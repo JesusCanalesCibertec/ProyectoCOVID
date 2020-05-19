@@ -9,8 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.test.Test2Activity"></activity>
-        <activity android:name=".ui.test.Test1Activity" />
+        <activity android:name=".ui.test.PreTestActivity"
+            android:parentActivityName=".TriajeActivity"></activity>
+        <activity android:name=".ui.test.Test2Activity"
+            android:parentActivityName=".ui.test.Test1Activity"/>
+        <activity
+            android:name=".ui.test.Test1Activity"
+            android:parentActivityName=".ui.test.PreTestActivity" />
         <activity
             android:name=".TriajeActivity"
             android:parentActivityName=".MainActivity" />

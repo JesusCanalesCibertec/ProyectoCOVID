@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.aplicacion.ui.test.PreTestActivity;
 import com.example.aplicacion.ui.test.Test1Activity;
 
 public class TriajeActivity extends AppCompatActivity {
 
-    Button btnA;
+    Button btnIniciar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,11 @@ public class TriajeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        btnA = (Button) findViewById(R.id.btnIniciarTest);
-        btnA.setOnClickListener(new View.OnClickListener() {
+        btnIniciar = (Button) findViewById(R.id.btnIniciarTest);
+        btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TriajeActivity.this, Test1Activity.class);
+                Intent intent = new Intent(TriajeActivity.this, PreTestActivity.class);
                 startActivity(intent);
             }
         });

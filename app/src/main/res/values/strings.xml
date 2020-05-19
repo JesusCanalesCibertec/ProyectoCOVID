@@ -13,6 +13,8 @@
     <string name="pretriaje_item5">. Coloración azul en lo labios (cianosis)</string>
     <string name="tit_triaje1">¿Qué sintomas presenta? Marca tus síntomas. Si no tienes ninguno a la siguiente pantalla.</string>
     <string name="tit_triaje1sub">¿En qué fecha iniciaron los síntomas?</string>
+    <string name="titpre_test1">¿La evaluación es para ti o un familiar?</string>
+    <string name="titpre_test2">Indica la relación familiar</string>
 
 
 </resources>
