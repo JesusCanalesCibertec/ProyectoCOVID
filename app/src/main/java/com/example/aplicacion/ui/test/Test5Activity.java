@@ -8,27 +8,27 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.aplicacion.R;
-import com.example.aplicacion.TriajeActivity;
 
-public class Test1Activity extends AppCompatActivity {
+public class Test5Activity extends AppCompatActivity {
 
     Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test1);
+        setContentView(R.layout.activity_test5);
 
         getSupportActionBar().setTitle("Triaje");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        btnNext = (Button) findViewById(R.id.btnTest1Next);
+        /*btnNext = (Button) findViewById(R.id.btnTest5Next);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Test1Activity.this, Test2Activity.class);
+                Intent intent = new Intent(Test5Activity.this, Test5Activity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }

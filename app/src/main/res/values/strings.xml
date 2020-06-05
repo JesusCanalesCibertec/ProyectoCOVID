@@ -25,5 +25,11 @@
     <string name="tit_triaje4sub2">¿Con cuántas personas vives?</string>
     <string name="tit_triaje4sub3">Al enviar tus datos, aceptas que el MINSA se ponga en contacto contigo para hacerle seguimiento a tu caso y fortalecer la estratefia del Estado Peruano frente al COVID-19 para protegerte a ti y a todos los peruanos. La confidencialidad de tus datos es importante para nosotros, por lo que cumplimos con las normativas de protección de datos establecidas.</string>
 
+    <string-array name="carga_spin_doc">
+        <item>DNI</item>
+        <item>Pasaporte</item>
+    </string-array>
+
+
 
 </resources>

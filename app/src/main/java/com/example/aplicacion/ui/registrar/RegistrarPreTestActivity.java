@@ -1,4 +1,4 @@
-package com.example.aplicacion.ui.test;
+package com.example.aplicacion.ui.registrar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,28 +8,36 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.aplicacion.R;
+import com.example.aplicacion.ui.test.PreTestActivity;
+import com.example.aplicacion.ui.test.Test1Activity;
 
-public class Test4Activity extends AppCompatActivity {
+
+public class RegistrarPreTestActivity extends AppCompatActivity {
+
 
     Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test4);
+        setContentView(R.layout.activity_registrar);
 
-        getSupportActionBar().setTitle("Triaje");
+        btnNext = (Button) findViewById(R.id.btnRegistrar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        btnNext.setText("Continuar");
 
-        btnNext = (Button) findViewById(R.id.btnTest4Next);
+
+        getSupportActionBar().setTitle("Registro de Familiar");
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Test4Activity.this, Test5Activity.class);
+                Intent intent = new Intent(RegistrarPreTestActivity.this, Test1Activity.class);
                 startActivity(intent);
             }
         });
+
 
     }
 }

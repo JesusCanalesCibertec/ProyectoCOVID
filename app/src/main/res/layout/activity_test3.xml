@@ -10,7 +10,7 @@
         android:id="@+id/lbTest3Tit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:text="@string/tit_triaje3"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -76,7 +76,7 @@
         android:layout_marginTop="20dp"
         android:text="Obesidad"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbTest3sub2" />
 
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:text="Diabetes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ckbCond3" />
 
