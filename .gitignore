@@ -1,10 +1,15 @@
-/AppCovid/.idea/
-/build
+/.idea/
+/build/
 *.iml
 .gradle
-/local.properties
+local.properties
 .DS_Store
+
+### 
+Por verse:
 /captures
 .externalNativeBuild
 .cxx
+###
+
 
