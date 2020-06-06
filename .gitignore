@@ -1,5 +1,5 @@
+/AppCovid/.idea/
 /build
-/.idea
 *.iml
 .gradle
 /local.properties
