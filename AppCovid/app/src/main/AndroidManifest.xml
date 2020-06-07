@@ -29,12 +29,7 @@
         <activity
             android:name=".TriajeActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ui.test.PreTestActivity"
-            android:parentActivityName=".TriajeActivity" />
-        <activity
-            android:name=".ui.registrar.RegistrarPreTestActivity"
-            android:parentActivityName=".ui.test.PreTestActivity"/>
+
         <activity
             android:name=".ui.test.Test1Activity" />
         <activity
@@ -46,9 +41,7 @@
         <activity
             android:name=".ui.test.Test4Activity"
             android:parentActivityName=".ui.test.Test3Activity" />
-        <activity
-            android:name=".ui.test.Test5Activity"
-            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

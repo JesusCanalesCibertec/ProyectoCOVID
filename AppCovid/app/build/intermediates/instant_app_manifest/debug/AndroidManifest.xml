@@ -37,12 +37,6 @@
         <activity
             android:name="com.example.aplicacion.TriajeActivity"
             android:parentActivityName="com.example.aplicacion.MainActivity" />
-        <activity
-            android:name="com.example.aplicacion.ui.test.PreTestActivity"
-            android:parentActivityName="com.example.aplicacion.TriajeActivity" />
-        <activity
-            android:name="com.example.aplicacion.ui.registrar.RegistrarPreTestActivity"
-            android:parentActivityName="com.example.aplicacion.ui.test.PreTestActivity" />
         <activity android:name="com.example.aplicacion.ui.test.Test1Activity" />
         <activity
             android:name="com.example.aplicacion.ui.test.Test2Activity"
@@ -53,9 +47,6 @@
         <activity
             android:name="com.example.aplicacion.ui.test.Test4Activity"
             android:parentActivityName="com.example.aplicacion.ui.test.Test3Activity" />
-        <activity
-            android:name="com.example.aplicacion.ui.test.Test5Activity"
-            android:parentActivityName="com.example.aplicacion.MainActivity" />
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"

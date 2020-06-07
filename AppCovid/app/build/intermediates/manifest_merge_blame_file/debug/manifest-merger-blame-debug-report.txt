@@ -15,7 +15,7 @@
 11-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:5:22-64
 12
 13    <application
-13-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:7:5-52:19
+13-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:7:5-45:19
 14        android:allowBackup="true"
 14-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:8:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -63,56 +63,38 @@
 37-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:30:13-43
 38            android:parentActivityName="com.example.aplicacion.MainActivity" />
 38-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:31:13-55
-39        <activity
-39-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:32:9-34:60
-40            android:name="com.example.aplicacion.ui.test.PreTestActivity"
-40-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:33:13-52
-41            android:parentActivityName="com.example.aplicacion.TriajeActivity" />
-41-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:34:13-57
-42        <activity
-42-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:35:9-37:68
-43            android:name="com.example.aplicacion.ui.registrar.RegistrarPreTestActivity"
-43-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:36:13-66
-44            android:parentActivityName="com.example.aplicacion.ui.test.PreTestActivity" />
-44-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:37:13-66
-45        <activity android:name="com.example.aplicacion.ui.test.Test1Activity" />
-45-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:38:9-39:53
-45-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:39:13-50
+39        <activity android:name="com.example.aplicacion.ui.test.Test1Activity" />
+39-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:33:9-34:53
+39-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:34:13-50
+40        <activity
+40-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:35:9-37:67
+41            android:name="com.example.aplicacion.ui.test.Test2Activity"
+41-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:36:13-50
+42            android:parentActivityName="com.example.aplicacion.ui.test.Test1Activity" />
+42-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:37:13-64
+43        <activity
+43-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:38:9-40:67
+44            android:name="com.example.aplicacion.ui.test.Test3Activity"
+44-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:39:13-50
+45            android:parentActivityName="com.example.aplicacion.ui.test.Test2Activity" />
+45-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:40:13-64
 46        <activity
-46-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:40:9-42:67
-47            android:name="com.example.aplicacion.ui.test.Test2Activity"
-47-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:41:13-50
-48            android:parentActivityName="com.example.aplicacion.ui.test.Test1Activity" />
-48-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:42:13-64
-49        <activity
-49-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:43:9-45:67
-50            android:name="com.example.aplicacion.ui.test.Test3Activity"
-50-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:44:13-50
-51            android:parentActivityName="com.example.aplicacion.ui.test.Test2Activity" />
-51-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:45:13-64
-52        <activity
-52-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:46:9-48:67
-53            android:name="com.example.aplicacion.ui.test.Test4Activity"
-53-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:47:13-50
-54            android:parentActivityName="com.example.aplicacion.ui.test.Test3Activity" />
-54-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:48:13-64
-55        <activity
-55-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:49:9-51:57
-56            android:name="com.example.aplicacion.ui.test.Test5Activity"
-56-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:50:13-50
-57            android:parentActivityName="com.example.aplicacion.MainActivity" />
-57-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:51:13-55
-58
-59        <provider
-59-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
-60            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-60-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
-61            android:authorities="com.example.aplicacion.lifecycle-process"
-61-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
-62            android:exported="false"
-62-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
-63            android:multiprocess="true" />
-63-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
-64    </application>
-65
-66</manifest>
+46-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:41:9-43:67
+47            android:name="com.example.aplicacion.ui.test.Test4Activity"
+47-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:42:13-50
+48            android:parentActivityName="com.example.aplicacion.ui.test.Test3Activity" />
+48-->D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\AppCovid\app\src\main\AndroidManifest.xml:43:13-64
+49
+50        <provider
+50-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+51            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+51-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+52            android:authorities="com.example.aplicacion.lifecycle-process"
+52-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+53            android:exported="false"
+53-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+54            android:multiprocess="true" />
+54-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\Admin\.gradle\caches\transforms-2\files-2.1\e953a6c6aa473293c3a94459e549ecaa\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+55    </application>
+56
+57</manifest>
