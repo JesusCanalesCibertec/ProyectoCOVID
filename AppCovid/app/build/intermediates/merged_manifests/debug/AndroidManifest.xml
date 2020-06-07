@@ -20,12 +20,14 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.aplicacion.ui.registrar.RegistrarActivity" >
+        <activity android:name="com.example.aplicacion.ui.registrar.registroPersona" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.example.aplicacion.ui.registrar.RegistrarActivity" >
         </activity>
         <activity
             android:name="com.example.aplicacion.MainActivity"

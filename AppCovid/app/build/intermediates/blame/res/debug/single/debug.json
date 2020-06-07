@@ -40,12 +40,12 @@
         "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_news.png"
     },
     {
-        "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registrar_pre_test.xml.flat",
-        "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\layout\\activity_registrar_pre_test.xml"
-    },
-    {
         "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
         "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registrar_pre_test.xml.flat",
+        "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\layout\\activity_registrar_pre_test.xml"
     },
     {
         "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test5.xml.flat",
@@ -190,6 +190,10 @@
     {
         "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_triaje.xml.flat",
         "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\layout\\fragment_triaje.xml"
+    },
+    {
+        "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registro_persona.xml.flat",
+        "source": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\src\\main\\res\\layout\\activity_registro_persona.xml"
     },
     {
         "merged": "D:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
