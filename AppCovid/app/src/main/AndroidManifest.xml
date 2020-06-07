@@ -12,12 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.registrar.RegistrarActivity">
+        <activity android:name=".ui.registrar.registroPersona">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.registrar.RegistrarActivity">
         </activity>
         <activity
             android:name=".MainActivity"
@@ -26,12 +29,7 @@
         <activity
             android:name=".TriajeActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ui.test.PreTestActivity"
-            android:parentActivityName=".TriajeActivity" />
-        <activity
-            android:name=".ui.registrar.RegistrarPreTestActivity"
-            android:parentActivityName=".ui.test.PreTestActivity"/>
+
         <activity
             android:name=".ui.test.Test1Activity" />
         <activity
@@ -43,9 +41,7 @@
         <activity
             android:name=".ui.test.Test4Activity"
             android:parentActivityName=".ui.test.Test3Activity" />
-        <activity
-            android:name=".ui.test.Test5Activity"
-            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

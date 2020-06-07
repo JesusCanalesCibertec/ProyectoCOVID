@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.aplicacion.ui.test.PreTestActivity;
 import com.example.aplicacion.ui.test.Test1Activity;
 
 public class TriajeActivity extends AppCompatActivity {
@@ -25,13 +24,6 @@ public class TriajeActivity extends AppCompatActivity {
 
 
         btnIniciar = (Button) findViewById(R.id.btnIniciarTest);
-        btnIniciar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TriajeActivity.this, PreTestActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
     }
