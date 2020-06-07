@@ -1,0 +1,17 @@
+.idea/
+*/build/
+*.iml
+.gradle/
+local.properties
+.DS_Store
+*~ 
+*.swp
+
+### 
+Por verse:
+/captures
+.externalNativeBuild
+.cxx
+###
+
+

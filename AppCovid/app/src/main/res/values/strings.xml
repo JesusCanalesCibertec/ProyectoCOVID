@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Aplicacion</string>
+    <string name="title_home">Home</string>
+    <string name="title_noticias">Noticias</string>
+    <string name="title_triaje">Triaje</string>
+    <string name="title_mapa">Mapa</string>
+    <string name="content_triaje">A continuación te ayudaremos a identificar si tú o un familiar cercano se encuentra en riesgo de contagio. Recuerda responder las siguientes preguntas con total sinceridad.</string>
+    <string name="tit_pretriaje">Antes de iniciar, recuerda que si cuentas con algunos de estos síntomas debes contactar con los números de emergencia inmediatamente:</string>
+    <string name="pretriaje_item1">. Sensación de falta de aire o dificultad para respirar en reposo</string>
+    <string name="pretriaje_item2">. Desorientación o confusión</string>
+    <string name="pretriaje_item3">. Fiebre mayor a 38ºC persistente por más de dos días</string>
+    <string name="pretriaje_item4">. Dolor en el pecho</string>
+    <string name="pretriaje_item5">. Coloración azul en lo labios (cianosis)</string>
+    <string name="titpre_test1">¿La evaluación es para ti o un familiar?</string>
+    <string name="titpre_test2">Indica la relación familiar</string>
+    <string name="tit_triaje1">¿Qué sintomas presenta? Marca tus síntomas. Si no tienes ninguno a la siguiente pantalla.</string>
+    <string name="tit_triaje1sub">¿En qué fecha iniciaron los síntomas?</string>
+    <string name="tit_triaje2">Situaciones de riesgo</string>
+    <string name="tit_triaje2sub1">¿En los últimos 14 días, has tenido contacto con un caso confirmado de COVID-19?</string>
+    <string name="tit_triaje2sub2">¿En los últimos 14 días, te has desplazado  un distrito diferente al de tu residencia?</string>
+    <string name="tit_triaje3">Otras condiciones</string>
+    <string name="tit_triaje3sub1">¿Trabajas en algún establecimiento de salud?</string>
+    <string name="tit_triaje3sub2">¿Tienes alguna de las siguientes enfermedades o condiciones?</string>
+    <string name="tit_triaje4sub1">¿Vives en la misma casa con alguna persona de los siguientes grupos de riesgo?</string>
+    <string name="tit_triaje4sub2">¿Con cuántas personas vives?</string>
+    <string name="tit_triaje4sub3">Al enviar tus datos, aceptas que el MINSA se ponga en contacto contigo para hacerle seguimiento a tu caso y fortalecer la estratefia del Estado Peruano frente al COVID-19 para protegerte a ti y a todos los peruanos. La confidencialidad de tus datos es importante para nosotros, por lo que cumplimos con las normativas de protección de datos establecidas.</string>
+
+    <string-array name="carga_spin_doc">
+        <item>DNI</item>
+        <item>Pasaporte</item>
+    </string-array>
+
+
+
+</resources>
