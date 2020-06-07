@@ -4,6 +4,12 @@ public class Pais {
     private int id;
     private String title;
 
+    @Override
+    public String toString(){
+        return title;
+    }
+
+
     public int getId() {
         return id;
     }
