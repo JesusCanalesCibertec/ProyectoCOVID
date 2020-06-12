@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.aplicacion.Entitiy.Pais;
+import com.example.aplicacion.Interface.Api;
 import com.example.aplicacion.MainActivity;
 import com.example.aplicacion.R;
 import com.example.aplicacion.controlador.PaisDAO;
@@ -100,7 +101,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
     public void cargarPais(){
         try{
-            ServicioTaskListPais servicio=new ServicioTaskListPais(this,"https://my-json-server.typicode.com/typicode/demo/posts/");
+            ServicioTaskListPais servicio=new ServicioTaskListPais(this,"http://10.0.2.2:8081/SpringConcurso/libro/list");
             servicio.execute();
             String c=servicio.get();
             ArrayList<Pais> data= PaisDAO.listaPaises(c);
@@ -109,20 +110,52 @@ public class RegistrarActivity extends AppCompatActivity {
         }
         catch (Exception e){
             e.printStackTrace();
-        }
+        }/*
+        Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://localhost:8081/SpringConcurso/libro/")
+                            .addConverterFactory(GsonConverterFactory.create()).build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<Pais>> call = api.getPais();
+        call.enqueue(new Callback<List<Pais>>() {
+            @Override
+            public void onResponse(Call<List<Pais>> call, Response<List<Pais>> response) {
+                if(!response.isSuccessful()){
+                    //response.code();
+                    List<String> data = new ArrayList<String>();
+                    List<Pais> paisList = response.body();
+                    for(Pais pais: paisList){
+                        data.add(pais.getTitle());
+                    }
+                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,data);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnNac.setAdapter(adapter);
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Pais>> call, Throwable t) {
+                    //t.getMessage();
+            }
+        });*/
+
     }
 
 
     public void registrar(){
         try{
             Pais pais = new Pais();
+            int idpais = 0;
             //Nacionalidad nac= new Nacionalidad();
 
-            pais.setId(4);
+            /*idpais = 6;
+            pais.setId(idpais);*/
             pais.setTitle(txtNombre.getText().toString());
             //nac= (Nacionalidad) spNacion.getItemAtPosition(spNacion.getSelectedItemPosition());
             //per.setCodigoNac(nac.getIdnacionalidad());
-            ServicioTaskSaveTest servicio= new ServicioTaskSaveTest(this,"https://my-json-server.typicode.com/typicode/demo/posts",pais);
+            ServicioTaskSaveTest servicio= new ServicioTaskSaveTest(this,"http://localhost:8081/SpringConcurso/libro/save/",pais);
             servicio.execute();
 
         }catch (Exception e){
