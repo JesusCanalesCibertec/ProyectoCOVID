@@ -1,0 +1,24 @@
+
+
+{
+    "data": [
+        {
+            "data": {
+                "codigo": "Documents",
+                "nombre": "75kb",
+                "estado": "Folder"
+            },
+            "children": [
+                {
+                    "data": {
+                        "codigo": "Work",
+                        "nombre": "55kb",
+                        "estado": "Folder"
+                    }
+                }
+            ]
+        }
+    ]
+   
+}
+

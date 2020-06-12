@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psconsumoplantilla
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+  
+
+
+
+
+<sql-query name="psconsumoplantilla.filtro">
+
+	select
+		a.ID_INSTITUCION,
+		a.ID_ITEM,
+		b.NOMBRE,
+		c.DescripcionCorta,	
+		ROW_NUMBER() OVER (ORDER BY a.ID_INSTITUCION ) AS Seq
+		from sgseguridadsys.PS_CONSUMO_PLANTILLA a 
+			 left join sgseguridadsys.PS_ITEM b on a.ID_ITEM = b.ID_ITEM
+			 left join UnidadesMast c on b.ID_UNIDAD_MEDIDA = c.UnidadCodigo
+		where 
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, '123'))
+		
+ </sql-query>
+ 
+ <sql-query name="psconsumoplantilla.paginacionFiltro">
+    	select
+		a.ID_INSTITUCION,
+		a.ID_ITEM,
+		b.NOMBRE,
+		c.DescripcionCorta,	
+		a.PLANTILLA,
+		ROW_NUMBER() OVER (ORDER BY a.ID_INSTITUCION ) AS Seq
+		from sgseguridadsys.PS_CONSUMO_PLANTILLA_DETALLE a 
+			 left join sgseguridadsys.PS_ITEM b on a.ID_ITEM = b.ID_ITEM
+			 left join UnidadesMast c on b.ID_UNIDAD_MEDIDA = c.UnidadCodigo
+			 left join sgseguridadsys.PS_CONSUMO_PLANTILLA e on e.plantilla	 = a.PLANTILLA
+		where 
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.PLANTILLA, '123') = isnull(:p_plantilla, ISNULL(a.PLANTILLA, '123'))
+		and ISNULL(e.ESTADO	, '123') = isnull('A', ISNULL(e.ESTADO, '123'))
+	</sql-query>
+
+	<sql-query name="psconsumoplantilla.paginacionContar">
+    	select
+		COUNT(1)
+		from sgseguridadsys.PS_CONSUMO_PLANTILLA_DETALLE a 
+			 left join sgseguridadsys.PS_ITEM b on a.ID_ITEM = b.ID_ITEM
+			 left join UnidadesMast c on b.ID_UNIDAD_MEDIDA = c.UnidadCodigo
+			 left join sgseguridadsys.PS_CONSUMO_PLANTILLA e on e.plantilla	 = a.PLANTILLA
+		where 
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.PLANTILLA, '123') = isnull(:p_plantilla, ISNULL(a.PLANTILLA, '123'))
+		and ISNULL(e.ESTADO	, '123') = isnull('A', ISNULL(e.ESTADO, '123'))
+	</sql-query>
+ 
+ <sql-query name="psconsumoplantilla.filtroPaginacion">
+    	select a.PLANTILLA, a.DESCRIPCION, a.ESTADO, a.ID_INSTITUCION,b.NOMBRE
+		,ROW_NUMBER() OVER (ORDER BY DAY(a.plantilla)) AS Seq
+		from sgseguridadsys.PS_CONSUMO_PLANTILLA a 
+			 left join sgseguridadsys.PS_INSTITUCION b on a.ID_INSTITUCION= b.ID_INSTITUCION
+		where 
+		a.id_institucion = isnull(:p_institucion, a.id_institucion) and
+		a.plantilla = isnull(:p_codigo, a.plantilla) and
+		a.descripcion like '%'+isnull(:p_descripcion, '')+'%'and
+		a.ESTADO = isnull(:p_estado, a.ESTADO)
+	</sql-query>
+
+	<sql-query name="psconsumoplantilla.filtroContar">
+    	select COUNT(1) 
+		from sgseguridadsys.PS_CONSUMO_PLANTILLA a 
+			 left join sgseguridadsys.PS_INSTITUCION b on a.ID_INSTITUCION= b.ID_INSTITUCION
+		where 
+		a.id_institucion = isnull(:p_institucion, a.id_institucion) and
+		a.plantilla = isnull(:p_codigo, a.plantilla) and
+		a.descripcion like '%'+isnull(:p_descripcion, '')+'%'and
+		a.ESTADO = isnull(:p_estado, a.ESTADO)
+	</sql-query>
+	
+	<sql-query name="psconsumoplantilla.eliminardetalle">
+      
+DELETE FROM sgseguridadsys.PS_CONSUMO_PLANTILLA_DETALLE
+WHERE Plantilla= :p_plantilla and ID_INSTITUCION= :p_institucion
+
+
+
+
+</sql-query>
+
+
+
+
+</hibernate-mapping>

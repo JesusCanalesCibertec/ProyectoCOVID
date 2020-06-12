@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="MpProyecto.filtroContar">
+   select 
+		COUNT(1)
+		from minedu.PROYECTO p 
+		left join MA_MiscelaneosDetalle ma1 on p.TIPO_PROYECTO = ma1.CodigoElemento and ma1.CodigoTabla = 'TIPOPROYEC' AND ma1.AplicacionCodigo = 'MP'
+		left join MA_MiscelaneosDetalle ma2 on p.ESTADO_ATENCION = ma2.CodigoElemento and ma2.CodigoTabla = 'ESTPROYECT' AND ma2.AplicacionCodigo = 'MP'
+		left join minedu.SEDEOFICINA sede on sede.SedeOficinaId = p.AREA
+		
+  </sql-query>
+  
+  <sql-query name="MpProyecto.filtroPaginacion">
+	select 
+		p.TIPO_PROYECTO,
+		ma1.DescripcionLocal as NOM_TIPO_PROYECTO,
+		p.ID_PROYECTO,
+		p.NOMBRE,
+		p.AREA,
+		case 
+		when sede.Nivel > 2 
+		then (
+		select n2.DescripcionCorta+ '/'+n1.DescripcionCorta from minedu.SEDEOFICINA n1
+		 left  join minedu.SEDEOFICINA n2 ON n1.PadreSedeOficinaId = n2.SedeOficinaId
+		 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		)
+		else (
+		select n1.DescripcionCorta
+		  from minedu.SEDEOFICINA n1 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		) end + '/'+ sede.DescripcionCorta as Niveles,
+		p.FECHA_INICIO,
+		p.FECHA_FIN,
+		p.ESTADO_ATENCION,
+		MA2.DescripcionLocal AS ESTADO,
+		p.AVANCE_REAL-p.AVANCE_PLAN as DESVIACION,
+		ROW_NUMBER() OVER (ORDER BY p.TIPO_PROYECTO desc, p.ID_PROYECTO asc) AS Seq
+		from minedu.PROYECTO p 
+		left join MA_MiscelaneosDetalle ma1 on p.TIPO_PROYECTO = ma1.CodigoElemento and ma1.CodigoTabla = 'TIPOPROYEC' AND ma1.AplicacionCodigo = 'MP'
+		left join MA_MiscelaneosDetalle ma2 on p.ESTADO_ATENCION = ma2.CodigoElemento and ma2.CodigoTabla = 'ESTPROYECT' AND ma2.AplicacionCodigo = 'MP'
+		left join minedu.SEDEOFICINA sede on sede.SedeOficinaId = p.AREA
+		
+		</sql-query>
+		
+		<sql-query name="MpProyecto.listado">
+	select 
+		p.TIPO_PROYECTO,
+		ma1.DESCRIPCIONLOCAL as NOM_TIPO_PROYECTO,
+		p.ID_PROYECTO,
+		p.NOMBRE,
+		p.AREA,
+		case 
+		when sede.Nivel > 2 
+		then (
+		select n2.DescripcionCorta+ '/'+n1.DescripcionCorta from minedu.SEDEOFICINA n1
+		 left  join minedu.SEDEOFICINA n2 ON n1.PadreSedeOficinaId = n2.SedeOficinaId
+		 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		)
+		else (
+		select n1.DescripcionCorta
+		  from minedu.SEDEOFICINA n1 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		) end + '/'+ sede.DescripcionCorta as Niveles,
+		p.FECHA_INICIO,
+		p.FECHA_FIN,
+		p.ESTADO_ATENCION,
+		ma2.DESCRIPCIONLOCAL AS ESTADO,
+		p.AVANCE_REAL-p.AVANCE_PLAN as DESVIACION,
+		p.AVANCE_PLAN,
+		p.AVANCE_REAL
+		from minedu.PROYECTO p 
+		left join MA_MISCELANEOSDETALLE ma1 on p.TIPO_PROYECTO = ma1.CODIGOELEMENTO and ma1.CODIGOTABLA = 'TIPOPROYEC' AND ma1.APLICACIONCODIGO = 'MP'
+		left join MA_MISCELANEOSDETALLE ma2 on p.ESTADO_ATENCION = ma2.CODIGOELEMENTO and ma2.CODIGOTABLA = 'ESTPROYECT' AND ma2.APLICACIONCODIGO = 'MP'
+		left join minedu.SEDEOFICINA sede on sede.SedeOficinaId = p.AREA
+		where 
+				ISNULL(p.TIPO_PROYECTO, '') = isnull(:p_tipo, ISNULL(p.TIPO_PROYECTO, '')) and
+				ISNULL(YEAR(p.CREACION_FECHA), '') = isnull(:p_anio, ISNULL(YEAR(p.CREACION_FECHA), '')) and
+				ISNULL(p.ESTADO_ATENCION, '') = isnull(:p_estado, ISNULL(p.ESTADO_ATENCION, ''))
+		order by p.ID_PROYECTO desc
+
+  </sql-query>
+  
+  <sql-query name="MpProyecto.listadoestados">
+declare @estado varchar(1000) = :p_estado
+select 
+		p.TIPO_PROYECTO,
+		ma1.DESCRIPCIONLOCAL as NOM_TIPO_PROYECTO,
+		p.ID_PROYECTO,
+		p.NOMBRE,
+		p.AREA,
+		case 
+		when sede.Nivel > 2 
+		then (
+		select n2.DescripcionCorta+ '/'+n1.DescripcionCorta from minedu.SEDEOFICINA n1
+		 left  join minedu.SEDEOFICINA n2 ON n1.PadreSedeOficinaId = n2.SedeOficinaId
+		 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		)
+		else (
+		select n1.DescripcionCorta
+		  from minedu.SEDEOFICINA n1 where n1.SedeOficinaId = sede.PadreSedeOficinaId
+		) end + '/'+ sede.DescripcionCorta as Niveles,
+		p.FECHA_INICIO,
+		p.FECHA_FIN,
+		p.ESTADO_ATENCION,
+		ma2.DESCRIPCIONLOCAL AS ESTADO,
+		p.AVANCE_REAL-p.AVANCE_PLAN as DESVIACION,
+		p.AVANCE_PLAN,
+		p.AVANCE_REAL,
+		p.ID_SISTEMA,
+		null as NOMCORTO_SIS,
+		null as NOMBRE_SIS,
+		(select top 1  auxper.NOMBRE+' '+auxper.APELLIDO
+		from minedu.PROYECTO_RECURSO auxpro
+		left join minedu.PERSONA auxper on auxpro.ID_PERSONA = auxper.ID_PERSONA 
+		WHERE auxpro.ROL = 4 and auxpro.ID_PROYECTO = p.ID_PROYECTO				
+		order by ID_RECURSO desc) as LIDER,
+		p.ASUNTO,
+		p.PROCESO,
+		sede.DescripcionCorta,
+		p.OBSERVACION,
+		p.EXPEDIENTE,
+		p.FECHA_EXPEDIENTE,
+		cast(ROW_NUMBER() OVER (ORDER BY p.ID_PROYECTO desc) as Int) as Seq
+		from minedu.PROYECTO p 
+		left join MA_MISCELANEOSDETALLE ma1 on p.TIPO_PROYECTO = ma1.CODIGOELEMENTO and ma1.CODIGOTABLA = 'TIPOPROYEC' AND ma1.APLICACIONCODIGO = 'MP'
+		left join MA_MISCELANEOSDETALLE ma2 on p.ESTADO_ATENCION = ma2.CODIGOELEMENTO and ma2.CODIGOTABLA = 'ESTPROYECT' AND ma2.APLICACIONCODIGO = 'MP'
+		left join minedu.SEDEOFICINA sede on sede.SedeOficinaId = p.AREA
+		where 
+				ISNULL(p.TIPO_PROYECTO, '') = isnull(:p_tipo, ISNULL(p.TIPO_PROYECTO, '')) and
+				ISNULL(YEAR(p.CREACION_FECHA), '') = isnull(:p_anio, ISNULL(YEAR(p.CREACION_FECHA), ''))
+				and 
+				(
+				@estado is null
+				or (@estado is not null and p.ESTADO_ATENCION IN (SELECT * FROM dbo.Split(@estado,',')))
+				)
+				
+
+  </sql-query>
+  
+  <sql-query name="MpProyecto.eliminarListarecursos">
+	
+	DELETE FROM minedu.PROYECTO_RECURSO WHERE ID_PROYECTO =  :p_IdProyecto
+	
+ </sql-query> 
+ 
+  <sql-query name="MpProyecto.listarestados">
+	
+	select * from (
+		select distinct
+		p.ESTADO_ATENCION, ma.DESCRIPCIONLOCAL AS NomEstado,  
+		(select count(1) from minedu.PROYECTO aux where aux.ESTADO_ATENCION = p.ESTADO_ATENCION) AS Cantidad
+		from minedu.PROYECTO p
+		left join MA_MISCELANEOSDETALLE ma on p.ESTADO_ATENCION = ma.CODIGOELEMENTO and CODIGOTABLA = 'ESTPROYECT' AND APLICACIONCODIGO = 'MP'
+		where p.ESTADO_ATENCION is not null
+		) p order by p.Cantidad desc
+	
+ </sql-query>
+ 
+ <sql-query name="MpProyecto.listartipos">
+	
+	DECLARE @tabla TABLE(
+		tipo varchar(30), nom_tipo varchar(100), mant int, proy int, dema int
+	)
+
+	insert into @tabla
+	SELECT *
+	FROM
+	(
+		select p.COORDINACION, ma1.DESCRIPCIONLOCAL as NOM_COORDINACION, p.TIPO_PROYECTO, ma.DESCRIPCIONLOCAL AS NOM_TIPO from minedu.PROYECTO p
+	left join MA_MISCELANEOSDETALLE ma on p.TIPO_PROYECTO = ma.CODIGOELEMENTO and ma.CODIGOTABLA = 'TIPOPROYEC' and ma.APLICACIONCODIGO = 'MP'
+	left join MA_MISCELANEOSDETALLE ma1 on p.COORDINACION = ma1.CODIGOELEMENTO and ma1.CODIGOTABLA = 'COORDINAMP' and ma1.APLICACIONCODIGO = 'MP'
+
+	) AS SourceTable PIVOT(COUNT(COORDINACION) FOR NOM_COORDINACION IN ([Coordinación de Mantenimiento],[Coordinación de Proyecto],[Coordinación de Demanda])) AS pv
+
+
+	select aux.CODIGOELEMENTO, aux.DESCRIPCIONLOCAL, 
+	case when t.mant is null then 0 else  t.mant end as mantenimiento ,
+	case when t.proy is null then 0 else t.proy end as proyecto ,
+	case when t.dema is null then 0 else t.dema end as demanda 
+	from MA_MISCELANEOSDETALLE aux
+	left join @tabla t on t.tipo = aux.CODIGOELEMENTO 
+	where aux.CODIGOTABLA = 'TIPOPROYEC' and aux.APLICACIONCODIGO = 'MP'
+	
+ </sql-query>
+
+
+</hibernate-mapping>

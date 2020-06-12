@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrPosicionempresa
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <sql-query name="hrposicionempresa.obtenerPorIdCompleto">
+    select cc.LocalName as "CentrocostosNombre"
+    from hr_posicionempresa po
+    left join AC_CostCenterMst cc
+    on po.centrocostos = cc.costcenter
+    where po.CompanyOwner = :p_companyowner and po.CodigoPosicion = :p_codigo_posicion
+  </sql-query>
+
+  <sql-query name="hrposicionempresa.listarPaginacion">
+     SELECT DISTINCT 
+      HR_PosicionEmpresa.CodigoPosicion,  
+      HR_PosicionEmpresa.Descripcion,   
+      ISNULL(AC_CostCenterMst.LocalName,HR_PosicionEmpresa.CentroCostos) centrocostonombre,
+      HR_PosicionEmpresa.CentroCostos,
+      ROW_NUMBER() OVER (ORDER BY HR_PosicionEmpresa.CodigoPosicion) AS Seq
+      FROM 
+      HR_PosicionEmpresa    
+	      INNER JOIN HR_TipoPosicion
+		      ON ( HR_PosicionEmpresa.CodigoTipo = HR_TipoPosicion.CodigoTipo ) 
+	  LEFT JOIN AC_CostCenterMst ON
+	  AC_CostCenterMst.CostCenter= HR_PosicionEmpresa.CentroCostos
+	  AND AC_CostCenterMst.Status = 'A'   
+      WHERE 
+      (HR_TipoPosicion.Orden > 0 AND  
+      ( HR_PosicionEmpresa.Estado = 'A') )  
+	  AND  HR_PosicionEmpresa.CodigoPosicion=ISNULL(:p_posicion,HR_PosicionEmpresa.CodigoPosicion)
+	   AND HR_PosicionEmpresa.DESCRIPCION like '%' + isnull(:p_descripcion,HR_PosicionEmpresa.DESCRIPCION) + '%'
+    
+    </sql-query>
+  
+ <sql-query name="hrposicionempresa.listarContar">
+     SELECT COUNT(1)
+      FROM 
+      HR_PosicionEmpresa    
+	      INNER JOIN HR_TipoPosicion
+		      ON ( HR_PosicionEmpresa.CodigoTipo = HR_TipoPosicion.CodigoTipo ) 
+	  LEFT JOIN AC_CostCenterMst ON
+	  AC_CostCenterMst.CostCenter= HR_PosicionEmpresa.CentroCostos
+	  AND AC_CostCenterMst.Status = 'A'   
+      WHERE 
+      (HR_TipoPosicion.Orden > 0 AND  
+      ( HR_PosicionEmpresa.Estado = 'A') )  
+	  AND  HR_PosicionEmpresa.CodigoPosicion=ISNULL(:p_posicion,HR_PosicionEmpresa.CodigoPosicion)
+	   AND HR_PosicionEmpresa.DESCRIPCION like '%' + isnull(:p_descripcion,HR_PosicionEmpresa.DESCRIPCION) + '%'
+     
+    </sql-query>
+  
+</hibernate-mapping>

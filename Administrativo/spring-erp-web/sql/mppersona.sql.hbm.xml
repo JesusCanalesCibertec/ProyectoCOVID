@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="mpPersona.filtroContar">
+   select 
+		COUNT(1)
+		from  minedu.PERSONA t1
+		left join minedu.CONTRATACION t2 on t1.ID_PERSONA = t2.ID_PERSONA
+		AND t2.ID_CONTRATACION = (select max(auxc.ID_CONTRATACION) from minedu.CONTRATACION auxc where auxc.ID_PERSONA = t1.ID_PERSONA)
+		where
+		ISNULL(t1.DNI, '') like isnull(:p_dni, ISNULL(t1.DNI, '')) + '%' and
+		(t1.NOMBRE  like '%' + isnull(:p_nombre, t1.NOMBRE) + '%' COLLATE Latin1_General_CI_AI or 
+		t1.APELLIDO like '%' + isnull(:p_nombre, t1.APELLIDO) + '%' COLLATE Latin1_General_CI_AI) and  
+		ISNULL(t1.ESTADO, '') = isnull(:p_estado, ISNULL(t1.ESTADO, ''))and
+		ISNULL(t2.ID_MODALIDAD, '') = isnull(:p_idmodalidad, ISNULL(t2.ID_MODALIDAD, ''))
+  </sql-query>
+  <sql-query name="mpPersona.filtroPaginacion">
+  
+select 
+		t1.ID_PERSONA,
+		t1.DNI,
+		t1.NOMBRE+' '+t1.APELLIDO AS 'PERSONA',
+		t2.ID_MODALIDAD,
+		CASE t2.ID_MODALIDAD
+		WHEN 'OS' THEN 'ORDEN DE SERVICIO'
+		WHEN 'MDF' THEN 'PRÁCTICAS'
+		ELSE 'CAS'
+		END AS 'MODALIDAD',
+		t2.FECHA_INICIO,
+		t2.FECHA_FIN,
+		CASE 
+		WHEN t1.CORREO is not null THEN t1.CORREO
+		ELSE t1.CORREO_ALTERNO
+		END CORREO,
+		t1.ESTADO,
+		(select max(auxc.ID_CONTRATACION) from minedu.CONTRATACION auxc where auxc.ID_PERSONA = t1.ID_PERSONA ) as 'ULTIMOCONTRATO'
+		,
+		case 
+		when t2.FECHA_CESE is null then 
+		 case 
+			when dbo.RETORNARFECHA(t1.ID_PERSONA) is null or t2.ID_MODALIDAD = 'OS' then t2.FECHA_FIN
+			else dbo.RETORNARFECHA(t1.ID_PERSONA)
+		 end
+		else t2.FECHA_CESE
+			end ULTIMAFECHA,
+		t2.FECHA_CESE,
+		(select count(1) from minedu.PERSONA_TITULO auxpt where auxpt.ID_PERSONA = t1.ID_PERSONA) as NUM_TITULOS,
+		(select count(1) from minedu.PERSONA_CONOCIMIENTO auxpc where auxpc.ID_PERSONA = t1.ID_PERSONA) as NUM_CONOCIMIENTOS,
+		(select count(1) from minedu.CONTRATACION_ADENDA_ENTREGABLE auxcae
+		where auxcae.ID_CONTRATACION = (select max(auxi.ID_CONTRATACION) from minedu.CONTRATACION auxi where auxi.ID_PERSONA = t1.ID_PERSONA)) as NUM_ADENDA_ENTREGABLES,
+		ROW_NUMBER() OVER (ORDER BY t1.ID_PERSONA desc) AS Seq
+		from  minedu.PERSONA t1
+		left join minedu.CONTRATACION t2 on t1.ID_PERSONA = t2.ID_PERSONA 
+		AND t2.ID_CONTRATACION = (select max(auxc.ID_CONTRATACION) from minedu.CONTRATACION auxc where auxc.ID_PERSONA = t1.ID_PERSONA)
+		where
+		ISNULL(t1.DNI, '') like isnull(:p_dni, ISNULL(t1.DNI, '')) + '%' and
+		(t1.NOMBRE  like '%' + isnull(:p_nombre, t1.NOMBRE) + '%' COLLATE Latin1_General_CI_AI or 
+		t1.APELLIDO like '%' + isnull(:p_nombre, t1.APELLIDO) + '%' COLLATE Latin1_General_CI_AI) and 
+		ISNULL(t1.ESTADO, '') = isnull(:p_estado, ISNULL(t1.ESTADO, ''))and
+		ISNULL(t2.ID_MODALIDAD, '') = isnull(:p_idmodalidad, ISNULL(t2.ID_MODALIDAD, ''))
+  </sql-query> 
+  
+  <sql-query name="mpPersona.listarpersonal">
+	USP_SELECT_LISTAR_PERSONAL_HORAS_TRABAJADAS_X_DIA_X_MES :p_parametro
+  </sql-query>
+  
+  <sql-query name="mpPersona.listareventos">
+	declare  @auxtabla table (secuencia int, idProyecto int, idPersona int)
+
+	insert into @auxtabla
+	select ROW_NUMBER() OVER (ORDER BY prp.ID_PROYECTO) AS #Row,
+	prp.ID_PROYECTO, prp.ID_PERSONA
+		from minedu.PROYECTO_RECURSO_PERIODO prp
+		inner join minedu.PROYECTO p on prp.ID_PROYECTO = p.ID_PROYECTO
+		group by prp.ID_PROYECTO, prp.ID_PERSONA
+		having prp.ID_PERSONA = :p_IdPersona
+
+
+
+	select p.NOMBRE + ' ('+ CONVERT( VARCHAR(10), prp.HORAS)+ ' HORAS/DIA)', prp.FECHA_INICIO, DATEADD(DAY,1,prp.FECHA_FIN), aux.secuencia
+	from minedu.PROYECTO_RECURSO_PERIODO prp
+	inner join minedu.PROYECTO p on prp.ID_PROYECTO = p.ID_PROYECTO
+	inner join @auxtabla aux on aux.idProyecto = prp.ID_PROYECTO and aux.idPersona = prp.ID_PERSONA
+	where prp.ID_PERSONA = :p_IdPersona
+  </sql-query>
+
+
+</hibernate-mapping>

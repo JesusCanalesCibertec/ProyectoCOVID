@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrLiquidacionempleado
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="prliquidacionempleado.listarContar">
+	<![CDATA[    
+         	select	count(1)
+		from PR_LiquidacionEmpleado l
+			inner join PersonaMast p
+				on l.Empleado=p.Persona
+			inner join EmpleadoMast e
+				on l.companiasocio = e.companiasocio and l.empleado=e.empleado
+		where l.Empleado = isnull( :p_id_empleado ,l.Empleado)
+		and l.CompaniaSocio = isnull( :p_id_companiasocio ,l.companiasocio)
+		and e.TipoPlanilla = isnull( :p_id_tipo_planilla  ,e.TipoPlanilla)
+		
+		and l.fechaliquidacion between isnull(:p_fecha_liquidacion_inicio, '1753-01-01') and isnull(:p_fecha_liquidacion_fin, '9999-12-30')
+		
+	]]>			
+    </sql-query>
+    
+    <sql-query name="prliquidacionempleado.listarPaginacion">
+	<![CDATA[    
+         	select	l.Empleado AS "idEmpleado"
+				,cast(p.NombreCompleto as varchar) as "nombreEmpleado"
+				,l.FechaIngreso as "fechaIngreso"
+				,l.FechaCese as "fechaCese"
+				,l.FechaLiquidacion as "fechaLiquidacion"
+				,l.TotalIngresos as "totalIngresos"
+				,l.TotalDescuentos as "totalDescuentos"
+				,l.MontoLiquidacion as "montoLiquidacion"
+				,l.companiasocio as "companiaSocio",ROW_NUMBER() OVER (ORDER BY l.FechaLiquidacion desc) AS Seq
+		from PR_LiquidacionEmpleado l
+			inner join PersonaMast p
+				on l.Empleado=p.Persona
+			inner join EmpleadoMast e
+				on l.companiasocio = e.companiasocio and l.empleado=e.empleado
+		where l.Empleado = isnull( :p_id_empleado ,l.Empleado)
+		and l.CompaniaSocio = isnull( :p_id_companiasocio ,l.companiasocio)
+		and e.TipoPlanilla = isnull( :p_id_tipo_planilla  ,e.TipoPlanilla)
+				and l.fechaliquidacion between isnull(:p_fecha_liquidacion_inicio, '1753-01-01') and isnull(:p_fecha_liquidacion_fin, '9999-12-30')
+		
+	]]>			
+    </sql-query>
+  
+  <sql-query name="prliquidacionempleado.listarReporte">
+	<![CDATA[    
+         SELECT
+	PR_LiquidacionEmpleadoTexto.Texto,   
+	PR_LiquidacionEmpleadoTexto.FechaLiquidacion,   
+	PR_LiquidacionEmpleadoTexto.Empleado,   
+	PR_LiquidacionEmpleadoTexto.Secuencia,
+	PR_LiquidacionEmpleadoTexto.Seccion,
+	PR_LiquidacionEmpleadoTexto.Orden,
+	PR_LiquidacionEmpleadoTexto.Resaltar
+	FROM 
+	PR_LiquidacionEmpleadoTexto
+		LEFT JOIN PR_LiquidacionSeccion  
+			ON (PR_LiquidacionEmpleadoTexto.Seccion = PR_LiquidacionSeccion.Seccion)
+	WHERE 
+	( PR_LiquidacionEmpleadoTexto.Empleado = :p_empleado ) AND  
+	( PR_LiquidacionEmpleadoTexto.CompaniaSocio = :p_compania ) AND  
+	( (PR_LiquidacionEmpleadoTexto.FechaLiquidacion =  :p_fecha_liquidacion) or
+	(:p_fecha_liquidacion is null)) 
+	ORDER BY 
+	PR_LiquidacionEmpleadoTexto.Seccion ASC,
+	PR_LiquidacionEmpleadoTexto.Orden ASC ,
+	PR_LiquidacionEmpleadoTexto.Secuencia ASC    
+	]]>			
+    </sql-query>
+    
+</hibernate-mapping>

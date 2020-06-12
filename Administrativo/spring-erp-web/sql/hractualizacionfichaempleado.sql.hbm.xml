@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrActualizacionfichaempleado -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hractualizacionfichaempleado.xxxxxx">
+		select sysdate from dual
+	</sql-query>
+	<sql-query name="hractualizacionfichaempleado.obtenernombrecentroestudio">
+		select Descripcion from HR_CentroEstudios
+		where centro = :centro
+	</sql-query>
+	<sql-query name="hractualizacionfichaempleado.obtenernombrenivel">
+		select DescripcionLocal from MA_MiscelaneosDetalle where codigotabla =
+		'NIVELIDIOM' and Compania = '999999' and CodigoElemento = :nivel
+	</sql-query>
+
+</hibernate-mapping>

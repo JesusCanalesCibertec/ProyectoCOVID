@@ -1,0 +1,61 @@
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE UBICACIÓN GEOGRÁFICA" [(visible)]="verSelector" modal="modal" showEffect="fade"
+        hideEffect="size" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <input pInputText [(ngModel)]="filtro.codigo" (keypress)="preBuscar($event, dtUbicacionGeo)" />
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2 ">
+                    <label>Descripción</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-7">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombre" (keypress)="preBuscar($event, dtUbicacionGeo)" />
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Páis</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [options]="paises" [style]="{'width':'100%'}" [(ngModel)]="filtro.valor1" (onChange)="cargarDepartamentosPorPais()"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2 ">
+                    <label>Departamento</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [options]="deps" [style]="{'width':'100%'}" [(ngModel)]="filtro.valor2" (onChange)="cargarProvinciasPorDepartamento()"></p-dropdown>
+
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2 ">
+                    <label>Provincia</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [options]="provs" [style]="{'width':'100%'}" [(ngModel)]="filtro.valor3"></p-dropdown>
+
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-save" type="button" (click)="buscar(dtUbicacionGeo)" class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable #dtUbicacionGeo [(selection)]="registroSeleccionado" selectionMode="single" [responsive]="true"
+            [rows]="registrosPorPagina" [paginator]="true" [lazy]="true" scrollWidth="100%" emptyMessage="No se encontraron registros"
+            (onRowDblclick)="onRowSelect($event)" [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargarPuesto($event)"
+            [value]="filtro.paginacion.listaResultado">
+            <p-column header="Código" field="codigoElemento" [style]="{'width':'100px'}"></p-column>
+            <p-column header="Descripción" field="descripcion"  [style]="{'width':'100%'}"></p-column>
+        </p-dataTable>
+
+    </p-dialog>
+</div>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="MpAreaminedu.filtroContar">
+   select 
+		count(1)
+		from minedu.SEDEOFICINA n3
+		left join minedu.SEDEOFICINA n2 on n2.SedeOficinaId = n3.PadreSedeOficinaId
+		left join minedu.SEDEOFICINA n1 on n1.SedeOficinaId = n2.PadreSedeOficinaId
+		where n2.Descripcion is not null and n3.Estado = 1 
+		and n3.Descripcion like isnull(:p_nombre,  n3.Descripcion) + '%' COLLATE Latin1_General_CI_AI
+		and n3.DescripcionCorta like isnull(:p_nombrecorto,  n3.DescripcionCorta) + '%' COLLATE Latin1_General_CI_AI
+		and ISNULL(n3.SedeOficinaId, '') = isnull(:p_codigo, ISNULL(n3.SedeOficinaId, ''))
+  </sql-query>
+  <sql-query name="MpAreaminedu.filtroPaginacion">
+	select 
+		n3.SedeOficinaId as Código,
+		n3.DescripcionCorta as n3,
+		n3.Descripcion + ' ('+n3.DescripcionCorta+')' as 'NIVEL 3',
+		n2.DescripcionCorta as n2,
+		n2.Descripcion + ' ('+n2.DescripcionCorta+')'as 'NIVEL 2',
+		n1.DescripcionCorta as n1,
+		case when n1.Descripcion is null then 'Sin nivel 1' else n1.Descripcion  + ' ('+n1.DescripcionCorta+')' end as 'NIVEL 1',
+		ROW_NUMBER() OVER (ORDER BY n3.Descripcion) AS Seq
+		from minedu.SEDEOFICINA n3
+		left join minedu.SEDEOFICINA n2 on n2.SedeOficinaId = n3.PadreSedeOficinaId
+		left join minedu.SEDEOFICINA n1 on n1.SedeOficinaId = n2.PadreSedeOficinaId
+		where n2.Descripcion is not null and n3.Estado = 1 
+		and n3.Descripcion like isnull(:p_nombre,  n3.Descripcion) + '%' COLLATE Latin1_General_CI_AI
+		and n3.DescripcionCorta like isnull(:p_nombrecorto,  n3.DescripcionCorta) + '%' COLLATE Latin1_General_CI_AI
+		and ISNULL(n3.SedeOficinaId, '') = isnull(:p_codigo, ISNULL(n3.SedeOficinaId, ''))
+  </sql-query>
+
+
+</hibernate-mapping>

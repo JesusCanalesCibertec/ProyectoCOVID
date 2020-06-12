@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.Hrencuestapreguntavalores
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+     <sql-query name="hrencuestapreguntavalores.filtro">
+      
+select 
+t1.Pregunta,
+t1.Valor,
+t1.Descripcion,
+t1.UltimoUsuario,
+t1.UltimaFechaModif, t1.peso
+from HR_EncuestaPreguntaValores t1
+where 
+ISNULL(t1.Pregunta, '123') = isnull(:p_pregunta, ISNULL(t1.Pregunta, '123'))
+
+</sql-query>
+
+
+
+<sql-query name="empleado.filtrocontar">
+select 
+count(1)	
+from AU_Empleado 
+where 
+EmpNombre like '%' + isnull(:p_nombre, '') + '%'
+and EmpApellido like '%' + isnull(:p_apellido,'') + '%'
+and ISNULL(EmpEstadoCivil, '123') = isnull(:p_estadocivil, ISNULL(EmpEstadoCivil, '123'))
+
+
+
+
+
+     </sql-query>
+
+
+
+<sql-query name="empleado.filtropaginacion">
+       
+select 
+EmpCodigo,
+EmpNombre,
+EmpApellido,
+case 
+when EmpEdad is null then 0
+else EmpEdad
+end as EmpEdad,
+EmpFechaRegistro,
+EmpSueldo,
+case EmpEstadoCivil
+when 'S' then 'Soltero'
+when 'C' then 'Casado'
+when 'D' then 'Divorciado'
+when 'V' then 'Viudo'
+else 'No registra' 
+end as EmpEstadoCivil,
+EmpCorreo,
+ROW_NUMBER() OVER (ORDER BY EmpCodigo,EmpApellido,EmpApellido) AS Seq
+from AU_Empleado
+where 
+EmpNombre like '%' + isnull(:p_nombre, '') + '%'
+and EmpApellido like '%' + isnull(:p_apellido,'') + '%'
+and ISNULL(EmpEstadoCivil, '123') = isnull(:p_estadocivil, ISNULL(EmpEstadoCivil, '123'))
+
+
+
+
+     </sql-query>
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    	<![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+	</sql-query>
+   
+</hibernate-mapping>

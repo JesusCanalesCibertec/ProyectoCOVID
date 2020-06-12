@@ -1,0 +1,43 @@
+
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid" #frm>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-2">
+            <button pButton label="Agregar Recurso" icon="fa fa-plus" class="ui-button" type="button" (click)='agregarRecurso()'></button>
+        </div>
+    </div>
+ 
+    <p-dataTable #dt [responsive]="true" scrollWidth="100%" [rows]="8" scrollWidth="100%" [value]="listaRecurso" [paginator]="true"
+        emptyMessage="No se encontraron registros">
+
+        <p-column header="Compañia" field="companyowner" [style]="{'width':'250px'}"></p-column>
+        <p-column header="Tipo Recurso" field="tiporecurso" [style]="{'width':'150px'}"></p-column>
+        <p-column header="Periodo" field="periodo" [style]="{'width':'150px'}"></p-column>
+        <p-column header="Nombrerecurso" field="nombrerecurso" [style]="{'width':'200px'}"></p-column>
+
+        <p-column header="{{'Acción'}}" styleClass="textoCentrado" [style]="{'width':'100px'}">
+            <ng-template let-tx="rowData" pTemplate="body">
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-6 ui-lg-4" title="Editar">
+                        <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                    </div>
+
+                    <div class="ui-g-6 ui-md-6 ui-lg-4" title="Eliminar">
+                        <i class="fa fa-times fa-lg seleccionable" (click)="eliminar(tx)"></i>
+                    </div>
+
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    <p-confirmDialog header="Mensaje de Confirmación" width="425"></p-confirmDialog>
+    <app-companiadetallemantenimiento (volveraBuscar)="volveraBuscar($event)"></app-companiadetallemantenimiento>

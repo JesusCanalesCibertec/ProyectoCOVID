@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrEmpleadoidioma
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrempleadoidioma.xxxxxx">
+         select sysdate from dual
+    </sql-query>
+    
+     <sql-query name="hrempleadoidioma.obtenernombreidioma">
+      select DescripcionLocal from HR_IdiomasMast
+		where idioma = :idioma
+    </sql-query>
+    
+    <sql-query name="hrempleadoidioma.eliminarporempleado">
+		delete from hr_empleadoidioma where empleado = :empleado
+	</sql-query>
+</hibernate-mapping>

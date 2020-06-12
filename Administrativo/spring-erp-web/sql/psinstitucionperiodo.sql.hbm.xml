@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psinstitucionperiodo
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="psinstitucionperiodo.filtro">
+    select
+    a.ID_INSTITUCION,
+    a.ID_APLICACION,
+    a.ID_GRUPO,
+    a.ID_CONCEPTO,
+    a.ID_PERIODO,
+    a.FECHA_INICIO,
+    a.FECHA_FIN,
+    B.Descripcion,
+    a.FECHA_INICIO_REGISTRO,
+    a.FECHA_FIN_REGISTRO,
+    ROW_NUMBER() OVER (ORDER BY a.ID_CONCEPTO ) AS Seq
+    from sgseguridadsys.PS_INSTITUCION_PERIODO a left join SeguridadConcepto b
+    on a.ID_APLICACION = b.AplicacionCodigo and a.ID_GRUPO = b.Grupo and a.ID_CONCEPTO = b.Concepto
+    where
+    ISNULL(a.ID_INSTITUCION, 'TMR') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, 'TMR'))
+	and ISNULL(a.ID_PERIODO, 'TMR') = isnull(:p_IdPeriodo, ISNULL(a.ID_PERIODO, 'TMR'))
+  </sql-query>
+
+  <sql-query name="psinstitucionperiodo.copiarPeriodo">
+    <![CDATA[
+       sgseguridadsys.SNp_CopiarPeriodo
+		:pIdInstitucion,
+        :pPeriodo,
+        :pcopiar,
+        :pFechaInicio,
+        :pFechaFin,
+        :pFechaRegistroInicio,
+        :pFechaRegistroFin
+    		]]>
+  </sql-query>
+
+  <sql-query name="psinstitucionperiodo.listarPeriodosSimple">
+    <![CDATA[
+     select DISTINCT
+	     per.ID_PERIODO as codigo, per.ID_PERIODO as nombre
+	   from sgseguridadsys.PS_INSTITUCION_PERIODO per
+	   WHERE per.ID_PERIODO=ISNULL(:pPeriodo,per.ID_PERIODO)
+	   ORDER BY per.ID_PERIODO desc
+    		]]>
+  </sql-query>
+ <sql-query name="psinstitucionperiodo.listarPeriodosSimple2">
+    <![CDATA[
+     select DISTINCT
+	     per.ID_PERIODO as codigo, per.ID_PERIODO as nombre
+	   from sgseguridadsys.PS_INSTITUCION_PERIODO per
+	   WHERE per.ID_PERIODO=ISNULL(:pPeriodo,per.ID_PERIODO)  and per.ID_INSTITUCION = :pIns
+	   ORDER BY per.ID_PERIODO desc
+    		]]>
+  </sql-query>
+
+  <sql-query name="psinstitucionperiodo.listarPeriodos">
+    <![CDATA[
+    select 
+	   per.ID_PERIODO as codigo, per.ID_PERIODO as nombre
+	   from sgseguridadsys.PS_INSTITUCION_PERIODO per
+	   WHERE per.ID_INSTITUCION=:p_IdInstitucion
+	   AND per.ID_CONCEPTO=:p_IdComponente
+	   ORDER BY per.ID_PERIODO desc
+    		]]>
+  </sql-query>
+
+
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    <![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+  </sql-query>
+
+</hibernate-mapping>

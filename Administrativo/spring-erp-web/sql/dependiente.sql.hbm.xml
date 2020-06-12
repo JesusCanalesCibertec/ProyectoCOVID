@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : core.Dependiente -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="dependiente.xxxxxx">
+		select sysdate from dual
+	</sql-query>
+
+	<sql-query name="dependiente.obtenernombreparentesco">
+		SELECT DescripcionLocal FROM MA_MiscelaneosDetalle
+		WHERE CodigoTabla =
+		'TIPOVINC'
+		AND Compania = '999999'
+		AND CodigoElemento = :codigoElemento
+	</sql-query>
+	<sql-query name="dependiente.eliminarporpersona">
+		delete from dependiente where persona = :persona and estado = :estado
+	</sql-query>
+
+</hibernate-mapping>

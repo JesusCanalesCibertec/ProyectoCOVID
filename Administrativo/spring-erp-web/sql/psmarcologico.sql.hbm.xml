@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psmarcologico
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="psmarcologico.filtroContar">
+
+    select
+    count(1)
+    from sgseguridadsys.PS_MARCO_LOGICO t1
+    where
+    t1.ID_MARCO_LOGICO like '%' +  isnull(:p_codigo, '') + '%'
+    and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+    and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+  </sql-query>
+
+  <sql-query name="psmarcologico.filtroPaginacion">
+
+    select
+    T1.ID_MARCO_LOGICO,
+    T1.NOMBRE,
+    case t1.ESTADO
+    when 'A' then 'Activo'
+    when 'I' then 'Inactivo'
+    end as Estado,
+    ROW_NUMBER() OVER (ORDER BY CREACION_FECHA desc) AS Seq
+    from sgseguridadsys.PS_MARCO_LOGICO t1
+    where
+    t1.ID_MARCO_LOGICO like '%' +  isnull(:p_codigo, '') + '%'
+    and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+    and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+
+
+
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarTree">
+
+    SELECT A.ID_MARCO_LOGICO, A.NOMBRE, B.ID_RESULTADO, B.NOMBRE FROM
+    sgseguridadsys.PS_MARCO_LOGICO A JOIN
+    sgseguridadsys.PS_MARCO_LOGICO_RESULTADO B ON A.ID_MARCO_LOGICO = B.ID_MARCO_LOGICO
+    where
+	B.ID_RESULTADO = isnull(:p_codigo, B.ID_RESULTADO)
+    and B.NOMBRE like '%' + isnull(:p_nombre, B.NOMBRE) + '%'
+    
+
+  </sql-query>
+
+  <sql-query name="psmarcologico.habitossaludables">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportHSN
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+		 
+       ]]>
+
+  </sql-query>
+
+  <sql-query name="psmarcologico.nivelsatisfaccion">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSACalidad
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+
+  </sql-query>
+
+  <sql-query name="psmarcologico.nutricionestandares">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGruposNutricionalesDB
+         :p_fechainicio,
+         :p_fechafin,
+         :p_IdInstitucion,
+         :p_IdPrograma
+       ]]>
+
+  </sql-query>
+  /ERNESTO INICIO/
+   <sql-query name="psmarcologico.valoresnutricionales">  
+        sgseguridadsys.SNp_PS_ListarReporteDVNutricional
+		 :p_IdPeriodo,
+		 :p_IdPrograma,
+         :p_IdInstitucion     
+  </sql-query>
+  <sql-query name="psmarcologico.actividadespreventivas">
+        sgseguridadsys.SNp_PS_ListarReporteActPreventivasBenActividad
+         :p_fechainicio,
+         :p_fechafin,
+		 :p_IdInstitucion,
+		 :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+		 
+  </sql-query>
+  <sql-query name="psmarcologico.estadosalud">
+        sgseguridadsys.SNp_PS_ListarReporteEstadoSaludCondicion
+         :p_IdPeriodo,
+		 :p_IdPrograma
+  </sql-query>
+  <sql-query name="psmarcologico.anemiaprevalente">
+        sgseguridadsys.SNp_PS_ListarReportePorcAnemiaPrevalenteNNA
+         :p_IdPeriodo,
+		 :p_Edad,
+		 :p_IdInstitucion
+  </sql-query>
+  <sql-query name="psmarcologico.accesoeducacion">
+        sgseguridadsys.SNp_PS_ListarReporteNNAAccedenIERegularesEsp
+         :p_IdPeriodo,
+		 :p_IdInstitucion
+  </sql-query>
+  <sql-query name="psmarcologico.rendimientoeducativo">
+        sgseguridadsys.SNp_PS_ListarReportePorcNNANivelRendimientoEducativo
+         :p_IdPeriodo,
+		 :p_Nivel,
+		 :p_Grado,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+  </sql-query>
+  <sql-query name="psmarcologico.retrasoeducativo">
+        sgseguridadsys.SNp_PS_ListarReportePorcRetrasoEducativo
+         :p_IdPeriodo,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+  </sql-query>
+  <sql-query name="psmarcologico.retrasoporinstitucion">
+        sgseguridadsys.SNp_PS_ListarReporteCantPorcRetrasoPorInstitucion
+         :p_IdInstitucion,
+		 :p_IdPeriodo
+  </sql-query>
+  <sql-query name="psmarcologico.prevalenciagrupo">
+        sgseguridadsys.SNp_PS_ListarReportePorcPrevalencia
+         :p_FechaInicio,
+         :p_FechaFin,
+		 :p_IdDiagnostico,
+		 :p_tipoRAS,
+		 :p_IdInstitucion,
+		 :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+  </sql-query>
+  <sql-query name="psmarcologico.tratamientofuera">
+        sgseguridadsys.SNp_PS_ListarReporteCantDiagTratFueraInst
+         :p_FechaInicio,
+         :p_FechaFin,
+		 :p_IdPrograma 
+  </sql-query>
+  <sql-query name="psmarcologico.estadofuncional">
+        sgseguridadsys.SNp_PS_ListarReportePorcAAMEstFuncionalEM
+         :p_IdPeriodo
+  </sql-query>
+  <sql-query name="psmarcologico.apoyobiomecanico">
+        sgseguridadsys.SNp_PS_ListarReportePorcAAMEstFuncionalApoyoBio
+		 :p_IdPeriodo,
+		 :p_IdInstitucion
+		 
+		
+  </sql-query>
+  <sql-query name="psmarcologico.mejorainfraestructura">
+        sgseguridadsys.SNp_PS_ListarReporteNroInstMejoraInfFisica
+         :p_IdPeriodo,
+		 :p_IdComponente,
+		 :p_IdInstitucion
+  </sql-query>
+  <sql-query name="psmarcologico.mejoraproyecto">
+        sgseguridadsys.SNp_PS_ListarReporteNroInstMejoraInfFisicaProyecto
+         :p_IdPeriodo
+  </sql-query>
+
+  
+
+  <sql-query name="psmarcologico.listarBPManufacturada">
+    <![CDATA[
+        sgseguridadsys.SNp_Res04
+         :p_periodo,
+		 :p_IdInstitucion
+      ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarBPManufacturadaGraficos">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficaBPManufacturada
+         :p_periodo
+      ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteNivelSatisfaccion">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisfaccion
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteNivelSatisfaccionInstitucion">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisfaccionInstitucion
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteNivelSatisfaccionInstitucionPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisfaccionInstitucionPie1
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteNivelSatisfaccionInstitucionPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisfaccionInstitucionPie2
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReportePorcHabitosSaludablesSalud">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcHabitosSaludablesSalud
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+  <!--PIES-->
+  <sql-query name="psmarcologico.listarReportePorcHabitosSaludablesSaludPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcHabitosSaludablesSaludPie1
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReportePorcHabitosSaludablesSaludPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcHabitosSaludablesSaludPie2
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+
+
+
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie1
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie2
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie3">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie3
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie4">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie4
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie5">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie5
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNAPie6">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNAPie6
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+
+  <sql-query name="psmarcologico.listarReporteGraficoNroNNAParticipanPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoNroNNAParticipanPie1
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoNroNNAParticipanPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoNroNNAParticipanPie2
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoNroNNAParticipanPie3">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoNroNNAParticipanPie3
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoNroNNAParticipanPie4">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoNroNNAParticipanPie4
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteGraficoPorcAutonomiaLogradaPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoPorcAutonomiaLogradaPie1
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteGraficoPorcAutonomiaLogradaPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoPorcAutonomiaLogradaPie2
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoPorcAutonomiaLogradaPie3">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoPorcAutonomiaLogradaPie3
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoPorcAutonomiaLogradaPie4">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoPorcAutonomiaLogradaPie4
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReportePorcGraficoAAMHabOcupacPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcGraficoAAMHabOcupacPie1
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteGraficoPorcAAMFortHabSocialesPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoPorcAAMFortHabSocialesPie1
+         :p_periodo,
+		 :p_programa
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteNivelSatisMejorasFisicasPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisMejorasFisicasPie1
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+    <sql-query name="psmarcologico.listarReporteNivelSatisMejorasFisicasPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisMejorasFisicasPie2
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+    <sql-query name="psmarcologico.listarReporteNivelSatisMejorasFisicasPie3">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisMejorasFisicasPie3
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+    <sql-query name="psmarcologico.listarReporteNivelSatisMejorasFisicasPie4">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisMejorasFisicasPie4
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  
+  <sql-query name="psmarcologico.listarReporteSatisfaccionServicioNNA">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSatisfaccionServicioNNA
+         :p_periodo,
+		 :p_programa,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteNivelSatisMejorasFisicas">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNivelSatisMejorasFisicas
+         :p_periodo,
+		 :p_programa,
+		 :p_sexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReportePorcAutonomiaLograda">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcAutonomiaLograda
+         :p_periodo
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReportePorcAAMHabOcupac">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcAAMHabOcupac
+         :p_periodo
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReportePorcAAMFortHabSociales">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePorcAAMFortHabSociales
+         :p_periodo,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteNroCapEspPersonal">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNroCapEspPersonal
+           :p_fechaInicio,
+           :p_fechaFin,
+		   :p_institucion
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteNroNNAParticipan1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNroNNAParticipan1
+         :p_fechaInicio,
+         :p_fechaFin
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteNroNNAParticipan2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteNroNNAParticipan2
+         :p_fechaInicio,
+         :p_fechaFin
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie1">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie1
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie2">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie2
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie3">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie3
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie4">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie4
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie5">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie5
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie6">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie6
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie7">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie7
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie8">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie8
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie9">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie9
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie10">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie10
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie11">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie11
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie12">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie12
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie13">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie13
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie14">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie14
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie15">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie15
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie16">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie16
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie17">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie17
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie18">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie18
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie19">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie19
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie20">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie20
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie21">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie21
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie22">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie22
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie23">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie23
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie24">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie24
+         :p_programa
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.listarReporteGraficoMejoraHabilidadesSocialesNNAPie25">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteGraficoMejoraHabilidadesSocialesNNAPie25
+         :p_programa
+       ]]>
+  </sql-query>
+
+  
+
+  <sql-query name="psmarcologico.listarReporteMejoraHabilidadesSocialesNNA">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteMejoraHabilidadesSocialesNNA
+         :p_periodo,
+         :p_institucion,
+         :p_sexo,
+		 :p_residencia
+       ]]>
+  </sql-query>
+
+  <sql-query name="psmarcologico.listarReporteMejoraHabilidadesSocialesNNAEdad">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteMejoraHabilidadesSocialesNNAEdad
+         :p_periodo,
+         :p_institucion,
+         :p_sexo,
+		 :p_residencia
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.listarReporteMejoraHabilidadesSocialesNNASatisf">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteMejoraHabilidadesSocialesNNASatisf
+         :p_periodo,
+         :p_institucion,
+         null
+       ]]>
+  </sql-query>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <sql-query name="psmarcologico.res01Cabecera">
+    <![CDATA[
+        sgseguridadsys.SNp_Res01Cabecera
+         :p_periodo,
+         :p_programa,
+	 :p_sexo,
+	 :p_EdadDesde,
+	 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.res01Detalle">
+    <![CDATA[
+        sgseguridadsys.SNp_Res01Detalle
+         :p_periodo,
+         :p_programa,
+         :p_institucion,
+	 :p_sexo,
+	 :p_EdadDesde,
+	 :p_EdadHasta
+       ]]>
+  </sql-query>
+  
+  
+  <sql-query name="psmarcologico.res07Cabecera">
+    <![CDATA[
+        sgseguridadsys.SNp_Res07
+         :p_IdPeriodo,
+         :p_IdInstitucion,
+         :p_IdPrograma,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  
+  
+   <sql-query name="psmarcologico.res09Cabecera">
+    <![CDATA[
+        sgseguridadsys.SNp_Res09Cabecera
+		 :p_periodo,
+		 :p_mayor,
+         :p_menor,
+		 :p_IdInstitucion
+         
+       ]]>
+  </sql-query>
+
+
+  <sql-query name="psmarcologico.res09Detalle">
+    <![CDATA[
+        sgseguridadsys.SNp_Res09Detalle
+         :p_periodo,
+		 :p_mayor,
+         :p_menor,
+		 :p_institucion
+       ]]>
+  </sql-query>
+  
+  
+   <sql-query name="psmarcologico.res10">
+    <![CDATA[
+        sgseguridadsys.SNp_Res10
+		 :p_periodo,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta		 
+       ]]>
+  </sql-query>
+  
+  
+     <sql-query name="psmarcologico.res11">
+    <![CDATA[
+        sgseguridadsys.SNp_Res11
+		 :p_programa,
+         :p_desde,        
+		 :p_hasta,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+		 
+       ]]>
+  </sql-query>
+
+  
+  
+     <sql-query name="psmarcologico.res16">
+    <![CDATA[
+        sgseguridadsys.SNp_Res16
+		 :p_periodo,
+		 :p_IdInstitucion,
+		 :p_IdResidencia,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+   <sql-query name="psmarcologico.res16Detalle">
+    <![CDATA[
+        sgseguridadsys.SNp_Res16Detalle
+         :p_periodo,
+		 :p_institucion,
+		 :p_IdResidencia,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.res21">
+    <![CDATA[
+        sgseguridadsys.SNp_Res21
+		 :p_periodo,
+		 :p_institucion,
+		 :p_residencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  
+     <sql-query name="psmarcologico.res19Cabecera">
+    <![CDATA[
+        sgseguridadsys.SNp_Res19Cabecera
+         :p_desde,
+		 :p_hasta,
+		 :p_institucion,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.res19Detalle">
+    <![CDATA[
+        sgseguridadsys.SNp_Res19Detalle
+		 :p_desde,
+		 :p_hasta,
+		 :p_institucion,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+   <sql-query name="psmarcologico.res20">
+    <![CDATA[
+        sgseguridadsys.SNp_Res20
+		 :p_periodo,
+		 :p_institucion,
+		 :p_residencia,
+		 :p_IdSexo,
+		 :p_EdadDesde,
+		 :p_EdadHasta
+       ]]>
+  </sql-query>
+
+
+
+
+
+
+  <sql-query name="psmarcologico.ListarReportePoblacionPorInstitucionyAnio">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePoblacionPorInstitucionyAnio
+         :pAnioInicio,
+	       :pAnioFin 
+      ]]>
+
+  </sql-query>
+  <sql-query name="psmarcologico.ListarReporteSubVencionesEjecutadas">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSubVencionesEjecutadas
+         :p_IdPeriodo
+      ]]>
+
+  </sql-query>
+  <sql-query name="psmarcologico.ListarReporteSubVencionesEjecutadasInstitucion">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteSubVencionesEjecutadasInstitucion
+         :p_IdPeriodo
+      ]]>
+</sql-query>
+  <sql-query name="psmarcologico.ListarReportePoblacionBeneficiaria">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReportePoblacionBeneficiaria
+         :p_IdPeriodo
+      ]]>
+  </sql-query>
+  <sql-query name="psmarcologico.obtenerAnalisisNutricionDetalle">
+        declare @periodo varchar(10) = :p_periodo
+		declare @compania varchar(10) = :p_compania
+		declare @secuencia int = :p_secuencia
+		declare @institucion varchar(10) = :p_institucion
+
+		select b.Descripcion, sum(cast(Observacion as int)) total from HR_EncuestaSujeto a 
+		join HR_EncuestaPregunta b on a.Pregunta = b.Pregunta
+		where a.Secuencia = @secuencia and a.PERIODO = @periodo and a.COMPANYOWNER = @compania
+		and b.Area = 'PER' and Observacion NOT LIKE '%[^0-9]%' and a.ID_INSTITUCION = ISNULL(@institucion, a.ID_INSTITUCION)
+		group by b.Descripcion
+
+  </sql-query>
+
+
+</hibernate-mapping>

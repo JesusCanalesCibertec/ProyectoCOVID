@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrOrganigrama
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrorganigramahistcab.obtenerPosicionEmpresa">
+         	select CodigoPosicion as "codigo"
+					,Descripcion as "nombre"
+				from HR_PosicionEmpresa
+			where companyowner = :p_companyowner 
+			and CodigoPosicion = :p_codigo_posicion
+    </sql-query>
+</hibernate-mapping>

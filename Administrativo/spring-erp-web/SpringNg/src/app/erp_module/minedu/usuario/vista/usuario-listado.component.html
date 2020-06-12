@@ -1,0 +1,108 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <p-table #dt [columns]="cols" [scrollable]="true" selectionMode="single" [responsive]="true"
+            [value]="filtro.paginacion.listaResultado" [lazy]="true" (onLazyLoad)="cargarPaginacion($event)" [rows]="15"
+            selectionMode="single" [(selection)]="rowUsuario" [totalRecords]="filtro.paginacion.registroEncontrados"
+            scrollHeight="700px">
+            <ng-template pTemplate="caption">
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-8 ui-md-4 ui-lg-2 controlEtiquetaDivTop" style="text-align: left;">
+                        <label style="font-size: 20px;">Lista de Usuarios</label>
+                    </div>
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton label="Nuevo" icon="fas fa-user-plus" type="button" class="ui-button"
+                            (click)="nuevo()"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <col *ngFor="let col of columns" [style.width.px]="col.width">
+                </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-columns="columns">
+                <tr [pSelectableRow]="row">
+                    <td *ngIf="row.creacionFecha == null" class="textoCentrado">
+                        <p-dropdown [(ngModel)]="row.perfil" [options]="perfiles" [autoWidth]="false"
+                            [style]="{'width':'100%'}" appendTo="body">
+                        </p-dropdown>
+                    </td>
+                    <td *ngIf="row.creacionFecha != null" class="textoCentrado">{{row.perfil}}</td>
+                    <td *ngIf="row.creacionFecha == null" class="textoCentrado">
+                        <p-dropdown [(ngModel)]="idPersona" [options]="personas" [autoWidth]="false" filter="true"
+                            resetFilterOnHide="true" filterBy="label" emptyFilterMessage="Personal no encontrado"
+                            [style]="{'width':'100%'}" appendTo="body" (onChange)="cargarUsuario()">
+                        </p-dropdown>
+                    </td>
+                    <td *ngIf="row.creacionFecha != null">{{row.nombres}}</td>
+                    <td>{{row.usuario}}</td>
+                    <td class="textoCentrado">{{row.ultimaconexion | date: 'hh:mm a  el  dd/MM/yyyy'}}</td>
+                    <td class="textoCentrado">{{row.creacionFecha | date: 'dd/MM/yyyy'}}</td>
+                    <td class="textoCentrado">
+                        <div *ngIf="row.creacionFecha != null" class="ui-g-12 ui-md-12 ui-lg-12">
+                            <p-inputSwitch [(ngModel)]="row.activo" (onChange)="cambiarestado(row)"></p-inputSwitch>
+                        </div>
+                    </td>
+                    <td class="textoCentrado">
+                        <div class="ui-g" *ngIf="row.creacionFecha == null">
+                            <div class="ui-g-6 ui-md-6 ui-lg-6" title="Guardar">
+                                <i class="fas fa-save fa-lg seleccionable" (click)="guardar(row)"></i>
+                            </div>
+                            <div class="ui-g-6 ui-md-6 ui-lg-6" title="Cancelar">
+                                <i class="fas fa-times fa-lg seleccionable" (click)="cancelar(row)"></i>
+                            </div>
+                        </div>
+                        <div class="ui-g" *ngIf="row.creacionFecha != null">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar">
+                                <i class="fas fa-user-times fa-lg seleccionable" (click)="eliminar(row)"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="columns.length">
+                        No se encontraron registros
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                Registros encontrados : {{filtro.paginacion.registroEncontrados}}
+            </ng-template>
+        </p-table>
+    </div>
+
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+</div>

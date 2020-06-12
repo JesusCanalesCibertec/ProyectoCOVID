@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+		<sql-query name="MpProyectorecurso.listarRecursos">
+select 
+		CAST(ROW_NUMBER() OVER(ORDER BY ID_RECURSO ASC) AS INT) AS Row#,
+		p.AREA,
+		p.ID_PERSONA,
+		case 
+		when p.ID_PERSONA is null then p.NOMBRE
+		else per.NOMBRE+' '+per.APELLIDO
+		end as Nombre,
+		p.CARGO as nomCargo,
+		p.ROL,
+		(
+		SELECT STUFF(
+			(SELECT ', ' + s1.NOMBRE
+				FROM minedu.CONOCIMIENTO s1
+				left join minedu.PERSONA_CONOCIMIENTO s2 ON s1.ID_CONOCIMIENTO = s2.ID_CONOCIMIENTO
+				WHERE s2.ID_PERSONA = c.ID_PERSONA 
+				order by s1.NOMBRE
+				FOR XML PATH ('')),
+		1,2, '')
+		) as Conocimientos,
+		(select max(aux.ID_CONTRATACION) from minedu.CONTRATACION aux where aux.ID_PERSONA = p.ID_PERSONA) as ultimo_contrato
+		from 
+		minedu.PROYECTO_RECURSO p
+		left join minedu.PERSONA per on p.ID_PERSONA = per.ID_PERSONA
+		left join minedu.CONTRATACION c on per.ID_PERSONA = c.ID_PERSONA and c.ESTADO = 'A' and c.ID_CONTRATACION = (select max(c2.ID_CONTRATACION) from minedu.CONTRATACION c2 where c2.ID_PERSONA = c.ID_PERSONA)
+		where 
+		ISNULL(p.ID_PROYECTO, '') = isnull(:p_IdProyecto, ISNULL(p.ID_PROYECTO, ''))  and (c.ESTADO = 'A' OR p.ID_PERSONA is null)
+		order by p.ID_RECURSO
+			
+  </sql-query>
+  
+  <sql-query name="MpProyectorecurso.eliminarListaperiodos">
+	
+	delete minedu.PROYECTO_RECURSO_PERIODO
+	where ID_PROYECTO = :p_IdProyecto and ID_PERSONA = :p_IdPersona AND ID_CONTRATACION = :p_IdContratación  
+	
+ </sql-query>
+
+
+</hibernate-mapping>

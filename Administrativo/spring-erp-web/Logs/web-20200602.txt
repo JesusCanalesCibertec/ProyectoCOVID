@@ -1,0 +1,14 @@
+2020-06-02T11:43:23.1669677-05:00  [INF] User profile is available. Using '"C:\Users\earbulu\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2020-06-02T11:43:36.6685283-05:00  [INF] Starting @angular/cli on port 52023... (42541af2)
+2020-06-02T11:43:47.2738635-05:00 0HM072GF4GSC1:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591115894335   (ca22a1cb)
+2020-06-02T11:43:47.2876184-05:00 0HM072GF4GSC0:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591115910164   (ca22a1cb)
+2020-06-02T11:43:47.2876188-05:00 0HM072GF4GSC2:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591115881743   (ca22a1cb)
+2020-06-02T11:43:47.3986389-05:00 0HM072GF4GSC3:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591115934583   (ca22a1cb)
+2020-06-02T11:43:47.4501125-05:00 0HM072GF4GSC1:00000001 [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2020-06-02T11:43:48.3975002-05:00 0HM072GF4GSC4:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591115974816   (ca22a1cb)
+2020-06-02T11:53:39.6769522-05:00 0HM072GF4GSC5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1591116110916   (ca22a1cb)
+2020-06-02T12:17:42.9393714-05:00  [INF] > california@1.0.0 start D:\earbulu\Proyectos\PROGETTO\2.Codigo\spring-erp-web\SpringNg
+> ng serve "--port" "52023"
+
+** Angular Live Development Server is listening on localhost:52023, open your browser on http://localhost:52023/ **
+ (5755000e)

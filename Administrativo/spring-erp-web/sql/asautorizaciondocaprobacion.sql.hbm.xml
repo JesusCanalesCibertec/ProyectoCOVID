@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrSolicitudvacacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+	<sql-query name="asautorizaciondocaprobacion.listarSeguiemiento">
+    	<![CDATA[
+         select	v.NumeroProceso
+		        ,v.Secuencial
+		        ,v.Responsable
+		        ,p.NombreCompleto
+		        ,v.Comentario
+		        ,v.FechaAprobacion
+		        ,e.UNIDADOPERATIVA
+		        ,uo.DESCRIPCION
+	        from AS_AutorizacionDocAprobacion v
+		        inner join PersonaMast p
+			        on v.Responsable = p.Persona
+		        left join EmpleadoMast e
+			        on v.Responsable = e.Empleado
+		        left join HR_UNIDADOPERATIVA uo
+			        on e.UNIDADOPERATIVA = uo.UNIDADOPERATIVA
+	        where 1=1
+	            and v.NumeroProceso = :p_numero_proceso
+	        order by v.FechaAprobacion desc
+		]]>
+    </sql-query>    
+
+</hibernate-mapping>

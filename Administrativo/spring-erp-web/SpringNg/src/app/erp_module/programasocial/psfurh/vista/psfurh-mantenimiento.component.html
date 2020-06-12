@@ -1,0 +1,269 @@
+<div class="ui-fluid" #frm>
+    <p-panel header="Registrar Ficha Unica de RRHH (FURH)">
+        <p-fieldset legend="Datos Personales">
+            <div [ngStyle]="{'pointer-events':puedeModificar ? 'none' : '' }">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Institución</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion" [options]="listaInstitucion"
+                            [(ngModel)]="dtoComponenteFurh.idInstitucion"></p-dropdown>
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Tipo Documento </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="tipodocumento"
+                            [(ngModel)]="dtoComponenteFurh.idTipoDocumento"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Apellido Paterno </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <input pInputText type="text" [(ngModel)]="dtoComponenteFurh.apellidoPaterno" />
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Nro Documento </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <input pInputText type="text" [(ngModel)]="dtoComponenteFurh.documento" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Apellido Materno </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <input pInputText type="text" [(ngModel)]="dtoComponenteFurh.apellidoMaterno" />
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Fecha de Nacimiento </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <p-calendar [monthNavigator]="true " (onSelect)="obtenerEdad()" [yearNavigator]="true "
+                            yearRange="1940:2200" [(ngModel)]="dtoComponenteFurh.fechanacimiento" [showIcon]="true"
+                            dateFormat="dd/mm/yy"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Nombres </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <input pInputText type="text" [(ngModel)]="dtoComponenteFurh.nombres" />
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Edad</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <input pInputText type="text" disabled [(ngModel)]="edad" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Correo Electrónico </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <input pInputText type="text" [(ngModel)]="dtoComponenteFurh.correo1" />
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Sexo </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaSexo" [(ngModel)]="dtoComponenteFurh.idSexo">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Con Discapacidad? </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaDiscapacidad"
+                            [(ngModel)]="dtoComponenteFurh.idDiscapacidad"></p-dropdown>
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Fecha de Ingreso </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-8 ui-lg-3">
+                        <p-calendar [monthNavigator]="true " (onSelect)="obtenerTiempoPermanencia()"
+                            [yearNavigator]="true " yearRange="1940:2200" [(ngModel)]="dtoComponenteFurh.fechaIngreso"
+                            [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+                    </div>
+                </div>
+
+                <div class="ui-g" style="display: none">
+                    <div class="ui-g-12 ui-md-12 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Grupo Sanguineo </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaGrupoSanguineo"
+                            [(ngModel)]="dtoComponenteFurh.idGrupoSanguineo"></p-dropdown>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-12 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Factor RH </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaFactorRh"
+                            [(ngModel)]="dtoComponenteFurh.idFactorRh"></p-dropdown>
+                    </div>
+
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Tiempo de Permanencia</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <input pInputText type="text" disabled [(ngModel)]="tiempoPermanencia" />
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Estado</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [disabled]="!puedeModificarEstado" [options]="estados"
+                            [(ngModel)]="dtoComponenteFurh.estado"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Area Trabajo </label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaInstitucionAreaTrabajo"
+                            [(ngModel)]="dtoComponenteFurh.idAreaTrabajo"></p-dropdown>
+                    </div>
+
+                    <div class="ui-g-12 ui-md ui-lg-1"></div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Código Usuario</label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <input pInputText type="text" maxlength="49" [(ngModel)]="dtoComponenteFurh.codigoUsuario" />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop"
+                        style="color: crimson; font-weight: bold;">
+                        <label>Nivel Académico </label>
+                    </div>
+
+                    <div class="ui-g-10 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" (onChange)="obtenerEspecialidadAcademica()"
+                            [options]="listaNivelAcademico" [(ngModel)]="dtoComponenteFurh.idNivelAcademico">
+                        </p-dropdown>
+                    </div>
+
+                    <div class="ui-g-1 ui-md-1 ui-lg-1">
+                        <button pButton icon="fa fa-plus" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneosNivelAcademico()" title="Buscar"></button>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Especialidad Académica</label>
+                    </div>
+
+                    <div class="ui-g-10 ui-md-4 ui-lg-3">
+                        <p-dropdown [autoWidth]="false" [options]="listaEspecialidadAcademica"
+                            [(ngModel)]="dtoComponenteFurh.idEspecialidadAcademica"></p-dropdown>
+                    </div>
+
+                    <div class="ui-g-1 ui-md-1 ui-lg-1">
+                        <button pButton icon="fa fa-plus" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneosEspecialidad()" title="Buscar"></button>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Observaciones</label>
+                    </div>
+
+                    <div class="ui-g-10 ui-md-4 ui-lg-10">
+                        <textarea pInputTextarea style="width:100%" maxlength="500"
+                            [(ngModel)]="dtoComponenteFurh.comentarios"></textarea>
+                    </div>
+
+                </div>
+            </div>
+        </p-fieldset>
+    </p-panel>
+
+    <div class="ui-g">
+        <div class="ui-g-4 ui-md-2 ui-lg-2">
+            <button pButton label="Guardar" icon="fa fa-plus" type="button" class="ui-button"
+                (click)="guardar()"></button>
+        </div>
+        <div class="ui-g-4 ui-md-8 ui-lg-8"></div>
+
+        <div class="ui-g-4 ui-md-2 ui-lg-2">
+            <button pButton label="Cancelar" icon="fa fa-history" type="button" class="ui-button"
+                (click)="cancelar()"></button>
+        </div>
+    </div>
+    <app-popup-mantenimiento (cargarSeleccionEvent)="buscarNivelAcademico()"
+        (cargarSeleccionPorTipoEvent)="buscarNivelEspecialidad()"></app-popup-mantenimiento>

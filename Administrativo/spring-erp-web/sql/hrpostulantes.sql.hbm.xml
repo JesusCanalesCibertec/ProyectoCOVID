@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder :  -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulantes.solicitudListarContar">
+    	
+       select count(1) from HR_Postulantes h join HR_PosRequer pr on pr.Postulante = h.Postulante
+	where 
+	h.nombres like '%'+isnull(:p_nombre, '')+'%' and 
+	pr.Requerimiento = :p_requerimiento and 
+	pr.companyowner = :p_companyowner and 
+	pr.Estado = isnull(:p_estado, pr.Estado)
+	</sql-query>
+
+	<sql-query name="hrpostulantes.solicitudListarPaginacion">
+    	
+        select h.postulante, pr.companyowner, h.nombres, h.apellidopaterno, h.apellidomaterno, h.documento, h.unidadreplicacion, ROW_NUMBER() OVER (ORDER BY h.postulante) AS Seq from HR_Postulantes h join HR_PosRequer pr on pr.Postulante = h.Postulante
+	where 
+	h.nombres like '%'+isnull(:p_nombre, '')+'%' and 
+	pr.Requerimiento = :p_requerimiento and 
+	pr.companyowner = :p_companyowner and 
+	pr.Estado = isnull(:p_estado, pr.Estado)
+		
+	</sql-query>
+</hibernate-mapping>

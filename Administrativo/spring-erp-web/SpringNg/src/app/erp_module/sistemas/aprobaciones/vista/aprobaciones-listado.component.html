@@ -1,0 +1,145 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid" #frm>
+
+    <p-panel header="APROBACIÓN DE PROCESOS : Filtros de Búsqueda">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Compañia</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-dropdown [options]="companias" [style]="{'width':'100%'}" [autoWidth]="false"
+                    [(ngModel)]="filtro.companiaSocio"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-3"></div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Aplicación</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-dropdown [options]="lstAplicacion" [style]="{'width':'100%'}" [autoWidth]="false"
+                    (onChange)="cargarProcesos()" [(ngModel)]="filtro.aplicacion"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Proceso</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-dropdown [options]="lstProceso" [style]="{'width':'100%'}" [autoWidth]="false"
+                    [(ngModel)]="filtro.proceso"></p-dropdown>
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Solicitante </label>
+            </div>
+            <div class="ui-g-8 ui-md-8 ui-lg-2">
+                <input pInputText type="text" disabled style="width:100%" [ngModel]="filtro.nombreSolicitante"
+                />
+            </div>
+
+            <div class="ui-g-4 ui-md-4 ui-lg-1">
+                <button pButton icon="fa fa-binoculars" type="button" (click)="mostrarSelectorEmpleadomast()"></button>
+                <button pButton icon="fa fa-trash" type="button" (click)="limpiarEmpleado()"></button>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-1 controlEtiquetaDivTop">
+                <label>Rango de Fechas</label>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <p-checkbox [(ngModel)]="filtroConRango" binary="true"></p-checkbox>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Desde</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200"
+                    [(ngModel)]="!filtroConRango?'':filtro.fechaDesde" [showIcon]="true" [disabled]="!filtroConRango"
+                    dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-1">
+                <label>Hasta</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200"
+                    [(ngModel)]="!filtroConRango?'':filtro.fechaHasta" [showIcon]="true" [disabled]="!filtroConRango"
+                    dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+        </div>
+
+    </p-panel>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-2">
+            <button pButton label="Seleccionar Todos" type="button" (click)="seleccionarTodos()"
+                icon="fa fa-th-list " style="font-size: 12px"></button>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-1">
+            <button pButton label="Aprobar" type="button" (click)="aprobar()" icon="fa fa-check"
+                style="font-size: 12px"></button>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-1">
+            <button pButton label="Rechazar" type="button" (click)="rechazar()" icon="fa fa-times"
+                style="font-size: 12px"></button>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-2">
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-1">
+            <button pButton label="Ver" type="button" (click)="ver()" icon="fa fa-search " style="font-size: 12px"></button>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-1">
+            <button pButton label="Buscar" type="button" (click)="buscar(dtAprobaciones)" icon="fa fa-binoculars "
+                style="font-size: 12px"></button>
+        </div>
+    </div>
+
+    <p-dataTable #dtAprobaciones scrollable="true" emptyMessage="No se encontraron registros"
+        scrollWidth="100%" [lazy]="true" [totalRecords]="paginacion.registroEncontrados"
+        (onLazyLoad)="cargarSolicitudes($event)" dataKey="dataKey" [(selection)]="seleccionados"
+        [responsive]="true" [value]="paginacion.listaResultado" [paginator]="true" [rows]="20"
+        [headerCheckboxToggleAllPages]="true">
+        <p-column [style]="{'width':'28px'}" selectionMode="multiple"></p-column>
+
+        <p-column header="N°" [style]="{'width':'70px'}" field="procesoNro" styleClass="textoCentrado"></p-column>
+        <p-column header="Tipo de solicitud" [style]="{'width':'200px'}" field="procesoNombre"></p-column>
+        <p-column header="Nivel a Aprobar" [style]="{'width':'50px'}" field="nivelAprobar"
+            styleClass="textoCentrado"></p-column>
+        <p-column header="Documento Referencia" [style]="{'width':'90px'}" field="documentoReferencia"
+            styleClass="textoCentrado"></p-column>
+        <p-column header="Fecha Documento" [style]="{'width':'80px'}">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.fechaSolicitud | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </p-column>
+        <p-column header="Solicitante / Empleado" [style]="{'width':'85px'}" field="solicitanteId"
+            styleClass="textoCentrado"></p-column>
+        <p-column header="Empleado / Solicitante Nombre" [style]="{'width':'270px'}" field="solicitanteNombre"></p-column>
+        <p-column header="Estado Registro" [style]="{'width':'100px'}" field="estadoNombre"
+            styleClass="textoCentrado"></p-column>
+
+    </p-dataTable>
+
+    <aprobacion-preguntas (reiniciarSeleccionados)="reiniciarSeleccionados()" (mostrarMensajeEjecutar)="mostrarMensajeEjecutar($event)"></aprobacion-preguntas>
+    <app-empleadomast-selector (cargarSeleccionEvent)="cargarEmpleado($event)" (block)="bloquearPagina()"
+        (unBlock)="desbloquearPagina()"></app-empleadomast-selector>

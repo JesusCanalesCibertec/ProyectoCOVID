@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : sistema.SyAprobacionniveles
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="syaprobacionniveles.obtenerEmpleado">
+    	 select	cast(p.NombreCompleto as varchar) as "nombreCompleto",
+				e.correointerno as "correoInterno",
+				e.UnidadOperativa as "unidadOperativa",
+				e.JefeResponsable as "jefeResponsable",
+				e.DepartamentoOperacional as "departamentoOperacional",
+				e.centrocostos as "centroCostos",
+				e.DeptoOrganizacion as "deptoOrganizacion"
+		from PersonaMast p inner join empleadomast e 
+			on p.persona=e.Empleado
+		where e.empleado = :p_id_persona		
+    </sql-query>
+    <sql-query name="syaprobacionniveles.obtenerDepartamento">
+         SELECT cast(per.Descripcion as varchar) as "nombre" 
+         FROM HR_Departamento per 
+         WHERE per.Departamento = :p_id_departamento
+    </sql-query>
+    <sql-query name="syaprobacionniveles.generarCodigo">
+          select isnull(max(codigo), 0)+1 from SY_APROBACIONNIVELES
+    </sql-query>
+    <sql-query name="syaprobacionniveles.validarconfiguracionporcomania">
+          select * from sy_Aprobacionniveles WHERE CodigoProceso IN(
+	  select CodigoProceso from sy_Aprobacionproceso WHERE  ProcesoInterno IN (
+	  select DISTINCT CodigoElemento from MA_MiscelaneosDetalle where CodigoTabla = 'prointapro' and ValorCodigo2 = :p_proceso))
+	  AND companyowner = :p_compania
+    </sql-query>
+</hibernate-mapping>

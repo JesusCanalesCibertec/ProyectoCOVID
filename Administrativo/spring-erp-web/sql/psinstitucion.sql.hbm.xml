@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psinstitucion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <sql-query name="psinstitucion.listarPeriodo">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ListarPeriodo
+        :p_institucion,
+        :p_idPrograma,
+        :p_idComponente,
+        :p_idUsuario,
+        :p_idBeneficiario
+       ]]>
+  </sql-query>
+
+
+
+  <sql-query name="psinstitucion.filtroContar">
+
+    select
+    count(1)
+    from sgseguridadsys.PS_INSTITUCION t1
+    where
+    t1.ID_INSTITUCION like '%' +  isnull(:p_codigo, '') + '%'
+    and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+    and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+
+
+  </sql-query>
+
+
+
+
+  <sql-query name="psinstitucion.filtroPaginacion">
+
+    select
+    T1.ID_INSTITUCION,
+    T1.NOMBRE,
+    case t1.ESTADO
+    when 'A' then 'Activo'
+    when 'I' then 'Inactivo'
+    end as Estado,
+    t1.CREACION_FECHA,
+    ROW_NUMBER() OVER (ORDER BY CREACION_FECHA desc) AS Seq
+    from sgseguridadsys.PS_INSTITUCION t1
+    where
+    t1.ID_INSTITUCION like '%' +  isnull(:p_codigo, '') + '%'
+    and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+    and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+
+
+
+  </sql-query>
+
+	<sql-query name="psinstitucion.eliminardetalle">
+      
+	DELETE FROM sgseguridadsys.PS_INSTITUCION_AREA
+	WHERE ID_INSTITUCION= :p_idInstitucion 
+	
+
+	</sql-query>
+
+
+</hibernate-mapping>

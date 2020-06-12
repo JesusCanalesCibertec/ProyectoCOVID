@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES10" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="1.3310000000000144"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_PERIODO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Desarrollo\\Fabrica\\CANEVARO\\spring-erp-web\\report\\Indicadores\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT TOP 4
+X.NOMBRE_INSTITUCION,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'ALL') AS POBLACION,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS INDEPENDIENTE,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS INDEPENDIENTE#,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Parcial') AS DEPENDIENTE_PARC,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Parcial') AS DEPENDIENTE_PARC#,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Total') AS DEPENDIENTE_TOT,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Total') AS DEPENDIENTE_TOT#,
+(SELECT SUM(CANTIDAD) FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR LIKE 'Dependiente%') AS TOTAL_DEPENDIENTE,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS TOTAL_INDEPENDIENTE,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE') AS NO_EVALUADOS,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE-PO') AS ENF_MENTALES,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE-PO') AS ENF_MENTALES#
+FROM ##tabla_temporal_res10 X]]>
+	</queryString>
+	<field name="NOMBRE_INSTITUCION" class="java.lang.String"/>
+	<field name="POBLACION" class="java.lang.Integer"/>
+	<field name="INDEPENDIENTE" class="java.lang.Integer"/>
+	<field name="INDEPENDIENTE#" class="java.math.BigDecimal"/>
+	<field name="DEPENDIENTE_PARC" class="java.lang.Integer"/>
+	<field name="DEPENDIENTE_PARC#" class="java.math.BigDecimal"/>
+	<field name="DEPENDIENTE_TOT" class="java.lang.Integer"/>
+	<field name="DEPENDIENTE_TOT#" class="java.math.BigDecimal"/>
+	<field name="TOTAL_DEPENDIENTE" class="java.lang.Integer"/>
+	<field name="TOTAL_INDEPENDIENTE" class="java.lang.Integer"/>
+	<field name="NO_EVALUADOS" class="java.lang.Integer"/>
+	<field name="ENF_MENTALES" class="java.lang.Integer"/>
+	<field name="ENF_MENTALES#" class="java.math.BigDecimal"/>
+	<title>
+		<band height="127">
+			<rectangle>
+				<reportElement positionType="Float" x="332" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="f140d8c7-e51c-48d6-9957-a2c3c9c72383"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="294" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="2c2506f8-c2f4-474b-90e8-76c894a15a13"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="294" y="112" width="38" height="15" uuid="3b343eac-dfc8-4e71-a7a8-bcb1d9a45125"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="208" y="82" width="48" height="45" backcolor="#CCCCCC" uuid="b6da800a-1008-4ad9-a34e-264dc2dc29f2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="483" y="82" width="76" height="45" backcolor="#CCCCCC" uuid="1ce825d0-7f17-4677-b9cb-b780e6a1d497"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="559" y="82" width="76" height="45" backcolor="#CCCCCC" uuid="e3735aab-bd8f-4894-a633-0179c931dfa2"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="559" y="82" width="76" height="45" uuid="440be673-f03c-472f-addc-501b50778450"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total Independientes]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="15" y="82" width="193" height="45" backcolor="#CCCCCC" uuid="3d4b2abe-e778-4c0e-b4f5-0b4b251ac73a"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="15" y="82" width="193" height="45" uuid="2c878ac9-67c2-4a02-91be-5cc143070aba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Instituciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="25" width="802" height="25" uuid="b3036ded-7f8e-48d4-b976-2b95b3f2edc9"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RES10 - Estado funcional y enfermedades mentales ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="332" y="97" width="76" height="15" backcolor="#CCCCCC" uuid="4c3f7734-d5b0-4956-a40c-45524ea25f71"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="407" y="97" width="76" height="15" backcolor="#CCCCCC" uuid="8db47afe-04d0-4cb8-b93b-3cb098111830"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="332" y="97" width="76" height="15" uuid="b12687b7-cebf-421a-800a-b096e183cf7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Dependiente Parcial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="407" y="97" width="76" height="15" uuid="190a9306-c590-45d9-b195-8830c627fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Dependiente Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="15" y="60" width="125" height="15" uuid="fba5b01e-6dba-47d6-acca-77b0fc984de1"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Periodo de evaluación:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="140" y="60" width="80" height="15" uuid="270101b3-5b81-4422-ab23-79e474e714ca"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_PERIODO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="635" y="82" width="76" height="45" backcolor="#CCCCCC" uuid="aa244e98-bffa-4bd3-aa25-9be7733ad5d5"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="635" y="82" width="76" height="45" uuid="3d1cf818-623f-4131-ae71-5b0e1edd988b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[No Evaluados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="483" y="82" width="76" height="45" uuid="abdb8ad9-4251-4b56-93d3-db8a116c545b"/>
+				<box leftPadding="3" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total Dependientes ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="208" y="82" width="48" height="45" uuid="e5e5df86-bc43-4091-9b47-70602dbb905c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Población]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="46a4a053-29c6-4af8-b076-8d2fb436b73e"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="256" y="112" width="38" height="15" uuid="5c53482b-dc8e-49b5-9ade-d4db79f3e89f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="369" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="49024b55-9f49-49cf-9281-0b8a37b64d92"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="332" y="112" width="38" height="15" uuid="2b61de89-9439-4e9c-9203-6d7a1ca69c0f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="369" y="112" width="38" height="15" uuid="9dc48d17-85d3-4691-99d6-99c95e4be83a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="445" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="ef5acee8-9334-46d5-a0f4-aedb83606eb9"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="445" y="112" width="38" height="15" uuid="66cea484-b2fb-43ec-b02d-fdbb49bc61c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="749" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="7f84f6e6-a03b-4b32-bb21-ebf7c1a77180"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="749" y="112" width="38" height="15" uuid="b866aab5-3e20-44c8-be3a-581d2843ed1b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="407" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="32433fe1-4d78-456f-9d9b-6de5e50f9b11"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="407" y="112" width="38" height="15" uuid="8195ac18-2614-422b-bca4-5e41a4b23c31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="711" y="112" width="38" height="15" backcolor="#CCCCCC" uuid="c74abc80-ba32-4416-8d2f-f873f6da5d76"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="711" y="112" width="38" height="15" uuid="d6c0e9a3-10bf-45c7-82b6-770f54b1d08e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="97" width="76" height="15" backcolor="#CCCCCC" uuid="2311776f-1b23-416d-a628-b59ab1054e79"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="256" y="97" width="76" height="15" uuid="c3071471-76ee-464d-a9b8-db008f08eedf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Independiente]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="711" y="82" width="76" height="30" backcolor="#CCCCCC" uuid="c06df0f1-4fa3-4bd9-b2cf-a9c299288618"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="711" y="82" width="76" height="30" uuid="c12cf6bf-8208-4a67-bb7f-5ab1c21f0c74"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Personas con Enfermedades Mentales]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="82" width="227" height="15" backcolor="#CCCCCC" uuid="f3f3754a-fd0c-4db1-be8b-81c993cc9da6"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="256" y="82" width="227" height="15" uuid="70b286d4-b7e9-4396-89f1-46493d630f23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Grado Dependencia KATZ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="28">
+			<rectangle>
+				<reportElement positionType="Float" x="483" y="0" width="76" height="28" uuid="b70cb11c-5bc7-4062-ace5-3ea6fb4ef50a"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="483" y="0" width="76" height="28" uuid="d13b2e8c-39c9-44a6-9e20-6cd70d709e46"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_DEPENDIENTE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="15" y="0" width="193" height="28" uuid="faa51e3d-54a7-42c1-b39d-7894b5b36076"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="0" width="193" height="28" uuid="650047fc-9cc2-4729-a326-73544bb36f80"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_INSTITUCION}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="208" y="0" width="48" height="28" uuid="cb8f7abd-687b-430b-a711-698f3bd11035"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="208" y="0" width="48" height="28" uuid="30f4c61d-368f-47d7-b652-eb218d67f02f"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{POBLACION}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="0" width="38" height="28" uuid="4757d866-4f4a-4e36-b033-ea5844b0a8b4"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="256" y="0" width="38" height="28" uuid="b35e3036-452e-4b31-95fc-dbe9ecf1b17e"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDEPENDIENTE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="294" y="0" width="38" height="28" uuid="8876152a-b1e9-4961-89b7-7790c3585ccb"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="294" y="0" width="38" height="28" uuid="ef1f6ef5-193d-435a-9ca2-3953dd2f56b2"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDEPENDIENTE#}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="332" y="0" width="38" height="28" uuid="ae4790c7-00fd-4a35-b49f-08a8c3ab0da0"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="332" y="0" width="38" height="28" uuid="34d28bc9-70e6-4a60-890b-c442917c98ac"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_PARC}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="369" y="0" width="38" height="28" uuid="6c2c3a6d-319e-4058-8850-4f26cda26090"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="369" y="0" width="38" height="28" uuid="c1863d25-7d0a-4918-82fe-936efff59a36"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_PARC#}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="407" y="0" width="38" height="28" uuid="4bb04520-5068-45cd-8999-46cea7a5191b"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="407" y="0" width="38" height="28" uuid="75b825be-cca2-438f-aa69-ab0fe07cb598"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_TOT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="445" y="0" width="38" height="28" uuid="c51c0cf5-3006-4115-b77d-ba63182b666f"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="445" y="0" width="38" height="28" uuid="42325d74-a062-4cbc-ab3c-195ccf5549ca"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_TOT#}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="559" y="0" width="76" height="28" uuid="b2911a6d-290f-4325-b103-98f3cb6fe4ba"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="559" y="0" width="76" height="28" uuid="fb21b17f-7f3a-446f-b27d-0ef2693ffd64"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_INDEPENDIENTE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="635" y="0" width="76" height="28" uuid="22c77f8f-29f7-4832-80a8-f1e8c6081dfc"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="635" y="0" width="76" height="28" uuid="68e7a18f-b5bb-4210-935a-5e90efeb7f39"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NO_EVALUADOS}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="711" y="0" width="38" height="28" uuid="a0b1fb44-9bc8-4702-bcfa-cc53894f33bc"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="711" y="0" width="38" height="28" uuid="1863ec70-c30b-48ef-b8d9-24de2acc8631"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_MENTALES}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="749" y="0" width="38" height="28" uuid="12b65f6b-a6c5-4d40-823a-8a42949594a7"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="749" y="0" width="38" height="28" uuid="6ce4b00b-5292-4639-99df-7723edc2f720"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_MENTALES#}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="15">
+			<subreport>
+				<reportElement positionType="Float" x="-20" y="0" width="842" height="15" uuid="eb7b1ab2-c9c9-4514-a804-e530711ef753"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["RES10total.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

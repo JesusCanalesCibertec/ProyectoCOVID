@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrencuestaplantilla.filtroPaginacion">
+    	select PLANTILLA, DESCRIPCION, ESTADO
+		,ROW_NUMBER() OVER (ORDER BY DAY(a.plantilla)) AS Seq
+		from 
+		HR_EncuestaPlantilla a
+		where 
+		a.plantilla = isnull(:p_codigo, a.plantilla) and
+		a.descripcion like '%'+isnull(:p_nombre, '')+'%' and
+		a.Estado  = isnull(:p_estado, a.Estado)
+	</sql-query>
+
+	<sql-query name="hrencuestaplantilla.filtroContar">
+    	select COUNT(1) from 
+		HR_EncuestaPlantilla a
+		where 	
+		a.plantilla = isnull(:p_codigo, a.plantilla) and
+		a.descripcion like '%'+isnull(:p_nombre, '')+'%' and
+		a.Estado  = isnull(:p_estado, a.Estado)
+	</sql-query>
+	
+	<sql-query name="hrencuestaplantilla.eliminardetalle">
+      
+DELETE FROM HR_EncuestaPlantillaDetalle
+WHERE Plantilla= :p_plantilla
+
+
+
+</sql-query>
+
+</hibernate-mapping>

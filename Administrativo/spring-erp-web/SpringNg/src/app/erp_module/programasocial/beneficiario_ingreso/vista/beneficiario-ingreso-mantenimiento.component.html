@@ -1,0 +1,139 @@
+<div class="ui-fluid">
+    <p-dialog header="Institución {{beanPsBeneficiarioIngreso.idInstitucion}} : {{beneficiario}}" [(visible)]="verSelector" modal="modal"
+        showEffect="fade" hideEffect="size"  [style]="{'max-width':'700px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+
+
+        <div class="ui-g">
+            <div class="ui-g-6 ui-md-4 ui-lg-4">
+                <label>Fecha de ingreso<span style="color:#ff0000"> *</span>
+                </label>
+            </div>
+            <div class="ui-g-6 ui-md-7 ui-lg-3">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                    yearRange="1900:2050 " disabled appendTo="body" [(ngModel)]="beanPsBeneficiarioIngreso.fechaIngreso"></p-calendar>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-2">
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Institución que deriva<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-10 ui-md-7 ui-lg-4">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngreso.idInstitucionDeriva"
+                    [options]="listaDeriva"></p-dropdown>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngreso.idInstitucionDeriva=='X'&&tipoNuevo === 2">
+                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                    (click)="agregarMiscelaneos('INSDERI','PS', 'DERIVA')" title="Agregar elemento"></button>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngreso.idInstitucionDeriva=='X'&&tipoNuevo === 1">
+                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                    (click)="agregarMiscelaneos('INSDAAM','PS', 'DERIVA')" title="Agregar elemento"></button>
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Situación legal<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-10 ui-md-7 ui-lg-4">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngreso.idSituacionLegal"
+                    [options]="listaLegal"></p-dropdown>
+            </div>
+            <div class="ui-g-1 ui-md-12 ui-lg-2">
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Causales de ingreso <span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-10 ui-md-7 ui-lg-7">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngresoCasual.idCausal"
+                    [options]="listaCausal"></p-dropdown>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal!='X'">
+                <button type="button " pButton icon="fa fa-plus" (click)="agregarCausal()"></button>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal=='X'&&tipoNuevo === 2">
+                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                    (click)="agregarMiscelaneos('CINGAAM','PS', 'CAUSAL')" title="Agregar elemento"></button>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal=='X'&&tipoNuevo === 1">
+                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                    (click)="agregarMiscelaneos('CINGNNA','PS', 'CAUSAL')" title="Agregar elemento"></button>
+            </div>
+
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-11 ui-lg-12">
+                <p-dataTable [responsive]="true" [scrollable]="true" scrollHeight="90px" [value]="beanPsBeneficiarioIngreso.listaCausal"
+                    emptyMessage="No se encontraron registros">
+                    <p-column header="Cód." field="idCausal" styleClass="textoCentrado" [style]="{'width':'60px'}"></p-column>
+                    <!---->
+                    <p-column header="Causal de ingreso" field="auxCausal" [style]="{'width':'300px'}"></p-column>
+                    <p-column header="" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar">
+                                    <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarCausal(tx.idCausal)"></i>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <h4 style="text-decoration: underline">Residencia asignada</h4>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Pabellón de residencia</label>
+            </div>
+            <div class="ui-g-12 ui-md-7 ui-lg-4">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngreso.idArea"
+                    [options]="listaPabellones"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-4">
+                <label>Comentarios adicionales de ingreso</label>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-8">
+                <textarea pInputTextarea style="width:100%;resize:none" [rows]="4" [(ngModel)]="beanPsBeneficiarioIngreso.comentarios"
+                    maxlength="50"></textarea>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar" (click)="guardar()"></button>
+            </div>
+            <div class="ui-g-4 ui-md-8 ui-lg-8">
+
+            </div>
+
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+            </div>
+        </div>
+
+
+    </p-dialog>
+
+
+</div>
+<app-popup-mantenimiento (cargarSeleccionEvent)="buscarLista($event)"></app-popup-mantenimiento>

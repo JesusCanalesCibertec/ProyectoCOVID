@@ -1,0 +1,182 @@
+<div class="ui-fluid">
+    <p-dialog header="{{titulo}} : RESIDENCIAS" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'700px','left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Nuevo" icon="fa fa-save" type="button" (click)="nuevo()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable [responsive]="true" scrollable= "true" [rows]="registrosPorPagina" [paginator]="true" scrollWidth="100%" [value]="listado"
+            emptyMessage="No se encontraron registros">
+            <p-column header="Código" field="idArea" [style]="{'width':'100px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Nombre" field="nombre" [style]="{'width':'250px'}"></p-column>
+            <p-column header="Programa" field="estado" [style]="{'width':'250px'}">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.idPrograma=='NNA'?'Programa Niñas, Niños y Adolescentes':tx.idPrograma=='AAM'?'Programa
+                    Adultos y Adultos
+                    Mayores':''}}
+                </ng-template>
+            </p-column>
+            <p-column header="Estado" field="estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.estado=='A'?'Activo':'Inactivo'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <div class="ui-g">
+                        <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
+                            <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                        </div>
+                        <div class="ui-g-4 ui-md-4 ui-lg-4" title="Ver">
+                            <i class="fa fa-eye fa-lg seleccionable" (click)="ver(tx)"></i>
+                        </div>
+                        <div class="ui-g-4 ui-md-4 ui-lg-4" title="Anular" *ngIf="tx.estado === 'A'">
+                            <i class="fa fa-trash fa-lg seleccionable" (click)="anular(tx)"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+
+        </p-dataTable>
+
+    </p-dialog>
+
+    <div class="ui-fluid">
+        <p-dialog header="RESIDENCIAS : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}"
+            [(visible)]="verModalFolio" [modal]="true" [responsive]="true " [resizable]="false" [draggable]="true "
+            [closable]="true " [closeOnEscape]="true" hideEffect="size " [style]="{'max-width':'600px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+            <div class="ui-fluid" #frm>
+
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 cntrolEtiquetaDivTop">
+                        <label>Código<span style="color:#ff0000"> *</span></label>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3 ui-lg-2">
+                        <input pInputText maxlength="5" [(ngModel)]="PsInstitucionArea.idArea" [disabled]="!puedeEditar || accion == ACCIONES.EDITAR"
+                            type="text">
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 cntrolEtiquetaDivTop">
+                        <label>Nombre<span style="color:#ff0000"> *</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <input pInputText maxlength="200" [(ngModel)]="PsInstitucionArea.nombre" [disabled]="!puedeEditar"
+                            type="text">
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Programa<span style="color:#ff0000"> *</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-4">
+                        <p-dropdown appendTo="body" [options]="programas" [disabled]="!puedeEditar" [(ngModel)]="PsInstitucionArea.idPrograma"
+                            [autoWidth]="false"></p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                        <label>Componente<span style="color:#ff0000"> *</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-4">
+                        <p-dropdown appendTo="body" [options]="componentes" [disabled]="!puedeEditar" [(ngModel)]="PsInstitucionArea.idComponente"
+                            [autoWidth]="false"></p-dropdown>
+                    </div>
+
+                </div>
+
+
+
+                <div class="ui-g ui-md ui-lg">
+
+                    <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDiv">
+                        <label>Estado</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-3 ui-lg-2 controlEtiquetaDivTop">
+                        <p-dropdown appendTo="body" [options]="estados" [(ngModel)]="PsInstitucionArea.estado"
+                            [disabled]="accion != ACCIONES.EDITAR" [autoWidth]="false"></p-dropdown>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12 cntrolEtiquetaDivTop">
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg" style="width: 100% ; height: 13%; background-color: #9D4C3D; border: 1px solid #9D4C3D;
+                                            color:#ffffff ; font-weight: 700; padding: 0.571em 1.143em">
+                <label>Auditoría</label>
+            </div>
+
+            <div *ngIf="accion == ACCIONES.NUEVO" class="ui-g ui-md ui-lg" style="width: 100% ; height: 16%; border: 1px solid #d6d7d9">
+                <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+
+                </div>
+                <div class="ui-g-3 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>Creación: </label>
+                </div>
+                <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>{{PsInstitucionArea.creacionUsuario}}</label>
+                </div>
+                <div class="ui-g-5 ui-md-3 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>{{fechaactual | date: 'dd/MM/yyyy HH:mm'}}</label>
+                </div>
+            </div>
+
+            <div *ngIf="!puedeEditar || accion == ACCIONES.EDITAR" class="ui-g ui-md ui-lg" style="width: 100% ; height: 16%; border: 1px solid #d6d7d9">
+                <div class="ui-g-3 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>Creación: </label>
+                </div>
+                <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>{{PsInstitucionArea.creacionUsuario}}</label>
+                </div>
+                <div class="ui-g-5 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>{{PsInstitucionArea.creacionFecha | date: 'dd/MM/yyyy HH:mm'}}</label>
+                </div>
+                <div class="ui-g-3 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>Modificación: </label>
+                </div>
+                <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop" style="text-align: center">
+                    <label>{{PsInstitucionArea.modificacionUsuario}}</label>
+                </div>
+                <div class="ui-g-5 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                    <label>{{PsInstitucionArea.modificacionFecha | date: 'dd/MM/yyyy HH:mm'}}</label>
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button *ngIf="puedeEditar" pButton label="Guardar" (click)="guardar()" icon="fa fa-save" type="button"
+                        class="ui-button"></button>
+                </div>
+
+                <div class="ui-g-4 ui-md-6 ui-lg-8">
+
+                </div>
+
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Salir" icon="fa fa-close" type="button" class="ui-button" (click)="verModalFolio=false"></button>
+                </div>
+
+            </div>
+        </p-dialog>
+
+    </div>
+</div>

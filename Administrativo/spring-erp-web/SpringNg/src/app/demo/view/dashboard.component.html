@@ -1,0 +1,81 @@
+<div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-lg-6">
+        <div class="card">
+            <p-chart type="horizontalBar" [data]="barData"  [options]="optionsBar"></p-chart>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-lg-6">
+        <div class="card">
+            <p-chart type="pie" [data]="pieData" [options]="options" (onDataSelect)="selectData($event)"></p-chart>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-lg-12">
+        <div class="card">
+            <p-chart type="bar" [data]="barData2"  [options]="optionsBar2"></p-chart>
+        </div>
+    </div>
+
+</div>
+<!-- 
+<proyecto-mantenimiento (block)="bloquearPagina()" (unBlock)="desbloquearPagina()" (buscarPadre)="buscar()"></proyecto-mantenimiento>
+<tarea-mantenimiento (block)="bloquearPagina()" (unBlock)="desbloquearPagina()" (buscarPadre)="buscar()"></tarea-mantenimiento> -->
+
+
+<!-- <div class="ui-g" *ngIf="tipo=='I'">
+        <ng-template ngFor let-row [ngForOf]="publicaciones">
+            <publicacion-component [innerHTML]="row.inner" [clase]="row.tamanio" [claseTres]="row.altura">
+            </publicacion-component>
+        </ng-template>
+    </div>
+    <div class="ui-g" *ngIf="tipo=='F'">
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad">
+                    <p-panel styleClass="team" header="Notificaciones">
+                        <ul>
+                            <ng-template ngFor let-notificacion [ngForOf]="notificaciones">
+                                <li>
+                                    <div class="team-box">
+                                        <span class="team-member">{{notificacion.titulo}}</span>
+                                        <span class="team-member-role">{{notificacion.descripcion}}</span>
+                                    </div>
+                                    <a (click)="verNotificacion(notificacion)">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </p-panel>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-12 ui-g-nopad" style="    padding-top: 1em;">
+                    <p-panel styleClass="team" header="Pendientes de {{nombreUsuario}}">
+
+                        <div class="ui-g" style="display:none">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <p-dropdown [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                            </div>
+                        </div>
+
+                        <ul>
+                            <ng-template ngFor let-pendiente [ngForOf]="pendientes">
+                                <li>
+                                    <div class="team-box">
+                                        <span class="team-member">{{pendiente.nombreCorto}}</span>
+                                        <span class="team-member-role">{{pendiente.descripcion}}</span>
+                                    </div>
+                                    <a (click)="verPendiente(pendiente)">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </li>
+                            </ng-template>
+                        </ul>
+                    </p-panel>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-8">
+            <p-panel header="Esquema de Tareas" styleClass="schedule">
+                <p-schedule [events]="events"></p-schedule>
+            </p-panel>
+        </div>
+    </div> -->

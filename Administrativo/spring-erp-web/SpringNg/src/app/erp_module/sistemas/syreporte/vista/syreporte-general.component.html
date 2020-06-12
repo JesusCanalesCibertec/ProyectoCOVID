@@ -1,0 +1,9 @@
+<p-tabView>
+    <p-tabPanel header="Informacion">
+        <app-syreportemantenimiento></app-syreportemantenimiento>
+    </p-tabPanel>
+
+    <p-tabPanel header="Detalle" *ngIf="verDetalle">
+        <app-syreportedetalle></app-syreportedetalle>
+    </p-tabPanel>
+</p-tabView>

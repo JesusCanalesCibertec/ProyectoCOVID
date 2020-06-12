@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrSolicitudvacacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="prsolicitudvacacion.solicitudAprobar">
+    	<![CDATA[
+	         SNp_HR_SolicitudVacacionAprobar :p_numero_solicitud, :p_usuario
+		]]>
+    </sql-query>
+
+  <sql-query name="prsolicitudvacacion.nombreDiaAsistencia">
+    <![CDATA[
+	         select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia=:p_tipodia
+		]]>
+  </sql-query>
+    
+	<sql-query name="prsolicitudvacacion.listarSolicitudContar">
+    	<![CDATA[
+         select	count(1)
+		from PR_SOLICITUDVACACION SV
+			LEFT JOIN PersonaMast EMP ON
+				SV.EMPLEADO=EMP.Persona
+			LEFT JOIN PersonaMast SOL ON
+				SV.Solicitante=SOL.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST ON
+				EST.CodigoTabla='SOLVACESTA' AND SV.ESTADO=EST.CodigoElemento
+		where sv.Solicitante = :p_id_solicitante
+		and SV.ESTADO = ISNULL(:p_id_estado, SV.ESTADO)
+		AND SV.Utilizacion = ISNULL(:p_id_utilizacion, SV.Utilizacion)
+		
+		and sv.FECHAREGISTRO >= isnull(:p_desde, '01-01-1753') and 
+							sv.FECHAREGISTRO <= isnull(:p_hasta, '12-30-9999')
+		]]>
+    </sql-query>
+    
+    <sql-query name="prsolicitudvacacion.listarSolicitudPaginacion">
+    	<![CDATA[
+         select	SV.NUMEROSOLICITUD as "numeroSolicitud"
+			,SV.EMPLEADO as "empleadoId"
+			,EMP.NombreCompleto as "empleadoNombre"
+			,SV.FECHAREGISTRO as "fechaRegistro"
+			,SV.FECHAINICIO as "fechaInicio"
+			,SV.FECHAFIN as "fechaFin"
+			,SV.DIAS AS "dias"
+			,SV.Solicitante as "solicitanteId"
+			,cast(SOL.NombreCompleto as varchar) as "solicitanteNombre"
+			,SV.ESTADO as "estadoId"
+			,EST.DescripcionLocal as "estadoNombre", ROW_NUMBER() OVER (ORDER BY SV.fechaRegistro desc) AS Seq	
+		from PR_SOLICITUDVACACION SV
+			LEFT JOIN PersonaMast EMP ON
+				SV.EMPLEADO=EMP.Persona
+			LEFT JOIN PersonaMast SOL ON
+				SV.Solicitante=SOL.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST ON
+				EST.CodigoTabla='SOLVACESTA' AND SV.ESTADO=EST.CodigoElemento
+		where sv.Solicitante = :p_id_solicitante
+		and SV.ESTADO = ISNULL(:p_id_estado, SV.ESTADO)
+		AND SV.Utilizacion = ISNULL(:p_id_utilizacion, SV.Utilizacion)
+		and sv.FECHAREGISTRO >= isnull(:p_desde, '01-01-1753') and 
+							sv.FECHAREGISTRO <= isnull(:p_hasta, '12-30-9999')
+		]]>
+    </sql-query>
+    <sql-query name="prsolicitudvacacion.generarCodigo">
+          select isnull(max(numerosolicitud), 0)+1 from PR_SolicitudVacacion
+    </sql-query>
+      <sql-query name="prsolicitudvacacion.pendientesSpring">
+            select pendientes as "pendientes"  from PR_VacacionPeriodo where empleado = :empleado and NumeroPeriodo in(
+			SELECT max(NumeroPeriodo)
+	        FROM   pr_vacacionperiodo 
+	        WHERE  empleado = :empleado 
+		  )
+
+    </sql-query>
+
+    <sql-query name="prsolicitudvacacion.vacacionperiodotraer2">
+           exec SNp_HR_VacacionPeriodoTraer2 :p_compania, :p_empleado
+    </sql-query>
+
+
+
+
+ <sql-query name="prsolicitudvacacion.esJefe">
+        declare @p7 int
+	exec SPp_HR_ListarSubalternosDelJefeDirecto 
+	@pJefe=:p_empleado,
+	@pEmpleadoSelect=NULL,
+	@pNombre=NULL,
+	@pNumPag=1,
+	@pNumReg =3,
+	@pCompania=:p_compania,
+	@pVirtCount=@p7 output
+    </sql-query>
+	<sql-query name="prsolicitudvacacion.esDiaSiguienteLaborable">
+           select dbo.VerificarFeriado(:p_empleado , :p_fecha)
+  </sql-query>
+
+  <sql-query name="prsolicitudvacacion.traerDatosAdelantoVacaciones">
+           exec SNp_traerDatosAdelantoVaca :p_empleado
+  </sql-query>
+  
+  <sql-query name="prsolicitudvacacion.listarSolicitudVacaciones">
+    	<![CDATA[
+         exec SNp_AS_ListarVacaciones :p_fechadesde, :p_fechahasta, :p_empleado, :p_jefe, :p_estado, :p_usuario, :p_numpagina, :p_numregistros, :p_es_administrador
+		]]>
+    </sql-query>
+<sql-query name="prsolicitudvacacion.listarSolicitudVacacionesAprobadas">
+    	<![CDATA[
+         
+			  select distinct sv.NUMEROSOLICITUD as NumeroSolicitud,sv.ultimafechaactualizacion as FechaAprobacion,emp.Empleado,per.NombreCompleto,
+			  sv.FECHAINICIO as FechaInicio,sv.FECHAFIN as FechaFin,sv.DIAS as Dias,
+			  dbo.SNf_POS_UsuarioResponsableAprobador(sv.NUMEROSOLICITUD,sva.Responsable) as Aprobador, ROW_NUMBER() OVER (ORDER BY sv.ULTIMAFECHAACTUALIZACION desc) AS Seq	
+			  From PR_SolicitudVacacion as sv left join PR_SolicitudVacacionDocAprobacion as sva
+			  on (sv.NUMEROSOLICITUD=sva.NumeroSolicitud)
+			  join EmpleadoMast as emp on(sv.EMPLEADO=emp.Empleado)
+			  join PersonaMast as per on (per.Persona=emp.Empleado)
+			  where sv.Estado='A'  and emp.empleado = isnull(:persona, emp.empleado)
+			  and (( :desde is null and :hasta is null)
+			  or (sv.ULTIMAFECHAACTUALIZACION  between :desde and :hasta))
+				group by 
+			  sv.NUMEROSOLICITUD ,sv.ultimafechaactualizacion ,emp.Empleado,per.NombreCompleto,
+			  sv.FECHAINICIO,sv.FECHAFIN ,sv.DIAS ,
+			  dbo.SNf_POS_UsuarioResponsableAprobador(sv.NUMEROSOLICITUD,sva.Responsable)
+		]]>
+    </sql-query>
+	 <sql-query name="prsolicitudvacacion.contarSolicitudVacacionesAprobadas">
+    	<![CDATA[
+           SELECT count(1) FROM (
+			  select distinct sv.NUMEROSOLICITUD as NumeroSolicitud,sv.ultimafechaactualizacion as FechaAprobacion,emp.Empleado,per.NombreCompleto,
+			  sv.FECHAINICIO as FechaInicio,sv.FECHAFIN as FechaFin,sv.DIAS as Dias,
+			  dbo.SNf_POS_UsuarioResponsableAprobador(sv.NUMEROSOLICITUD,sva.Responsable) as Aprobador
+			  From PR_SolicitudVacacion as sv left join PR_SolicitudVacacionDocAprobacion as sva
+			  on (sv.NUMEROSOLICITUD=sva.NumeroSolicitud)
+			  join EmpleadoMast as emp on(sv.EMPLEADO=emp.Empleado)
+			  join PersonaMast as per on (per.Persona=emp.Empleado)
+			  where sv.Estado='A' and emp.empleado = isnull(:persona, emp.empleado)
+			  and (( :desde is null and :hasta is null)
+			  or (sv.ULTIMAFECHAACTUALIZACION  between :desde and :hasta))) as t
+		]]>
+    </sql-query>
+
+</hibernate-mapping>

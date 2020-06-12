@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HR_ENCUESTA_DETALLE_VALORES" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="93ff56ff-1adc-493c-8aaa-3551197fb54d">
+	<property name="ireport.zoom" value="1.1586575189467514"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pregunta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from HR_EncuestaPreguntaValores where pregunta = $P{pregunta}]]>
+	</queryString>
+	<field name="Pregunta" class="java.lang.Integer"/>
+	<field name="Valor" class="java.lang.Integer"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Calificacion" class="java.lang.String"/>
+	<field name="UltimoUsuario" class="java.lang.String"/>
+	<field name="UltimaFechaModif" class="java.sql.Timestamp"/>
+	<field name="PESO" class="java.math.BigDecimal"/>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="83" y="0" width="22" height="20" uuid="0569b453-2fca-4ec4-bdf7-dfc1af08f6df">
+					<printWhenExpression><![CDATA[$P{tipo}.equals( "A" )||$P{tipo}.equals( "P" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="116" y="0" width="264" height="20" uuid="68ae7310-7824-40c1-888d-272d44f12f52"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="83" y="0" width="22" height="20" uuid="f85afcf4-d7e3-4f2f-a5b8-785f53445cfc">
+					<printWhenExpression><![CDATA[$P{tipo}.equals( "N" )||$P{tipo}.equals( "M" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+		</band>
+	</detail>
+	<summary>
+		<band height="46">
+			<printWhenExpression><![CDATA[$P{tipo}.equals( "A" )||$P{tipo}.equals( "N" )]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="0" width="380" height="46" isPrintWhenDetailOverflows="true" uuid="d700de30-07b4-4283-abe8-313240f0e072">
+					<printWhenExpression><![CDATA[$P{tipo}.equals( "A" )||$P{tipo}.equals( "N" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+		</band>
+	</summary>
+</jasperReport>

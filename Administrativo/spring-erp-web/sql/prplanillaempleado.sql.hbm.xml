@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : contabilidad.AcSucursal -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="prplanillaempleado.listarPlanilla">
+        <![CDATA[
+         select 
+				PLA.CompaniaSocio as "companiaSocioId"
+				,PLA.Empleado as "empleadoId"
+				,PLA.Periodo  as "periodoId"
+				,SUBSTRING(PLA.Periodo,1,4)+'-'+SUBSTRING(PLA.Periodo,5,2) as "periodoNombre"
+				,PLA.TipoPlanilla as "tipoPlanillaId"
+				,tpl.descripcion as "tipoPlanillaNombre"
+				,PLA.TipoProceso  as "tipoProcesoId"
+				,tpro.DESCRIPCION as "tipoProcesoNombre"
+				,cast(PLA.TotalIngresos as numeric(26,4)) as "totalIngresos"
+				,cast(PLA.TotalEgresos as numeric(26,4))  as "totalEgresos"
+				,cast(PLA.TotalNeto as numeric(26,4))  as "totalNeto"
+				,cast(PLA.TotalPatronales as numeric(26,4))  as "totalPatronales"
+			from pr_planillaempleado PLA 
+				left join pr_tipoplanilla tpl
+					on PLA.TipoPlanilla = tpl.TipoPlanilla
+				left join PR_TipoProceso tpro
+					on PLA.TipoProceso = tpro.TIPOPROCESO
+			where PLA.CompaniaSocio = ISNULL(:p_id_companiasocio,PLA.CompaniaSocio)
+			AND PLA.Empleado = ISNULL(:p_id_empleado,PLA.Empleado)
+			AND PLA.Periodo = ISNULL(:p_id_periodo,PLA.PERIODO)
+			AND PLA.TipoPlanilla = ISNULL(:p_id_tipo_planilla,PLA.TIPOPLANILLA)
+			AND PLA.TipoProceso = ISNULL(:p_id_tipo_proceso,PLA.TIPOPROCESO)
+		]]>
+	</sql-query>
+	<sql-query name="prplanillaempleado.listarPeriodoPorEmpleadoProcesado">
+        <![CDATA[
+         select pla.Periodo as "codigo"
+			from PR_PLANILLAEMPLEADO pla
+				INNER JOIN PR_ProcesoPeriodo per
+				on pla.CompaniaSocio=per.CompaniaSocio and pla.Periodo=per.Periodo and pla.TipoPlanilla=per.TipoPlanilla and pla.TipoProceso=per.TipoProceso
+			WHERE pla.Empleado = :p_id_empleado
+				and per.FlagProcesado='S'		
+			GROUP BY pla.Periodo
+			ORDER BY pla.Periodo DESC
+		]]>
+	</sql-query>
+	<sql-query name="prplanillaempleado.listarPeriodoPorEmpleadoProcesadoAprobado">
+        <![CDATA[
+         select pla.Periodo as "codigo"
+			from PR_PLANILLAEMPLEADO pla
+				INNER JOIN PR_ProcesoPeriodo per
+				on pla.CompaniaSocio=per.CompaniaSocio and pla.Periodo=per.Periodo and pla.TipoPlanilla=per.TipoPlanilla and pla.TipoProceso=per.TipoProceso
+			WHERE pla.Empleado = :p_id_empleado
+				and per.FlagProcesado='S'		
+				and per.FlagAprobado='S'
+			GROUP BY pla.Periodo
+			ORDER BY pla.Periodo DESC
+		]]>
+	</sql-query>
+	<sql-query name="prplanillaempleado.listarPeriodoPorEmpleadoProcesadoAprobadoParametroAnio">
+        <![CDATA[
+         select pla.Periodo as "codigo"
+			from PR_PLANILLAEMPLEADO pla
+				INNER JOIN PR_ProcesoPeriodo per
+				on pla.CompaniaSocio=per.CompaniaSocio and pla.Periodo=per.Periodo and pla.TipoPlanilla=per.TipoPlanilla and pla.TipoProceso=per.TipoProceso
+			WHERE pla.Empleado = :p_id_empleado
+				and per.FlagProcesado='S'		
+				and per.FlagAprobado='S'
+				and substring(pla.Periodo,0,7) >= :p_periodo
+			GROUP BY pla.Periodo
+			ORDER BY pla.Periodo DESC
+		]]>
+	</sql-query>
+
+  <sql-query name="prplanillaempleado.listarBoletaGeneral">
+    <![CDATA[
+      SELECT 
+      EmpleadoMast.MonedaPago,
+      PR_PlanillaEmpleado.fechaingresoboleta as FechaIngreso,
+      PR_PlanillaEmpleado.FechaCeseboleta as FechaCese,
+      EmpleadoMast.EstadoEmpleado,
+      PR_PlanillaEmpleado.CodigoCargo,
+      ISNULL(HR_PuestoEmpresa.Descripcion,'') Puestodescripcion,
+      EmpleadoMast.DeptoOrganizacion,
+      ISNULL(EmpleadoMast.NumeroAFP,'') NumeroAFP,
+      EmpleadoMast.GradoSalario,
+      EmpleadoMast.TipoTrabajador,
+      PersonaMast.ApellidoPaterno,
+      PersonaMast.ApellidoMaterno,
+      PersonaMast.Nombres,
+      ISNULL(PersonaMast.DocumentoIdentidad,PersonaMast.Documento) DocumentoIdentidad,
+      PersonaMast.Documento,
+      PersonaMast.Direccion,
+      ISNULL(PR_PlanillaEmpleado.CodigoAfp,'') CodigoAfp,
+      ISNULL(CompaniaMast.descripcionlarga,'') CompaniaSocio,
+      cast(isnull(PR_PlanillaEmpleado.TotalIngresos,0) as numeric(20,2)) TotalIngresos,
+      cast(isnull(PR_PlanillaEmpleado.TotalEgresos,0) as numeric(20,2)) TotalEgresos,
+      cast(isnull(PR_PlanillaEmpleado.TotalPatronales,0) as numeric(20,2)) TotalPatronales,
+      cast(isnull(PR_PlanillaEmpleado.TotalNeto,0) as numeric(20,2)) TotalNeto,
+      
+      fechainicio VacacionDesde, 
+      fechafin VacacionHasta,
+      
+      
+      PR_PlanillaEmpleado.CentroCosto,
+      AC_CostCenterMst.LocalName CentroCostodescripcion,
+      PR_PlanillaEmpleado.AFE,
+      PR_PlanillaEmpleado.empleado,
+      cast(ISNULL(PR_PlanillaEmpleado.SueldoBasicoLocal,(SELECT ISNULL(MONTO,0) FROM PR_PLANILLAEMPLEADOCONCEPTO
+      WHERE
+      COMPANIASOCIO = :p_compania AND
+      PERIODO = :p_periodo AND
+      TIPOPLANILLA = :p_tipo_planilla AND
+      TIPOPROCESO = :p_tipo_proceso AND
+      EMPLEADO = :p_empleado AND
+      CONCEPTO = '0010') ) as numeric(20,2)) as SueldoBasicoLocal ,
+      cast(PR_PlanillaEmpleado.SueldoBasicoDolar as numeric(20,2)),
+      ISNULL(PR_PlanillaEmpleado.DiasTrabajados,0) DiasTrabajados,
+      isnull(PR_PlanillaEmpleado.HorasTrabajadas,0) HorasTrabajadas,
+      cast(PR_PlanillaEmpleado.TipoCambio as numeric(20,2)), 
+      ISNULL(PR_PlanillaEmpleado.LocaciondePago,'') as LocaciondePago,
+      ISNULL(PR_PlanillaEmpleado.DepartamentoOperacional,'') DepartamentoOperacional,
+      PersonaMast.NombreCompleto,
+      ISNULL(MA_UnidadNegocio.RegistroPatronalPlanilla,'') RegistroPatronalPlanilla,
+      isnull(PR_PlanillaEmpleado.Cuenta,'') as  Cuenta,
+      isnull(PR_PlanillaEmpleado.Banco,'') Banco,
+      isnull(PR_PlanillaEmpleado.MonedaBanco,'') as MonedaBanco,
+      ISNULL(HR_AFP.NombreAFP,'') as NombreAFP,
+      ISNULL(PR_PlanillaEmpleado.TipoContrato,'') as TipoContrato,
+      EmpleadoMast.situacionespecial  as FlagDeConfianza,
+      CompaniaMast.documentofiscal,
+      CompaniaMast.direccionadicional,
+      CompaniaMast.direccioncomun,
+      PR_PlanillaEmpleado.TipoPlanilla  ,
+      ISNULL(Banco.DescripcionCorta,'') as desbanco,
+      cast(PR_PlanillaEmpleado.TotalIngresosExtranjera as numeric(20,2)),
+      cast(PR_PlanillaEmpleado.TotalEgresosExtranjera as numeric(20,2)),
+      cast(PR_PlanillaEmpleado.TotalPatronalesExtranjera as numeric(20,2)),
+      cast(PR_PlanillaEmpleado.TotalNetoExtranjera as numeric(20,2)),
+      AC_Sucursal.DescripcionLocal as sucursal,
+      PR_TipoPlanilla.Descripcion as nametipoplanilla,
+      isnull(HR_TipoContrato.Descripcion,'') as TipoContratoNombre,
+      PC.Comentario,
+      Personamast.personaant,
+      (SELECT MonedaMast.DescripcionCorta FROM MonedaMast WHERE MonedaMast.MonedaCodigo ='LO') as MonedaNombre
+      ,
+
+		isnull((SELECT Departamento.DescripcionLarga FROM Departamento WHERE Departamento.Departamento = PersonaMast.Departamento), ''),
+		isnull((SELECT Provincia.DescripcionCorta FROM Provincia where Provincia.Departamento = PersonaMast.Departamento AND Provincia.Provincia = PersonaMast.Provincia) , ''),
+		isnull((SELECT ZonaPostal.DescripcionCorta FROM	ZonaPostal where ( ZonaPostal.Departamento =PersonaMast.Departamento) AND ( ZonaPostal.Provincia = PersonaMast.Provincia ) AND ( ZonaPostal.CodigoPostal = PersonaMast.CodigoPostal)), ''),isnull(Pais.Nacionalidad, '')  as nacionalidad,
+    
+   	isnull(PR_PlanillaEmpleado.DiasSubsidiados,0)DiasSubsidiados,
+		(
+		    SELECT 
+              
+		        case  when 'LO' = 'LO' then	
+				cast(PR_PlanillaEmpleadoConcepto.Monto  as numeric(20,2)) else cast(PR_PlanillaEmpleadoConcepto.MontoExtranjera as numeric(20,2)) end as monto
+               
+          FROM PR_Concepto,
+			      PR_PlanillaEmpleadoConcepto 
+         WHERE ( PR_Concepto.Concepto = PR_PlanillaEmpleadoConcepto.Concepto ) and
+                ( PR_PlanillaEmpleadoConcepto.Periodo = :p_periodo  ) AND  
+               ( PR_PlanillaEmpleadoConcepto.TipoProceso = :p_tipo_proceso  ) and
+               ( PR_PlanillaEmpleadoConcepto.TipoPlanilla = :p_tipo_planilla ) and
+			      ( PR_PlanillaEmpleadoConcepto.Empleado = :p_empleado) and  
+			      ( PR_PlanillaEmpleadoConcepto.CompaniaSocio =  :p_compania) and   
+			      (PR_PlanillaEmpleadoConcepto.Monto <> 0 OR PlanillaOrden < 0 or PR_PlanillaEmpleadoConcepto.Saldo>0)
+				  AND PR_Concepto.Concepto ='5020'
+	      
+		) as essalud,
+		(
+		    SELECT 
+ 
+		        case  when 'LO' = 'LO' then	
+				cast(PR_PlanillaEmpleadoConcepto.Monto  as numeric(20,2)) else cast(PR_PlanillaEmpleadoConcepto.MontoExtranjera as numeric(20,2)) end as monto   
+            
+          FROM PR_Concepto,
+			      PR_PlanillaEmpleadoConcepto 
+         WHERE ( PR_Concepto.Concepto = PR_PlanillaEmpleadoConcepto.Concepto ) and
+               ( PR_PlanillaEmpleadoConcepto.Periodo = :p_periodo  ) AND  
+               ( PR_PlanillaEmpleadoConcepto.TipoProceso = :p_tipo_proceso  ) and
+               ( PR_PlanillaEmpleadoConcepto.TipoPlanilla = :p_tipo_planilla ) and
+			      ( PR_PlanillaEmpleadoConcepto.Empleado = :p_empleado) and  
+			      ( PR_PlanillaEmpleadoConcepto.CompaniaSocio =  :p_compania) and  
+			      (PR_PlanillaEmpleadoConcepto.Monto <> 0 OR PlanillaOrden < 0 or PR_PlanillaEmpleadoConcepto.Saldo>0)
+				  AND PR_Concepto.Concepto ='5025'
+	      
+		) as epsempresa,
+      
+		ISNULL(PR_PlanillaEmpleado.InasistenciasInjustificadas, 0) + ISNULL(PR_PlanillaEmpleado.InasistenciasJustificadas, 0) AS DiasNoTrabNoSub,
+      	        ('')  AS tipoActividad,
+                 CAST(ano as varchar) periodoinicio,
+       CAST((ano+1) as varchar) periodofin,
+
+(select DescripcionLocal from hr_Cargosmast where cargo = EmpleadoMast.cargo) as categoria ,
+
+
+(
+
+select upper(DescripcionLocal) from ma_miscelaneosdetalle 
+where CodigoTabla = 'tipodoci' and AplicacionCodigo = 'hr' and Compania = '999999'
+and CodigoElemento = PersonaMast.tipodocumento) as tipodoc
+ 
+
+   
+	FROM PR_PlanillaEmpleado
+	
+      INNER JOIN PersonaMast
+      ON ( PR_PlanillaEmpleado.Empleado = PersonaMast.Persona )
+	 LEFT JOIN Pais
+            ON	(Pais.Pais = PersonaMast.Nacionalidad)
+      INNER JOIN EmpleadoMast
+      ON ( PR_PlanillaEmpleado.Empleado = EmpleadoMast.Empleado and PR_PlanillaEmpleado.CompaniaSocio = EmpleadoMast.CompaniaSocio)
+      INNER JOIN CompaniaMast
+      ON ( SUBSTRING(PR_PlanillaEmpleado.CompaniaSocio,1,6) = CompaniaMast.companiacodigo )
+      INNER JOIN PR_TipoPlanilla
+      ON ( PR_PlanillaEmpleado.TipoPlanilla = PR_TipoPlanilla.TipoPlanilla )
+      LEFT JOIN MA_UnidadNegocio
+      ON ( EmpleadoMast.LocaciondePago = MA_UnidadNegocio.UnidadNegocio )
+      LEFT JOIN AC_Sucursal
+      ON ( EmpleadoMast.Sucursal = AC_Sucursal.Sucursal )
+      LEFT JOIN HR_AFP
+      ON ( PR_PlanillaEmpleado.CodigoAFP = HR_AFP.CodigoAFP )
+      LEFT JOIN HR_Empleado
+      ON ( PR_PlanillaEmpleado.Empleado = HR_Empleado.Empleado)
+      LEFT JOIN PR_PlanillaComentario PC
+      ON (	PR_PlanillaEmpleado.Empleado = PC.Empleado and
+      PR_PlanillaEmpleado.TipoPlanilla = PC.TipoPlanilla and
+      PR_PlanillaEmpleado.TipoProceso = PC.TipoProceso and
+      PR_PlanillaEmpleado.Periodo = PC.Periodo)
+      LEFT JOIN HR_PuestoEmpresa
+      ON (  PR_PlanillaEmpleado.CodigoCargo = HR_PuestoEmpresa.CodigoPuesto AND
+      HR_PuestoEmpresa.Estado = 'A')
+      LEFT JOIN AC_CostCenterMst
+      on (  AC_CostCenterMst.CostCenter = EmpleadoMast.CentroCostos )
+      LEFT JOIN HR_TipoContrato
+      on (HR_TipoContrato.TipoContrato = PR_PlanillaEmpleado.TipoContrato )
+      LEFT JOIN Banco on
+      (Banco.BANCO = PR_PlanillaEmpleado.Banco)
+      LEFT JOIN HR_CargosMast on
+      (HR_CargosMast.Cargo = PR_PlanillaEmpleado.Cargo)
+      
+       LEFT JOIN pr_vacacionperiodo vape ON
+      vape.Empleado=PR_PlanillaEmpleado.Empleado AND
+      vape.CompaniaSocio=PR_PlanillaEmpleado.CompaniaSocio
+      LEFT JOIN  pr_vacacionpago pago ON
+      pago.empleado=vape.Empleado AND
+      pago.numeroperiodo=vape.numeroperiodo AND
+      pago.periodo=PR_PlanillaEmpleado.Periodo
+      AND pago. periodo  = :p_periodo
+	    and pago. empleado = :p_empleado
+      
+      WHERE ( PR_PlanillaEmpleado.Periodo = :p_periodo ) AND
+      ( PR_PlanillaEmpleado.TipoProceso = :p_tipo_proceso ) AND
+      ( PR_PlanillaEmpleado.CompaniaSocio = :p_compania) AND
+      ( PR_PlanillaEmpleado.TipoPlanilla = :p_tipo_planilla ) AND
+      ( PR_PlanillaEmpleado.Empleado = :p_empleado ) 
+   
+      ]]>
+  </sql-query>
+
+  <sql-query name="prplanillaempleado.listarBoletaDetalle">
+    <![CDATA[
+         SELECT 
+            PR_Concepto.Concepto,   
+		        case  when 'LO' = 'LO' then	cast(PR_PlanillaEmpleadoConcepto.Monto  as numeric(20,2)) else cast(PR_PlanillaEmpleadoConcepto.MontoExtranjera as numeric(20,2)) end as monto,   
+               cast(PR_PlanillaEmpleadoConcepto.Cantidad as numeric(20,2)),   
+		        case  when PR_Concepto.MonedaPago = 'LO' then	cast(PR_PlanillaEmpleadoConcepto.Saldo as numeric(20,2)) else cast(PR_PlanillaEmpleadoConcepto.SaldoExtranjera as numeric(20,2)) end as saldo,   
+			      PR_Concepto.TipoConcepto,
+			      PR_Concepto.TextoImpresion
+          FROM PR_Concepto,
+			      PR_PlanillaEmpleadoConcepto 
+         WHERE ( PR_Concepto.Concepto = PR_PlanillaEmpleadoConcepto.Concepto ) and
+               ( PR_PlanillaEmpleadoConcepto.Periodo = :p_periodo ) AND  
+               ( PR_PlanillaEmpleadoConcepto.TipoProceso = :p_tipo_proceso  ) and
+               ( PR_PlanillaEmpleadoConcepto.TipoPlanilla = :p_tipo_planilla ) and
+			      ( PR_PlanillaEmpleadoConcepto.Empleado = :p_empleado) and  
+			      ( PR_PlanillaEmpleadoConcepto.CompaniaSocio =  :p_compania) and  
+			      (PR_PlanillaEmpleadoConcepto.Monto <> 0 OR PlanillaOrden < 0 or PR_PlanillaEmpleadoConcepto.Saldo>0)
+	     	    	      order by PR_Concepto.TipoConcepto desc, PR_Concepto.PlanillaOrden asc, PR_PlanillaEmpleadoConcepto.monto asc
+       
+       ]]>
+  </sql-query>
+
+  <sql-query name="prplanillaempleado.listarBoletaTiempo">
+    <![CDATA[
+        SELECT PR_PlanillaEmpleadoConcepto.Concepto,   
+            ISNULL(PR_PlanillaEmpleadoConcepto.Cantidad,0)  as Cantidad,
+			      isnull(PR_PlanillaEmpleadoConcepto.InformacionOpcional1 , 0 ) as InformacionOpcional1  
+          FROM PR_PlanillaEmpleadoConcepto 
+         WHERE ( PR_PlanillaEmpleadoConcepto.Periodo = :p_periodo) AND  
+            ( PR_PlanillaEmpleadoConcepto.TipoProceso = :p_tipo_proceso ) and
+            ( PR_PlanillaEmpleadoConcepto.TipoPlanilla = :p_tipo_planilla ) AND  
+			      ( PR_PlanillaEmpleadoConcepto.Empleado = :p_empleado) and  
+			      ( PR_PlanillaEmpleadoConcepto.CompaniaSocio = :p_compania) and  
+			      ( PR_PlanillaEmpleadoConcepto.Concepto in ('0010','0050','0060','0070','FALT','LICE','SUSP','PERM', '0080', '2951', '2950', '2970', 'tard', '2905'))
+      ]]>
+  </sql-query>
+
+
+  <sql-query name="prplanillaempleado.listarDetalle">
+    <![CDATA[
+         SNp_HR_ListarPlanillaEmpleadoConceptoBoleta 
+			:p_empleado,
+			:p_compania,
+			:p_periodo,
+			:p_tipo_proceso,
+      :p_tipo_planilla
+        ]]>
+  </sql-query>
+</hibernate-mapping>

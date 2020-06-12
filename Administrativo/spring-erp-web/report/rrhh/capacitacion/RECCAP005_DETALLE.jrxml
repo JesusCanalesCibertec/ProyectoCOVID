@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RECCAP005_DETALLE" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a513d2b6-231a-485e-b32d-7b100f447ab3">
+	<property name="ireport.zoom" value="6.115909044841473"/>
+	<property name="ireport.x" value="1880"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="capacitacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="company_owner" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+   ROW_NUMBER() over(
+order by
+   b.persona asc) as numero,
+   B.Persona,
+   B.Documento,
+   B.NombreCompleto,
+   D.description  DESCRIPCIONCORTA,
+   CompanyOwner
+FROM
+   HR_EMPLEADOCAPACITACION A
+   LEFT JOIN
+      PersonaMast B
+      ON A.Empleado = B.Persona
+   LEFT JOIN
+      EmpleadoMast C
+      ON B.Persona = C.Empleado
+   LEFT JOIN
+      departmentmst D
+      ON C.DeptoOrganizacion = D.department
+WHERE
+CAPACITACION = $P{capacitacion} and CompanyOwner = $P{company_owner}]]>
+	</queryString>
+	<field name="numero" class="java.lang.Long"/>
+	<field name="Persona" class="java.lang.Integer"/>
+	<field name="Documento" class="java.lang.String"/>
+	<field name="NombreCompleto" class="java.lang.String"/>
+	<field name="DESCRIPCIONCORTA" class="java.lang.String"/>
+	<field name="CompanyOwner" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="15" uuid="f68da966-05b6-47da-bb9b-ef0a75542d66"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="25" height="15" uuid="ce45c611-6962-4842-a6c0-2817ea34f726"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="27" y="0" width="33" height="15" uuid="f5bee241-2f3e-4a87-95ce-e46af16c7067"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Persona}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="64" y="0" width="44" height="15" uuid="b1ee59e4-d4e6-4ea9-a05a-21c35327c1d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Documento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="112" y="0" width="250" height="15" uuid="5a634ab6-1e64-4ccd-a96f-6d4bf38fa495"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NombreCompleto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="365" y="0" width="111" height="15" uuid="f93e3e96-f518-47bb-b054-4c4cca753afd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCIONCORTA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="25" y="0" width="1" height="15" uuid="5d11ecbf-676d-4021-a46a-f509e26dd76d"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="60" y="0" width="1" height="15" uuid="441c823e-84d8-4f14-93c0-8ade2482c8f8"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="108" y="0" width="1" height="15" uuid="04da9db8-b236-4fbd-b2aa-db13bdbba06c"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="362" y="0" width="1" height="15" uuid="ed30a230-166e-4d9b-a3d3-afd2edb63805"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="477" y="0" width="1" height="15" uuid="04179728-6f6d-4c7b-9c07-382f31440f75"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

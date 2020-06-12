@@ -1,0 +1,26 @@
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Agregar" icon="fa fa-plus" type="button" [disabled]=""></button>
+            </div>
+        </div>
+
+        <p-dataTable #datatable [responsive]="true" scrollWidth="100%" scrollable="true" [value]=""
+            emptyMessage="Sin registros">
+            <p-column header="Acción" i18n-header styleClass="textoCentrado" [style]="{ 'width': '70px'} ">
+                <ng-template let-tx="rowData " pTemplate="body ">
+                    <div class="ui-g" [ngStyle]="">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12 " style="cursor: pointer; " title="Eliminar">
+                            <i class="fa fa-times fa-lg seleccionable"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+            <p-column header="N°" field="auxPersonaNombreCompleto" [style]="{'width':'70px'}"></p-column>
+            <p-column header="Riesgo" field="edad" [style]="{'width':'300px'}"></p-column>
+            <p-column header="Propietario/Responsable" field="auxInstitucion" [style]="{'width':'300px'}"></p-column>
+            <p-column header="Acción o Tarea" [style]="{'width':'200px'}"></p-column>
+        </p-dataTable>
+    </div>
+</div>

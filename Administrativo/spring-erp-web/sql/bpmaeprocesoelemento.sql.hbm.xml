@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="bpmaeprocesoelemento.listarElementosIniciales">
+    	<![CDATA[
+	    	SELECT PE.ID_PROCESO as "idProceso"
+		,PE.ID_ELEMENTO as "idElemento"
+		FROM sgseguridadsys.BP_MAE_PROCESO_ELEMENTO PE
+		INNER JOIN sgseguridadsys.BP_TIPO_ELEMENTO MA
+		ON MA.ID_CLASE_ELEMENTO=PE.ID_CLASE_ELEMENTO AND
+		MA.ID_TIPO_ELEMENTO=PE.ID_TIPO_ELEMENTO
+		WHERE PE.ID_PROCESO = :p_id_proceso AND
+		ISNULL(MA.FLG_ESTADO_INICIAL,'N')='S'    	]]>
+    </sql-query>
+	
+	<sql-query name="bpmaeprocesoelemento.filtro">
+      
+		select 
+		a.ID_PROCESO,
+		b.NOMBRE as NomProceso,
+		a.ID_ELEMENTO,
+		a.ID_UNICO,
+		a.NOMBRE as NomElemento,
+		a.ID_TIPO_ELEMENTO,
+		c.NOMBRE as NomTipoElemento,
+		a.ID_ESTADO,
+		d.NOMBRE as NomEstado,
+		a.ID_ROL,
+		e.NOMBRE as NomRol,
+		a.ID_NIVEL_SEGURIDAD,
+		a.ICONO_HOJA_ESTILO,
+		a.PORCENTAJE_AVANCE,
+		a.DIAS_DURACION,
+		'' as Color,
+		'' as NombreColor,
+		a.RUTA_ICONO,
+		a.POSICION_X,
+		a.POSICION_Y
+		from sgseguridadsys.BP_MAE_PROCESO_ELEMENTO a 
+			left join sgseguridadsys.BP_MAE_PROCESO b        on a.ID_PROCESO = b.ID_PROCESO
+			left join sgseguridadsys.BP_TIPO_ELEMENTO c      on a.ID_TIPO_ELEMENTO = c.ID_TIPO_ELEMENTO and a.ID_CLASE_ELEMENTO = c.ID_CLASE_ELEMENTO
+			left join sgseguridadsys.BP_MAE_PROCESO_ESTADO d on a.ID_ESTADO = d.ID_ESTADO and a.ID_PROCESO = d.ID_PROCESO
+			left join sgseguridadsys.BP_MAE_PROCESO_ROL e    on a.ID_ROL = e.ID_ROL and a.ID_PROCESO = e.ID_PROCESO
+			--left join ColorMast f							 on a.ID_COLOR = f.Color
+		where 
+		ISNULL(a.ID_PROCESO, '123') = isnull(:p_IdProceso, ISNULL(a.ID_PROCESO, '123'))
+
+	</sql-query>
+	
+</hibernate-mapping>

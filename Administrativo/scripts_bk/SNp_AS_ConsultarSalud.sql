@@ -1,0 +1,989 @@
+ALTER  PROCEDURE [sgseguridadsys].[SNp_AS_ConsultarSalud]  
+(  
+@pNombreCompleto varchar(200),  
+@pPeriodo varchar(8) ,  
+@pArea varchar(10),  
+@pSexo varchar(1),  
+@pNumPag int,  
+@pNumReg int,  
+@pInstitucion varchar(6),  
+@pPrograma varchar(3)  
+)  
+AS  
+  
+-- exec [sgseguridadsys].[SNp_AS_ConsultarSalud] null, '201802',null,null,1,20,'CANEV','AAM'  
+
+DECLARE
+  @ID_INSTITUCION [varchar](10) , 
+  @ID_BENEFICIARIO INT,  
+  @ID_SALUD INT,  
+  @NOMBRECOMPLETO [varchar](100) ,  
+  @FECHA_INFORME DATETIME,  
+  @ID_PERIODO [varchar](10),  
+  @COMENTARIOS [varchar](1000),  
+  @ESTADO [varchar](20),  
+  @HEMOGLOBINA numeric(10,4),  
+  @HEMOGLOBINA_RESULTADO [varchar](100),  
+  @ID_AYUDA_MEDICA [varchar](100),  
+  @ID_DESCARTE_SEROLOGICO [varchar](100),  
+  @ID_DESCARTE_TBC [varchar](100),  
+  @ID_TRATAMIENTO_ANEMIA [varchar](100),  
+  @ID_HTA [varchar](100),  
+  @ID_TBC [varchar](100),  
+  @ID_DIABETES [varchar](100),  
+  @ID_COGNITIVO [varchar](100),  
+  @ID_AFECTIVO [varchar](100),  
+  @ID_OSTEOARTROSIS [varchar](100),  
+  @NOMBRE [varchar](100),  
+  @ID_PROGRAMA [varchar](10),  
+  @esNuevo [varchar](1),  
+  @NOMBRE_AYUDA_MEDICA [varchar](200),  
+  @NOMBRE_COGNITIVO [varchar](200),  
+  @NOMBRE_AFECTIVO [varchar](100),  
+  @EVALUADO [varchar](2),  
+  @OTRAS_ENFERMEDADES [varchar](100),
+  @CANTIDAD INT,
+
+  @ID_NOMBRE varchar(150),
+	@ID_NOMBRE2 varchar(150),
+	@ID_NOMBRE3 varchar(150),
+	@ID_NOMBRE_AYUDA_BIOMECANICA varchar(150),
+	@ID_NOMBRE_AYUDA_BIOMECANICA2 varchar(150),
+	@ID_NOMBRE_AYUDA_BIOMECANICA3 varchar(150),
+	@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA varchar(150),
+	@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2 varchar(150),
+	@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3 varchar(150),
+	@ID_NOMBRE_DIAGNOSTICO varchar(150),
+	@ID_NOMBRE_DIAGNOSTICO2 varchar(150),
+	@ID_NOMBRE_DIAGNOSTICO3 varchar(150),
+	@ID_NOMBRE_DISCAPACIDAD varchar(150),
+	@ID_NOMBRE_DISCAPACIDAD2 varchar(150),
+	@ID_NOMBRE_DISCAPACIDAD3 varchar(150),
+	@ID_NOMBRE_ESTADO varchar(150),
+	@ID_NOMBRE_ESTADO2 varchar(150),
+	@ID_NOMBRE_ESTADO3 varchar(150),
+	@ID_NOMBRE_EXAMEN varchar(150), 
+	@ID_NOMBRE_EXAMEN2 varchar(150),    
+	@ID_NOMBRE_EXAMEN3 varchar(150), 
+	@ID_NOMBRE_RESULTADO varchar(150),
+	@ID_NOMBRE_RESULTADO2 varchar(150),
+	@ID_NOMBRE_RESULTADO3 varchar(150),
+	@ID_NOMBRE_CONDICION varchar(150),
+	@ID_NOMBRE_CONDICION2 varchar(150),
+	@ID_NOMBRE_CONDICION3 varchar(150),
+	@ID_NOMBRE_SUB_CONDICION varchar(150),
+	@ID_NOMBRE_SUB_CONDICION2 varchar(150),
+	@ID_NOMBRE_SUB_CONDICION3 varchar(150),
+	@ID_NOMBRE_TERAPIA varchar(150), 
+	@ID_NOMBRE_TERAPIA2 varchar(150),      
+	@ID_NOMBRE_TERAPIA3 varchar(150),  
+	@ID_NOMBRE_TRATAMIENTO varchar(150),
+	@ID_NOMBRE_TRATAMIENTO2 varchar(150),
+	@ID_NOMBRE_TRATAMIENTO3 varchar(150)
+
+BEGIN  
+    
+
+	 IF OBJECT_ID('tempdb..##tmp_ps_salud') IS NOT NULL            
+      BEGIN            
+        drop table ##tmp_ps_salud            
+      END
+
+	  CREATE TABLE #tmp_PS_SALUD_AYUDA(
+     [FILA] int NULL,
+     [ID_AYUDA] VARCHAR(20),      
+     [ID_NOMBRE] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_BIOMECANICA(
+    [FILA] int NULL,
+    [ID_TIPO_AYUDA] VARCHAR(20), 
+	[ID_ESTADO_AYUDA] VARCHAR(20),      
+    [ID_NOMBRE_AYUDA_BIOMECANICA] varchar(150),
+	[ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA] varchar(150),
+)
+CREATE TABLE #tmp_PS_SALUD_DIAGNOSTICO(
+ [FILA] int NULL,
+ [ID_DIAGNSOTICO] VARCHAR(20),      
+ [ID_NOMBRE_DIAGNOSTICO] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_DISCAPACIDAD(
+ [FILA] int NULL,
+ [ID_DISCAPACIDAD] VARCHAR(20),      
+ [ID_NOMBRE_DISCAPACIDAD] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_ESTADO(
+ [FILA] int NULL,
+ [ID_ESTADO] VARCHAR(20),      
+ [ID_NOMBRE_ESTADO] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_EXAMEN(
+ [FILA] int NULL,
+ [ID_EXAMEN] VARCHAR(20), 
+ [ID_RESULTADO] VARCHAR(20),      
+ [ID_NOMBRE_EXAMEN] varchar(150),    
+ [ID_NOMBRE_RESULTADO] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_SUBCONDICION(
+ [FILA] int NULL,
+ [ID_CONDICION] VARCHAR(20),      
+ [ID_NOMBRE_CONDICION] varchar(150),
+ [ID_SUB_CONDICION] VARCHAR(20),      
+ [ID_NOMBRE_SUB_CONDICION] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_TERAPIA(
+ [FILA] int NULL,
+ [ID_TERAPIA] VARCHAR(20),      
+ [ID_NOMBRE_TERAPIA] varchar(150)
+)
+CREATE TABLE #tmp_PS_SALUD_TRATAMIENTO(
+  [FILA] int NULL,
+  [ID_TRATAMIENTO] VARCHAR(20),      
+  [ID_NOMBRE_TRATAMIENTO] varchar(150)
+)
+
+create table ##tmp_ps_salud (
+  ID_INSTITUCION [varchar](10) COLLATE database_default  NULL , 
+  ID_BENEFICIARIO INT,  
+  ID_SALUD INT,  
+  NOMBRECOMPLETO [varchar](100) COLLATE database_default  NULL ,  
+  FECHA_INFORME DATETIME,  
+  ID_PERIODO [varchar](10) COLLATE database_default  NULL,  
+  COMENTARIOS [varchar](1000) COLLATE database_default  NULL,  
+  ESTADO [varchar](20) COLLATE database_default  NULL,  
+  HEMOGLOBINA numeric(10,4),  
+  HEMOGLOBINA_RESULTADO [varchar](100) COLLATE database_default  NULL,  
+  ID_AYUDA_MEDICA [varchar](100) COLLATE database_default  NULL,  
+  ID_DESCARTE_SEROLOGICO [varchar](100) COLLATE database_default  NULL,  
+  ID_DESCARTE_TBC [varchar](100) COLLATE database_default  NULL,  
+  ID_TRATAMIENTO_ANEMIA [varchar](100) COLLATE database_default  NULL,  
+  ID_HTA [varchar](100) COLLATE database_default  NULL,  
+  ID_TBC [varchar](100) COLLATE database_default  NULL,  
+  ID_DIABETES [varchar](100) COLLATE database_default  NULL,  
+  ID_COGNITIVO [varchar](100) COLLATE database_default  NULL,  
+  ID_AFECTIVO [varchar](100) COLLATE database_default  NULL,  
+  ID_OSTEOARTROSIS [varchar](100) COLLATE database_default  NULL,  
+  NOMBRE [varchar](100) COLLATE database_default  NULL,  
+  ID_PROGRAMA [varchar](10) COLLATE database_default  NULL,  
+  esNuevo [varchar](1) COLLATE database_default  NULL,  
+  NOMBRE_AYUDA_MEDICA [varchar](200) COLLATE database_default  NULL,  
+  NOMBRE_COGNITIVO [varchar](200) COLLATE database_default  NULL,  
+  NOMBRE_AFECTIVO [varchar](100) COLLATE database_default  NULL,  
+  EVALUADO [varchar](2) COLLATE database_default  NULL,  
+  OTRAS_ENFERMEDADES [varchar](100) COLLATE database_default  NULL,
+  CANTIDAD INT,
+
+  [ID_NOMBRE] varchar(150),
+	[ID_NOMBRE2] varchar(150),
+	[ID_NOMBRE3] varchar(150),
+	[ID_NOMBRE_AYUDA_BIOMECANICA] varchar(150),
+	[ID_NOMBRE_AYUDA_BIOMECANICA2] varchar(150),
+	[ID_NOMBRE_AYUDA_BIOMECANICA3] varchar(150),
+	[ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA] varchar(150),
+	[ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2] varchar(150),
+	[ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3] varchar(150),
+	[ID_NOMBRE_DIAGNOSTICO] varchar(150),
+	[ID_NOMBRE_DIAGNOSTICO2] varchar(150),
+	[ID_NOMBRE_DIAGNOSTICO3] varchar(150),
+	[ID_NOMBRE_DISCAPACIDAD] varchar(150),
+	[ID_NOMBRE_DISCAPACIDAD2] varchar(150),
+	[ID_NOMBRE_DISCAPACIDAD3] varchar(150),
+	[ID_NOMBRE_ESTADO] varchar(150),
+	[ID_NOMBRE_ESTADO2] varchar(150),
+	[ID_NOMBRE_ESTADO3] varchar(150),
+	[ID_NOMBRE_EXAMEN] varchar(150), 
+	[ID_NOMBRE_EXAMEN2] varchar(150),  
+	[ID_NOMBRE_EXAMEN3] varchar(150),     
+	[ID_NOMBRE_RESULTADO] varchar(150),
+	[ID_NOMBRE_RESULTADO2] varchar(150),
+	[ID_NOMBRE_RESULTADO3] varchar(150),
+	[ID_NOMBRE_CONDICION] varchar(150),
+	[ID_NOMBRE_CONDICION2] varchar(150),
+	[ID_NOMBRE_CONDICION3] varchar(150),
+	[ID_NOMBRE_SUB_CONDICION] varchar(150),
+	[ID_NOMBRE_SUB_CONDICION2] varchar(150),
+	[ID_NOMBRE_SUB_CONDICION3] varchar(150),
+	[ID_NOMBRE_TERAPIA] varchar(150),  
+	[ID_NOMBRE_TERAPIA2] varchar(150),
+	[ID_NOMBRE_TERAPIA3] varchar(150),    
+	[ID_NOMBRE_TRATAMIENTO] varchar(150),
+	[ID_NOMBRE_TRATAMIENTO3] varchar(150),
+	[ID_NOMBRE_TRATAMIENTO2] varchar(150)
+
+)
+
+
+
+	declare @general int = (
+	select  
+	count(1)
+  FROM sgseguridadsys.PS_SALUD salud  
+  JOIN sgseguridadsys.PS_BENEFICIARIO bene ON bene.ID_BENEFICIARIO=salud.ID_BENEFICIARIO  
+   AND bene.ID_INSTITUCION=salud.ID_INSTITUCION  
+  JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO  
+  JOIN sgseguridadsys.PS_INSTITUCION ints ON  ints.ID_INSTITUCION=bene.ID_INSTITUCION  
+  WHERE  
+  salud.ID_PERIODO=@pPeriodo  
+  AND salud.ID_INSTITUCION=ISNULL(@pInstitucion,salud.ID_INSTITUCION)  
+  AND ISNULL(bene.id_area,'XX')=ISNULL(@pArea,ISNULL(bene.id_area,'XX'))  
+  AND ISNULL(entidad.ID_SEXO,'XX')=ISNULL(@pSexo,ISNULL(entidad.ID_SEXO,'XX'))  
+  AND entidad.NOMBRECOMPLETO LIKE  '%' + COALESCE(@pNombreCompleto, entidad.NOMBRECOMPLETO) + '%'  
+  AND bene.ID_PROGRAMA=@pPrograma
+)
+
+INSERT INTO ##tmp_ps_salud(
+
+ID_INSTITUCION , 
+ID_BENEFICIARIO ,  
+ID_SALUD ,  
+NOMBRECOMPLETO ,  
+FECHA_INFORME,  
+ID_PERIODO,  
+COMENTARIOS ,  
+ESTADO ,  
+HEMOGLOBINA,  
+HEMOGLOBINA_RESULTADO,  
+ID_AYUDA_MEDICA,  
+ID_DESCARTE_SEROLOGICO,  
+ID_DESCARTE_TBC,  
+ID_TRATAMIENTO_ANEMIA,  
+ID_HTA,  
+ID_TBC,  
+ID_DIABETES,  
+ID_COGNITIVO,  
+ID_AFECTIVO,  
+ID_OSTEOARTROSIS,  
+NOMBRE,  
+ID_PROGRAMA,  
+esNuevo,  
+NOMBRE_AYUDA_MEDICA ,  
+NOMBRE_COGNITIVO ,  
+NOMBRE_AFECTIVO,  
+EVALUADO ,  
+OTRAS_ENFERMEDADES,
+CANTIDAD 
+)
+
+ select  
+  salud.ID_INSTITUCION,  
+  salud.ID_BENEFICIARIO,  
+  salud.ID_SALUD,  
+  entidad.NOMBRECOMPLETO,  
+  salud.FECHA_INFORME,  
+  salud.ID_PERIODO,  
+  salud.COMENTARIOS,  
+  salud.ESTADO,  
+  salud.HEMOGLOBINA,  
+  salud.HEMOGLOBINA_RESULTADO,  
+  salud.ID_AYUDA_MEDICA,  
+  salud.ID_DESCARTE_SEROLOGICO,  
+  salud.ID_DESCARTE_TBC,  
+  salud.ID_TRATAMIENTO_ANEMIA,  
+  ID_HTA ,  
+  ID_TBC ,  
+  ID_DIABETES ,  
+  ID_COGNITIVO ,  
+  ID_AFECTIVO ,  
+  ID_OSTEOARTROSIS,  
+  ints.NOMBRE,  
+  bene.ID_PROGRAMA,  
+  'N' esNuevo,  
+  sgseguridadsys.FN_OBTENER_NOMBRE_MISCELANEO('TIPAYUMEDI',salud.ID_AYUDA_MEDICA)NOMBRE_AYUDA_MEDICA,  
+  sgseguridadsys.FN_OBTENER_NOMBRE_MISCELANEO('VMENCOG',salud.ID_COGNITIVO)NOMBRE_COGNITIVO,  
+  sgseguridadsys.FN_OBTENER_NOMBRE_MISCELANEO('VMENAFE',salud.ID_AFECTIVO)NOMBRE_AFECTIVO,  
+  salud.EVALUADO,  
+  salud.OTRAS_ENFERMEDADES,
+  @general general 
+ --  ROW_NUMBER() OVER(ORDER BY entidad.NOMBRECOMPLETO ASC) AS sec  
+  FROM sgseguridadsys.PS_SALUD salud  
+  JOIN sgseguridadsys.PS_BENEFICIARIO bene ON bene.ID_BENEFICIARIO=salud.ID_BENEFICIARIO  
+   AND bene.ID_INSTITUCION=salud.ID_INSTITUCION  
+  JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO  
+  JOIN sgseguridadsys.PS_INSTITUCION ints ON  ints.ID_INSTITUCION=bene.ID_INSTITUCION  
+  WHERE  
+  salud.ID_PERIODO=@pPeriodo  
+  AND salud.ID_INSTITUCION=ISNULL(@pInstitucion,salud.ID_INSTITUCION)  
+  AND ISNULL(bene.id_area,'XX')=ISNULL(@pArea,ISNULL(bene.id_area,'XX'))  
+  AND ISNULL(entidad.ID_SEXO,'XX')=ISNULL(@pSexo,ISNULL(entidad.ID_SEXO,'XX'))  
+  AND entidad.NOMBRECOMPLETO LIKE  '%' + COALESCE(@pNombreCompleto, entidad.NOMBRECOMPLETO) + '%'  
+  AND bene.ID_PROGRAMA=@pPrograma
+  --) tt 
+ -- where tt.sec between @pNumPag+1 and (@pNumPag+1+@pNumReg)
+
+  DECLARE InsertSalud CURSOR FOR
+    SELECT
+	    ID_INSTITUCION , 
+		ID_BENEFICIARIO ,  
+		ID_SALUD ,  
+		NOMBRECOMPLETO ,  
+		FECHA_INFORME,  
+		ID_PERIODO,  
+		COMENTARIOS ,  
+		ESTADO ,  
+		HEMOGLOBINA,  
+		HEMOGLOBINA_RESULTADO,  
+		ID_AYUDA_MEDICA,  
+		ID_DESCARTE_SEROLOGICO,  
+		ID_DESCARTE_TBC,  
+		ID_TRATAMIENTO_ANEMIA,  
+		ID_HTA,  
+		ID_TBC,  
+		ID_DIABETES,  
+		ID_COGNITIVO,  
+		ID_AFECTIVO,  
+		ID_OSTEOARTROSIS,  
+		NOMBRE,  
+		ID_PROGRAMA,  
+		esNuevo,  
+		NOMBRE_AYUDA_MEDICA ,  
+		NOMBRE_COGNITIVO ,  
+		NOMBRE_AFECTIVO,  
+		EVALUADO ,  
+		OTRAS_ENFERMEDADES,
+		CANTIDAD
+	FROM ##tmp_ps_salud 
+
+  OPEN InsertSalud      
+  FETCH InsertSalud      
+  INTO
+    @ID_INSTITUCION , 
+	@ID_BENEFICIARIO ,  
+	@ID_SALUD ,  
+	@NOMBRECOMPLETO ,  
+	@FECHA_INFORME ,  
+	@ID_PERIODO,  
+	@COMENTARIOS ,  
+	@ESTADO ,  
+	@HEMOGLOBINA,  
+	@HEMOGLOBINA_RESULTADO,  
+	@ID_AYUDA_MEDICA,  
+	@ID_DESCARTE_SEROLOGICO,  
+	@ID_DESCARTE_TBC,  
+	@ID_TRATAMIENTO_ANEMIA,  
+	@ID_HTA,  
+	@ID_TBC,  
+	@ID_DIABETES,  
+	@ID_COGNITIVO,  
+	@ID_AFECTIVO,  
+	@ID_OSTEOARTROSIS,  
+	@NOMBRE,  
+	@ID_PROGRAMA,  
+	@esNuevo,  
+	@NOMBRE_AYUDA_MEDICA ,  
+	@NOMBRE_COGNITIVO ,  
+	@NOMBRE_AFECTIVO,  
+	@EVALUADO ,  
+	@OTRAS_ENFERMEDADES,
+	@CANTIDAD 
+
+	WHILE @@fetch_status = 0      
+   BEGIN 
+
+     IF OBJECT_ID('tempdb..#tmp_PS_SALUD_AYUDA') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_AYUDA      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_BIOMECANICA') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_BIOMECANICA      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_DIAGNOSTICO') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_DIAGNOSTICO      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_DISCAPACIDAD') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_DISCAPACIDAD      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_ESTADO') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_ESTADO      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_EXAMEN') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_EXAMEN      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_SUBCONDICION') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_SUBCONDICION      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_TERAPIA') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_TERAPIA      
+      END
+
+	  IF OBJECT_ID('tempdb..#tmp_PS_SALUD_TRATAMIENTO') IS NOT NULL      
+      BEGIN      
+        delete #tmp_PS_SALUD_TRATAMIENTO      
+      END
+
+	 -- INSERTAR AYUDA      
+     INSERT INTO #tmp_PS_SALUD_AYUDA      
+     (   [FILA],   
+         [ID_AYUDA],      
+         [ID_NOMBRE]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY ID_AYUDA ASC) AS sec,      
+       ID_AYUDA,      
+       detalle.DescripcionLocal      
+     FROM sgseguridadsys.PS_SALUD_AYUDA  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='TIPAYUMEDI' AND detalle.CodigoElemento=ID_AYUDA
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x INT      
+               
+     SET @x=1      
+     SET @ID_NOMBRE=NULL  
+	 SET @ID_NOMBRE2=NULL     
+     SET @ID_NOMBRE3=NULL     
+      
+     while @x<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_AYUDA)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE=ID_NOMBRE      
+        FROM #tmp_PS_SALUD_AYUDA WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE2=ID_NOMBRE      
+        FROM #tmp_PS_SALUD_AYUDA WHERE FILA=2   
+
+		SELECT       
+         @ID_NOMBRE3=ID_NOMBRE      
+        FROM #tmp_PS_SALUD_AYUDA WHERE FILA=3
+      
+      SET @x=@x+1      
+     END      
+ 
+
+  -- INSERTAR PS_SALUD_BIOMECANICA  
+     INSERT INTO #tmp_PS_SALUD_BIOMECANICA      
+     (   [FILA],   
+         [ID_ESTADO_AYUDA],  
+		 [ID_TIPO_AYUDA],    
+         [ID_NOMBRE_AYUDA_BIOMECANICA],
+		 [ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA]   
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_TIPO_AYUDA] ASC) AS sec,      
+       ID_ESTADO_AYUDA, 
+	   [ID_TIPO_AYUDA],      
+       detalle.DescripcionLocal,
+	   detalle1.DescripcionLocal    
+     FROM sgseguridadsys.PS_SALUD_BIOMECANICA  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='TIPAYUBIO' AND detalle.CodigoElemento=ID_TIPO_AYUDA
+
+	 JOIN MA_MiscelaneosDetalle detalle1 ON detalle1.AplicacionCodigo='PS'     
+	 AND detalle1.CodigoTabla='ESTAPAYUBI' AND detalle1.CodigoElemento=ID_ESTADO_AYUDA
+
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x1 INT      
+               
+     SET @x1=1      
+     SET @ID_NOMBRE_AYUDA_BIOMECANICA=NULL  
+	 SET @ID_NOMBRE_AYUDA_BIOMECANICA2=NULL 
+	 SET @ID_NOMBRE_AYUDA_BIOMECANICA3=NULL 
+	 SET @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA=NULL  
+	 SET @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2=NULL   
+	 SET @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3=NULL   
+         
+      
+     while @x1<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_BIOMECANICA)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_AYUDA_BIOMECANICA=ID_NOMBRE_AYUDA_BIOMECANICA , 
+		 @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA=ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA    
+        FROM #tmp_PS_SALUD_BIOMECANICA WHERE FILA=1  
+		
+	   SELECT       
+         @ID_NOMBRE_AYUDA_BIOMECANICA2=ID_NOMBRE_AYUDA_BIOMECANICA, 
+		 @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2=ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA    
+        FROM #tmp_PS_SALUD_BIOMECANICA WHERE FILA=2 
+
+		 SELECT       
+         @ID_NOMBRE_AYUDA_BIOMECANICA3=ID_NOMBRE_AYUDA_BIOMECANICA, 
+		 @ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3=ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA    
+        FROM #tmp_PS_SALUD_BIOMECANICA WHERE FILA=3
+      
+      SET @x1=@x1+1      
+     END 
+
+	 -- INSERTAR PS_SALUD_DIAGNOSTICO      
+    INSERT INTO #tmp_PS_SALUD_DIAGNOSTICO      
+     (   [FILA],   
+         [ID_DIAGNSOTICO],      
+         [ID_NOMBRE_DIAGNOSTICO]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY ID_DIAGNOSTICO ASC) AS sec,      
+       [ID_DIAGNOSTICO],      
+       diag.Nombre      
+     FROM sgseguridadsys.PS_SALUD_DIAGNOSTICO  
+	 JOIN sgseguridadsys.SS_ge_diagnostico diag ON diag.IdDiagnostico=ID_DIAGNOSTICO
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x2 INT      
+               
+     SET @x2=1      
+     SET @ID_NOMBRE_DIAGNOSTICO=NULL  
+	 SET @ID_NOMBRE_DIAGNOSTICO2=NULL     
+	 SET @ID_NOMBRE_DIAGNOSTICO3=NULL  
+         
+      
+     while @x2<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_DIAGNOSTICO)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_DIAGNOSTICO=ID_NOMBRE_DIAGNOSTICO      
+        FROM #tmp_PS_SALUD_DIAGNOSTICO WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE_DIAGNOSTICO2=ID_NOMBRE_DIAGNOSTICO      
+        FROM #tmp_PS_SALUD_DIAGNOSTICO WHERE FILA=2   
+
+		SELECT       
+         @ID_NOMBRE_DIAGNOSTICO3=ID_NOMBRE_DIAGNOSTICO      
+        FROM #tmp_PS_SALUD_DIAGNOSTICO WHERE FILA=3
+      
+      SET @x2=@x2+1      
+     END      
+ 
+  -- INSERTAR PS_SALUD_DISCAPACIDAD   
+     INSERT INTO #tmp_PS_SALUD_DISCAPACIDAD      
+     (   [FILA],   
+         [ID_DISCAPACIDAD],      
+         [ID_NOMBRE_DISCAPACIDAD]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_DISCAPACIDAD] ASC) AS sec,      
+       [ID_DISCAPACIDAD],      
+       detalle.DescripcionLocal      
+     FROM sgseguridadsys.PS_SALUD_DISCAPACIDAD  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='TIPDISCA' AND detalle.CodigoElemento=ID_DISCAPACIDAD
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x3 INT      
+               
+     SET @x3=1      
+     SET @ID_NOMBRE_DISCAPACIDAD=NULL  
+	 SET @ID_NOMBRE_DISCAPACIDAD2=NULL 
+	 SET @ID_NOMBRE_DISCAPACIDAD3=NULL     
+             
+     while @x3<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_DISCAPACIDAD)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_DISCAPACIDAD=ID_NOMBRE_DISCAPACIDAD      
+        FROM #tmp_PS_SALUD_DISCAPACIDAD WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE_DISCAPACIDAD2=ID_NOMBRE_DISCAPACIDAD      
+        FROM #tmp_PS_SALUD_DISCAPACIDAD WHERE FILA=2   
+
+		SELECT       
+         @ID_NOMBRE_DISCAPACIDAD3=ID_NOMBRE_DISCAPACIDAD      
+        FROM #tmp_PS_SALUD_DISCAPACIDAD WHERE FILA=3 
+      
+      SET @x3=@x3+1      
+     END 
+
+	 -- INSERTAR PS_SALUD_ESTADO   
+    INSERT INTO #tmp_PS_SALUD_ESTADO      
+     (   [FILA],   
+         [ID_ESTADO],      
+         [ID_NOMBRE_ESTADO]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_ESTADO] ASC) AS sec,      
+       [ID_ESTADO],      
+       detalle.DescripcionLocal      
+     FROM sgseguridadsys.PS_SALUD_ESTADO  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='ESTASALU' AND detalle.CodigoElemento=ID_ESTADO
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x4 INT      
+               
+     SET @x4=1      
+     SET @ID_NOMBRE_ESTADO=NULL  
+	 SET @ID_NOMBRE_ESTADO2=NULL     
+	 SET @ID_NOMBRE_ESTADO3=NULL  
+             
+     while @x4<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_ESTADO)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_ESTADO=ID_NOMBRE_ESTADO      
+        FROM #tmp_PS_SALUD_ESTADO WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE_ESTADO2=ID_NOMBRE_ESTADO      
+        FROM #tmp_PS_SALUD_ESTADO WHERE FILA=2  
+		
+		SELECT       
+         @ID_NOMBRE_ESTADO3=ID_NOMBRE_ESTADO      
+        FROM #tmp_PS_SALUD_ESTADO WHERE FILA=3    
+      
+      SET @x4=@x4+1      
+     END 
+
+     -- INSERTAR PS_SALUD_EXAMEN  
+     INSERT INTO #tmp_PS_SALUD_EXAMEN      
+     (   [FILA],   
+         [ID_EXAMEN],  
+		 [ID_RESULTADO],    
+         [ID_NOMBRE_EXAMEN],
+		 [ID_NOMBRE_RESULTADO]   
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_EXAMEN] ASC) AS sec,      
+       [ID_EXAMEN], 
+	   [ID_RESULTADO],      
+       detalle.DescripcionLocal,
+	   detalle1.DescripcionLocal    
+     FROM sgseguridadsys.PS_SALUD_EXAMEN  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='EXAAUXI' AND detalle.CodigoElemento=[ID_EXAMEN]
+
+	 JOIN MA_MiscelaneosDetalle detalle1 ON detalle1.AplicacionCodigo='PS'     
+	 AND detalle1.CodigoTabla='EXARESU' AND detalle1.CodigoElemento=[ID_RESULTADO]
+
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x5 INT      
+               
+     SET @x5=1      
+     SET @ID_NOMBRE_EXAMEN=NULL  
+	 SET @ID_NOMBRE_RESULTADO=NULL 
+	 SET @ID_NOMBRE_EXAMEN2=NULL  
+	 SET @ID_NOMBRE_RESULTADO2=NULL   
+	 SET @ID_NOMBRE_EXAMEN3=NULL  
+	 SET @ID_NOMBRE_RESULTADO3=NULL
+         
+      
+     while @x5<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_EXAMEN)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_EXAMEN=ID_NOMBRE_EXAMEN , 
+		 @ID_NOMBRE_RESULTADO=ID_NOMBRE_RESULTADO    
+        FROM #tmp_PS_SALUD_EXAMEN WHERE FILA=1  
+		
+	   SELECT       
+         @ID_NOMBRE_EXAMEN2=ID_NOMBRE_EXAMEN, 
+		 @ID_NOMBRE_RESULTADO2=ID_NOMBRE_RESULTADO    
+        FROM #tmp_PS_SALUD_EXAMEN WHERE FILA=2 
+
+	   SELECT       
+         @ID_NOMBRE_EXAMEN3=ID_NOMBRE_EXAMEN, 
+		 @ID_NOMBRE_RESULTADO3=ID_NOMBRE_RESULTADO    
+        FROM #tmp_PS_SALUD_EXAMEN WHERE FILA=3
+      
+      SET @x5=@x5+1      
+     END 
+
+   -- INSERTAR PS_SALUD_EXAMEN  
+     INSERT INTO #tmp_PS_SALUD_SUBCONDICION      
+     (   [FILA],   
+         [ID_CONDICION],  
+		 [ID_NOMBRE_CONDICION],    
+         [ID_SUB_CONDICION],
+		 [ID_NOMBRE_SUB_CONDICION]   
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_CONDICION] ASC) AS sec,      
+       [ID_CONDICION], 
+	   [ID_SUBCONDICION],      
+       detalle.DescripcionLocal,
+	   detalle1.DescripcionLocal    
+     FROM sgseguridadsys.PS_SALUD_SUBCONDICION  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='EXAAUXI' AND detalle.CodigoElemento=[ID_CONDICION]
+
+	 JOIN MA_MiscelaneosDetalle detalle1 ON detalle1.AplicacionCodigo='PS'     
+	 AND detalle1.CodigoTabla='EXARESU' AND detalle1.CodigoElemento=[ID_SUBCONDICION]
+
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x6 INT      
+               
+     SET @x6=1      
+     SET @ID_NOMBRE_CONDICION=NULL  
+	 SET @ID_NOMBRE_SUB_CONDICION=NULL 
+	 SET @ID_NOMBRE_CONDICION2=NULL  
+	 SET @ID_NOMBRE_SUB_CONDICION2=NULL   
+	 SET @ID_NOMBRE_CONDICION3=NULL  
+	 SET @ID_NOMBRE_SUB_CONDICION3=NULL  
+         
+      
+     while @x6<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_SUBCONDICION)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_CONDICION=ID_NOMBRE_CONDICION , 
+		 @ID_NOMBRE_SUB_CONDICION=ID_NOMBRE_SUB_CONDICION    
+        FROM #tmp_PS_SALUD_SUBCONDICION WHERE FILA=1  
+		
+	   SELECT       
+         @ID_NOMBRE_CONDICION2=ID_NOMBRE_CONDICION, 
+		 @ID_NOMBRE_SUB_CONDICION2=ID_NOMBRE_SUB_CONDICION    
+        FROM #tmp_PS_SALUD_SUBCONDICION WHERE FILA=2 
+
+		SELECT       
+         @ID_NOMBRE_CONDICION3=ID_NOMBRE_CONDICION, 
+		 @ID_NOMBRE_SUB_CONDICION3=ID_NOMBRE_SUB_CONDICION    
+        FROM #tmp_PS_SALUD_SUBCONDICION WHERE FILA=3
+      
+      SET @x6=@x6+1      
+     END 
+
+
+	  -- INSERTAR PS_SALUD_TERAPIA   
+    INSERT INTO #tmp_PS_SALUD_TERAPIA      
+     (   [FILA],   
+         [ID_TERAPIA],      
+         [ID_NOMBRE_TERAPIA]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_TERAPIA] ASC) AS sec,      
+       [ID_TERAPIA],      
+       detalle.DescripcionLocal      
+     FROM sgseguridadsys.PS_SALUD_TERAPIA  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='TERAPIA' AND detalle.CodigoElemento=[ID_TERAPIA]
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x7 INT      
+               
+     SET @x7=1      
+     SET @ID_NOMBRE_TERAPIA=NULL  
+	 SET @ID_NOMBRE_TERAPIA2=NULL
+	 SET @ID_NOMBRE_TERAPIA3=NULL      
+             
+     while @x7<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_TERAPIA)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_TERAPIA=ID_NOMBRE_TERAPIA      
+        FROM #tmp_PS_SALUD_TERAPIA WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE_TERAPIA2=ID_NOMBRE_TERAPIA      
+        FROM #tmp_PS_SALUD_TERAPIA WHERE FILA=2  
+		
+		SELECT       
+         @ID_NOMBRE_TERAPIA3=ID_NOMBRE_TERAPIA      
+        FROM #tmp_PS_SALUD_TERAPIA WHERE FILA=3 
+      
+      SET @x7=@x7+1      
+     END 
+
+    -- INSERTAR PS_SALUD_TRATAMIENTO   
+    INSERT INTO #tmp_PS_SALUD_TRATAMIENTO      
+     (   [FILA],   
+         [ID_TRATAMIENTO],      
+         [ID_NOMBRE_TRATAMIENTO]    
+     )      
+     SELECT       
+       ROW_NUMBER() OVER(ORDER BY [ID_TRATAMIENTO] ASC) AS sec,      
+       [ID_TRATAMIENTO],      
+       detalle.DescripcionLocal      
+     FROM sgseguridadsys.PS_SALUD_TRATAMIENTO  
+	 JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'     
+	 AND detalle.CodigoTabla='RASTRATA' AND detalle.CodigoElemento=[ID_TRATAMIENTO]
+     WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD      
+                  
+     DECLARE @x8 INT      
+               
+     SET @x8=1      
+     SET @ID_NOMBRE_TRATAMIENTO=NULL  
+	 SET @ID_NOMBRE_TRATAMIENTO2=NULL     
+	 SET @ID_NOMBRE_TRATAMIENTO3=NULL   
+             
+     while @x8<=(SELECT COUNT(1) FROM #tmp_PS_SALUD_TRATAMIENTO)      
+     BEGIN      
+        SELECT       
+         @ID_NOMBRE_TRATAMIENTO=ID_NOMBRE_TRATAMIENTO      
+        FROM #tmp_PS_SALUD_TRATAMIENTO WHERE FILA=1  
+		
+		SELECT       
+         @ID_NOMBRE_TRATAMIENTO2=ID_NOMBRE_TRATAMIENTO      
+        FROM #tmp_PS_SALUD_TRATAMIENTO WHERE FILA=2  
+		
+	    SELECT       
+         @ID_NOMBRE_TRATAMIENTO3=ID_NOMBRE_TRATAMIENTO      
+        FROM #tmp_PS_SALUD_TRATAMIENTO WHERE FILA=3 
+      
+      SET @x8=@x8+1      
+     END   
+
+	 UPDATE ##tmp_ps_salud  SET 
+	       ID_NOMBRE=@ID_NOMBRE,  
+	       ID_NOMBRE2=@ID_NOMBRE2,
+		   ID_NOMBRE3=@ID_NOMBRE3,
+		   ID_NOMBRE_AYUDA_BIOMECANICA=@ID_NOMBRE_AYUDA_BIOMECANICA,  
+		   ID_NOMBRE_AYUDA_BIOMECANICA2=@ID_NOMBRE_AYUDA_BIOMECANICA2, 
+		   ID_NOMBRE_AYUDA_BIOMECANICA3=@ID_NOMBRE_AYUDA_BIOMECANICA3, 
+		   ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA=@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA,  
+		   ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2=@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2 ,
+		   ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3=@ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3 ,
+		   ID_NOMBRE_DIAGNOSTICO=@ID_NOMBRE_DIAGNOSTICO,  
+	       ID_NOMBRE_DIAGNOSTICO2=@ID_NOMBRE_DIAGNOSTICO2,
+		   ID_NOMBRE_DIAGNOSTICO3=@ID_NOMBRE_DIAGNOSTICO3,
+		   ID_NOMBRE_DISCAPACIDAD= @ID_NOMBRE_DISCAPACIDAD,
+	       ID_NOMBRE_DISCAPACIDAD2=@ID_NOMBRE_DISCAPACIDAD2,
+		   ID_NOMBRE_DISCAPACIDAD3=@ID_NOMBRE_DISCAPACIDAD3,
+	       ID_NOMBRE_ESTADO=  @ID_NOMBRE_ESTADO,
+	       ID_NOMBRE_ESTADO2= @ID_NOMBRE_ESTADO2,
+		   ID_NOMBRE_ESTADO3= @ID_NOMBRE_ESTADO3,
+	       ID_NOMBRE_EXAMEN=  @ID_NOMBRE_EXAMEN,
+	       ID_NOMBRE_RESULTADO= @ID_NOMBRE_RESULTADO,
+	       ID_NOMBRE_EXAMEN2= @ID_NOMBRE_EXAMEN2,
+	       ID_NOMBRE_RESULTADO2= @ID_NOMBRE_RESULTADO2,
+		   ID_NOMBRE_EXAMEN3= @ID_NOMBRE_EXAMEN2,
+	       ID_NOMBRE_RESULTADO3= @ID_NOMBRE_RESULTADO2,
+	       ID_NOMBRE_CONDICION= @ID_NOMBRE_CONDICION, 
+	       ID_NOMBRE_SUB_CONDICION= @ID_NOMBRE_SUB_CONDICION,
+	       ID_NOMBRE_CONDICION2= @ID_NOMBRE_CONDICION2,
+	       ID_NOMBRE_SUB_CONDICION2=@ID_NOMBRE_SUB_CONDICION2,
+		   ID_NOMBRE_CONDICION3= @ID_NOMBRE_CONDICION3,
+	       ID_NOMBRE_SUB_CONDICION3=@ID_NOMBRE_SUB_CONDICION3,
+	       ID_NOMBRE_TERAPIA= @ID_NOMBRE_TERAPIA,
+	       ID_NOMBRE_TERAPIA2=@ID_NOMBRE_TERAPIA2,
+		   ID_NOMBRE_TERAPIA3=@ID_NOMBRE_TERAPIA3,
+	       ID_NOMBRE_TRATAMIENTO= @ID_NOMBRE_TRATAMIENTO ,
+	       ID_NOMBRE_TRATAMIENTO2= @ID_NOMBRE_TRATAMIENTO2,
+		   ID_NOMBRE_TRATAMIENTO3= @ID_NOMBRE_TRATAMIENTO3   
+
+
+
+	 WHERE ID_INSTITUCION=@ID_INSTITUCION AND ID_BENEFICIARIO= @ID_BENEFICIARIO      
+     AND ID_SALUD=@ID_SALUD
+        
+    FETCH InsertSalud      
+    INTO       
+       @ID_INSTITUCION , 
+		@ID_BENEFICIARIO ,  
+		@ID_SALUD ,  
+		@NOMBRECOMPLETO ,  
+		@FECHA_INFORME ,  
+		@ID_PERIODO,  
+		@COMENTARIOS ,  
+		@ESTADO ,  
+		@HEMOGLOBINA,  
+		@HEMOGLOBINA_RESULTADO,  
+		@ID_AYUDA_MEDICA,  
+		@ID_DESCARTE_SEROLOGICO,  
+		@ID_DESCARTE_TBC,  
+		@ID_TRATAMIENTO_ANEMIA,  
+		@ID_HTA,  
+		@ID_TBC,  
+		@ID_DIABETES,  
+		@ID_COGNITIVO,  
+		@ID_AFECTIVO,  
+		@ID_OSTEOARTROSIS,  
+		@NOMBRE,  
+		@ID_PROGRAMA,  
+		@esNuevo,  
+		@NOMBRE_AYUDA_MEDICA ,  
+		@NOMBRE_COGNITIVO ,  
+		@NOMBRE_AFECTIVO,  
+		@EVALUADO ,  
+		@OTRAS_ENFERMEDADES,
+		@CANTIDAD 
+      
+ END      
+ CLOSE InsertSalud      
+    DEALLOCATE InsertSalud      
+      
+  
+
+ SELECT * 
+ FROM(
+  SELECT 
+        ID_INSTITUCION , 
+		ID_BENEFICIARIO ,  
+		ID_SALUD ,  
+		NOMBRECOMPLETO ,  
+		FECHA_INFORME,  
+		ID_PERIODO,  
+		COMENTARIOS ,  
+		ESTADO ,  
+		HEMOGLOBINA,  
+		HEMOGLOBINA_RESULTADO,  
+		ID_AYUDA_MEDICA,  
+		ID_DESCARTE_SEROLOGICO,  
+		ID_DESCARTE_TBC,  
+		ID_TRATAMIENTO_ANEMIA,  
+		ID_HTA,  
+		ID_TBC,  
+		ID_DIABETES,  
+		ID_COGNITIVO,  
+		ID_AFECTIVO,  
+		ID_OSTEOARTROSIS,  
+		NOMBRE,  
+		ID_PROGRAMA,  
+		esNuevo,  
+		NOMBRE_AYUDA_MEDICA ,  
+		NOMBRE_COGNITIVO ,  
+		NOMBRE_AFECTIVO,  
+		EVALUADO ,  
+		OTRAS_ENFERMEDADES,
+		CANTIDAD,
+		
+		isnull(ID_NOMBRE,'') ID_NOMBRE,  
+	       isnull(ID_NOMBRE2,'') ID_NOMBRE2,  
+		   isnull(ID_NOMBRE3,'') ID_NOMBRE3, 
+		   isnull(ID_NOMBRE_AYUDA_BIOMECANICA,  '') ID_NOMBRE_AYUDA_BIOMECANICA,  
+		   isnull(ID_NOMBRE_AYUDA_BIOMECANICA2, '') ID_NOMBRE_AYUDA_BIOMECANICA2,  
+		   isnull(ID_NOMBRE_AYUDA_BIOMECANICA3, '') ID_NOMBRE_AYUDA_BIOMECANICA3,  
+		   isnull(ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA, '') ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA,   
+		   isnull(ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2 ,'') ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA2,  
+		   isnull(ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3 ,'')ID_NOMBRE_ESTADO_AYUDA_BIOMECANICA3,  
+		   isnull(ID_NOMBRE_DIAGNOSTICO,'') ID_NOMBRE_DIAGNOSTICO,    
+	       isnull(ID_NOMBRE_DIAGNOSTICO2,'') ID_NOMBRE_DIAGNOSTICO2,  
+		   isnull(ID_NOMBRE_DIAGNOSTICO3,'') ID_NOMBRE_DIAGNOSTICO3,  
+		   isnull(ID_NOMBRE_DISCAPACIDAD,'') ID_NOMBRE_DISCAPACIDAD,  
+	       isnull(ID_NOMBRE_DISCAPACIDAD2,'') ID_NOMBRE_DISCAPACIDAD2,  
+		   isnull(ID_NOMBRE_DISCAPACIDAD3,'') ID_NOMBRE_DISCAPACIDAD3, 
+	       isnull(ID_NOMBRE_ESTADO,'') ID_NOMBRE_ESTADO,  
+	       isnull(ID_NOMBRE_ESTADO2,'') ID_NOMBRE_ESTADO2,  
+		   isnull(ID_NOMBRE_ESTADO3,'') ID_NOMBRE_ESTADO3,  
+	       isnull(ID_NOMBRE_EXAMEN,'') ID_NOMBRE_EXAMEN,  
+	       isnull(ID_NOMBRE_RESULTADO,'') ID_NOMBRE_RESULTADO,  
+	       isnull(ID_NOMBRE_EXAMEN2,'') ID_NOMBRE_EXAMEN2,  
+	       isnull(ID_NOMBRE_RESULTADO2,'') ID_NOMBRE_RESULTADO2,  
+		   isnull(ID_NOMBRE_EXAMEN3,'') ID_NOMBRE_EXAMEN3,  
+	       isnull(ID_NOMBRE_RESULTADO3,'') ID_NOMBRE_RESULTADO3,  
+	       isnull(ID_NOMBRE_CONDICION, '') ID_NOMBRE_CONDICION,  
+	       isnull(ID_NOMBRE_SUB_CONDICION,'') ID_NOMBRE_SUB_CONDICION,  
+	       isnull(ID_NOMBRE_CONDICION2,'') ID_NOMBRE_CONDICION2,  
+	       isnull(ID_NOMBRE_SUB_CONDICION2,'') ID_NOMBRE_SUB_CONDICION2,  
+		   isnull(ID_NOMBRE_CONDICION3,'') ID_NOMBRE_CONDICION3,  
+	       isnull(ID_NOMBRE_SUB_CONDICION3,'') ID_NOMBRE_SUB_CONDICION3,  
+
+		    isnull( ID_NOMBRE_TERAPIA,'') ID_NOMBRE_TERAPIA,
+	        isnull( ID_NOMBRE_TERAPIA2,'') ID_NOMBRE_TERAPIA2,
+		    isnull( ID_NOMBRE_TERAPIA3,'') ID_NOMBRE_TERAPIA3,
+	        isnull(ID_NOMBRE_TRATAMIENTO,'') ID_NOMBRE_TRATAMIENTO,
+	        isnull(ID_NOMBRE_TRATAMIENTO2,'') ID_NOMBRE_TRATAMIENTO2,
+		    isnull(ID_NOMBRE_TRATAMIENTO3,'') ID_NOMBRE_TRATAMIENTO3,
+	 
+		ROW_NUMBER() OVER(ORDER BY NOMBRECOMPLETO ASC) AS sec  
+   FROM ##tmp_ps_salud) tt
+   where tt.sec between @pNumPag+1 and (@pNumPag+1+@pNumReg)
+  
+ END  

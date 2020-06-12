@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrcapacitacion.solicitudListarContar">
+    	<![CDATA[
+         select	count(1)
+		from hr_capacitacion cap 
+	             LEFT JOIN hr_cursodescripcion cud 
+	                    ON ( cap.curso = cud.curso ) 
+				LEFT JOIN hr_centroestudios AS cee 
+	                    ON cap.centrocapacitacion = cee.centro 
+	            LEFT JOIN personamast AS pso 
+	                    ON cap.EMPLEADOSOLICITANTE = pso.persona 
+				LEFT JOIN MA_MiscelaneosDetalle ES
+						on es.AplicacionCodigo='HR' and ES.CodigoTabla = 'ESTCAPACIT' AND ES.CodigoElemento = CAP.Estado
+				left join MonedaMast mon
+						on cap.Moneda=mon.MonedaCodigo
+				LEFT JOIN MA_MiscelaneosDetalle TC
+						on TC.AplicacionCodigo='HR' and TC.CodigoTabla = 'TIPOCAPA' AND TC.CodigoElemento = CAP.Tipo
+		where 
+		--cap.Solicitante = ISNULL(:p_id_solicitante, cap.Solicitante) and
+		ISNULL(cap.estado, '0') = ISNULL(:p_id_estado, ISNULL(cap.estado, '0'))
+		and ISNULL(cap.Curso, '0') = ISNULL(:p_idCurso, ISNULL(cap.Curso, '0'))
+		--and cap.FechaDesde >= isnull(:p_desde, '1753-01-01') and 
+			--cap.FechaDesde <= isnull(:p_hasta, '9999-12-30')
+		AND	((CAST(isnull(cap.FechaDesde, '1980-01-01') AS DATE)  between isnull(null, '1980-01-01') and
+		isnull(null, '2980-12-31')))
+		and (:p_institucion is null or (
+			select SUM(cantidades.c) from (
+			select COUNT(1)c from HR_Capacitacion_Beneficiario bene where bene.Capacitacion = cap.Capacitacion and bene.CompanyOwner = cap.CompanyOwner and bene.ID_INSTITUCION = :p_institucion
+			union all
+			select COUNT(1) from HR_Capacitacion_Empleado bene where bene.Capacitacion = cap.Capacitacion and bene.CompanyOwner = cap.CompanyOwner and bene.ID_INSTITUCION = :p_institucion) cantidades
+		)>1)
+		]]>
+	</sql-query>
+
+	<sql-query name="hrcapacitacion.solicitudListarPaginacion">
+    	<![CDATA[
+select	cap.CompanyOwner as "comapnyowner"
+			,cap.Capacitacion as "capacitacionId"		 
+			,cap.curso as "cursoId"
+			,cud.Descripcion as "cursoNombre"
+			,cast(cap.TipoCurso as varchar) as "tipocursoId"
+			,(case cap.TipoCurso when'I' THEN 'Interno' WHEN 'E' THEN 'Externo' when 'M' then 'Mixto' else '' end) as "tipocursoNombre"
+			,cap.EmpleadoSolicitante as "solicitanteId"
+			,cast(pso.NombreCompleto as varchar) as "solicitanteNombre"
+			,Convert(Varchar(10),cap.FechaSolicitud,103) as "fechaSolicitud"
+			,Isnull(null, cap.fechaDesde) AS "fechaDesde"
+	        ,Isnull(null, cap.fechaHasta) AS "fechaHasta"
+			,cap.Moneda as "monedaId"
+			,mon.Sigla as "monedaSigla"
+			,cast(cap.CostoTotalEstimadoLocal as numeric(20,4))  as "costoTotalEstimadoLocal"
+			,cast(cap.CostoTotalEstimadoExtranjero as numeric(20,4)) as "costoTotalEstimadoExtranjero"
+			,cast(cap.Estado as varchar)	as "estadoId"	
+			,ES.DescripcionLocal as "estadoNombre", ROW_NUMBER() OVER (ORDER BY cap.Capacitacion desc) AS Seq	
+		from hr_capacitacion cap 
+	             LEFT JOIN hr_cursodescripcion cud 
+	                    ON ( cap.curso = cud.curso ) 
+				LEFT JOIN hr_centroestudios AS cee 
+	                    ON cap.centrocapacitacion = cee.centro 
+	            LEFT JOIN personamast AS pso 
+	                    ON cap.EMPLEADOSOLICITANTE = pso.persona 
+				LEFT JOIN MA_MiscelaneosDetalle ES
+						on es.AplicacionCodigo='HR' and ES.CodigoTabla = 'ESTCAPACIT' AND ES.CodigoElemento = CAP.Estado
+				left join MonedaMast mon
+						on cap.Moneda=mon.MonedaCodigo
+				LEFT JOIN MA_MiscelaneosDetalle TC
+						on TC.AplicacionCodigo='HR' and TC.CodigoTabla = 'TIPOCAPA' AND TC.CodigoElemento = CAP.Tipo
+		where 
+		--cap.Solicitante = ISNULL(:p_id_solicitante, cap.Solicitante) and
+		ISNULL(cap.estado, '0') = ISNULL(:p_id_estado, ISNULL(cap.estado, '0'))
+		and ISNULL(cap.Curso, '0') = ISNULL(:p_idCurso, ISNULL(cap.Curso, '0'))
+		and cap.FechaDesde >= isnull(:p_desde, '1753-01-01') and 
+			cap.FechaDesde <= isnull(:p_hasta, '9999-12-30')
+		and (:p_institucion is null or (
+			select SUM(cantidades.c) from (
+			select COUNT(1)c from HR_Capacitacion_Beneficiario bene where bene.Capacitacion = cap.Capacitacion and bene.CompanyOwner = cap.CompanyOwner and bene.ID_INSTITUCION = :p_institucion
+			union all
+			select COUNT(1) from HR_Capacitacion_Empleado bene where bene.Capacitacion = cap.Capacitacion and bene.CompanyOwner = cap.CompanyOwner and bene.ID_INSTITUCION = :p_institucion) cantidades
+		)>1)
+		]]>
+	</sql-query>
+	<sql-query name="hrcapacitacion.generarCodigo">
+		select ISNULL(max(cast(SUBSTRING(Capacitacion,len( :unidad )+1,len(Capacitacion)) as int)) +1,0)
+		FROM HR_Capacitacion WHERE LEFT(CAPACITACION,len( :unidad )) = :unidad
+	</sql-query>
+	<sql-query name="hrcapacitacion.listarParticipantes">
+		select B.NOMBRECOMPLETO, C.NOMBRE, CASE WHEN FLAG_ASISTIO = 's' THEN 'Si' else 'No'end asistio, d.DescripcionLocal, e.DescripcionLocal, A.Comentario
+		from HR_Capacitacion_Beneficiario A 
+		JOIN sgseguridadsys.PS_ENTIDAD B ON A.ID_BENEFICIARIO = B.ID_ENTIDAD
+		JOIN sgseguridadsys.PS_INSTITUCION C ON A.ID_INSTITUCION = C.ID_INSTITUCION
+		left join MA_MiscelaneosDetalle d on d.CodigoTabla = 'RENDCAPPA' and d.AplicacionCodigo = 'HR' and d.CodigoElemento = A.ID_RENDIEMIENTO
+		left join MA_MiscelaneosDetalle e on e.CodigoTabla = 'PARTCAPPA' and e.AplicacionCodigo = 'HR' and e.CodigoElemento = A.ID_PARTICIPACION
+		WHERE A.Capacitacion = :p_capacitacion AND A.CompanyOwner = :p_compania
+		union all 
+		select B.NOMBRECOMPLETO, C.NOMBRE, CASE WHEN FLAG_ASISTIO = 's' THEN 'Si' else 'No'end asistio, d.DescripcionLocal, e.DescripcionLocal, A.Comentario 
+		from HR_Capacitacion_Empleado A 
+		JOIN sgseguridadsys.PS_ENTIDAD B ON A.ID_EMPLEADO = B.ID_ENTIDAD
+		JOIN sgseguridadsys.PS_INSTITUCION C ON A.ID_INSTITUCION = C.ID_INSTITUCION
+		left join MA_MiscelaneosDetalle d on d.CodigoTabla = 'RENDCAPPA' and d.AplicacionCodigo = 'HR' and d.CodigoElemento = A.ID_RENDIEMIENTO
+		left join MA_MiscelaneosDetalle e on e.CodigoTabla = 'PARTCAPPA' and e.AplicacionCodigo = 'HR' and e.CodigoElemento = A.ID_PARTICIPACION
+		WHERE A.Capacitacion = :p_capacitacion AND A.CompanyOwner = :p_compania
+	</sql-query>
+	<sql-query name="hrcapacitacion.listarParametros">
+		begin
+			declare @compania varchar(20) = :p_compania
+			declare @capacitacion varchar(20) = :p_capacitacion
+			declare @curso int
+			declare @tipo varchar(1)
+			declare @desde date
+			declare @hasta date
+			declare @centro varchar(10)
+			declare @responsable  varchar(100)
+			declare @aula varchar(100)
+			declare @comentario varchar(300)
+
+			select 
+				@curso = Curso,  
+				@tipo = tipoCurso,
+				@desde = FechaDesde,
+				@hasta = FechaHasta,
+				@centro = centrocapacitacion,
+				@responsable = Expositor
+				from HR_Capacitacion where Capacitacion = @capacitacion and companyowner = @compania
+			
+			select 'p_curso', b.Descripcion from  HR_CursoDescripcion b where curso = @curso
+			union all 
+			select 'p_tipo', case when @tipo = 'I' then 'Interno' else 'Externo'end
+			union all
+			select 'p_horario', convert(varchar, @desde, 3)	+  '  -  '+convert(varchar, @hasta, 3)	
+			union all
+			select 'p_centro',Descripcion from HR_CentroEstudios where Centro = @centro
+			union all
+			select 'p_responsable', @responsable
+			union all
+			select 'p_aula', @aula
+			union all
+			select 'p_comentario', @comentario
+		end
+	</sql-query>
+	<sql-query name="hrcapacitacion.listarCorreos">
+		select t.correo from (
+		select (select CorreoInterno from EmpleadoMast where Empleado = a.Empleado) as correo from HR_EmpleadoCapacitacion a 
+		where a.Capacitacion = :p_capacitacion and a.CompanyOwner = :p_compania AND 1=2
+		union all
+		select (select correo1 from sgseguridadsys.PS_ENTIDAD b where b.ID_ENTIDAD= a.ID_EMPLEADO) from HR_Capacitacion_Empleado a 
+		where a.Capacitacion = :p_capacitacion and a.CompanyOwner = :p_compania
+		union all
+		select (select correo1 from sgseguridadsys.PS_ENTIDAD b where b.ID_ENTIDAD= a.ID_BENEFICIARIO)  from HR_Capacitacion_beneficiario a 
+		where a.Capacitacion = :p_capacitacion and a.CompanyOwner = :p_compania AND 1=2
+		) as t
+		where t.correo is not null
+	</sql-query>
+	
+	<sql-query name="hrcapacitacion.prevencionsaludcabecera">
+        [sgseguridadsys].[SNp_PS_ListarReportePrevencionSaludCabecera]
+		 :p_IdInstitucion,
+         :p_fechainicio,
+         :p_fechafin
+  </sql-query>
+  <sql-query name="hrcapacitacion.prevencionsaluddetalle">
+        [sgseguridadsys].[SNp_PS_ListarReportePrevencionSaludDetalleAsistencia]
+		 :p_IdInstitucion,
+         :p_fechainicio,
+         :p_fechafin
+  </sql-query>
+</hibernate-mapping>

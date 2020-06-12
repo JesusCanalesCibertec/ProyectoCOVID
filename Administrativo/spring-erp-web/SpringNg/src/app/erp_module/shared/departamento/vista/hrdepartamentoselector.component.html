@@ -1,0 +1,75 @@
+
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: auto;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE UNIDAD DE TRABAJO" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size" width="800">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <input pInputText type="text" [(ngModel)]="filtro.codigo" />
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2 ">
+                    <label>Descripción</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-5">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombre" />
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Estado</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [options]="lstEstados" [(ngModel)]="filtro.estado" [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-9 ui-md-10 ui-lg-10"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-save" type="button" (click)="buscar()" class="ui-button"></button>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable #dtCursos [responsive]="true" [rows]="registrosPorPagina" [paginator]="true" emptyMessage="No se encontraron registros"
+                    selectionMode="single" (onRowDblclick)="onRowSelect($event)" [value]="lstJefaturas">
+                    <p-column header="Código" field="departamento" [style]="{'width':'70px'}"></p-column>
+                    <p-column header="Descripción" field="descripcion"></p-column>
+                    <p-column header="Estado" field="estado" [style]="{'width':'70px'}"></p-column>
+                </p-dataTable>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" scrollable="true" scrollHeight="228px" [value]="lstSeleccionada">
+                    <p-column header="Código" field="departamento" [style]="{'width':'70px'}"></p-column>
+                    <p-column header="Descripción" field="descripcion"></p-column>
+                    <p-column header="Acción" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <i class="fa fa-times seleccionable" title="Quitar" (click)="quitarSeleccionado(tx)"></i>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Aceptar" icon="fa fa-check" type="button" class="ui-button" (click)="aceptar()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-8"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+    </p-dialog>
+</div>

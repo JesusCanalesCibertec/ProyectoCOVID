@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="bpauditoria.listarContar"><![CDATA[
+         select count(1) from sgseguridadsys.bp_auditoria au
+				 inner join PersonaMast per
+					on au.id_persona = per.persona
+				 left join ac_sucursal suc
+					on au.id_sucursal = suc.sucursal
+				 left join AC_CostCenterMst cc
+					on au.ID_CENTROCOSTO = cc.CostCenter
+				left join companyowner com
+					on au.ID_COMPANIASOCIO = com.companyowner
+				left join MA_MiscelaneosDetalle de
+					on au.ID_FUNCIONALIDAD = de.CodigoElemento and de.codigotabla = 'ACCAUDIT' and de.AplicacionCodigo = 'SY'
+			where 1=1
+			and au.ID_PERSONA = isnull( :p_id_empleado ,au.ID_PERSONA)
+			and au.ID_PERIODO = isnull( :p_periodo ,au.ID_PERIODO)
+			and au.ID_COMPANIASOCIO = isnull( :p_id_companiasocio ,au.ID_COMPANIASOCIO)
+			and au.ID_PROCESO = isnull( :p_id_proceso ,au.ID_PROCESO)
+			and au.ID_FUNCIONALIDAD = isnull( :p_id_funcionalidad ,au.ID_FUNCIONALIDAD)
+
+			and isnull(au.ID_TIPO_PLANILLA,'TTPP') = isnull( :p_id_tipoplanilla ,ISNULL(au.ID_TIPO_PLANILLA,'TTPP'))
+			and ISNULL(au.ID_CENTROCOSTO,'CCCC') = isnull( :p_id_centrocosto ,ISNULL(au.ID_CENTROCOSTO,'CCCC'))
+			and ISNULL(au.ID_SUCURSAL,'SUCSUC') = isnull( :p_id_sucursal ,ISNULL(au.ID_SUCURSAL,'SUCSUC'))
+			and ( (:p_desde is null ) or ( AU.CREACION_FECHA >= :p_desde and AU.CREACION_FECHA<= :p_hasta ) )
+			order by 1 
+    ]]></sql-query>
+    
+    <sql-query name="bpauditoria.listarPaginacion"><![CDATA[
+         select substring(au.id_periodo,0, 7) as "periodo"
+				,au.id_companiasocio as "companiaSocioId"
+				,com.description as "companiaSocioNombre"
+				,au.id_centrocosto AS "centroCostoId"
+				,cc.LocalName AS "centroCostoNombre"
+				,AU.ID_SUCURSAL AS "sucursalId"
+				,suc.DescripcionLocal as "sucursalNombre"
+				,au.ID_PROCESO as "procesoId"
+				,'' as "funcionalidadId"
+				,'' as "funcionalidadNombre"
+				,au.id_persona as "empleadoId"
+				,cast(per.nombrecompleto as varchar) as "empleadoNombre"
+				,per.documento as "empleadoDocumento",  replace(convert(NVARCHAR,au.CREACION_FECHA, 127), ' ', '/') f, 
+
+de.DescripcionLocal,
+(select top 1 descripcion from PR_TipoPlanilla where tipoplanilla in (select tipoplanilla from empleadomast where empleado  = per.persona and companiasocio = au.id_companiasocio)) as "nombrePlanilla",
+ROW_NUMBER() OVER (ORDER BY au.id_periodo) AS Seq
+         	from sgseguridadsys.bp_auditoria au
+				 inner join PersonaMast per
+					on au.id_persona = per.persona
+				 left join ac_sucursal suc
+					on au.id_sucursal = suc.sucursal
+				 left join AC_CostCenterMst cc
+					on au.ID_CENTROCOSTO = cc.CostCenter
+				left join companyowner com
+					on au.ID_COMPANIASOCIO = com.companyowner
+				left join MA_MiscelaneosDetalle de
+					on au.ID_PROCESO = de.CodigoElemento and de.codigotabla = 'ACCAUDIT' and de.AplicacionCodigo = 'SY'
+				
+			where 1=1
+			and au.ID_PERSONA = isnull( :p_id_empleado ,au.ID_PERSONA)
+			and au.ID_PERIODO = isnull( :p_periodo ,au.ID_PERIODO)
+			and au.ID_COMPANIASOCIO = isnull( :p_id_companiasocio ,au.ID_COMPANIASOCIO)
+			and au.ID_PROCESO = isnull( :p_id_proceso ,au.ID_PROCESO)		
+
+			and isnull(au.ID_TIPO_PLANILLA,'TTPP') = isnull( :p_id_tipoplanilla ,ISNULL(au.ID_TIPO_PLANILLA,'TTPP'))
+			and ISNULL(au.ID_CENTROCOSTO,'CCCC') = isnull( :p_id_centrocosto ,ISNULL(au.ID_CENTROCOSTO,'CCCC'))
+			and ISNULL(au.ID_SUCURSAL,'SUCSUC') = isnull( :p_id_sucursal ,ISNULL(au.ID_SUCURSAL,'SUCSUC'))
+			and ( (:p_desde is null ) or ( AU.CREACION_FECHA >= :p_desde and AU.CREACION_FECHA<= :p_hasta ) )
+ 		
+    ]]></sql-query>
+</hibernate-mapping>

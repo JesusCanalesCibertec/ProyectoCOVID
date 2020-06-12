@@ -1,0 +1,99 @@
+<div class="ui-fluid">
+    <p-dialog header="{{beneficiario}} : Último Ingreso {{beanPsBeneficiarioIngreso.fechaIngreso | date: 'dd/MM/yyyy'}}"
+        [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size" [style]="{'max-width':'600px','left':'15px', 'right':'15px', 'margin-top':'10px'}">
+
+
+
+        <div class="ui-g">
+            <div class="ui-g-6 ui-md-4 ui-lg-3">
+                <label>Fecha de Egreso
+                </label>
+            </div>
+            <div class="ui-g-6 ui-md-7 ui-lg-4">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true"
+                    [(ngModel)]="beanPsBeneficiarioIngreso.fechaEgreso"  yearRange="1900:2050 " appendTo="body"></p-calendar>
+            </div>
+
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <label>Motivo de egreso<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-7 ui-lg-8">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngreso.idMotivoEgreso"
+                    (onChange)='cargar()' [disabled]= "estado=='TEMPORAL'" [options]="listaMotivos"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <label>Diagnóstico de egreso<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-10 ui-md-7 ui-lg-8">
+                <p-dropdown [style]="{'width':'100%'}" [autoWidth]="false" [disabled]="beanPsBeneficiarioIngreso.idMotivoEgreso == 'DECE' && estado=='ACTIVO'"
+                    [(ngModel)]="beanPsBeneficiarioIngresoDiagnostico.idDiagnostico" [options]="listaDiagnosticos"></p-dropdown>
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                <button type="button " [disabled]="beanPsBeneficiarioIngreso.idMotivoEgreso == 'DECE' && estado=='ACTIVO'" pButton icon="fa fa-plus"
+                    (click)="agregarDiagnostico()"></button>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p-dataTable [responsive]="true" [scrollable]="true" scrollHeight="90px" [value]="beanPsBeneficiarioIngreso.listaDiagnostico"
+                    emptyMessage="No se encontraron registros">
+                    <p-column header="Número" field="idDiagnostico" styleClass="textoCentrado" [style]="{'width':'60px'}"></p-column>
+                    <!---->
+                    <p-column header="Diagnóstico de egreso" field="auxDiagnostico" [style]="{'width':'300px'}"></p-column>
+                    <p-column header="" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar">
+                                    <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarMotivo(tx.idDiagnostico)"></i>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <label>Comentario Adicionales de Egreso</label>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <textarea pInputTextarea style="width:100%; resize:none" [rows]="4" [(ngModel)]="beanPsBeneficiarioIngreso.comentariosEgreso"
+                    maxlength="500"></textarea>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button  pButton type="button" icon="fa fa-save"
+                    [disabled]="motivo == 'DECE'&&estado!='TEMPORAL'" style="width:100%" label="Finalizar" (click)="guardar('FIN')"></button>
+            </div>
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button *ngIf="motivo == 'DECE'&&estado=='ACTIVO'" pButton type="button" icon="fa fa-save" style="width:100%"
+                    label="Preparar" (click)="guardar('PRE')"></button>
+            </div>
+            <div class="ui-g-1 ui-md-4 ui-lg-4">
+
+            </div>
+
+
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+            </div>
+        </div>
+
+
+    </p-dialog>
+
+</div>

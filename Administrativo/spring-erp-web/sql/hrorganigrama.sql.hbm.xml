@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrOrganigrama
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrorganigrama.listar">
+    	<![CDATA[
+         select det.companyowner as "CompaniaSocio"
+				,det.ano as "Anio"
+				,det.UNIDADNEGOCIO as "UnidadNegocio"
+				,det.SECUENCIA as "Secuencia"
+				,cast(det.tipo as varchar) as "Tipo"
+				,det.CodigoPuesto as "Codigo"
+				,det.orden as "Orden"
+				,(det.Descripcion) as "Descripcion"
+				,cast(det.PRINCIPAL as varchar) as "Principal"
+				,det.NUMEROESTANDAR as "Vacantes"
+				,(SELECT Isnull(Count(*), 0) 
+				  FROM   hr_organigrama_puestos opo
+				  WHERE      opo.companyowner = det.companyowner 
+						 AND opo.unidadnegocio = det.UNIDADNEGOCIO 
+						 AND opo.ano = det.ano 
+						 AND opo.secuencia = det.SECUENCIA
+						 AND opo.codigopuesto = det.CodigoPuesto
+						 AND opo.orden >= det.orden 
+                      	 AND opo.orden LIKE det.orden + '%'  ) as "VacantesOcupados"
+				,CASE Len(det.orden) 
+				  WHEN '4' THEN 0 
+				  WHEN '9' THEN 1 
+				  WHEN '14' THEN 2 
+				  WHEN '19' THEN 3 
+				  WHEN '24' THEN 4 
+				  WHEN '29' THEN 5 
+				  WHEN '34' THEN 6 
+				  WHEN '39' THEN 7 
+				  WHEN '44' THEN 8 
+				  WHEN '49' THEN 9 
+				  END AS "Nivel", det.padre padre, det.UNIDADORGANIGRAMA_DESC, 
+          det.UNIDADORGANIGRAMA_COD, ROW_NUMBER() OVER (ORDER BY det.Descripcion) AS Seq
+		from
+		(
+				select o.companyowner, o.ano, o.UNIDADNEGOCIO, o.SECUENCIA, o.TIPO,P.CodigoPuesto,o.orden, p.Descripcion, o.PRINCIPAL 
+				,o.NUMEROESTANDAR , null padre, null nompadre, 
+        (SELECT DESCRIPCION FROM HR_POSICIONEMPRESA WHERE COMPANYOWNER = O.COMPANYOWNER AND CODIGOPOSICION IN (SELECT MAX(AA.CODIGO) FROM HR_ORGANIGRAMA AA WHERE AA.COMPANYOWNER = O.COMPANYOWNER AND AA.ANO = O.ANO AND AA.UNIDADNEGOCIO = O.UNIDADNEGOCIO AND AA.SECUENCIA = O.SECUENCIA
+AND AA.ORDEN = CASE WHEN LEN(O.ORDEN) > 4 THEN SUBSTRING(O.ORDEN, 1, LEN(O.ORDEN) - 5) ELSE '0000' END)) AS UNIDADORGANIGRAMA_DESC,
+        (SELECT CodigoPosicion FROM HR_POSICIONEMPRESA WHERE COMPANYOWNER = O.COMPANYOWNER AND CODIGOPOSICION IN (SELECT MAX(AA.CODIGO) FROM HR_ORGANIGRAMA AA WHERE AA.COMPANYOWNER = O.COMPANYOWNER AND AA.ANO = O.ANO AND AA.UNIDADNEGOCIO = O.UNIDADNEGOCIO AND AA.SECUENCIA = O.SECUENCIA
+AND AA.ORDEN = CASE WHEN LEN(O.ORDEN) > 4 THEN SUBSTRING(O.ORDEN, 1, LEN(O.ORDEN) - 5) ELSE '0000' END)) AS UNIDADORGANIGRAMA_COD
+				from HR_ORGANIGRAMA o left join hr_puestoempresa p on o.CODIGO=p.CodigoPuesto
+				where o.companyowner = :p_id_companiasocio and o.ano = :p_anio and o.SECUENCIA = :p_secuencia 
+				and o.TIPO=2 and p.descripcion like '%'+isnull(:p_descripcion, '')+'%' and o.CODIGO = isnull(:p_codigo,o.CODIGO)
+		 ) det
+		]]> 
+    </sql-query>
+
+  <sql-query name="hrorganigrama.listarCantidadUbicaciones">
+    SELECT
+    CASE WHEN LEN(A.ORDEN) > 4 THEN SUBSTRING(A.ORDEN, 1, LEN(A.ORDEN) - 5) ELSE '0000' END AS UNIDADORGANIGRAMA,
+    (SELECT DESCRIPCION FROM HR_POSICIONEMPRESA WHERE COMPANYOWNER = A.COMPANYOWNER AND CODIGOPOSICION IN (SELECT MAX(AA.CODIGO) FROM HR_ORGANIGRAMA AA WHERE AA.COMPANYOWNER = A.COMPANYOWNER AND AA.ANO = A.ANO AND AA.UNIDADNEGOCIO = A.UNIDADNEGOCIO AND AA.SECUENCIA = A.SECUENCIA
+    AND AA.ORDEN = CASE WHEN LEN(A.ORDEN) > 4 THEN SUBSTRING(A.ORDEN, 1, LEN(A.ORDEN) - 5) ELSE '0000' END)) AS UNIDADORGANIGRAMA_DESC,
+    A.CODIGO AS CODIGO,
+    B.DESCRIPCION AS CODIGO_DESC,
+    A.ORDEN AS ORDEN,
+
+
+    ISNULL(A.NUMEROESTANDAR,0) vacantes,
+
+    (SELECT Isnull(Count(*), 0)
+    FROM   hr_organigrama_puestos opo
+    WHERE      opo.companyowner = :p_id_companiasocio
+    AND opo.unidadnegocio = 'DEFA'
+    AND opo.ano = :p_anio
+    AND opo.secuencia = :p_secuencia
+    AND opo.codigopuesto = A.CODIGO
+    AND opo.orden >= A.orden
+    AND opo.orden LIKE A.orden + '%'  ) as "VacantesOcupados",
+    A.COMPANYOWNER,
+    (
+    select TOP 1
+    (
+    SELECT
+    CodigoPosicion
+    FROM
+    HR_POSICIONEMPRESA
+    WHERE
+    COMPANYOWNER = O.COMPANYOWNER
+    AND CODIGOPOSICION IN
+    (
+    SELECT
+    MAX(AA.CODIGO)
+    FROM
+    HR_ORGANIGRAMA AA
+    WHERE
+    AA.COMPANYOWNER = O.COMPANYOWNER
+    AND AA.ANO = O.ANO
+    AND AA.UNIDADNEGOCIO = O.UNIDADNEGOCIO
+    AND AA.SECUENCIA = O.SECUENCIA
+    AND AA.ORDEN = SUBSTRING(A.ORDEN, 1, LEN(A.ORDEN) - 5)
+    )
+    )
+
+    from
+    HR_ORGANIGRAMA o
+    left join
+    hr_puestoempresa p
+    on o.CODIGO = p.CodigoPuesto
+    where
+    o.companyowner = :p_id_companiasocio
+    and o.ano = :p_anio
+    and o.SECUENCIA = :p_secuencia
+    and o.CODIGO = isnull(A.CODIGO , o.CODIGO)
+    )  AS codigoPadre,
+
+    ROW_NUMBER() OVER (ORDER BY  A.ORDEN) AS Seq
+
+    FROM
+    HR_ORGANIGRAMA A
+    JOIN HR_PUESTOEMPRESA B ON B.CODIGOPUESTO = A.CODIGO AND A.TIPO = '2'
+    WHERE
+    A.COMPANYOWNER = :p_id_companiasocio
+    AND A.ANO = :p_anio
+    AND A.UNIDADNEGOCIO = 'DEFA'
+    AND A.SECUENCIA = :p_secuencia
+    AND A.CODIGO = :p_codigo
+    AND
+    (SELECT DESCRIPCION FROM HR_POSICIONEMPRESA WHERE COMPANYOWNER = A.COMPANYOWNER AND CODIGOPOSICION IN (SELECT MAX(AA.CODIGO) FROM HR_ORGANIGRAMA AA WHERE AA.COMPANYOWNER = A.COMPANYOWNER AND AA.ANO = A.ANO AND AA.UNIDADNEGOCIO = A.UNIDADNEGOCIO AND AA.SECUENCIA = A.SECUENCIA
+    AND AA.ORDEN = CASE WHEN LEN(A.ORDEN) > 4 THEN SUBSTRING(A.ORDEN, 1, LEN(A.ORDEN) - 5) ELSE '0000' END))like + '%' + ISNULL(:p_descripcion, Descripcion) + '%'
+  </sql-query>
+
+  <sql-query name="hrorganigrama.contarCantidadUbicaciones">
+    SELECT
+    COUNT(1)
+    FROM
+    HR_ORGANIGRAMA A
+    JOIN HR_PUESTOEMPRESA B ON B.CODIGOPUESTO = A.CODIGO AND A.TIPO = '2'
+    WHERE
+    A.COMPANYOWNER = :p_id_companiasocio
+    AND A.ANO = :p_anio
+    AND A.UNIDADNEGOCIO = 'DEFA'
+    AND A.SECUENCIA = :p_secuencia
+    AND A.CODIGO = :p_codigo
+    AND
+    (SELECT DESCRIPCION FROM HR_POSICIONEMPRESA WHERE COMPANYOWNER = A.COMPANYOWNER AND CODIGOPOSICION IN (SELECT MAX(AA.CODIGO) FROM HR_ORGANIGRAMA AA WHERE AA.COMPANYOWNER = A.COMPANYOWNER AND AA.ANO = A.ANO AND AA.UNIDADNEGOCIO = A.UNIDADNEGOCIO AND AA.SECUENCIA = A.SECUENCIA
+    AND AA.ORDEN = CASE WHEN LEN(A.ORDEN) > 4 THEN SUBSTRING(A.ORDEN, 1, LEN(A.ORDEN) - 5) ELSE '0000' END))like + '%' + ISNULL(:p_descripcion, Descripcion) + '%'
+  </sql-query>
+
+
+  <sql-query name="hrorganigrama.obteneranioOrganigrama">
+    SELECT MAX(ANO)
+    FROM HR_ORGANIGRAMA_HIST_CAB
+    WHERE COMPANYOWNER = :p_compania
+    AND UNIDADNEGOCIO = :p_unidad_negocio
+  </sql-query>
+
+  <sql-query name="hrorganigrama.obtenerSecuenciaOrganigrama">
+    SELECT MAX(SECUENCIA)
+    FROM HR_ORGANIGRAMA_HIST_CAB
+    WHERE COMPANYOWNER = :p_compania
+    AND UNIDADNEGOCIO = :p_unidad_negocio
+    AND ANO = :p_anio
+  </sql-query>
+
+   <sql-query name="hrorganigrama.contar">
+    	<![CDATA[
+         select count(*)
+		      from
+		(
+				select o.companyowner, o.ano, o.UNIDADNEGOCIO, o.SECUENCIA, o.TIPO,P.CodigoPuesto,o.orden, p.Descripcion, o.PRINCIPAL 
+				,o.NUMEROESTANDAR , null padre
+				from HR_ORGANIGRAMA o left join hr_puestoempresa p on o.CODIGO=p.CodigoPuesto
+				where o.companyowner = :p_id_companiasocio and o.ano = :p_anio and o.SECUENCIA = :p_secuencia 
+				and o.TIPO=2 and p.descripcion like '%'+isnull(:p_descripcion, '')+'%' and o.CODIGO = isnull(:p_codigo,o.CODIGO)
+    ) det
+		]]> 
+    </sql-query>
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Estado de atención</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-7">
+            <p-dropdown [options]="estados" [disabled]="enabledEstado" [style]="{'width':'100%'}"
+                [(ngModel)]="proyecto.estadoatencion" [autoWidth]="false"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Fase de Gestión</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-7">
+            <p-dropdown [options]="gestiones" [disabled]="enabledEstado" [style]="{'width':'100%'}"
+                [(ngModel)]="proyecto.fasegestion" [autoWidth]="false"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Tipo de Ingeniería</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-7">
+            <p-dropdown [options]="tipos" [disabled]="" [style]="{'width':'100%'}" [(ngModel)]="proyecto.tipoanalisis"
+                [autoWidth]="false" (onChange)='cargarFasesIngenierias()'></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Fase de Ingeniería</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-7">
+            <p-dropdown [options]="ingenierias" [disabled]="" [(ngModel)]="proyecto.faseingenieria"
+                [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Avance planificado %</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-2">
+            <p-spinner [min]="0" type="text" [(ngModel)]="proyecto.avanceplan"></p-spinner>
+        </div>
+
+        <div class="ui-g-12 ui-md-4 ui-lg-3" style="color: crimson; font-weight: bold;">
+            <label>Avance Real %</label>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-2">
+            <p-spinner [min]="0" type="text" [(ngModel)]="proyecto.avancereal"></p-spinner>
+        </div>
+        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+            <label>Ruta</label>
+        </div>
+        <div class="ui-g-12 ui-md-8 ui-lg-7">
+            <input pInputText type="text" [(ngModel)]="proyecto.ruta" style="width:100%" [disabled]="true" />
+        </div>
+    </div>
+
+</div>

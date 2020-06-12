@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpprocesoconexionevento.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+     <sql-query name="bpprocesoconexionevento.filtro">
+     
+select
+	a.ID_PROCESO,
+	a.ID_VERSION,
+	a.ID_CONEXION,
+	a.ID_EVENTO,
+	b.NOMBRE,
+	ROW_NUMBER() OVER (ORDER BY b.NOMBRE ) AS Seq
+	from sgseguridadsys.BP_PROCESO_CONEXION_EVENTO a 
+			join sgseguridadsys.BP_MAE_EVENTO b on a.ID_EVENTO = b.ID_EVENTO
+															
+	where a.ID_PROCESO like '%' +  isnull(:p_IdProceso, '') + '%'
+	and ISNULL(a.ID_CONEXION, '123') = isnull(:p_IdConexion,ISNULL(a.ID_CONEXION, '123'))
+
+
+</sql-query>
+
+
+
+
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    	<![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+	</sql-query>
+   
+</hibernate-mapping>

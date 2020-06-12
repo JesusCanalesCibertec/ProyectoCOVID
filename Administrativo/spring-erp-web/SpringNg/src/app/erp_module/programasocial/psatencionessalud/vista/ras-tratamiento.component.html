@@ -1,0 +1,50 @@
+<div class="ui-fluid">
+    <p-dialog header="INGRESAR TRATAMIENTOS" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'500px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                Tratamiento 1
+            </div>
+
+            <div class="ui-g-12 ui-md-8 ui-lg-8">
+                <p-dropdown [autoWidth]="false" appendTo="body" [(ngModel)]="dtoTratamientos.tratamiento1" [options]="listaTratamientos"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                Tratamiento 2
+            </div>
+
+            <div class="ui-g-12 ui-md-8 ui-lg-8">
+                <p-dropdown [autoWidth]="false" appendTo="body" [(ngModel)]="dtoTratamientos.tratamiento2" [options]="listaTratamientos"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                Tratamiento 3
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-8">
+                <p-dropdown [autoWidth]="false" appendTo="body" [(ngModel)]="dtoTratamientos.tratamiento3" [options]="listaTratamientos"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Aplicar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                    style="width:100%"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                    style="width:100%"></button>
+            </div>
+
+        </div>
+
+    </p-dialog>
+</div>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES10total" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="0.9090909090909185"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT TOP 1 * FROM (
+SELECT DISTINCT
+X.NOMBRE_INSTITUCION,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'ALL') AS POBLACION,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS INDEPENDIENTE,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS INDEPENDIENTE#,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Parcial') AS DEPENDIENTE_PARC,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Parcial') AS DEPENDIENTE_PARC#,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Total') AS DEPENDIENTE_TOT,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Dependiente Total') AS DEPENDIENTE_TOT#,
+(SELECT SUM(CANTIDAD) FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR LIKE 'Dependiente%') AS TOTAL_DEPENDIENTE,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Independiente') AS TOTAL_INDEPENDIENTE,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE') AS NO_EVALUADOS,
+(SELECT CANTIDAD FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE-PO') AS ENF_MENTALES,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res10 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE-PO') AS ENF_MENTALES#
+FROM ##tabla_temporal_res10 X
+) AS TABLA ORDER BY NOMBRE_INSTITUCION DESC]]>
+	</queryString>
+	<field name="NOMBRE_INSTITUCION" class="java.lang.String"/>
+	<field name="POBLACION" class="java.lang.Integer"/>
+	<field name="INDEPENDIENTE" class="java.lang.Integer"/>
+	<field name="INDEPENDIENTE#" class="java.math.BigDecimal"/>
+	<field name="DEPENDIENTE_PARC" class="java.lang.Integer"/>
+	<field name="DEPENDIENTE_PARC#" class="java.math.BigDecimal"/>
+	<field name="DEPENDIENTE_TOT" class="java.lang.Integer"/>
+	<field name="DEPENDIENTE_TOT#" class="java.math.BigDecimal"/>
+	<field name="TOTAL_DEPENDIENTE" class="java.lang.Integer"/>
+	<field name="TOTAL_INDEPENDIENTE" class="java.lang.Integer"/>
+	<field name="NO_EVALUADOS" class="java.lang.Integer"/>
+	<field name="ENF_MENTALES" class="java.lang.Integer"/>
+	<field name="ENF_MENTALES#" class="java.math.BigDecimal"/>
+	<title>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" x="483" y="0" width="76" height="15" uuid="ed0494e6-b920-4b9f-aa91-95bc2b07d49d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="635" y="0" width="76" height="15" uuid="19b7cd66-ff42-4fda-bae5-2810e2e9699d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="445" y="0" width="38" height="15" uuid="045a9ba8-832c-4706-b80b-c0d27b829964"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="332" y="0" width="38" height="15" uuid="937fe4ee-3269-4eee-a4be-2b5b0641ce7f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="711" y="0" width="38" height="15" uuid="a32e8d56-0389-4409-9a98-682eb76089e1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="294" y="0" width="38" height="15" uuid="fc31661a-34d5-42ff-91e1-407c7ef946e2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="369" y="0" width="38" height="15" uuid="f8bcf493-8a9a-4f0b-a7aa-35da9e53c434"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="445" y="0" width="38" height="15" uuid="0c6cc0bc-ca11-4133-8be6-4fec5bc2b41b"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_TOT#}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="559" y="0" width="76" height="15" uuid="7ec9a552-01a6-452a-9cab-bbfa69533f5b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="208" y="0" width="48" height="15" uuid="89e79e46-758a-45eb-94a4-55db66c980db"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="407" y="0" width="38" height="15" uuid="8ab70f94-fa92-4a38-86e5-b263bf270687"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="749" y="0" width="38" height="15" uuid="f7817328-c397-4c1a-ac21-18614368a8ee"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="559" y="0" width="76" height="15" uuid="93d17c28-5266-460e-a7cc-d9b60177d921"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_INDEPENDIENTE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="635" y="0" width="76" height="15" uuid="83493f08-e2a0-4bdb-b921-2be23c702c60"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NO_EVALUADOS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="294" y="0" width="38" height="15" uuid="1d36022b-5fdc-482e-8f1d-f3ce37f5e69e"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDEPENDIENTE#}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="407" y="0" width="38" height="15" uuid="28b6446e-844a-48a2-9275-db9b179995e1"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_TOT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="0" width="38" height="15" uuid="ea68951d-40c7-4499-b412-9f052cc69543"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="332" y="0" width="38" height="15" uuid="948059d5-28b7-4e40-93d4-0493037c6cdb"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_PARC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="256" y="0" width="38" height="15" uuid="a5689c03-41df-4f4e-81ee-9aab36e5c3a7"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INDEPENDIENTE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="749" y="0" width="38" height="15" uuid="de29e5dd-18b0-4b1a-ab90-a89c97e176fe"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_MENTALES#}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="711" y="0" width="38" height="15" uuid="3ad4c0a6-31c0-4024-9893-01508f7c11c9"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_MENTALES}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="15" y="0" width="193" height="15" uuid="2e3f2609-f643-4e76-9d36-1242da317aa9"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="369" y="0" width="38" height="15" uuid="0de21b51-33cf-4252-a1c9-906d7f930c0e"/>
+				<box leftPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPENDIENTE_PARC#}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="208" y="0" width="48" height="15" uuid="968f7bff-aff1-4c82-b830-8efe2ffc7f17"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{POBLACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="0" width="193" height="15" uuid="b99570b5-efa1-4926-b77b-235c042826f9"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_INSTITUCION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="483" y="0" width="76" height="15" uuid="d9e1052d-e01a-41cf-a102-68bc8e2c0a9d"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL_DEPENDIENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

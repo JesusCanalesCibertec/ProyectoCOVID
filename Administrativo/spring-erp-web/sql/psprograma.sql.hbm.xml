@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psprograma
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="psprograma.filtroContar">
+
+select 
+count(1)
+from sgseguridadsys.PS_PROGRAMA t1
+where 
+t1.ID_PROGRAMA like '%' +  isnull(:p_codigo, '') + '%'
+and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+
+
+</sql-query>
+
+
+
+
+<sql-query name="psprograma.filtroPaginacion">
+
+select 
+T1.ID_PROGRAMA,
+T1.NOMBRE,
+case t1.ESTADO
+when 'A' then 'Activo'
+when 'I' then 'Inactivo'
+end as Estado,
+t1.CREACION_FECHA,
+ROW_NUMBER() OVER (ORDER BY CREACION_FECHA desc) AS Seq
+from sgseguridadsys.PS_PROGRAMA t1
+where 
+t1.ID_PROGRAMA like '%' +  isnull(:p_codigo, '') + '%'
+and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(t1.ESTADO, '123') = isnull(:p_estado, ISNULL(t1.ESTADO, '123'))
+
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

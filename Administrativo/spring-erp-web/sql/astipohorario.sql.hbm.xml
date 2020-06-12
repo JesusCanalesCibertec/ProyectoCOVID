@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : asistencia.AsAutorizacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="astipohorario.listarHorasSemana">
+    	<![CDATA[
+		  DECLARE @LUNES INT
+		  DECLARE @MARTES INT
+		  DECLARE @MIERCOLES INT
+		  DECLARE @JUEVES INT
+		  DECLARE @VIERNES INT
+		  DECLARE @SABADO INT
+		  DECLARE @DOMINGO INT
+
+		  SELECT
+		  @LUNES = ISNULL(Lunes,66),
+		  @MARTES = ISNULL(Martes,66),
+		  @MIERCOLES = ISNULL(Miercoles,66),
+		  @JUEVES = ISNULL(Jueves,66),
+		  @VIERNES = ISNULL(Viernes,66),
+		  @SABADO = ISNULL(Sabado,66),
+		  @DOMINGO = ISNULL(Domingo,66)
+		  FROM AS_TipoHorario WHERE TipoHorario = :p_tipo_dia
+
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @LUNES
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @MARTES
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @MIERCOLES
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @JUEVES
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @VIERNES
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @SABADO
+		  union all
+		  select DescripcionLocal from AS_TipoDiaAsistencia where TipoDia =  @DOMINGO
+    	]]>
+    </sql-query>
+     
+</hibernate-mapping>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES09total" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="0.9090909090909185"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT TOP 1 * FROM (
+SELECT DISTINCT
+X.NOMBRE_INSTITUCION,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Sin Anemia' AND NOMBRE_VALOR = 'M') AS SIN_ANEMIA_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Sin Anemia' AND NOMBRE_VALOR = 'F') AS SIN_ANEMIA_F,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Con Anemia' AND NOMBRE_VALOR = 'M') AS CON_ANEMIA_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Con Anemia' AND NOMBRE_VALOR = 'F') AS CON_ANEMIA_F,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Grave' AND NOMBRE_VALOR = 'M') AS GRAVE_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Grave' AND NOMBRE_VALOR = 'F') AS GRAVE_F,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Leve' AND NOMBRE_VALOR = 'M') AS LEVE_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Leve' AND NOMBRE_VALOR = 'F') AS LEVE_F,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Moderado' AND NOMBRE_VALOR = 'M') AS MODERADO_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'Moderado' AND NOMBRE_VALOR = 'F') AS MODERADO_F,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE' AND NOMBRE_VALOR = 'M') AS NE_M,
+(SELECT CANTIDAD FROM ##tabla_temporal_res09 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'NE' AND NOMBRE_VALOR = 'F') AS NE_F
+FROM ##tabla_temporal_res09 X
+) AS TABLA ORDER BY NOMBRE_INSTITUCION DESC]]>
+	</queryString>
+	<field name="NOMBRE_INSTITUCION" class="java.lang.String"/>
+	<field name="SIN_ANEMIA_M" class="java.lang.Integer"/>
+	<field name="SIN_ANEMIA_F" class="java.lang.Integer"/>
+	<field name="CON_ANEMIA_M" class="java.lang.Integer"/>
+	<field name="CON_ANEMIA_F" class="java.lang.Integer"/>
+	<field name="GRAVE_M" class="java.lang.Integer"/>
+	<field name="GRAVE_F" class="java.lang.Integer"/>
+	<field name="LEVE_M" class="java.lang.Integer"/>
+	<field name="LEVE_F" class="java.lang.Integer"/>
+	<field name="MODERADO_M" class="java.lang.Integer"/>
+	<field name="MODERADO_F" class="java.lang.Integer"/>
+	<field name="NE_M" class="java.lang.Integer"/>
+	<field name="NE_F" class="java.lang.Integer"/>
+	<title>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" x="544" y="0" width="48" height="15" uuid="e2f48d0e-e3da-46f2-9479-243c817b0dce"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="352" y="0" width="48" height="15" uuid="9e206a37-e81f-400c-b7da-57917fd8866a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="448" y="0" width="48" height="15" uuid="92873ea5-2111-48c8-aef4-531757e991f6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="304" y="0" width="48" height="15" uuid="9fdd01ca-a2a2-445a-b73f-682030b771d8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="496" y="0" width="48" height="15" uuid="e4bc57b5-3e37-4c88-8b22-fb06fac6845b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="736" y="0" width="48" height="15" uuid="60161c41-b321-4367-8096-1601c5031f9f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="592" y="0" width="48" height="15" uuid="3444b5fa-0233-434d-ae96-398590cd940c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="688" y="0" width="48" height="15" uuid="55c38457-7ad9-4ce5-a8fd-722994cbe6b4"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="448" y="0" width="48" height="15" uuid="5f6986c4-54d8-4e2f-9d9a-feb34a2ca365"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GRAVE_F}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="352" y="0" width="48" height="15" uuid="567cd05a-8313-4156-8d89-ae2fbbe2227b"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_ANEMIA_F}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="544" y="0" width="48" height="15" uuid="3ce67410-f585-4ca2-8b71-0f6c85ca52b0"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEVE_F}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="736" y="0" width="48" height="15" uuid="5fc3c029-fc58-4fa8-8d27-d8beb21a8900"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NE_F}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="15" y="0" width="193" height="15" uuid="6835e5c0-3843-4fba-8560-5b38b881b610"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="15" y="0" width="193" height="15" uuid="7a83fe0a-7d1a-4d78-9f50-5ba5c1228a32"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_INSTITUCION}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="640" y="0" width="48" height="15" uuid="6c33d297-b25c-4478-8312-017bb6960ba1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="400" y="0" width="48" height="15" uuid="ca36d999-24f1-4576-84d2-81a726598b15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="256" y="0" width="48" height="15" uuid="32c432bb-4640-4240-8d64-fbd21e6922f9"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="304" y="0" width="48" height="15" uuid="1f282284-75e8-4777-89a4-0f986f0676d9"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CON_ANEMIA_M}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="208" y="0" width="48" height="15" uuid="db4801d7-4e3a-4b0c-8540-7978b55d692b"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="640" y="0" width="48" height="15" uuid="a44a92db-7b70-4788-92d5-509738055a29"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODERADO_F}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="256" y="0" width="48" height="15" uuid="273f614f-0d75-47f8-9012-9e7030c9290e"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SIN_ANEMIA_F}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="496" y="0" width="48" height="15" uuid="6282e190-8305-4021-99ae-4a66328f88b0"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEVE_M}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="400" y="0" width="48" height="15" uuid="f5883dab-b2a9-44ef-a41a-da38fb6bdc3b"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GRAVE_M}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="688" y="0" width="48" height="15" uuid="e160ba52-dde7-4195-a6d5-90d5e12d90ab"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NE_M}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="592" y="0" width="48" height="15" uuid="c5a765ae-f34f-45c5-a85a-01dc703ee4ea"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODERADO_M}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="208" y="0" width="48" height="15" uuid="18e4d114-5c60-4ecc-8b38-22e43205a0e9"/>
+				<box leftPadding="0" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SIN_ANEMIA_M}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

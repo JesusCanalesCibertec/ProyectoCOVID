@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <sql-query name="mamiscelaneodetalle.listarEnSentenciaOrdenarPorDescripcion">
+    SELECT APLICACIONCODIGO
+    ,CODIGOTABLA
+    ,COMPANIA
+    ,CODIGOELEMENTO
+    ,DESCRIPCIONLOCAL
+    ,ESTADO
+    FROM MA_MISCELANEOSDETALLE
+    WHERE APLICACIONCODIGO = isnull(:p_aplicacion,APLICACIONCODIGO)
+    AND CODIGOTABLA = isnull(:p_codigo_tabla,CODIGOTABLA)
+    AND COMPANIA = isnull(:p_compania,COMPANIA)
+    AND CODIGOELEMENTO = isnull(:p_codigo_elemento,CODIGOELEMENTO)
+    AND ESTADO = isnull(:p_estado,ESTADO)
+    ORDER BY DESCRIPCIONLOCAL
+  </sql-query>
+  <sql-query name="mamiscelaneodetalle.listarEnSentenciaOrdenarPorCodigo">
+    SELECT APLICACIONCODIGO
+    ,CODIGOTABLA
+    ,COMPANIA
+    ,CODIGOELEMENTO
+    ,DESCRIPCIONLOCAL
+    ,ESTADO
+    FROM MA_MISCELANEOSDETALLE
+    WHERE APLICACIONCODIGO = isnull(:p_aplicacion,APLICACIONCODIGO)
+    AND CODIGOTABLA = isnull(:p_codigo_tabla,CODIGOTABLA)
+    AND COMPANIA = isnull(:p_compania,COMPANIA)
+    AND CODIGOELEMENTO = isnull(:p_codigo_elemento,CODIGOELEMENTO)
+    AND ESTADO = isnull(:p_estado,ESTADO)
+    ORDER BY CODIGOELEMENTO
+  </sql-query>
+    <sql-query name="mamiscelaneodetalle.paginacioncontar">
+        select count(1) from MA_MiscelaneosDetalle where
+	        AplicacionCodigo = isnull(:p_aplicacion, AplicacionCodigo)
+	        and CodigoTabla = isnull(:p_codigo_tabla, CodigoTabla)
+	        and compania = isnull(:p_compania, Compania)
+	        and DescripcionLocal like '%'+isnull(:p_descripcion, '')+'%'
+	        and estado = isnull(:p_estado, Estado) and codigoelemento = isnull(:p_codigo_elemento, codigoelemento)
+	        order by 1 
+    </sql-query>
+    <sql-query name="mamiscelaneodetalle.paginacionlistar">
+        select AplicacionCodigo, CodigoTabla, Compania, CodigoElemento, DescripcionLocal, Estado, ROW_NUMBER() OVER (ORDER BY AplicacionCodigo) AS Seq from MA_MiscelaneosDetalle where
+	        AplicacionCodigo = isnull(:p_aplicacion, AplicacionCodigo)
+	        and CodigoTabla = isnull(:p_codigo_tabla, CodigoTabla)
+	        and compania = isnull(:p_compania, Compania)
+	        and DescripcionLocal like '%'+isnull(:p_descripcion, '')+'%'
+	        and estado = isnull(:p_estado, Estado)  and codigoelemento = isnull(:p_codigo_elemento, codigoelemento)
+    </sql-query>
+
+	<sql-query name="mamiscelaneosdetalle.filtro">
+      
+select 
+a.CodigoElemento,
+a.DescripcionLocal,
+a.Estado,
+a.valornumerico,
+a.valornumerico2
+from MA_MiscelaneosDetalle a
+where 
+ISNULL(a.AplicacionCodigo, '123') = isnull(:p_codaplicacion, ISNULL(a.AplicacionCodigo, '123'))
+and iSNULL(a.CodigoTabla, '123') = isnull(:p_codtabla, ISNULL(a.CodigoTabla, '123'))
+and iSNULL(a.Compania, '123') = isnull(:p_codcompania, ISNULL(a.Compania, '123'))
+
+
+</sql-query>
+
+<sql-query name="mamiscelaneosdetalle.eliminardetalle">
+      
+DELETE FROM MA_MiscelaneosDetalle
+WHERE AplicacionCodigo= :p_codaplicacion 
+AND CodigoTabla=:p_codtabla 
+AND Compania=:p_codcompania
+</sql-query>
+
+<sql-query name="mamiscelaneosdetalle.listar">
+     select CAST(CODIGOELEMENTO + 1 AS VARCHAR(10)) 
+	 from MA_MISCELANEOSDETALLE where APLICACIONCODIGO = 'MP' and CODIGOTABLA = 'CARRERAS' ORDER BY cast (CODIGOELEMENTO as int) desc 
+</sql-query>
+
+
+</hibernate-mapping>

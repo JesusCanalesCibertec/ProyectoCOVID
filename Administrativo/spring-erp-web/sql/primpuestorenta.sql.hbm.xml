@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrImpuestorenta
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="primpuestorenta.listarPeriodoPorEmpleado">
+         select	CompaniaSocio as "companiaSocio"
+			,Empleado as "idEmpleado"
+			,Ejerciciofiscal as "ejercicioFiscal"
+			,LEFT(ejerciciofiscal, 4)+'-'+substring(ejerciciofiscal,5,2) as "periodoNombre"
+		from pr_impuestorenta 
+		where empleado = :p_id_empleado 
+		AND LEFT(ejerciciofiscal, 4) >= 2010
+		order by ejerciciofiscal desc
+    </sql-query>
+
+    <sql-query name="primpuestorenta.listarCertificado">
+       <![CDATA[
+          SELECT 
+            Empleador = (select description from companyowner where rtrim(companyowner) = cast(:p_compania as varchar(20)) ),  
+              Responsable = (SELECT a.nombrecompleto
+                       FROM   personamast a, 
+                              parametrosmast c 
+                       WHERE  parametroclave = 'RESPONSIR' 
+                              AND a.persona = c.numero 
+                              AND aplicacioncodigo = 'PR'), 
+             ResponsableDocumento = (SELECT a.documento
+                       FROM   personamast a, 
+                              parametrosmast c 
+                       WHERE  parametroclave = 'RESPONSIR' 
+                              AND a.persona = c.numero 
+                              AND aplicacioncodigo = 'PR'), 
+             Ruc = (select documentofiscal from companiamast where rtrim(companiacodigo) = cast(:p_compania as varchar(6))) , 
+             Direccion = Isnull( 
+                         (select direccionComun from companiamast where rtrim(companiacodigo) = cast(:p_compania as varchar(6))) , ''), 
+             DireccionTrabajador = Isnull(personamast.direccion, ''), 
+             '' as locallidad,
+             personamast.nombrecompleto, 
+             cast(pr_impuestorenta.estimadorentatrabajo as numeric(20,2)), 
+             cast(pr_impuestorenta.sueldoactual as numeric(20,2)), 
+             cast(pr_impuestorenta.estimadoimpuestomensual as numeric(20,2)), 
+             cast(Isnull(acumuladoretencion, 0) 
+                                  + Isnull(acumuladoretencioninterno, 0) 
+                                  + Isnull(estimadoimpuestomensual, 0) as numeric(20,2)), 
+             cast(Isnull(acumuladoretencionexterno, 0) as numeric(20,2)), 
+             cast(Isnull(acumuladosueldo, 0) 
+                               + Isnull(acumuladosueldointeno, 0) 
+                               + Isnull(sueldoactual, 0)  as numeric(20,2)), 
+             cast(Isnull(acumuladosueldoexterno, 0) as numeric(20,2)), 
+             cast(Isnull(pr_impuestorenta.estimadoimpuestoanual, 0) as numeric(20,2)), 
+             cast(Isnull(pr_impuestorenta.creditofiscal, 0) as numeric(20,2)), 
+             Empleado = pr_impuestorenta.empleado, 
+             DocumentoIdentidad = ISNULL(personamast.Documento, personamast.DOCUMENTOIdentidad) , 
+             cast(ISNULL( CONVERT(FLOAT, 25200),0 ) as numeric(20,2)), 
+             EjercicioFiscal = 
+             CONVERT(CHAR(4), pr_impuestorenta.ejerciciofiscal), 
+             FechaCese = fechacese, 
+             EstadoEmpleado = estadoempleado, 
+             FechaIngreso = fechaingreso, 
+             Puesto = (SELECT top 1 descripcion 
+                       FROM   empleadomast a, 
+                              hr_puestoempresa b, 
+                              parametrosmast c 
+                       WHERE  parametroclave = 'RESPONSIR' 
+                              AND a.empleado = c.numero 
+                              AND a.codigocargo = b.codigopuesto 
+                              AND aplicacioncodigo = 'PR'), 
+         
+             Cargo = hr_puestoempresa.descripcion, 
+             ac_costcentermst.localname                         AS CentrodeCosto 
+             , 
+             cast(ISNULL((SELECT Sum(a.monto) 
+              FROM   pr_planillaempleadoconcepto a 
+              WHERE  LEFT(a.periodo, 4) = 
+                     LEFT(pr_impuestorenta.ejerciciofiscal, 4) 
+                     AND Substring(a.periodo, 5, 2) = 
+                         Substring(pr_impuestorenta.ejerciciofiscal, 5, 2) 
+                     AND a.concepto = '2701' 
+                     AND a.empleado = pr_impuestorenta.empleado),0) as numeric(20,2)) AS devolucion
+           
+      FROM   pr_impuestorenta, 
+             personamast, 
+             empleadomast, 
+             ac_costcentermst, 
+             hr_puestoempresa 
+      WHERE  ( pr_impuestorenta.empleado = personamast.persona ) 
+             AND ( personamast.persona = empleadomast.empleado ) 
+             AND 
+             ( CONVERT(INT, pr_impuestorenta.ejerciciofiscal) = 
+               :p_ejercicio_fiscal 
+             ) 
+             AND ( empleadomast.estadoempleado <> '2' 
+                    OR 'N' = 'S' ) 
+             AND empleadomast.companiasocio = :p_compania 
+             AND ac_costcentermst.costcenter = empleadomast.centrocostos 
+             AND hr_puestoempresa.codigopuesto = empleadomast.codigocargo 
+             AND personamast.persona = :p_empleado 
+      ORDER  BY ac_costcentermst.localname, 
+                nombrecompleto 
+                 ]]>
+    </sql-query>
+  
+ <sql-query name="primpuestorenta.listarCertificadoUIT">
+       <![CDATA[
+          select
+		        montotope,
+		        impuesto
+	        from PR_ImpuestoRentaDetalle
+            where empleado = :p_empleado and
+	              EjercicioFiscal = :p_ejercicio_fiscal and
+		          CompaniaSocio  = :p_compania
+	        order by factor
+                 ]]>
+    </sql-query>
+
+</hibernate-mapping>

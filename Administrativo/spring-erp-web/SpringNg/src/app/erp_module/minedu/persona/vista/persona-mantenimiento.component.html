@@ -1,0 +1,189 @@
+<p-dialog
+    header="Personal : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}"
+    [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size" [width]="1000"
+    [style]="{'margin-top':'10px'}">
+
+    <div class="ui-fluid" #frm>
+        <div class="ui-g-5 ui-md-5 ui-lg-5">
+            <p-fieldset legend="DATOS PERSONALES">
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Usuario<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-5 ui-lg-5">
+                        <input pInputText [(ngModel)]="persona.usuario"
+                            [disabled]="deshabilitar || (persona.correo != null)" maxlength="20" type="text">
+                    </div>
+                    <div *ngIf="persona.correo == null" class="ui-g-12 ui-md-4 ui-lg-4">
+                        <button pButton label="Obtener" icon="far fa-address-book" type="button" class="ui-button"
+                            [disabled]="deshabilitar" (click)="validarUsuario()"></button>
+                    </div>
+                    <div *ngIf="persona.correo != null && accion == ACCIONES.NUEVO" class="ui-g-12 ui-md-4 ui-lg-4">
+                        <button pButton label="Limpiar" icon="fas fa-backspace" type="button" class="ui-button"
+                            [disabled]="deshabilitar" (click)="limpiarUsuario()"></button>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-2 ui-lg-3">
+                        <label>Correo<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-10 ui-lg-9">
+                        <input pInputText [(ngModel)]="persona.correo" [disabled]="true" type="text">
+                        <!-- <div class="ui-inputgroup">
+                            <input pInputText [(ngModel)]="persona.correo" [disabled]="true" type="text"
+                                pKeyFilter="alphanum" style="width:55%">
+                            <span class="ui-inputgroup-addon" style="width:45%">@minedu.gob.pe</span>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>D.N.I<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-5 ui-lg-5">
+                        <p-inputMask [(ngModel)]="persona.dni" mask="99999999" slotChar=" "
+                            [disabled]="deshabilitar || (persona.apellido != null)"></p-inputMask>
+                    </div>
+                    <div *ngIf="persona.apellido == null" class="ui-g-12 ui-md-4 ui-lg-4">
+                        <button pButton label="Validar" icon="far fa-check-circle" type="button" class="ui-button"
+                            [disabled]="deshabilitar" (click)="validarDNI()"></button>
+                    </div>
+                    <div *ngIf="persona.apellido != null && accion == ACCIONES.NUEVO" class="ui-g-12 ui-md-4 ui-lg-4">
+                        <button pButton label="Limpiar" icon="fas fa-backspace" type="button" class="ui-button"
+                            [disabled]="deshabilitar" (click)="limpiarDNI()"></button>
+                    </div>
+                    <!-- <div *ngIf="!valido || accion == ACCIONES.NUEVO" class="ui-g-12 ui-md-4 ui-lg-4">
+                        <button pButton label="Validar" icon="far fa-check-circle" type="button" class="ui-button"
+                            [disabled]="deshabilitar || valido" (click)="validarDNI()"></button>
+                    </div> -->
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Nombre<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-9 ui-lg-9">
+                        <input pInputText [(ngModel)]="persona.nombre" [disabled]="internet" type="text">
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Apellidos<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-9 ui-lg-9">
+                        <input pInputText [(ngModel)]="persona.apellido" [disabled]="internet" type="text">
+                    </div>
+                </div>
+                <!-- <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-2 ui-lg-3">
+                        <label>Correo 2</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-10 ui-lg-9">
+                        <input pInputText [(ngModel)]="persona.correoalterno" [disabled]="deshabilitar" type="text"
+                            style="text-transform:none">
+                    </div>
+                </div> -->
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-2 ui-lg-3">
+                        <label>Anexo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <p-inputMask [(ngModel)]="persona.anexo" mask="99999" slotChar=" " (onBlur)="limpiarAnexo()"
+                            [disabled]="deshabilitar"></p-inputMask>
+                    </div>
+                    <div class="ui-g-12 ui-md-2 ui-lg-2">
+                        <label>Celular<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-4 ui-lg-4">
+                        <p-inputMask [(ngModel)]="persona.celular" mask="999999999" slotChar=" "
+                            (onBlur)="limpiarCelular()" [disabled]="deshabilitar"></p-inputMask>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+
+        <div class="ui-g-7 ui-md-7 ui-lg-7">
+            <p-fieldset legend="CONTRATACIÓN">
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-4 ui-md-1 ui-lg-3">
+                        <label>Modalidad<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-8 ui-md-2 ui-lg-8">
+                        <p-dropdown [options]="modalidades" [(ngModel)]="persona.idModalidad"
+                            [disabled]="deshabilitar || auxverificacion || cantaux > 0" (onChange)="cambiarModalidad()"
+                            [autoWidth]="false">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Cargo<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-9 ui-lg-8">
+                        <p-dropdown [options]="cargos" [(ngModel)]="persona.cargo"
+                            [disabled]="deshabilitar || auxverificacion || cantaux > 0" appendTo="body"
+                            [autoWidth]="false">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-4 ui-md-3 ui-lg-3">
+                        <label>Inicio<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-8 ui-md-4 ui-lg-5">
+                        <p-calendar [(ngModel)]="persona.fechainicio" [monthNavigator]="true" [yearNavigator]="true "
+                            [locale]="es" yearRange="1940:2200" appendTo="body" [disabledDays]="[0,6]" [showIcon]="true"
+                            dateFormat="dd/mm/yy" [disabled]="deshabilitar || auxverificacion || cantaux > 0">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-4 ui-md-1 ui-lg-3">
+                        <label>Fin
+                            <!-- <span style="color:#ff0000">*</span> -->
+                        </label>
+                    </div>
+                    <div class="ui-g-8 ui-md-4 ui-lg-5">
+                        <p-calendar [(ngModel)]="persona.fechafin"
+                            [disabled]="deshabilitar || auxverificacion || cantaux > 0" [monthNavigator]="true"
+                            [yearNavigator]="true" [locale]="es" [disabledDays]="[0,6]" yearRange="1940:2200"
+                            [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Nro. de orden<span *ngIf="!auxmodalidad" style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-3 ui-lg-4">
+                        <input pInputText [(ngModel)]="persona.numeroorden"
+                            [disabled]="deshabilitar || auxmodalidad || cantaux > 0 || accion != ACCIONES.NUEVO"
+                            maxlength="7" type="text">
+                    </div>
+                </div>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-3 ui-lg-3">
+                        <label>Nro. entregables</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-3 ui-lg-4">
+                        <p-spinner [(ngModel)]="persona.numeroplazo" [min]="0" [max]="6"
+                            [disabled]="deshabilitar || auxmodalidad || cantaux > 0">
+                        </p-spinner>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button *ngIf="!deshabilitar" pButton label="Guardar" icon="fa fa-save" type="button"
+                    (click)="guardar()" style="width: 100%"></button>
+            </div>
+            <div class="ui-g-3 ui-md-2 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" type="button" (click)="salir()"
+                    style="width: 100%"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

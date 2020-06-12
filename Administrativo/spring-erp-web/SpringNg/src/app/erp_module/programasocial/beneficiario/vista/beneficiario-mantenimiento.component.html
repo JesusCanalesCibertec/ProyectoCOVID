@@ -1,0 +1,964 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+
+    <p-panel header="{{titulo}} : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar" (click)="guardar()"
+                    *ngIf="hacerCambios"></button>
+            </div>
+            <div class="ui-g-4 ui-md-6 ui-lg-8">
+            </div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+            </div>
+        </div>
+    </p-panel>
+
+    <p-tabView [activeIndex]="tabIndex" (onChange)="handleChange($event)">
+
+        <p-tabPanel header="Datos Personales">
+            <p-fieldset legend="Datos Personales">
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-7">
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <label>Institución</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" disabled
+                                [(ngModel)]="bean.auxInstitucion" [options]="listaInstituciones"></p-dropdown>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <label>Programa</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" disabled
+                                [(ngModel)]="bean.auxPrograma" [options]="listaProgramaBean"></p-dropdown>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                            <label>Apellido Paterno</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <input pInputText type="text" [(ngModel)]="bean.apellidoPaterno" maxlength="30" disabled="{{!hacerCambios}}" />
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <label>Apellido Materno</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <input pInputText type="text" [(ngModel)]="bean.apellidoMaterno" maxlength="30" disabled="{{!hacerCambios}}" />
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                            <label>Nombres</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <input pInputText type="text" [(ngModel)]="bean.nombres" maxlength="30" disabled="{{!hacerCambios}}" />
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-4">
+                            <label>Lugar de nacimiento</label>
+                        </div>
+                        <div class="ui-g-10 ui-md-7 ui-lg-7">
+                            <input pInputText type="text" [(ngModel)]="bean.auxUbigeo" disabled />
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1">
+                            <button type="button " pButton icon="fa fa-search" (click)="seleccionarNacimiento('NA')"
+                                [disabled]="!hacerCambios"></button>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" *ngIf="tipoFUN==BENEFICIARIO_TIPO_AAM">
+                            <label>Grado de instrucción</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7" *ngIf="tipoFUN==BENEFICIARIO_TIPO_AAM">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaGradoInstruccion"
+                                [(ngModel)]="bean.idNivelAcademico" [disabled]="!hacerCambios"></p-dropdown>
+                        </div>
+
+
+                    </div>
+                   
+                    <div class="ui-g-12 ui-md-12 ui-lg-5">
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-5" style="color: crimson; font-weight: bold;">
+                            <label>Sexo</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="bean.idSexo"
+                                [options]="listaSexo" disabled="{{accion != ACCIONES.NUEVO}}"></p-dropdown>
+                        </div>
+
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-5" style="color: crimson; font-weight: bold;">
+                            <label>Discapacidad</label>
+                        </div>
+                        <div class="ui-g-6 ui-md-4 ui-lg-3">
+                            <p-radioButton label="Si" name="Discapacidad" value="S" [(ngModel)]="bean.idDiscapacidad"
+                                [disabled]="!hacerCambios"></p-radioButton>
+                        </div>
+
+                        <div class="ui-g-6 ui-md-3 ui-lg-3">
+                            <p-radioButton label="No" name="Discapacidad" value="N" [(ngModel)]="bean.idDiscapacidad"
+                                [disabled]="!hacerCambios"></p-radioButton>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-5" style="color: crimson; font-weight: bold;">
+                            <label>Fecha de Nac.</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true "
+                                [monthNavigator]="true " yearRange="1900:2050 " appendTo="body" [(ngModel)]="bean.fechaNacimiento"
+                                (onSelect)="calcularEdad()" (onBlur)="calcularEdad()" [disabled]="!hacerCambios"></p-calendar>
+                        </div>
+
+                        <div class="ui-g-4 ui-md-4 ui-lg-5">
+                            <label>Edad</label>
+                        </div>
+                        <div class="ui-g-8 ui-md-7 ui-lg-7" style="display: none;">
+                            <input pInputText type="text" [(ngModel)]="bean.edad" disabled />
+                        </div>
+                        <div class="ui-g-8 ui-md-7 ui-lg-6">
+                            <input pInputText type="text" value="{{bean.fechaNacimiento | edadCompleta}}" disabled />
+                        </div>
+
+                        <div class="ui-g-4 ui-md-4 ui-lg-5" *ngIf="tipoFUN != BENEFICIARIO_TIPO_AAM">
+                            <label>Estado Civil</label>
+                        </div>
+                        <div class="ui-g-4 ui-md-4 ui-lg-5" *ngIf="tipoFUN == BENEFICIARIO_TIPO_AAM">
+                            <label>Estado Civil</label>
+                        </div>
+                        <div class="ui-g-8 ui-md-7 ui-lg-7">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaEstadoCivil"
+                                [(ngModel)]="bean.idEstadoCivil" [disabled]="tipoFUN == BENEFICIARIO_TIPO_NNA||!hacerCambios"></p-dropdown>
+                        </div>
+
+                        <div class="ui-g-4 ui-md-4 ui-lg-5">
+                            <label>Estado</label>
+                        </div>
+                        <div class="ui-g-8 ui-md-7 ui-lg-7">
+                            <p-dropdown [options]="listaEstado" [(ngModel)]="bean.estadoBeneficiario" [autoWidth]="false"></p-dropdown>
+                        </div>
+
+                        <div class="ui-g-4 ui-md-4 ui-lg-5" style="color: crimson; font-weight: bold;" *ngIf="false">
+                            <label>Factor RH</label>
+                        </div>
+                        <div class="ui-g-8 ui-md-7 ui-lg-7" *ngIf="false">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaFactor"
+                                [(ngModel)]="bean.idFactorRh"></p-dropdown>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </p-fieldset>
+
+            <p-fieldset legend="Datos de Identificación">
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-7">
+                        <div class="ui-g-12 ui-md-4 ui-lg-7">
+                            <label>DNI</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-4">
+                            <input pInputText type="text" [(ngModel)]="bean.documento" maxlength="8" disabled="{{!hacerCambios}}" />
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="
+                                (bean.nombres!=null && bean.nombres!='' &&
+                                 bean.apellidoPaterno!=null && bean.apellidoPaterno!='') 
+                                 || (bean.documento != null && bean.documento != '')">
+                            <button type="button " pButton icon="fa fa-search-plus" title="Traer datos del beneficiario"
+                                (click)="buscarBeneficiario()" [disabled]="!hacerCambios"></button>
+                        </div>
+                        <div class="ui-g-12 ui-md-12 ui-lg-7">
+                            <label>Otros Datos de Identificación</label>
+                        </div>
+                        <div class="ui-g-10 ui-md-11 ui-lg-4">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsEntidadDocumento.idTipoDocumento"
+                                [options]="listaTipoDoc" [disabled]="!hacerCambios"></p-dropdown>
+                        </div>
+
+
+                        <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsEntidadDocumento.idTipoDocumento!='X'">
+                            <button type="button " pButton icon="fa fa-plus" (click)="agregarDocumento()" [disabled]="!hacerCambios"></button>
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsEntidadDocumento.idTipoDocumento=='X'&&tipoFUN==BENEFICIARIO_TIPO_AAM">
+                            <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                (click)="agregarMiscelaneos('TIPDCAAM','PS', 'TIPOD')" title="Agregar elemento"
+                                [disabled]="!hacerCambios"></button>
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsEntidadDocumento.idTipoDocumento=='X'&&tipoFUN==BENEFICIARIO_TIPO_NNA">
+                            <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                (click)="agregarMiscelaneos('TIPDCNNA','PS', 'TIPOD')" title="Agregar elemento"
+                                [disabled]="!hacerCambios"></button>
+                        </div>
+
+
+
+                        <div class="ui-g-12 ui-md-11 ui-lg-11">
+                            <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.listaDocumento">
+                                <p-column header="Cod." field="idTipoDocumento" styleClass="textoCentrado" [style]="{'width':'12%'}"></p-column>
+                                <p-column header="Otros Datos de Identificación" field="auxTipo" [style]="{'width':'80%'}"></p-column>
+                                <p-column header="" styleClass="textoCentrado" [style]="{'width':'8%'}">
+                                    <ng-template let-tx="rowData" pTemplate="body">
+                                        <div class="ui-g">
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                                <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarDocumento(tx.idTipoDocumento)"></i>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+
+            </p-fieldset>
+
+            <p-fieldset legend="Datos Sociales">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-7">
+                        <div class="ui-g-12 ui-md-12 ui-lg-7">
+                            <label>Beneficiario/a de algún programa social del Estado</label>
+                        </div>
+                        <div class="ui-g-10 ui-md-11 ui-lg-4">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsEntidadProgramaSocial.idProgramaSocial"
+                                [options]="listaPrograma" [disabled]="!hacerCambios"></p-dropdown>
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1">
+                            <button type="button " pButton icon="fa fa-plus" (click)="agregarPrograma()" [disabled]="!hacerCambios"></button>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-11 ui-lg-11">
+                            <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.listaPrograma">
+                                <p-column header="Cod." field="idProgramaSocial" styleClass="textoCentrado" [style]="{'width':'12%'}"></p-column>
+                                <p-column header="Beneficiario de Programa Social" field="auxPrograma" [style]="{'width':'80%'}"></p-column>
+                                <p-column header="" styleClass="textoCentrado" [style]="{'width':'8%'}">
+                                    <ng-template let-tx="rowData" pTemplate="body">
+                                        <div class="ui-g">
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                                <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarPrograma(tx.idProgramaSocial)"></i>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+
+                    </div>
+
+           
+
+                    <div class="ui-g-12 ui-md-12 ui-lg-5">
+                        <div class="ui-g-12 ui-md-4 ui-lg-5" style="color: crimson; font-weight: bold;" *ngIf="bean.idDiscapacidad=='S'">
+                            <label>Carnet de CONADIS</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-5" *ngIf="bean.idDiscapacidad!='S'">
+                            <label>Carnet de CONADIS</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-7">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaConadis"
+                                [(ngModel)]="bean.idCarnetConadis" [disabled]="!hacerCambios"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-7">
+                        <div class="ui-g-12 ui-md-4 ui-lg-7">
+                            <label>Seguro de salud</label>
+                        </div>
+                        <div class="ui-g-10 ui-md-7 ui-lg-4">
+                            <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsEntidadSeguroSocial.idSegurosocial"
+                                [options]="listaSeguro" [disabled]="!hacerCambios"></p-dropdown>
+                        </div>
+                        <div class="ui-g-1 ui-md-1 ui-lg-1">
+                            <button type="button " pButton icon="fa fa-plus" (click)="agregarSeguro()" [disabled]="!hacerCambios"></button>
+                        </div>
+
+
+                        <div class="ui-g-12 ui-md-4 ui-lg-7">
+                            <label>Número de Seguro</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-7 ui-lg-4">
+                            <input pInputText type="text" [(ngModel)]="beanPsEntidadSeguroSocial.seguroSocial"
+                                maxlength="20" disabled="{{!hacerCambios}}" />
+                        </div>
+
+
+
+
+                        <div class="ui-g-12 ui-md-11 ui-lg-11">
+                            <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.listaSeguro">
+                                <p-column header="Seguro de Salud" field="auxSeguro" [style]="{'width':'52%'}"></p-column>
+                                <p-column header="Número" field="seguroSocial" [style]="{'width':'40%'}"></p-column>
+                                <p-column header="" styleClass="textoCentrado" [style]="{'width':'8%'}">
+                                    <ng-template let-tx="rowData" pTemplate="body">
+                                        <div class="ui-g">
+                                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                                <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarSeguro(tx.idSegurosocial)"></i>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            <label>Comentario Adicionales Sociales</label>
+                        </div>
+                        <div class="ui-g-12 ui-md-11 ui-lg-6">
+                            <textarea pInputTextarea style="width:100%" maxlength="500" [(ngModel)]="bean.comentarios"
+                                disabled="{{!hacerCambios}}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </p-fieldset>
+
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar" (click)="guardar()"></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-8">
+
+                </div>
+
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+                </div>
+            </div>
+            <div class="ui-g">
+
+                <div class="ui-g ui-md-6 ui-lg-6">
+
+                </div>
+                <div class="ui-g-12 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-arrow-right" style="width:100%" label="Siguiente" (click)="nextTab()"></button>
+                </div>
+                
+
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Datos de Ingreso">
+            <p-fieldset legend="Datos de Ingreso">
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        <label>Fecha de Ingreso</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-7 ui-lg-2">
+                        <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                            yearRange="1900:2050 " appendTo="body" [(ngModel)]="bean.ingreso.fechaIngreso" (onSelect)="calcularPerm()"
+                            (onBlur)="calcularPerm()" disabled="{{accion != ACCIONES.NUEVO||!hacerCambios}}"></p-calendar>
+                    </div>
+                    <div class="ui-g-12 ui-md ui-lg-2">
+                    </div>
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Tiempo de Permanencia</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-7 ui-lg-2">
+                        <input pInputText value="{{bean.ingreso.fechaIngreso | edadCompleta}}" disabled />
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Institución que deriva</label>
+                    </div>
+                    <div class="ui-g-10 ui-md-7 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaDeriva"
+                            [(ngModel)]="bean.ingreso.idInstitucionDeriva" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="bean.ingreso.idInstitucionDeriva=='X'&&tipoFUN==BENEFICIARIO_TIPO_AAM">
+                        <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneos('INSDERI','PS', 'DERIVA')" title="Agregar elemento" [disabled]="!hacerCambios"></button>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="bean.ingreso.idInstitucionDeriva=='X'&&tipoFUN==BENEFICIARIO_TIPO_NNA">
+                        <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneos('INSDAAM','PS', 'DERIVA')" title="Agregar elemento" [disabled]="!hacerCambios"></button>
+                    </div>
+                    <div class="ui-g ui-md ui-lg-1" *ngIf="bean.ingreso.idInstitucionDeriva=='X'">
+                    </div>
+                    <div class="ui-g ui-md ui-lg-2" *ngIf="bean.ingreso.idInstitucionDeriva!='X'">
+                    </div>
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Situación Legal</label>
+                    </div>
+                    <div class="ui-g-10 ui-md-7 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaLegal"
+                            [(ngModel)]="bean.ingreso.idSituacionLegal" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1">
+                            <button type="button " pButton icon="fa fa-plus" (click)="agregarMiscelaneosSituacion()" [disabled]="!hacerCambios"></button>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Causal de Ingreso</label>
+                    </div>
+                    <div class="ui-g-10 ui-md-7 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsBeneficiarioIngresoCasual.idCausal"
+                            [options]="listaCausal" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal!='X'">
+                        <button type="button " pButton icon="fa fa-plus" (click)="agregarCausal()" [disabled]="!hacerCambios"></button>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal=='X'&&tipoFUN==BENEFICIARIO_TIPO_AAM">
+                        <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneos('CINGAAM','PS', 'causal')" title="Agregar elemento" [disabled]="!hacerCambios"></button>
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsBeneficiarioIngresoCasual.idCausal=='X'&&tipoFUN==BENEFICIARIO_TIPO_NNA">
+                        <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                            (click)="agregarMiscelaneos('CINGNNA','PS', 'causal')" title="Agregar elemento" [disabled]="!hacerCambios"></button>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-6">
+                        <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.ingreso.listaCausal">
+                            <p-column header="Cod." field="idCausal" styleClass="textoCentrado" [style]="{'width':'60px'}"></p-column>
+                            <p-column header="Causal de Ingreso" field="auxCausal"></p-column>
+                            <p-column header="" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                                <ng-template let-tx="rowData" pTemplate="body">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                            <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarCausal(tx.idCausal)"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Residencia Asignada</h4>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-4">
+                        <label>Pabellón de Residencia</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaPabellones"
+                            [(ngModel)]="bean.ingreso.idArea" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-4">
+                        <label>Comentario Adicionales de Ingreso</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-4">
+                        <textarea pInputTextarea style="width:100%" maxlength="500" [(ngModel)]="bean.ingreso.comentarios"
+                            disabled="{{!hacerCambios}}"></textarea>
+                    </div>
+                </div>
+
+            </p-fieldset>
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar" (click)="guardar()"></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-8">
+
+
+
+                </div>
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g ui-md-3 ui-lg-4">
+
+                </div>
+                <div class="ui-g-6 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-arrow-left" style="width:100%" label="Atras" (click)="prevTab()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-arrow-right" style="width:100%" label="Siguiente" (click)="nextTab()"></button>
+                </div>
+                <div class="ui-g ui-md-3 ui-lg-4">
+
+                </div>
+
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Referencia Familiar">
+            <p-fieldset legend="Procedencia / Domicilio">
+                <div class="ui-g">
+
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Procedencia / Domicilio</h4>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Domicilio Conocido</label>
+                    </div>
+                    <div class="ui-g-10 ui-md-7 ui-lg-4">
+                        <input pInputText type="text" [(ngModel)]="bean.auxUbigeoConocido" disabled />
+                    </div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1">
+                        <button type="button " pButton icon="fa fa-search" (click)="seleccionarNacimiento('CO')"
+                            [disabled]="!hacerCambios"></button>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Dirección</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-7 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.domicilioDireccion" maxlength="100" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2">
+                        <label>Referencia</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-7 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.domicilioReferencia" maxlength="100" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g ui-g-no-pad" *ngIf="tipoFUN == BENEFICIARIO_TIPO_NNA||tipoFUN == BENEFICIARIO_TIPO_ALL">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Vivienda</h4>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 ui-lg-6">
+                        <div class="ui-g ui-g-no-pad">
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Tenencia</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaTenencia"
+                                    [(ngModel)]="bean.idTenencia" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('TENENCINNA','PS', 'TENEN')" title="Agregar elemento"
+                                    *ngIf="bean.idTenencia=='X'" [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Material de Construcción</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaMaterialContruccion"
+                                    [(ngModel)]="bean.idMaterialConstruccion" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('MATECONST','PS', 'MATCO')" title="Agregar elemento"
+                                    *ngIf="bean.idMaterialConstruccion=='X'" [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Servicio de agua potable</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaAgua"
+                                    [(ngModel)]="bean.idServicioAgua" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('SERAGUAPO','PS', 'AGUA')" title="Agregar elemento"
+                                    *ngIf="bean.idServicioAgua=='X'" [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Servicio de desagüe</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaAgua"
+                                    [(ngModel)]="bean.idServicioDesague" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('SERDESAGU','PS', 'DESA')" title="Agregar elemento"
+                                    *ngIf="bean.idServicioDesague=='X'" [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>N° Teléfono</label>
+                            </div>
+                            <div class="ui-g-12 ui-md-7 ui-lg-5">
+                                <input pInputText type="text" [(ngModel)]="bean.telefono1" maxlength="11" disabled="{{!hacerCambios}}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 ui-lg-6">
+                        <div class="ui-g ui-g-no-pad">
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Servicio de electricidad</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5  ">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaElectricidad"
+                                    [(ngModel)]="bean.idServicioElectricidad" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('SERELECTR','PS', 'ELEC')" title="Agregar elemento"
+                                    *ngIf="bean.idServicioElectricidad=='X'" [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-6">
+                                <label>Equipamiento básico</label>
+                            </div>
+                            <div class="ui-g-10 ui-md-7 ui-lg-5">
+                                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsEntidadEquipamiento.idEquipamiento"
+                                    [options]="listaEquipamiento" [disabled]="!hacerCambios"></p-dropdown>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsEntidadEquipamiento.idEquipamiento!='X'">
+                                <button type="button " pButton icon="fa fa-plus" (click)="agregarEquipamiento()"
+                                    [disabled]="!hacerCambios"></button>
+                            </div>
+                            <div class="ui-g-1 ui-md-1 ui-lg-1" *ngIf="beanPsEntidadEquipamiento.idEquipamiento=='X'">
+                                <button pButton icon="fa fa-pencil" style="margin-right:10px" class="ui-button" type="button"
+                                    (click)="agregarMiscelaneos('EQPBASICO','PS', 'EQUIP')" title="Agregar elemento"
+                                    [disabled]="!hacerCambios"></button>
+
+                            </div>
+
+                            <div class="ui-g-12 ui-md-11 ui-lg-12">
+                                <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.listaEquipamiento">
+                                    <p-column header="Cod." field="idEquipamiento" styleClass="textoCentrado" [style]="{'width':'40px'}"></p-column>
+                                    <p-column header="Equipamiento básico" field="auxEquipamiento"></p-column>
+                                    <p-column header="" styleClass="textoCentrado" [style]="{'width':'40px'}">
+                                        <ng-template let-tx="rowData" pTemplate="body">
+                                            <div class="ui-g">
+                                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                                    <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarEquipamiento(tx.idEquipamiento)"></i>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-fieldset>
+            <p-fieldset legend="Referencia Familiar" *ngIf="tipoFUN == BENEFICIARIO_TIPO_NNA || tipoFUN == BENEFICIARIO_TIPO_ALL">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Datos del padre</h4>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.padreNombre" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>DNI</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.padreNroDocumento" maxlength="8" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Vive</label>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="Si" name="ViveP" value="S" [(ngModel)]="bean.padreIdVive" [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="No" name="ViveP" value="N" [(ngModel)]="bean.padreIdVive" [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-12 ui-md ui-lg-4">
+
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Ocupación</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaOcupacion"
+                            [(ngModel)]="bean.padreIdOcupacion" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Datos de la madre</h4>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.madreNombre" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>DNI</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.madreNroDocumento" maxlength="8" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Vive</label>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="Si" name="ViveM" value="S" [(ngModel)]="bean.madreIdVive" [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="No" name="ViveM" value="N" [(ngModel)]="bean.madreIdVive" [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-12 ui-md ui-lg-4">
+
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Ocupación</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [options]="listaOcupacion"
+                            [(ngModel)]="bean.madreIdOcupacion" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Nombre del/la apoderado</h4>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoNombre" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>DNI</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoNroDocumento" maxlength="8" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre del esposo/a</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoEsposoa" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Ingreso familiar mensual</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <input pInputText type="number" [(ngModel)]="bean.ingresoMensual" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+
+                <div class="ui-g" *ngIf="conBeneficiarios">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Personas que viven en la casa y que dependa del/la
+                            jefe/a de familia</h4>
+                    </div>
+                </div>
+                <div class="ui-g" *ngIf="conBeneficiarios">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="beanPsEntidadPariente.pariente" maxlength="70"
+                            disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g" *ngIf="conBeneficiarios">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Parentesco</label>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-2">
+                        <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="beanPsEntidadPariente.idParentesco"
+                            [options]="listaParentesco" [disabled]="!hacerCambios"></p-dropdown>
+                    </div>
+                    <div class="ui-g ui-md ui-lg-3">
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <button type="button" pButton [label]="agregarParienteBoton" (click)="agregarPariente()"
+                            [disabled]="!hacerCambios"></button>
+                    </div>
+                </div>
+                <div class="ui-g" *ngIf="conBeneficiarios">
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <p-dataTable [responsive]="true" emptyMessage="No se encontraron registros" [value]="bean.listaPariente">
+                            <p-column header="Nombre Completo" field="pariente"></p-column>
+                            <p-column header="Parentesco" [style]="{'width':'200px'}" field="auxParentesco"></p-column>
+                            <p-column header="" styleClass="textoCentrado" [style]="{'width':'40px'}">
+                                <ng-template let-tx="rowData" pTemplate="body">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12" title="Editar" *ngIf="hacerCambios">
+                                            <i class="fa fa-pencil fa-lg seleccionable" (click)="editarPariente(tx)"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-column>
+                            <p-column header="" styleClass="textoCentrado" [style]="{'width':'40px'}">
+                                <ng-template let-tx="rowData" pTemplate="body">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar" *ngIf="hacerCambios">
+                                            <i class="fa fa-trash fa-lg seleccionable" (click)="eliminarPariente(tx.idPariente)"></i>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-4">
+                        <label>Comentario Adicionales de Referencia Familiar</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 ui-lg-4">
+                        <textarea pInputTextarea style="width:100%" maxlength="500" [(ngModel)]="bean.comentariosReferenciaFamiliar"
+                            disabled="{{!hacerCambios}}"></textarea>
+                    </div>
+                </div>
+            </p-fieldset>
+            <p-fieldset legend="Referencia Familiar" *ngIf="tipoFUN == BENEFICIARIO_TIPO_AAM">
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        <label>Es Pensionista?</label>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="Si" name="flgPensionista" value="S" [(ngModel)]="bean.flgPensionista"
+                            [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="No" name="flgPensionista" value="N" [(ngModel)]="bean.flgPensionista"
+                            [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-12 ui-md ui-lg-4">
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        <label>Tiene Familiares?</label>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="Si" name="flgFamiliares" value="S" [(ngModel)]="bean.flgFamiliares"
+                            [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                    <div class="ui-g-6 ui-md-3 ui-lg-1">
+                        <p-radioButton label="No" name="flgFamiliares" value="N" [(ngModel)]="bean.flgFamiliares"
+                            [disabled]="!hacerCambios"></p-radioButton>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2" *ngIf="bean.flgPensionista=='S'">
+                        <label>Monto de Ingreso</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2" *ngIf="bean.flgPensionista!='S'">
+                        <label>Monto de Ingreso</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <input pInputText type="number" [(ngModel)]="bean.ingresoMensual" disabled="{{bean.flgPensionista!='S'||!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Persona a cargo - Apoderado(a)</h4>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoNombre" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>DNI</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoNroDocumento" maxlength="8" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nro. Teléfono</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.telefono2" maxlength="11" disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12">
+                        <h4 style="text-decoration: underline">Datos del esposo(a)</h4>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>Nombre Completo</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-6">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoEsposoa" maxlength="70" disabled="{{!hacerCambios}}" />
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <label>DNI</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <input pInputText type="text" [(ngModel)]="bean.apoderadoEsposoaNroDocumento" maxlength="8"
+                            disabled="{{!hacerCambios}}" />
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <label>Comentario Adicionales de Referencia Familiar</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <textarea pInputTextarea style="width:100%" maxlength="500" [(ngModel)]="bean.comentariosReferenciaFamiliar"
+                            disabled="{{!hacerCambios}}"></textarea>
+                    </div>
+                </div>
+            </p-fieldset>
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar" (click)="guardar()"></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-8">
+
+
+
+                </div>
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()" style="width:100%"></button>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g ui-md-3 ui-lg-4">
+
+                </div>
+                <div class="ui-g-12 ui-md-3 ui-lg-2">
+                    <button pButton type="button" icon="fa fa-arrow-left" style="width:100%" label="Atras" (click)="prevTab()"></button>
+                </div>
+                
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+<app-popup-mantenimiento (cargarSeleccionEvent)="buscarLista($event)"></app-popup-mantenimiento>
+
+<app-selector-ubicaciongeografica (block)="bloquearPagina()" (unBlock)="desbloquearPagina()" (cargarSeleccionEvent)="cargarUbigeo($event)"></app-selector-ubicaciongeografica>

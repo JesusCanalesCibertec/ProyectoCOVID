@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.pscomponente
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+ <sql-query name="psantencion.listarPaginacion">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ListarRAS2
+        :p_nombreCompleto,
+        :p_fecha_inicio,
+        :p_fecha_fin,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+        :p_area,
+        :p_sexo,
+        :p_tipoRas
+
+       ]]>
+  </sql-query>
+
+  <sql-query name="psantencion.listarPaginacionConsulta">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ConsultarRAS
+        :p_nombreCompleto,
+        :p_fecha_inicio,
+        :p_fecha_fin,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+        :p_area,
+        :p_sexo,
+        :p_tipoRas,
+        :p_idDiagnostico,
+		:p_orden,
+		:p_sentido
+
+       ]]>
+  </sql-query>
+
+  <sql-query name="psantencion.eliminarAtenciones">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_EliminarAtenciones
+         :p_institucion,
+         :p_idAtencion
+       
+
+       ]]>
+  </sql-query>
+
+
+</hibernate-mapping>

@@ -1,0 +1,179 @@
+<div class="ui-fluid" #frm>
+    <p-panel header="Consultar Ficha Unica de RRHH (FURH)">
+        <p-fieldset legend="Filtros">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Institución</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion" [options]="listaInstitucion"
+                        [(ngModel)]="filtro.idInstitucion" (onChange)="cargarProgramaArea()"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md ui-lg-2"></div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Área</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown [autoWidth]="false" [options]="listaArea" [(ngModel)]="filtro.idAreaTrabajo">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Nombre Completo</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombrecompleto" />
+                </div>
+                <div class="ui-g-12 ui-md ui-lg-2"></div>
+                <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Con Usuario</label>
+                </div>
+                <div class="ui-g-8 ui-md-1 ui-lg-1">
+                    <p-checkbox [(ngModel)]="filtro.conusuario" binary="true"></p-checkbox>
+                </div>
+
+
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Nivel Académico</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown [autoWidth]="false" (onChange)="obtenerEspecialidadAcademica()"
+                        [options]="listaNivelAcademico" [(ngModel)]="filtro.idNivelAcademico"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md ui-lg-2"></div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Especialidad Académica</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown [autoWidth]="false" [options]="listaEspecialidadAcademica"
+                        [(ngModel)]="filtro.idEspecialidadAcademica"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2 controlEtiquetaDivTop">
+                    <label>Estado</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [autoWidth]="false" [options]="listaEstados" [(ngModel)]="filtro.estado"></p-dropdown>
+                </div>
+
+
+                <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                </div>
+
+                <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                    <label>Orden por</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-2">
+                    <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.orden" [options]="listaOrden"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                    <label>Sentido</label>
+                </div>
+                <div class="ui-g-12 ui-md-4 ui-lg-2">
+                    <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.sentido" [options]="listaSentido">
+                    </p-dropdown>
+                </div>
+            </div>
+        </p-fieldset>
+    </p-panel>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button" (click)='nuevo()'></button>
+        </div>
+        <div class="ui-g-1 ui-md-5 ui-lg-5"></div>
+
+        <div class="ui-g-5 ui-md-3 ui-lg-3">
+            <button pButton label="Export Excel" icon="fa fa-table" type="button" class="ui-button"
+                (click)="export()"></button>
+        </div>
+
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Buscar" icon="fa fa-binoculars" type="button" class="ui-button"
+                (click)="buscar(dtfurh)"></button>
+        </div>
+    </div>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-dataTable #dtfurh scrollable="true" [rows]="registrosDevolver" emptyMessage="No se encontraron registros"
+                [paginator]="true" [lazy]="true" [totalRecords]="filtro.paginacion.registroEncontrados"
+                (onLazyLoad)="cargarFurh($event)" [value]="filtro.paginacion.listaResultado" [responsive]="true">
+
+                <p-column header="Nro" field="idEntidad" styleClass="textoCentrado" [style]="{'width':'70px'}">
+                </p-column>
+                <p-column header="Nombre Completo" field="nombrecompleto" [style]="{'width':'300px'}"></p-column>
+                <p-column header="Fecha de Ingreso" styleClass="textoCentrado" [style]="{'width':'150px'}">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.fechaIngreso | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Tiempo de Permanencia" [style]="{'width':'200px'}" field="tiempoPermanencia"
+                    styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.fechaIngreso | edadCompleta}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Nivel Académico" field="idNivelAcademicoNombre" [style]="{'width':'120px'}">
+                </p-column>
+                <p-column header="Especialidad Académica" field="idEspecialidadAcademicaNombre"
+                    [style]="{'width':'120px'}"></p-column>
+                <p-column header="Estado" field="estadoNombre" [style]="{'width':'100px'}"></p-column>
+
+                <p-column header="Acción" [style]="{'width':'80px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Editar">
+                                <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Ver">
+                                <i class="fa fa-eye fa-lg seleccionable" (click)="ver(tx)"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Anular">
+                                <i class="fa fa-trash fa-lg seleccionable" (click)="anular(tx)"></i>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-column>
+
+
+            </p-dataTable>
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+        </div>
+    </div>
+
+</div>
+
+<p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+    <p-footer>
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-confirmDialog>
+
+<app-empleadomast-selector (cargarSeleccionEvent)="cargarEmpleado($event)" (block)="bloquearPagina()"
+    (unBlock)="desbloquearPagina()"></app-empleadomast-selector>

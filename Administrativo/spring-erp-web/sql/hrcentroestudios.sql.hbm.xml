@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrCentroestudios
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrcentroestudios.listarBusquedaContar">
+    	<![CDATA[
+         select	count(1)
+				from Hr_Centroestudios ce
+			where ce.Centro = isnull(:p_id_centro_estudios,ce.centro)
+			and ce.Descripcion like '%' + isnull(:p_nombre,ce.descripcion) + '%'
+			and isnull(ce.Estado,'A') = isnull(:p_id_estado,ISNULL(ce.estado,'A'))
+		]]>
+    </sql-query>
+    
+    <sql-query name="hrcentroestudios.listarBusquedaPaginacion">
+    	<![CDATA[
+         select ce.Centro as "idCentroEstudios"
+				,ce.Descripcion as "nombre"
+				,ISNULL(cast(ce.Estado as varchar(1)),'A') as "estadoId"
+				,'' as "estadoNombre", ROW_NUMBER() OVER (ORDER BY ce.Centro) AS Seq
+			from Hr_Centroestudios ce
+			where ce.Centro = isnull(:p_id_centro_estudios,ce.centro)
+			and ce.Descripcion like '%' + isnull(:p_nombre,ce.descripcion) + '%'
+			and isnull(ce.Estado,'A') = isnull(:p_id_estado,ISNULL(ce.estado,'A'))
+		]]>
+    </sql-query>
+    
+</hibernate-mapping>

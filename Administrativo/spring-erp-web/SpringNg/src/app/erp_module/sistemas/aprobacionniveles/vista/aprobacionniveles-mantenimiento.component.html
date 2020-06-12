@@ -1,0 +1,254 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+
+    <div class="ui-g">
+        <div class="ui-g-4 ui-md-2 ui-lg-1">
+            <button pButton label="Grabar" icon="fa fa-save" type="button" (click)="guardar()"></button>
+        </div>
+        <div class="ui-g-4 ui-md-8 ui-lg-10">
+        </div>
+        <div class="ui-g-4 ui-md-2 ui-lg-1">
+            <button pButton label="Salir" icon="fa fa-mail-reply" type="button" (click)="salir()"></button>
+        </div>
+    </div>
+    <p-panel header="Edición de Niveles de Aprobación">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Aplicación
+                    <span style="color:#ff0000">*</span>
+                </label>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-dropdown [options]="lstAplicacion" (onChange)="cargarProcesos()" [(ngModel)]="nivel.aplicacion"
+                    [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Código</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <input pInputText type="text" disabled [(ngModel)]="nivel.codigo" />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Proceso
+                    <span style="color:#ff0000">*</span>
+                </label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-dropdown [options]="lstProceso" [style]="{'width':'100%'}" [autoWidth]="false"
+                    [(ngModel)]="nivel.codigoproceso"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Descripción</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <input pInputText type="text" [(ngModel)]="nivel.descripcion" />
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Nro. Niveles</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <input pInputText type="number" disabled [(ngModel)]="nivel.nroniveles" />
+            </div>
+        </div>
+        <br>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-checkbox label="Solo para el usuario" [(ngModel)]="nivel.flagusuariosuperB" binary="true"
+                    (onChange)="chkUsuarioOnChange()"></p-checkbox>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input pInputText type="text" disabled [ngModel]="nivel.auxUsuarioNombre" />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button *ngIf="nivel.flagusuariosuperB" pButton icon="fa fa-binoculars" class="ui-button"
+                    type="button" (click)="mostrarSelectorEmpleado('U')"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button *ngIf="nivel.flagusuariosuperB" pButton label="Correos" class="ui-button"
+                    type="button" (click)="mostrarCorreo('C')"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-checkbox *ngIf="nivel.flagusuariosuperB" label="a Superior" [(ngModel)]="nivel.flagsuperiorB"
+                    binary="true"></p-checkbox>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-checkbox *ngIf="nivel.flagusuariosuperB" label="a Solicitante" [(ngModel)]="nivel.flagsolicitanteB"
+                    binary="true"></p-checkbox>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <p-checkbox label="Usuario Adminstrador" [(ngModel)]="nivel.flagusuarioadministradorB"
+                    binary="true" (onChange)="chkAdminOnChange()"></p-checkbox>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-radioButton name="groupname" value="A" label="Activo" [(ngModel)]="nivel.estado"
+                    [disabled]="accion == ACCIONES.NUEVO"></p-radioButton>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-radioButton name="groupname" value="I" label="Inactivo" [(ngModel)]="nivel.estado"
+                    [disabled]="accion == ACCIONES.NUEVO"></p-radioButton>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input pInputText type="text" disabled [ngModel]="nivel.auxUsuarioAdmNombre" />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton *ngIf="nivel.flagusuarioadministradorB" icon="fa fa-binoculars" class="ui-button"
+                    type="button" (click)="mostrarSelectorEmpleado('A')"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>última Modif.</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <input pInputText type="text" disabled [(ngModel)]="nivel.ultimousuario" />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200"
+                    [locale]="es" [showIcon]="true" disabled dateFormat="dd/mm/yy" [(ngModel)]="nivel.ultimafechamodif"></p-calendar>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                Confirmación de Solicitudes
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton label="Correos" class="ui-button" type="button" (click)="mostrarCorreo('AR')"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-checkbox label="a Superior" [(ngModel)]="nivel.nivel0FlagsuperiorB" binary="true"></p-checkbox>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-checkbox label="a Solicitante" [(ngModel)]="nivel.nivel0FlagsolicitanteB" binary="true"></p-checkbox>
+            </div>
+        </div>
+    </p-panel>
+    <br>
+    <p-panel header="Niveles">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-10">
+                <label style="font-weight: bold;">Usuarios del nivel {{lvl.auxCodigo}}</label>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton class="ui-button" type="button" label="Agregar" (click)="agregarNivel()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton class="ui-button" type="button" label="Quitar" (click)="quitarNivelB()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton class="ui-button" type="button" label="Insertar Linea" (click)="mostrarSelectorEmpleado('NL')"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton class="ui-button" type="button" label="Aprobación por jefe directo" (click)="asignarJefeDirecto()"></button>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+
+                <p-dataTable (onRowUnselect)="onRowUnselect($event)" (onRowSelect)="onRowSelect($event)"
+                    [value]="nivel.listaNiveles" selectionMode="single" [(selection)]="lvl"
+                    emptyMessage="No se encontraron registros" scrollable="true" scrollHeight="200px">
+                    <p-column field="nombre" header="Nivel"></p-column>
+                </p-dataTable>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-10">
+                <p-dataTable #datatable [value]="lstDetalle" scrollable="true" [responsive]="true"
+                    scrollWidth="100%" emptyMessage="No se encontraron registros">
+                    <p-column header="Acción" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Quitar">
+                                    <i class="fa fa-times seleccionable" (click)="quitarNivel(tx)"></i>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                    <p-column header="N°" field="auxSecuencia" styleClass="textoCentrado" [style]="{'width':'50px'}"></p-column>
+                    <p-column header="Usuario" [style]="{'width':'200px'}" field="auxNombrePersona"></p-column>
+                    <p-column header="" styleClass="textoCentrado" [style]="{'width':'50px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <button pButton icon="fa fa-binoculars" class="ui-button" type="button" (click)="mostrarSelectorEmpleado(tx.auxSecuencia)"></button>
+                        </ng-template>
+                    </p-column>
+
+                    <p-column header="Correos" styleClass="textoCentrado" [style]="{'width':'130px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <button pButton label="Agregar / Ver" class="ui-button" type="button" (click)="mostrarCorreoDetalle(tx)"></button>
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Solicitante" styleClass="textoCentrado" [style]="{'width':'120px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <p-radioButton name="g2{{tx.nivel}}{{tx.auxSecuencia}}" value="S" label="Si" [(ngModel)]="tx.flagsolicitante"></p-radioButton>
+                            <p-radioButton name="g2{{tx.nivel}}{{tx.auxSecuencia}}" value="N" label="No" [(ngModel)]="tx.flagsolicitante"></p-radioButton>
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Superior" styleClass="textoCentrado" [style]="{'width':'120px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <p-radioButton name="g3{{tx.nivel}}{{tx.auxSecuencia}}" value="S" label="Si" [(ngModel)]="tx.flagsuperior"></p-radioButton>
+                            <p-radioButton name="g3{{tx.nivel}}{{tx.auxSecuencia}}" value="N" label="No" [(ngModel)]="tx.flagsuperior"></p-radioButton>
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Unidad de Trabajo" styleClass="textoCentrado" [style]="{'width':'150px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <p-radioButton name="g1{{tx.nivel}}{{tx.auxSecuencia}}" value="S" label="Si" [(ngModel)]="tx.flagarea"></p-radioButton>
+                            <p-radioButton name="g1{{tx.nivel}}{{tx.auxSecuencia}}" value="N" label="No" [(ngModel)]="tx.flagarea"></p-radioButton>
+                            <button *ngIf="tx.flagarea == 'N'" pButton icon="fa fa-binoculars" class="ui-button"
+                                type="button" (click)="mostrarSelectorJefatura(tx)"></button>
+                        </ng-template>
+                    </p-column>
+
+                    <p-column header="Unidad de Trabajo" field="area" [style]="{'width':'250px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            {{tx.area}}
+                        </ng-template>
+                    </p-column>
+
+                    <p-column header="Filtro Adicional" styleClass="textoCentrado" [style]="{'width':'150px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <button *ngIf="verMotivoRequerimiento" label="Motivo" pButton icon="fa fa-binoculars"
+                                class="ui-button" type="button" (click)="mostrarSelectorMotivos(tx)"></button>
+                        </ng-template>
+                    </p-column>
+
+                </p-dataTable>
+            </div>
+        </div>
+
+    </p-panel>
+</div>
+
+<app-empleadomast-selector (cargarSeleccionEvent)="cargarEmpleado($event)" (block)="bloquearPagina()"
+    (unBlock)="desbloquearPagina()"></app-empleadomast-selector>
+<app-hr-departamento-selector (cargarDataEvent)="cargarAreas($event)"></app-hr-departamento-selector>
+
+<correo-mantenimiento (cargarDataEvent)="cargarCorreosDetalle($event)" (cargarCabeceraEvent)="cargarCorreosCabecera($event)"
+    (cargarDataConfirmacionEvent)="cargarCorreosConfirmacion($event)"></correo-mantenimiento>
+<p-confirmDialog key="eliminarNivel" #c>
+    <p-footer>
+        <button type="button" pButton icon="fa fa-check" label="Si" (click)="c.accept()"></button>
+        <button type="button" pButton icon="fa fa-close" label="No" (click)="c.reject()"></button>
+    </p-footer>
+</p-confirmDialog>

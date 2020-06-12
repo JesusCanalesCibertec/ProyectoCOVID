@@ -1,0 +1,40 @@
+
+
+<div class="ui-fluid">
+    <p-dialog header="SYREPORTE ARCHIVO" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size" [style]="{'max-width':'500px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="">
+            <!-- <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-4">
+                    <p-fileUpload #fotoFile mode="basic" url="{{api}}api/spring/core/companyownerimagenes/procesa" (onUpload)="onUpload($event)"
+                        auto="true" maxFileSize="1000000" (onBeforeSend)="appendHeaders($event)" name="myfile" chooseLabel="Subir Archivo"
+                        [disabled]="estadoRegistrado">
+                    </p-fileUpload>
+                </div>
+            </div> -->
+
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-3">
+                    <label>Nombre Archivo</label>
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-5">
+                    <input pInputText type="text" [(ngModel)]="nombreArchivo" disabled/>
+                </div>
+            </div>
+            
+
+        </p-panel>
+
+        <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-3">
+                    <button pButton label="Guardar" icon="fa fa-save" type="button" class="ui-button" (click)="guardar()"></button>
+                </div>
+
+                <div class="ui-g-4 ui-md-8 ui-lg-6"></div>
+                <div class="ui-g-4 ui-md-2 ui-lg-3">
+                    <button pButton label="Salir" icon="fa fa-mail-reply" type="button" class="ui-button" (click)="verSelector=false"></button>
+                </div>
+
+            </div>
+    </p-dialog>
+</div>

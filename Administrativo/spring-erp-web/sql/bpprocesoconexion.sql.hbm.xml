@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query
+		name="bpprocesoconexion.listarPorProcesoVersionElementoEntradaUsuario">
+		SELECT 
+		PC.ID_PROCESO as 'idProceso', 
+		PC.ID_VERSION as 'idVersion',
+		PC.ID_CONEXION as 'idConexion'
+		from
+		sgseguridadsys.BP_PROCESO_CONEXION
+		PC
+		INNER JOIN
+		sgseguridadsys.BP_MAE_PROCESO_ELEMENTO PE
+		ON
+		PC.ENTRADA_ID_PROCESO=PE.ID_PROCESO AND
+		PC.ENTRADA_ID_ELEMENTO=PE.ID_ELEMENTO
+		INNER JOIN
+		sgseguridadsys.BP_MAE_PROCESO_ROL PR
+		ON PE.ID_PROCESO=PR.ID_PROCESO AND
+		PE.ID_ROL=PR.ID_ROL
+		WHERE
+		PC.ID_PROCESO=:p_id_proceso AND
+		PC.ID_VERSION=:p_id_version
+		AND PC.ENTRADA_ID_PROCESO=:p_id_proceso AND
+		PC.ENTRADA_ID_ELEMENTO=:p_id_elemento_entrada
+		AND (
+		(PR.ID_TIPO_SEGURIDAD='TODOS' AND PE.ID_NIVEL_SEGURIDAD='TODOS') OR
+
+		(PE.ID_NIVEL_SEGURIDAD='SOLOSOLICITANTE' AND
+		:p_transaccion_id_solicitante = :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='SOLOAPROBADOR' AND :p_transaccion_id_aprobador
+		= :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='SOLORESPONSABLE'
+		AND :p_transaccion_id_responsable = :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='SOLICI_Y_RESPON' AND
+		:p_transaccion_id_solicitante = :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='SOLICI_Y_RESPON' AND
+		:p_transaccion_id_responsable = :p_session_id_persona ) OR
+
+
+		(PE.ID_NIVEL_SEGURIDAD='INCLUIRSOLICITA' AND
+		:p_transaccion_id_solicitante = :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='INCLUIRAPROBADO' AND
+		:p_transaccion_id_aprobador = :p_session_id_persona ) OR
+		(PE.ID_NIVEL_SEGURIDAD='INCLUIRRESPONSA' AND
+		:p_transaccion_id_responsable = :p_session_id_persona )
+		)
+
+		UNION
+		SELECT
+		PC2.ID_PROCESO as 'idProceso', PC2.ID_VERSION as 'idVersion',
+		PC2.ID_CONEXION as 'idConexion'
+		from sgseguridadsys.BP_PROCESO_CONEXION
+		PC2
+		INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO PE2
+		ON
+		PC2.ENTRADA_ID_PROCESO=PE2.ID_PROCESO AND
+		PC2.ENTRADA_ID_ELEMENTO=PE2.ID_ELEMENTO
+		INNER JOIN
+		sgseguridadsys.BP_MAE_PROCESO_ROL PR2
+		ON PE2.ID_PROCESO=PR2.ID_PROCESO
+		AND PE2.ID_ROL=PR2.ID_ROL
+		INNER JOIN
+		sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO PRU2
+		ON
+		PR2.ID_PROCESO=PRU2.ID_PROCESO AND PR2.ID_ROL=PRU2.ID_ROL AND
+		PR2.ID_TIPO_SEGURIDAD=PRU2.ID_TIPO_SEGURIDAD
+		WHERE
+		PC2.ID_PROCESO=:p_id_proceso AND PC2.ID_VERSION=:p_id_version
+		AND
+		PC2.ENTRADA_ID_PROCESO=:p_id_proceso AND
+		PC2.ENTRADA_ID_ELEMENTO=:p_id_elemento_entrada
+		AND (
+		(PR2.ID_TIPO_SEGURIDAD='USUARIO' AND PE2.ID_NIVEL_SEGURIDAD='TODOS'
+		AND PRU2.ID_USUARIO = :p_session_id_usuario ) OR
+		(PR2.ID_TIPO_SEGURIDAD='RRHHPUESTO' AND PE2.ID_NIVEL_SEGURIDAD='TODOS'
+		AND PRU2.ID_PUESTO = :p_session_id_puesto ) OR
+		(PR2.ID_TIPO_SEGURIDAD='CCSOLI_RHPUESTO' AND
+		PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PRU2.ID_CENTRO_COSTOS =
+		:p_transaccion_solicitante_id_centrocostos
+		AND PRU2.ID_PUESTO = :p_session_id_puesto) OR
+		(PR2.ID_TIPO_SEGURIDAD='SUCSOL_RHPUESTO' AND 
+		PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PRU2.ID_SUCURSAL = :p_transaccion_solicitante_id_sucursal
+		AND PRU2.ID_PUESTO = :p_session_id_puesto)
+		)
+
+	</sql-query>
+	
+	<sql-query name="bpprocesoconexion.filtro">
+	     select 
+			a.ID_PROCESO,
+			b.NOMBRE as nomProceso,
+			a.ID_CONEXION,
+			a.ID_UNICO,
+			a.ACCION,
+			a.ENTRADA_ID_ELEMENTO,
+			c.NOMBRE,
+			a.SALIDA_ID_ELEMENTO,
+			d.NOMBRE,
+			a.ID_VERSION,
+			ROW_NUMBER() OVER (ORDER BY a.ID_CONEXION desc) AS Seq
+			from sgseguridadsys.BP_PROCESO_CONEXION a 
+				left join sgseguridadsys.BP_MAE_PROCESO b on a.ID_PROCESO = b.ID_PROCESO
+				left join sgseguridadsys.BP_MAE_PROCESO_ELEMENTO c on a.ENTRADA_ID_ELEMENTO = c.ID_ELEMENTO and a.ENTRADA_ID_PROCESO = c.ID_PROCESO
+				left join sgseguridadsys.BP_MAE_PROCESO_ELEMENTO d on a.SALIDA_ID_ELEMENTO = d.ID_ELEMENTO and a.SALIDA_ID_PROCESO = d.ID_PROCESO
+			where 
+			a.ID_PROCESO like '%' +  isnull(:p_IdProceso, '') + '%'
+   </sql-query>
+</hibernate-mapping>

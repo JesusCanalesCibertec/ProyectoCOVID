@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.hrsolicitudgeneral -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrsolicitudgeneral.solicitudListarContar">
+    	<![CDATA[
+			select	COUNT(1)
+			from hr_solicitudGeneral s
+				inner join PersonaMast p
+					on s.EmpleadoSolicitante=p.Persona
+				inner join as_TipoHorario th
+					on s.tipohorario = th.TipoHorario
+				LEFT JOIN MA_MiscelaneosDetalle ES
+								on es.AplicacionCodigo='HR' and ES.CodigoTabla = 'SLGENESTAD' AND ES.CodigoElemento = s.Estado
+			where S.EMPLEADOSOLICITANTE = :p_id_solicitante 
+			and ISNULL(S.estado, '0') = ISNULL(:p_id_estado, ISNULL(S.estado, '0'))
+			and S.fechasolicitud >= isnull(:p_desde, '1753-01-01') 
+			and S.fechasolicitud <= isnull(:p_hasta, '9999-12-30')			
+		]]>
+	</sql-query>
+
+	<sql-query name="hrsolicitudgeneral.solicitudListarPaginacion">
+    	<![CDATA[
+			select	s.numeroproceso as "numeroproceso"
+				,s.fechasolicitud as "fechasolicitud"
+				,p.Persona as "solicitanteId"
+				,p.NombreCompleto as "solicitanteNombre"
+				,s.TipoHorario as "tipohorarioId"
+				,th.DescripcionLocal as "tipohorarioNombre"
+				,s.estado as "estadoId"
+				,es.DescripcionLocal as "estadoNombre"
+				,s.codigoproceso, ROW_NUMBER() OVER (ORDER BY S.fechasolicitud desc, numeroproceso desc) AS Seq
+			from hr_solicitudGeneral s
+				inner join PersonaMast p
+					on s.EmpleadoSolicitante=p.Persona
+				inner join as_TipoHorario th
+					on s.tipohorario = th.TipoHorario
+				LEFT JOIN MA_MiscelaneosDetalle ES
+								on es.AplicacionCodigo='HR' and ES.CodigoTabla = 'SLGENESTAD' AND ES.CodigoElemento = s.Estado
+			where S.EMPLEADOSOLICITANTE = :p_id_solicitante 
+			and ISNULL(S.estado, '0') = ISNULL(:p_id_estado, ISNULL(S.estado, '0'))
+			and S.fechasolicitud >= isnull(:p_desde, '1753-01-01') 
+			and S.fechasolicitud <= isnull(:p_hasta, '9999-12-30')	
+		]]>
+	</sql-query>
+<sql-query name="hrsolicitudgeneral.obtenerNumeroProceso">
+    	<![CDATA[
+		select isnull(max(numeroproceso),0)+1 codigo from HR_SolicitudGeneral where codigoproceso = :p_id_codigo
+	]]>
+	</sql-query>
+
+<sql-query name="hrsolicitudgeneral.tieneSolicitudesEnProceso">
+    	<![CDATA[
+		select COUNT(1) from HR_SolicitudGeneral 
+where 
+EmpleadoSolicitante = :p_empleado AND companiasocio = :p_compania
+and Estado in ('SO','AP')
+	]]>
+	</sql-query>	
+</hibernate-mapping>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrRequerimiento
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrrequerimiento.xxxxxx">
+         select sysdate from dual
+    </sql-query>
+    
+	<sql-query name="hrrequerimiento.solicitudListarParaPostulanteContar">
+    	<![CDATA[
+        SELECT	count(1)
+		FROM hr_requerimiento req
+			LEFT JOIN hr_puestoempresa AS pue 
+				ON req.codigopuesto = pue.codigopuesto 
+			LEFT JOIN PersonaMast PER 
+				ON REQ.EmpleadoSolicitante = PER.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST
+				ON EST.CodigoTabla='REQUEESTAD' AND EST.CodigoElemento=REQ.Estado		
+   WHERE
+      pue.Descripcion LIKE '%' + ISNULL(:p_puesto, '') + '%' and
+      req.estado in ('AP','TE','EV')
+		]]>
+    </sql-query>
+	
+	<sql-query name="hrrequerimiento.solicitudListarParaPostulantePaginacion">
+    	<![CDATA[
+         SELECT	req.Requerimiento as "Requerimiento"
+			,req.CompanyOwner as "Companyowner"
+			,req.codigopuesto as "PuestoId"
+			,pue.Descripcion as "PuestoNombre"
+			,req.FechaSolicitud as "FechaSolicitud"
+			,req.EmpleadoSolicitante as "EmpleadoSolicitanteId"
+			,cast(PER.NombreCompleto as  varchar) as "EmpleadoSolicitanteNombre"
+			,req.estado AS "EstadoId"
+			,EST.DescripcionLocal AS "EstadoNombre"
+			,REQ.NUMEROSOLICITADO AS "vacante"
+			,REQ.CENTROCOSTO
+			,CC.LOCALNAME
+		FROM hr_requerimiento req
+			LEFT JOIN hr_puestoempresa AS pue 
+				ON req.codigopuesto = pue.codigopuesto 
+			LEFT JOIN PersonaMast PER 
+				ON REQ.EmpleadoSolicitante = PER.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST
+				ON EST.CodigoTabla='REQUEESTAD' AND EST.CodigoElemento=REQ.Estado
+			LEFT JOIN  AC_COSTCENTERMST CC
+		        		ON REQ.CENTROCOSTO = CC.COSTCENTER
+    WHERE
+      pue.Descripcion LIKE '%' + ISNULL(:p_puesto, '') + '%' AND
+       req.estado in ('AP','TE','EV')
+		order by req.fechasolicitud desc
+		]]>
+	</sql-query>
+	
+	
+    <sql-query name="hrrequerimiento.solicitudListarContar">
+    	<![CDATA[
+        SELECT	count(1)
+		FROM hr_requerimiento req
+			LEFT JOIN hr_puestoempresa AS pue 
+				ON req.codigopuesto = pue.codigopuesto 
+			LEFT JOIN PersonaMast PER 
+				ON REQ.EmpleadoSolicitante = PER.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST
+				ON EST.CodigoTabla='REQUEESTAD' AND EST.CodigoElemento=REQ.Estado
+			LEFT JOIN  AC_COSTCENTERMST CC
+		        		ON REQ.CENTROCOSTO = CC.COSTCENTER
+		WHERE req.EmpleadoSolicitante = :p_id_solicitante  
+      and req.estado in (select CodigoElemento from MA_MiscelaneosDetalle where CodigoTabla = 'REQUEESTAD' AND valorcodigo1='S')
+			and req.estado = isnull(:p_id_estado, req.estado)
+				and req.FechaSolicitud >= isnull(:p_desde, '1753-01-01') and 
+							req.FechaSolicitud <= isnull(:p_hasta, '9999-12-30') 
+		
+		]]>
+    </sql-query>
+    
+    <sql-query name="hrrequerimiento.solicitudListarPaginacion">
+    	<![CDATA[
+         SELECT	req.Requerimiento as "Requerimiento"
+			,req.CompanyOwner as "Companyowner"
+			,req.codigopuesto as "PuestoId"
+			,pue.Descripcion as "PuestoNombre"
+			,req.FechaSolicitud as "FechaSolicitud"
+			,req.EmpleadoSolicitante as "EmpleadoSolicitanteId"
+			,cast(PER.NombreCompleto as  varchar) as "EmpleadoSolicitanteNombre"
+			,req.estado AS "EstadoId"
+			,EST.DescripcionLocal AS "EstadoNombre"
+			,REQ.NUMEROSOLICITADO AS "vacante"
+			,REQ.CENTROCOSTO
+			,CC.LOCALNAME, (select count(1) from hr_Posrequer a join HR_postulantes b on a.postulante = b.postulante where a.Requerimiento = req.Requerimiento  and a.companyowner = req.CompanyOwner) c, ROW_NUMBER() OVER (ORDER BY  req.fechasolicitud desc) AS Seq
+		FROM hr_requerimiento req
+			LEFT JOIN hr_puestoempresa AS pue 
+				ON req.codigopuesto = pue.codigopuesto 
+			LEFT JOIN PersonaMast PER 
+				ON REQ.EmpleadoSolicitante = PER.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST
+				ON EST.CodigoTabla='REQUEESTAD' AND EST.CodigoElemento=REQ.Estado
+			LEFT JOIN  AC_COSTCENTERMST CC
+		        		ON REQ.CENTROCOSTO = CC.COSTCENTER
+		WHERE req.EmpleadoSolicitante = :p_id_solicitante 
+		and req.estado = isnull(:p_id_estado, req.estado)
+        and req.estado in (select CodigoElemento from MA_MiscelaneosDetalle where CodigoTabla = 'REQUEESTAD' AND valorcodigo1='S')
+				and req.FechaSolicitud >= isnull(:p_desde, '1753-01-01') and 
+							req.FechaSolicitud <= isnull(:p_hasta, '9999-12-30') 
+		]]>
+	</sql-query>
+	 <sql-query name="hrrequerimiento.generarcodigo">
+           SELECT Rtrim(:unidad) 
+                               + Substring('000000' + Cast((Isnull(Max(Cast( 
+                               Substring( 
+                                      requerimiento, 5, 6) AS INT)), 0)+ 1) AS 
+                               VARCHAR 
+                               (50)), 
+                                      Len(Cast((Isnull(Max(Cast(Substring( 
+                               requerimiento, 5, 6 
+                                      ) AS INT)), 1)+ 1) AS VARCHAR(50))) + 1, 6 
+                               ) "codigo"
+										  FROM   hr_requerimiento 
+      WHERE  requerimiento LIKE Rtrim(:unidad) + '%'
+    </sql-query>	
+
+
+    <sql-query name="hrrequerimiento.solicitudListarContarPre">
+    	<![CDATA[
+        SELECT	count(1)
+		    FROM hr_requerimiento req
+			    LEFT JOIN hr_puestoempresa AS pue 
+				    ON req.codigopuesto = pue.codigopuesto 
+			    LEFT JOIN PersonaMast PER 
+				    ON REQ.EmpleadoSolicitante = PER.Persona
+			    LEFT JOIN MA_MiscelaneosDetalle EST
+				    ON EST.CodigoTabla='REQUEESTAD' AND EST.CodigoElemento=REQ.Estado
+			    LEFT JOIN  AC_COSTCENTERMST CC
+		        		    ON REQ.CENTROCOSTO = CC.COSTCENTER
+	    WHERE
+		    req.EmpleadoSolicitante = :p_id_solicitante and         
+        req.estado in (select CodigoElemento from MA_MiscelaneosDetalle where CodigoTabla = 'REQUEESTAD' AND valorcodigo1='S') AND
+		    CAST(req.FechaSolicitud AS DATE) >= isnull(:p_desde, '1753-01-01') and 
+		    CAST(req.FechaSolicitud AS DATE) <= isnull(:p_hasta, '9999-12-30') AND 		
+		    (
+			    (req.estado = isnull(:p_id_estado, req.estado))
+		    )
+		]]>
+    </sql-query>
+    
+    <sql-query name="hrrequerimiento.solicitudListarPaginacionPre">
+    	<![CDATA[
+         SELECT		req.Requerimiento as "Requerimiento"
+			,req.CompanyOwner as "Companyowner"
+			,req.codigopuesto as "PuestoId"
+			,pue.Descripcion as "PuestoNombre"
+			,req.FechaSolicitud as "FechaSolicitud"
+			,req.EmpleadoSolicitante as "EmpleadoSolicitanteId"
+			,cast(PER.NombreCompleto as  varchar) as "EmpleadoSolicitanteNombre"
+			,req.estado AS "EstadoId"
+			,ISNULL(EST.DescripcionLocal,EST2.DescripcionLocal) AS "EstadoNombre"
+			,REQ.NUMEROSOLICITADO AS "vacante"
+			,REQ.CENTROCOSTO
+			,CC.LOCALNAME, (select count(1) from hr_Posrequer a join HR_postulantes b on a.postulante = b.postulante where a.Requerimiento = req.Requerimiento  and a.companyowner = req.CompanyOwner) c, req.codigoproceso,ROW_NUMBER() OVER (ORDER BY  req.fechasolicitud desc) AS Seq
+		FROM hr_requerimiento req
+			LEFT JOIN hr_puestoempresa AS pue 
+				ON req.codigopuesto = pue.codigopuesto 
+			LEFT JOIN PersonaMast PER 
+				ON REQ.EmpleadoSolicitante = PER.Persona
+			LEFT JOIN MA_MiscelaneosDetalle EST
+				ON EST.CodigoTabla='PRREQESTAD' AND EST.CodigoElemento=REQ.Estado
+			LEFT JOIN MA_MiscelaneosDetalle EST2
+				ON EST2.CodigoTabla='REQUEESTAD' AND EST2.CodigoElemento=REQ.Estado
+			LEFT JOIN  AC_COSTCENTERMST CC
+		        		ON REQ.CENTROCOSTO = CC.COSTCENTER
+		WHERE 
+		
+		req.EmpleadoSolicitante = :p_id_solicitante and 
+    req.estado in (select CodigoElemento from MA_MiscelaneosDetalle where CodigoTabla = 'REQUEESTAD' AND valorcodigo1='S') AND
+		CAST(req.FechaSolicitud AS DATE) >= isnull(:p_desde, '1753-01-01') and 
+		CAST(req.FechaSolicitud AS DATE) <= isnull(:p_hasta, '9999-12-30') AND 
+		
+		(
+			(req.estado = isnull(:p_id_estado, req.estado))
+		)
+		]]>
+	</sql-query>	
+</hibernate-mapping>

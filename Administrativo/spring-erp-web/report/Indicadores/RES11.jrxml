@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES11" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="1.3310000000000128"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_PERIODO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PROGRAMA" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT
+SUBSTRING(X.ID_INSTITUCION,6,100) AS CODIGO, X.NOMBRE_INSTITUCION,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'ALL') AS POBLACION,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'AGUD      ') AS ENF_AGUD,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'CRON      ') AS ENF_CRON,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'DAGUD     ') AS ENF_DAGUD,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'DCRON     ') AS ENF_DCRON,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'DSINA     ') AS ENF_DSINA,
+(SELECT PORCENTAJE FROM ##tabla_temporal_res07 WHERE ID_INSTITUCION = X.ID_INSTITUCION AND ID_VALOR = 'SANO      ') AS ENF_SANO
+FROM ##tabla_temporal_res07 X]]>
+	</queryString>
+	<field name="CODIGO" class="java.lang.String"/>
+	<field name="NOMBRE_INSTITUCION" class="java.lang.String"/>
+	<field name="POBLACION" class="java.math.BigDecimal"/>
+	<field name="ENF_AGUD" class="java.math.BigDecimal"/>
+	<field name="ENF_CRON" class="java.math.BigDecimal"/>
+	<field name="ENF_DAGUD" class="java.math.BigDecimal"/>
+	<field name="ENF_DCRON" class="java.math.BigDecimal"/>
+	<field name="ENF_DSINA" class="java.math.BigDecimal"/>
+	<field name="ENF_SANO" class="java.math.BigDecimal"/>
+	<title>
+		<band height="127">
+			<rectangle>
+				<reportElement positionType="Float" x="276" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="b6da800a-1008-4ad9-a34e-264dc2dc29f2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="531" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="1ce825d0-7f17-4677-b9cb-b780e6a1d497"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="616" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="e3735aab-bd8f-4894-a633-0179c931dfa2"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="616" y="96" width="76" height="31" uuid="440be673-f03c-472f-addc-501b50778450"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Con discapacidad sin enfermedad aguda o crónica	]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="82" width="195" height="45" backcolor="#CCCCCC" uuid="3d4b2abe-e778-4c0e-b4f5-0b4b251ac73a"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="82" width="195" height="45" uuid="2c878ac9-67c2-4a02-91be-5cc143070aba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Instituciones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="25" width="802" height="25" uuid="b3036ded-7f8e-48d4-b976-2b95b3f2edc9"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RES11 - Acceden a diagnóstico y tratamiento atendidos fuera de la institución ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="361" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="4c3f7734-d5b0-4956-a40c-45524ea25f71"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="446" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="8db47afe-04d0-4cb8-b93b-3cb098111830"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="361" y="96" width="76" height="31" uuid="b12687b7-cebf-421a-800a-b096e183cf7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Enfermedad Crónica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="446" y="96" width="76" height="31" uuid="190a9306-c590-45d9-b195-8830c627fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Con discapacidad y enfermedad aguda	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="57" width="68" height="15" uuid="fba5b01e-6dba-47d6-acca-77b0fc984de1"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="84" y="57" width="80" height="15" uuid="270101b3-5b81-4422-ab23-79e474e714ca"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_PERIODO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="174" y="57" width="56" height="15" uuid="011ec072-8b0e-4c05-8518-f945ca325aa1">
+					<printWhenExpression><![CDATA[$P{ID_PROGRAMA}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="701" y="96" width="85" height="31" backcolor="#CCCCCC" uuid="aa244e98-bffa-4bd3-aa25-9be7733ad5d5"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="701" y="96" width="76" height="31" uuid="3d1cf818-623f-4131-ae71-5b0e1edd988b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="531" y="96" width="76" height="31" uuid="abdb8ad9-4251-4b56-93d3-db8a116c545b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Con discapacidad y enfermedad crónica	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="276" y="96" width="76" height="31" uuid="e5e5df86-bc43-4091-9b47-70602dbb905c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Enfermedad Aguda	]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="211" y="82" width="65" height="45" backcolor="#CCCCCC" uuid="29d16f45-84e9-43e5-b122-f1d74395bd12"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="211" y="82" width="65" height="45" uuid="ae510ff9-7797-4583-9ccc-127d213e80d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Cantidad de atenciones]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="276" y="82" width="510" height="15" backcolor="#CCCCCC" uuid="5164547a-fcf9-49c8-ab77-f7a77f82644e"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="276" y="82" width="510" height="15" uuid="1108bd65-9118-48dc-9542-5c6590d1674b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[% Estado de Salud]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="230" y="57" width="80" height="15" uuid="8ff4e399-4c17-4623-9bd3-70f35e5ab498"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_PERIODO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="389" y="57" width="80" height="15" uuid="c23dfad7-b388-4a2a-8fcc-9827043dd73b"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ID_PERIODO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="333" y="57" width="56" height="15" uuid="ee61c6e0-d520-47e2-b42f-bcb8a49c36a1">
+					<printWhenExpression><![CDATA[$P{ID_PROGRAMA}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Programa:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" x="446" y="0" width="85" height="15" uuid="6c2c3a6d-319e-4058-8850-4f26cda26090"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="361" y="0" width="85" height="15" uuid="8876152a-b1e9-4961-89b7-7790c3585ccb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="276" y="0" width="85" height="15" uuid="cb8f7abd-687b-430b-a711-698f3bd11035"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="701" y="0" width="85" height="15" uuid="a0b1fb44-9bc8-4702-bcfa-cc53894f33bc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="531" y="0" width="85" height="15" uuid="c51c0cf5-3006-4115-b77d-ba63182b666f"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="531" y="0" width="85" height="15" uuid="42325d74-a062-4cbc-ab3c-195ccf5549ca"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_DCRON}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="0" width="195" height="15" uuid="faa51e3d-54a7-42c1-b39d-7894b5b36076"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="616" y="0" width="85" height="15" uuid="b2911a6d-290f-4325-b103-98f3cb6fe4ba"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="616" y="0" width="85" height="15" uuid="fb21b17f-7f3a-446f-b27d-0ef2693ffd64"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_DSINA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="0" width="195" height="15" uuid="650047fc-9cc2-4729-a326-73544bb36f80"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE_INSTITUCION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="701" y="0" width="85" height="15" uuid="1863ec70-c30b-48ef-b8d9-24de2acc8631"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_SANO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="211" y="0" width="65" height="15" uuid="cebf999f-9947-48ed-b614-04afb153d4c1"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="211" y="0" width="65" height="15" uuid="86430b6d-a3ce-43ff-a188-f258ae771815"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{POBLACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="446" y="0" width="85" height="15" uuid="c1863d25-7d0a-4918-82fe-936efff59a36"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_DAGUD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="361" y="0" width="85" height="15" uuid="ef1f6ef5-193d-435a-9ca2-3953dd2f56b2"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_CRON}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="276" y="0" width="85" height="15" uuid="30f4c61d-368f-47d7-b652-eb218d67f02f"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENF_AGUD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

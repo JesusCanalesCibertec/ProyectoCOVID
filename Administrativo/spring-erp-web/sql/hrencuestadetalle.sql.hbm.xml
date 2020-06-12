@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrencuestadetalle.obtenerPreguntas">
+    	<![CDATA[
+		select A.pregunta, A.orden, 
+		CASE WHEN B.TIPO IN ('P', 'A') THEN 1 ELSE 0 END CONVALOR ,  
+		CASE WHEN B.TIPO IN ('C', 'A') THEN 1 ELSE 0 END CONCOMENTARIO, 
+		B.Descripcion, B.Tipo, b.area, b.requiereFlag , b.requierePregunta, b.requiereValor, a.grupo
+		from HR_EncuestaDetalle A JOIN
+		HR_EncuestaPregunta B ON A.Pregunta = B.Pregunta
+		where 
+		A.Secuencia = :p_secuencia and 
+		A.PERIODO = :p_periodo and 
+		A.companyowner = :p_compania
+		order by A.orden
+		]]>
+	</sql-query>	
+	<sql-query name="hrencuestadetalle.obtenerAreas">
+    	<![CDATA[
+				SELECT CodigoElemento, DescripcionLocal FROM MA_MiscelaneosDetalle WHERE CODIGOTABLA = 'AREAENCSAT'
+		AND CODIGOELEMENTO IN (
+		select isnull(b.area, 'SIN AREA') AREAS
+		from HR_EncuestaDetalle A JOIN
+		HR_EncuestaPregunta B ON A.Pregunta = B.Pregunta
+		where 
+		A.Secuencia = :p_secuencia and 
+		A.PERIODO = :p_periodo and 
+		A.companyowner = :p_compania)
+		union all
+		SELECT CodigoElemento, DescripcionLocal FROM MA_MiscelaneosDetalle WHERE CODIGOTABLA = 'ARGOINF'
+		AND CODIGOELEMENTO IN (
+		select isnull(b.area, 'SIN AREA') AREAS
+		from HR_EncuestaDetalle A JOIN
+		HR_EncuestaPregunta B ON A.Pregunta = B.Pregunta
+		where 
+		A.Secuencia = :p_secuencia and 
+		A.PERIODO = :p_periodo and 
+		A.companyowner = :p_compania)
+		union all
+		SELECT CodigoElemento, DescripcionLocal FROM MA_MiscelaneosDetalle WHERE CODIGOTABLA = 'AREASCLIMA'
+		AND CODIGOELEMENTO IN (
+		select isnull(b.area, 'SIN AREA') AREAS
+		from HR_EncuestaDetalle A JOIN
+		HR_EncuestaPregunta B ON A.Pregunta = B.Pregunta
+		where 
+		A.Secuencia = :p_secuencia and 
+		A.PERIODO = :p_periodo and 
+		A.companyowner = :p_compania)
+		
+		]]>
+	</sql-query>	
+	<sql-query name="hrencuestadetalle.eliminarPorEncuesta">
+		delete from HR_EncuestaDetalle where periodo = :p_periodo and companyowner = :p_compania and secuencia = :p_secuencia
+	</sql-query>
+</hibernate-mapping>

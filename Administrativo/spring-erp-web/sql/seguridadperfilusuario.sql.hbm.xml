@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="seguridadperfilusuario.filtroContar">
+	select count(1) 
+	from SEGURIDADPERFILUSUARIO seg
+	INNER JOIN minedu.PERSONA per on seg.USUARIO = per.USUARIO
+  </sql-query>
+
+
+  <sql-query name="seguridadperfilusuario.filtroPaginacion">
+ <![CDATA[
+ select 
+	 seg.PERFIL, 
+	 TRIM(seg.USUARIO) AS Usuario,
+	 per.NOMBRE+' '+per.APELLIDO  as Nombre,
+	 seg.ESTADO,
+	 seg.CREACION_FECHA, 
+	 seg.ULTIMA_CONEXION,
+	 ROW_NUMBER() OVER (ORDER BY per.NOMBRE) AS Seq
+		from SEGURIDADPERFILUSUARIO seg
+	INNER JOIN minedu.PERSONA per on seg.USUARIO = per.USUARIO
+	where seg.PERFIL <> 'ADMIN'
+	]]>
+  </sql-query>
+
+
+</hibernate-mapping>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.pscomponente
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="psentidad.filtroContar">
+    select
+    COUNT(1)
+    from sgseguridadsys.PS_ENTIDAD entidad
+    JOIN sgseguridadsys.PS_EMPLEADO empleado ON empleado.ID_EMPLEADO=entidad.ID_ENTIDAD
+    left JOIN MA_MiscelaneosDetalle empnivel ON empnivel.AplicacionCodigo='PS'
+    AND empnivel.CodigoTabla='EMPNIVELAC' AND empnivel.CodigoElemento=entidad.ID_NIVEL_ACADEMICO
+    LEFT JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'
+    AND detalle.CodigoTabla IN ('NIVACAPROF','NIVACATECN') AND detalle.CodigoElemento=entidad.ID_ESPECIALIDAD_ACADEMICA
+    left JOIN MA_MiscelaneosDetalle estado ON estado.AplicacionCodigo='PS'
+    AND estado.CodigoTabla='ESTADOBASI' AND estado.CodigoElemento=entidad.ESTADO
+    left JOIN MA_MiscelaneosDetalle tipo ON tipo.AplicacionCodigo='HR'
+    AND tipo.CodigoTabla='TIPODOCI' AND tipo.CodigoElemento=entidad.ID_TIPO_DOCUMENTO
+    LEFT JOIN sgseguridadsys.PS_INSTITUCION_AREA area ON area.ID_AREA=entidad.ID_AREA_TRABAJO
+    WHERE
+    ISNULL(entidad.ID_NIVEL_ACADEMICO,'XX')=ISNULL(:p_nivel,ISNULL(entidad.ID_NIVEL_ACADEMICO,'XX'))
+    AND ISNULL(entidad.ID_ESPECIALIDAD_ACADEMICA,'XX') =ISNULL(:p_especialidad,ISNULL(entidad.ID_ESPECIALIDAD_ACADEMICA,'XX'))
+    AND entidad.ESTADO=ISNULL(:p_estado,entidad.ESTADO)
+    and
+    (entidad.APELLIDO_PATERNO+' ' +entidad.APELLIDO_MATERNO +' '+entidad.NOMBRES like '%' + isnull(:p_empleado, '') + '%'
+
+    or
+    entidad.NOMBRES+' ' +entidad.APELLIDO_PATERNO +' '+entidad.APELLIDO_MATERNO like '%' + isnull(:p_empleado, '') + '%'
+    )
+    AND empleado.id_Institucion=:p_institucion
+	and isnull(entidad.ID_AREA_TRABAJO, 'sin') = isnull(:p_area, isnull(entidad.ID_AREA_TRABAJO, 'sin'))
+	and ((:p_conusuario=0 and empleado.CODIGOUSUARIO is null) or (:p_conusuario=1 and empleado.CODIGOUSUARIO is not null))
+
+  </sql-query>
+
+  <sql-query name="psentidad.filtroPaginacion">
+    select
+    entidad.ID_ENTIDAD,
+    entidad.APELLIDO_PATERNO,
+    entidad.APELLIDO_MATERNO,
+    entidad.NOMBRES,
+    entidad.NOMBRECOMPLETO,
+    empleado.FECHA_INGRESO,
+    entidad.ID_NIVEL_ACADEMICO,
+    entidad.ID_ESPECIALIDAD_ACADEMICA,
+    empnivel.DescripcionLocal,
+    detalle.DescripcionLocal,
+    estado.DescripcionLocal,
+    sgseguridadsys.FN_CalcularEdad(empleado.FECHA_INGRESO) fechaingreso,
+    empleado.id_Institucion,
+
+    entidad.CORREO1,
+    sgseguridadsys.FN_OBTENER_NOMBRE_MISCELANEO('FLAGSINO',entidad.ID_DISCAPACIDAD) discapacidad,
+    area.NOMBRE,
+    tipo.DescripcionLocal tipoDocumento,
+    entidad.DOCUMENTO,
+    entidad.FECHA_NACIMIENTO,
+    sgseguridadsys.FN_CalcularEdad(entidad.FECHA_NACIMIENTO) edad,
+
+    CASE entidad.ID_SEXO
+    WHEN 'F'THEN 'Femenino'
+    ELSE   'Masculino'
+    END sexo,
+    empleado.CODIGOUSUARIO,
+
+	  case 
+	
+	when :p_orden = 1 and isnull(:p_sentido, 1) = -1 then cast(ROW_NUMBER() OVER (ORDER BY nombrecompleto desc) as int)
+	when :p_orden = 1 and isnull(:p_sentido, 1) = 1 then cast(ROW_NUMBER() OVER (ORDER BY nombrecompleto asc) as int)
+
+	when :p_orden = 2 and isnull(:p_sentido, 1) = -1 then cast(ROW_NUMBER() OVER (ORDER BY FECHA_INGRESO desc) as int)
+	when :p_orden = 2 and isnull(:p_sentido, 1) = 1 then cast(ROW_NUMBER() OVER (ORDER BY FECHA_INGRESO asc) as int)
+
+	when :p_orden = 3 and isnull(:p_sentido, 1) = -1 then cast(ROW_NUMBER() OVER (ORDER BY  empnivel.DescripcionLocal desc) as int)
+	when :p_orden = 3 and isnull(:p_sentido, 1) = 1 then cast(ROW_NUMBER() OVER (ORDER BY  empnivel.DescripcionLocal asc) as int)
+
+	when :p_orden = 4 and isnull(:p_sentido, 1) = -1 then cast(ROW_NUMBER() OVER (ORDER BY  detalle.DescripcionLocal desc) as int)
+	when :p_orden = 4 and isnull(:p_sentido, 1) = 1 then cast(ROW_NUMBER() OVER (ORDER BY  detalle.DescripcionLocal asc) as int)
+
+	else cast( ROW_NUMBER() OVER (ORDER BY nombrecompleto) as int)
+	end as sec
+
+    from sgseguridadsys.PS_ENTIDAD entidad
+    JOIN sgseguridadsys.PS_EMPLEADO empleado ON empleado.ID_EMPLEADO=entidad.ID_ENTIDAD
+    left JOIN MA_MiscelaneosDetalle empnivel ON empnivel.AplicacionCodigo='PS'
+    AND empnivel.CodigoTabla='EMPNIVELAC' AND empnivel.CodigoElemento=entidad.ID_NIVEL_ACADEMICO
+    LEFT JOIN MA_MiscelaneosDetalle detalle ON detalle.AplicacionCodigo='PS'
+    AND detalle.CodigoTabla IN ('NIVACAPROF','NIVACATECN') AND detalle.CodigoElemento=entidad.ID_ESPECIALIDAD_ACADEMICA
+    left JOIN MA_MiscelaneosDetalle estado ON estado.AplicacionCodigo='PS'
+    AND estado.CodigoTabla='ESTADOBASI' AND estado.CodigoElemento=entidad.ESTADO
+    left JOIN MA_MiscelaneosDetalle tipo ON tipo.AplicacionCodigo='HR'
+    AND tipo.CodigoTabla='TIPODOCI' AND tipo.CodigoElemento=entidad.ID_TIPO_DOCUMENTO
+    LEFT JOIN sgseguridadsys.PS_INSTITUCION_AREA area ON area.ID_AREA=entidad.ID_AREA_TRABAJO  and area.ID_INSTITUCION =empleado.ID_INSTITUCION
+    WHERE
+    ISNULL(entidad.ID_NIVEL_ACADEMICO,'XX')=ISNULL(:p_nivel,ISNULL(entidad.ID_NIVEL_ACADEMICO,'XX'))
+    AND ISNULL(entidad.ID_ESPECIALIDAD_ACADEMICA,'XX') =ISNULL(:p_especialidad,ISNULL(entidad.ID_ESPECIALIDAD_ACADEMICA,'XX'))
+    AND entidad.ESTADO=ISNULL(:p_estado,entidad.ESTADO)
+    and
+    (entidad.APELLIDO_PATERNO+' ' +entidad.APELLIDO_MATERNO +' '+entidad.NOMBRES like '%' + isnull(:p_empleado, '') + '%'
+
+    or
+    entidad.NOMBRES+' ' +entidad.APELLIDO_PATERNO +' '+entidad.APELLIDO_MATERNO like '%' + isnull(:p_empleado, '') + '%'
+    )
+    AND empleado.id_Institucion=:p_institucion
+	and isnull(entidad.ID_AREA_TRABAJO, 'sin') = isnull(:p_area, isnull(entidad.ID_AREA_TRABAJO, 'sin'))
+	and ((:p_conusuario=0 and empleado.CODIGOUSUARIO is null) or (:p_conusuario=1 and empleado.CODIGOUSUARIO is not null))
+	order by sec
+	
+	
+  </sql-query>
+  
+  <sql-query name="psentidad.filtroPaginacion2">
+	select c.NOMBRE, b.APELLIDO_PATERNO, b.APELLIDO_MATERNO, b.NOMBRES, d.DescripcionLocal, b.DOCUMENTO, case when ID_SEXO = 'F' then 'Femenino' when ID_SEXO = 'M' then 'Masculino' else '' end as sexo,
+	b.FECHA_NACIMIENTO, CORREO1, case when ID_DISCAPACIDAD = 'SI' then 'Si' when ID_DISCAPACIDAD = 'NO' then 'No' else '' end as discapacidad, FECHA_INGRESO, G.NOMBRE, e.DescripcionLocal, f.DescripcionLocal, CODIGOUSUARIO, case when a.ESTADO = 'A' then 'Activo' else 'Inactivo' end as estadoEnpekado from 
+	sgseguridadsys.PS_EMPLEADO a join 
+	sgseguridadsys.PS_ENTIDAD b on a.ID_EMPLEADO = b.ID_ENTIDAD join
+	sgseguridadsys.PS_INSTITUCION c on a.ID_INSTITUCION = c.ID_INSTITUCION left join 
+	MA_MiscelaneosDetalle d on d.CodigoTabla = 'TIPODOCI' and d.CodigoElemento = b.ID_TIPO_DOCUMENTO left join 
+	MA_MiscelaneosDetalle e on e.CodigoTabla = 'EMPNIVELAC' and e.CodigoElemento = ID_NIVEL_ACADEMICO left join 
+	MA_MiscelaneosDetalle f on f.CodigoTabla = (case when ID_NIVEL_ACADEMICO = 'PRO'then 'NIVACAPROF' when ID_NIVEL_ACADEMICO = 'TEC' then 'NIVACATECN'  when ID_NIVEL_ACADEMICO = 'SEC' then 'NIVACATECN' else '' end) and f.CodigoElemento = ID_ESPECIALIDAD_ACADEMICA LEFT JOIN
+	sgseguridadsys.PS_INSTITUCION_AREA G ON G.ID_INSTITUCION = A.ID_INSTITUCION AND G.ID_AREA = B.ID_AREA_TRABAJO
+
+	where a.ID_INSTITUCION = isnull(:p_institucion, a.ID_INSTITUCION) and 
+	isnull(APELLIDO_PATERNO, '') + ' '+isnull(APELLIDO_MATERNO, '') +', '+ isnull(B.NOMBRES, '') like '%'+isnull(:p_empleado, '')+'%' and
+	isnull(ID_NIVEL_ACADEMICO, 'nive') = isnull(:p_nivel, isnull(ID_NIVEL_ACADEMICO, 'nive')) and
+	a.ESTADO = isnull(:p_estado, a.ESTADO) and
+	isnull(ID_ESPECIALIDAD_ACADEMICA, 'espe') = isnull(:p_especialidad, isnull(ID_ESPECIALIDAD_ACADEMICA, 'espe'))
+  </sql-query>
+
+
+
+
+</hibernate-mapping>

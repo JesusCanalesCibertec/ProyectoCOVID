@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psconsumo
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+  
+<sql-query name="psconsumo.filtroContar">
+<![CDATA[
+	select 
+	count(1)
+	from sgseguridadsys.PS_CONSUMO a 
+				 left join sgseguridadsys.PS_INSTITUCION b on a.ID_INSTITUCION = b.ID_INSTITUCION
+			where
+			ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+			AND CAST(isnull(a.FECHA_INICIO, '3000-12-31') AS DATE) >= isnull(:p_fechainicial, ISNULL(a.FECHA_INICIO, '3000-12-31'))
+			AND CAST(isnull(a.FECHA_FIN, '3000-12-31') AS DATE) <= isnull(:p_fechafinal, ISNULL(a.FECHA_FIN, '3000-12-31'))
+			AND ISNULL(a.ESTADO, '123') = isnull(:p_estado, ISNULL(a.ESTADO, '123'))
+
+]]>
+
+     </sql-query>
+
+
+
+
+<sql-query name="psconsumo.filtroPaginacion">
+  <![CDATA[
+  select
+		a.ID_CONSUMO,
+		a.ID_INSTITUCION,
+		b.NOMBRE as nomInstitucion,
+		a.ID_PERIODO,
+		a.FECHA_INICIO,
+		a.FECHA_FIN,
+		a.DESCRIPCION,
+		a.ESTADO,
+		a.APORTANTE,
+		ROW_NUMBER() OVER (ORDER BY a.CREACION_FECHA desc ) AS Seq
+		from sgseguridadsys.PS_CONSUMO a 
+			 left join sgseguridadsys.PS_INSTITUCION b on a.ID_INSTITUCION = b.ID_INSTITUCION
+		where
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+		AND CAST(isnull(a.FECHA_INICIO, '3000-12-31') AS DATE) >= isnull(:p_fechainicial, ISNULL(a.FECHA_INICIO, '3000-12-31'))
+		AND CAST(isnull(a.FECHA_FIN, '3000-12-31') AS DATE) <= isnull(:p_fechafinal, ISNULL(a.FECHA_FIN, '3000-12-31'))
+		AND ISNULL(a.ESTADO, '123') = isnull(:p_estado, ISNULL(a.ESTADO, '123'))
+   
+    		]]>
+
+
+		  
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

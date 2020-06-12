@@ -1,0 +1,866 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : contabilidad.AcSucursal -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="empleadomast.listarCumpleaniosContar">
+    <![CDATA[
+      select  count(1)
+		  from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0' --AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND per.FechaNacimiento IS NOT NULL
+			AND ( ( :p_fecha_inicio IS NULL) 
+				OR ( CAST(CAST(2016 AS VARCHAR) + SUBSTRING(CONVERT(varchar, per.FechaNacimiento, 112),5,6) AS DATE) 
+					BETWEEN :p_fecha_inicio AND :p_fecha_fin ) )
+
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.listarCumpleaniosPaginacion">
+    <![CDATA[
+                 select  PER.Persona AS "personaId"
+			,cast(PER.NOMBRECOMPLETO as varchar(100)) AS "personaNombre"
+			,EMP.CentroCostos as "centroCostosId"
+			,CC.LocalName as "centroCostosNombre"
+			,PER.FECHANACIMIENTO as "fechaNacimiento"
+			,EMP.FechaIngreso as "fechaIngreso"
+			,EMP.CorreoInterno as "correoInterno"
+			,HRE.Anexo as "anexo"
+			,PER.Documento as "personaNroDocumento",
+			DATEDIFF(hour,PER.FECHANACIMIENTO,GETDATE())/8766 as "FechaNacimientoDescripcion",ROW_NUMBER() OVER (ORDER BY DAY(PER.FECHANACIMIENTO)) AS Seq
+		from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0' --AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND per.FechaNacimiento IS NOT NULL
+			AND ( ( :p_fecha_inicio IS NULL) 
+				OR ( CAST( cast(2016 as varchar) + SUBSTRING(CONVERT(varchar, per.FechaNacimiento, 112),5,6) AS DATE) 
+					BETWEEN :p_fecha_inicio AND :p_fecha_fin ) )
+     
+
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.listarAniversariosContarDividido">
+    <![CDATA[
+         select  count(1)
+		from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0'
+			--AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND EMP.FechaIngreso IS NOT NULL
+			AND Datepart(MM, EMP.FechaIngreso) = ISNULL(:p_mes, Datepart(MM, EMP.FechaIngreso))
+			AND Datepart(DD, EMP.FechaIngreso) = ISNULL(:p_dia, Datepart(DD, EMP.FechaIngreso))	
+			
+			and(
+				(:p_s_menor = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) < :p_anios )or
+				(:p_s_mayor = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) > :p_anios )or
+				(:p_s_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) = :p_anios )or
+				(:p_s_menor_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) <= :p_anios)or
+				(:p_s_mayor_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) >= :p_anios) or
+				(:p_anios is null)
+				)
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.listarAniversariosPaginacionDividido">
+    <![CDATA[
+         select  PER.Persona AS "personaId"
+			,cast(PER.NOMBRECOMPLETO as varchar(100)) AS "personaNombre"
+			,EMP.CentroCostos as "centroCostosId"
+			,CC.LocalName as "centroCostosNombre"
+			,PER.FECHANACIMIENTO as "fechaNacimiento"
+			,EMP.FechaIngreso as "fechaIngreso"
+			,EMP.CorreoInterno as "correoInterno"
+			,HRE.Anexo as "anexo"
+			,PER.Documento as "personaNroDocumento"
+			,Datepart(dd, fechaingreso) AS "dia"
+            ,CASE WHEN Datepart(mm, fechaingreso) < 10 THEN '0' + CONVERT(CHAR(1), Datepart(mm, fechaingreso)) 
+               ELSE CONVERT(CHAR(2), Datepart(mm, fechaingreso)) 
+             END AS "mes"
+             ,Cast(Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) AS CHAR(2)) 
+             + ' año(s)' AS "fechaIngresoDescripcion",ROW_NUMBER() OVER (ORDER BY PER.Persona) AS Seq
+		from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0' --AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND EMP.FechaIngreso IS NOT NULL
+			AND Datepart(MM, EMP.FechaIngreso) = ISNULL(:p_mes, Datepart(MM, EMP.FechaIngreso))
+			AND Datepart(DD, EMP.FechaIngreso) = ISNULL(:p_dia, Datepart(DD, EMP.FechaIngreso))
+			
+					and(
+		(:p_s_menor = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) < :p_anios )or
+		(:p_s_mayor = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) > :p_anios )or
+		(:p_s_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) = :p_anios )or
+		(:p_s_menor_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) <= :p_anios)or
+		(:p_s_mayor_igual = 1 and Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) >= :p_anios) or
+		(:p_anios is null)
+		)	
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.listarAniversariosContar">
+    <![CDATA[
+         select  count(1)
+		from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0' AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND EMP.FechaIngreso IS NOT NULL
+			AND ( ( :p_fecha_inicio IS NULL) 
+				OR ( CAST('2016' + SUBSTRING(CONVERT(varchar, EMP.FechaIngreso, 112),5,6) AS DATE)  
+					BETWEEN :p_fecha_inicio AND :p_fecha_fin ) )
+		]]>
+  </sql-query>
+  <sql-query name="empleadomast.listarAniversariosPaginacion">
+    <![CDATA[
+         select  PER.Persona AS "personaId"
+			,cast(PER.NOMBRECOMPLETO as varchar(100)) AS "personaNombre"
+			,EMP.CentroCostos as "centroCostosId"
+			,CC.LocalName as "centroCostosNombre"
+			,PER.FECHANACIMIENTO as "fechaNacimiento"
+			,EMP.FechaIngreso as "fechaIngreso"
+			,EMP.CorreoInterno as "correoInterno"
+			,HRE.Anexo as "anexo"
+			,PER.Documento as "personaNroDocumento"
+			,Datepart(dd, fechaingreso) AS "dia"
+            ,CASE WHEN Datepart(mm, fechaingreso) < 10 THEN '0' + CONVERT(CHAR(1), Datepart(mm, fechaingreso)) 
+               ELSE CONVERT(CHAR(2), Datepart(mm, fechaingreso)) 
+             END AS "mes"
+             ,Cast(Datepart(yy, Getdate()) - Datepart(yy, fechaingreso) AS CHAR(2)) 
+             + ' año(s)' AS "fechaIngresoDescripcion",ROW_NUMBER() OVER (ORDER BY PER.FechaIngreso) AS Seq
+		from PersonaMast PER
+			INNER JOIN EmpleadoMast EMP
+				ON PER.PERSONA=EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst AS cc
+	                    ON emp.centrocostos = cc.costcenter 
+			LEFT JOIN hr_empleado AS hre 
+	                    ON emp.empleado = hre.empleado 
+		where EMP.EstadoEmpleado='0' AND emp.CompaniaSocio = (:p_compania)
+			AND PER.Persona = ISNULL( :p_id_persona ,PER.PERSONA)
+			AND ISNULL(EMP.CentroCostos,'CCCC') = ISNULL( :p_id_centro_costos ,ISNULL(EMP.CENTROCOSTOS,'CCCC'))
+			AND EMP.FechaIngreso IS NOT NULL
+			AND ( ( :p_fecha_inicio IS NULL) 
+				OR ( CAST('2016' + SUBSTRING(CONVERT(varchar, EMP.FechaIngreso, 112),5,6) AS DATE)  
+					BETWEEN :p_fecha_inicio AND :p_fecha_fin ) )
+ 
+		
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.obtenerInformacionPorIdPersona">
+    select  EMP.COMPANIASOCIO AS "companiaId"
+    ,COM.description AS "companiaNombre"
+    ,PER.PERSONA AS "personaId"
+    ,PER.NombreCompleto as "personaNombre"
+    ,cast(PER.Sexo as varchar) as "sexo"
+    ,PER.Documento as "documento"
+    ,EMP.FechaIngreso as "fechaIngreso"
+    ,PER.FechaNacimiento as "fechaNacimiento"
+    ,EMP.CodigoUsuario as "codigoUsuario"
+    ,EMP.Cargo AS "cargoId"
+    ,CAR.DescripcionLocal AS "cargoNombre"
+    ,EMP.CentroCostos AS "centroCostosId"
+    ,CC.LocalName AS "centroCostosNombre"
+    ,EMP.Sucursal AS "sucursalId"
+    ,SUC.DescripcionLocal AS "sucursalNombre"
+    ,EMP.DeptoOrganizacion AS "deptoOrganizacionId"
+    ,DEP.description AS "deptoOrganizacionNombre"
+    ,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaId"
+    ,UNI.DescripcionLocal AS "unidadNegocioAsignadaNombre"
+    ,EMP.TipoPlanilla AS "tipoPlanillaId"
+    ,TPL.Descripcion AS "tipoPlanillaNombre"
+    ,cast(EMP.EstadoEmpleado as varchar) as "estadoEmpleado"
+    ,'' AS "estadoEmpleadoNombre"
+    ,PER.personaant AS "personaant"
+    ,EMP.CodigoCargo AS "puestoEmpresaCodigo"
+    ,PUE.Descripcion AS "puestoEmpresaNombre",
+    emp.FechaInicioContrato,
+    rtrim(per.nombres)+' '+rtrim(per.apellidopaterno)+' '+rtrim(per.apellidomaterno),
+    (select nombrecompleto from personamast where persona in (select responsable from hr_unidadoperativa h where h.unidadoperativa = emp.unidadoperativa)) as 'jeff'
+   
+
+    from PERSONAMAST PER
+    INNER JOIN EMPLEADOMAST EMP ON
+    PER.PERSONA = EMP.EMPLEADO
+    LEFT JOIN ac_costcentermst CC ON
+    EMP.centrocostos = CC.costcenter
+    LEFT JOIN hr_cargosmast CAR ON
+    EMP.cargo = CAR.cargo
+    LEFT JOIN AC_Sucursal SUC ON
+    EMP.Sucursal = SUC.Sucursal
+    LEFT JOIN companyowner COM ON
+    EMP.companiasocio = COM.companyowner
+    LEFT JOIN departmentmst DEP ON
+    EMP.DeptoOrganizacion = DEP.department
+    LEFT JOIN MA_UnidadNegocio UNI ON
+    EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+    LEFT JOIN PR_TipoPlanilla TPL ON
+    EMP.TipoPlanilla = TPL.TipoPlanilla
+    LEFT JOIN HR_PUESTOEMPRESA PUE
+    ON EMP.CodigoCargo = PUE.CodigoPuesto
+    WHERE PER.persona = :p_id_persona
+    order by UNIDADOPERATIVA asc
+  </sql-query>
+
+  <!--<sql-query name="empleadomast.listarBusquedaContar">
+    <![CDATA[
+         SNp_Contar_Empleados
+        :p_id_companiasocio,
+			  :p_id_sucursal,
+			  :p_id_unidadnegocio,
+			  :p_id_empleado,
+		    :p_id_estado,
+			  :p_documento ,
+        :p_nombreempleado,
+        :p_jefe,
+        :p_usuario,
+        :p_novalida
+			]]>
+  </sql-query>
+	
+	<sql-query name="empleadomast.listarBusquedaPaginacion">
+    <![CDATA[
+        SNp_Listar_Empleados
+        :p_id_companiasocio,
+			  :p_id_sucursal,
+			  :p_id_unidadnegocio,
+			  :p_id_empleado,
+		    :p_id_estado,
+			  :p_documento ,
+        :p_nombreempleado,
+        :p_jefe,
+        :p_usuario,
+        :p_novalida,
+        :p_numpagina,
+        :p_numregistros
+		]]>
+  </sql-query> -->
+
+
+  <sql-query name="empleadomast.listarBusquedaContar">
+    <![CDATA[
+       select  count(1)
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN MA_UnidadNegocio UNI ON
+				EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal ,EMP.Sucursal)
+			and EMP.UnidadNegocioAsignada = isnull( :p_id_unidadnegocio ,EMP.UnidadNegocioAsignada)
+			and EMP.EMPLEADO = isnull( :p_id_empleado ,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull( :p_id_estado ,EMP.EstadoEmpleado)
+			and PER.Documento = isnull( :p_documento ,PER.Documento)
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'
+			]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.listarBusquedaPaginacion">
+    <![CDATA[
+       select  
+         emp.CodigoCargo as "puestoEmpresaCodigo",
+			PE.Descripcion AS "puestoEmpresaNombre",
+         	EMP.COMPANIASOCIO AS "companiaId"
+			,COM.description AS "companiaNombre"
+			,PER.PERSONA AS "personaId"
+			,cast(PER.NombreCompleto as varchar) as "personaNombre"
+			,cast(PER.Sexo as varchar) as "sexo"
+			,PER.Documento as "documento"
+			,EMP.FechaIngreso as "fechaIngreso"		
+			,PER.FechaNacimiento as "fechaNacimiento"
+			,EMP.CodigoUsuario as "codigoUsuario"		
+			,EMP.Cargo AS "cargoId"
+			,CAR.DescripcionLocal AS "cargoNombre"
+			,EMP.CentroCostos AS "centroCostosId"
+			,CC.LocalName AS "centroCostosNombre"
+			,EMP.Sucursal AS "sucursalId"
+			,SUC.DescripcionLocal AS "sucursalNombre"
+			,EMP.DeptoOrganizacion AS "deptoOrganizacionId"
+			,DEP.description AS "deptoOrganizacionNombre"
+			,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaId"
+			,UNI.DescripcionLocal AS "unidadNegocioAsignadaNombre"
+			,EMP.TipoPlanilla AS "tipoPlanillaId"
+			,TPL.Descripcion AS "tipoPlanillaNombre"		
+			,cast(EMP.EstadoEmpleado as varchar) as "estadoEmpleado"
+			,cast(MEST.DescripcionLocal as varchar) AS "estadoEmpleadoNombre" 
+      ,ROW_NUMBER() OVER(ORDER BY PER.PERSONA ASC) AS seq
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN MA_UnidadNegocio UNI ON
+				EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+			LEFT JOIN MA_MiscelaneosDetalle MEST
+				ON MEST.CodigoTabla='EMPLESTADO' AND MEST.CodigoElemento=EMP.EstadoEmpleado
+				LEFT JOIN hr_puestoempresa PE ON PE.CodigoPuesto = EMP.CodigoCargo
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal ,EMP.Sucursal)
+			and EMP.UnidadNegocioAsignada = isnull( :p_id_unidadnegocio ,EMP.UnidadNegocioAsignada)
+			and EMP.EMPLEADO = isnull( :p_id_empleado ,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull( :p_id_estado ,EMP.EstadoEmpleado)
+			and PER.Documento = isnull( :p_documento ,PER.Documento)
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'	
+     
+		]]>
+  </sql-query>
+
+
+
+
+  <sql-query name="empleadomast.obtenerafp">
+    <![CDATA[
+         select nombreafp from HR_AFP where codigoafp = :p_afp
+		]]>
+  </sql-query>
+
+
+  <sql-query name="empleadomast.obtenerHorarioEmpleado">
+    <![CDATA[
+        		select 
+              b.empleado, 
+              d.fecha,
+              d.FechaHasta,
+              b.intervaloacceso, 
+              b.tipohorario, 
+              isnull(e.derechovacacional,0) as derecho
+            from as_empleadoexcepciondetalle b, 
+            as_empleadoexcepcion d,
+            as_tipohorario e
+            where 
+            (d.empleado = b.empleado) and
+            (d.fecha = b.fecha) and 
+            (b.tipohorario = e.tipohorario) and
+            ((d.Fecha between :par_desde and :par_hasta) or 
+            (d.Fechahasta between :par_desde and :par_hasta) or 
+            (d.Fecha < :par_desde and :par_hasta < d.Fechahasta))and
+            d.empleado = :par_empleado
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.obtenerInformacionPorIdPersonaCompania">
+    SELECT
+    EMP.COMPANIASOCIO AS "companiaId"
+    ,COM.description AS "companiaNombre"
+    ,PER.PERSONA AS "personaId"
+    ,cast(PER.NombreCompleto as varchar(100)) as "personaNombre"
+    ,cast(PER.Sexo as varchar) as "sexo"
+    ,PER.Documento as "documento"
+    ,EMP.FechaIngreso as "fechaIngreso"
+    ,PER.FechaNacimiento as "fechaNacimiento"
+    ,EMP.CodigoUsuario as "codigoUsuario"
+    ,EMP.Cargo AS "cargoId"
+    ,CAR.DescripcionLocal AS "cargoNombre"
+    ,EMP.CentroCostos AS "centroCostosId"
+    ,CC.LocalName AS "centroCostosNombre"
+    ,EMP.Sucursal AS "sucursalId"
+    ,SUC.DescripcionLocal AS "sucursalNombre"
+    ,EMP.DeptoOrganizacion AS "deptoOrganizacionId"
+    ,DEP.description AS "deptoOrganizacionNombre"
+    ,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaId"
+    ,UNI.DescripcionLocal AS "unidadNegocioAsignadaNombre"
+    ,EMP.TipoPlanilla AS "tipoPlanillaId"
+    ,TPL.Descripcion AS "tipoPlanillaNombre"
+    ,cast(EMP.EstadoEmpleado as varchar) as "estadoEmpleado"
+    ,'' AS "estadoEmpleadoNombre"
+    ,PER.personaant AS "personaant"
+    ,EMP.CodigoCargo AS "puestoEmpresaCodigo"
+    ,PUE.Descripcion AS "puestoEmpresaNombre"
+    ,EMP.TipoContrato AS "tipoContrato"
+    ,TCN.Descripcion AS "tipoContratoNombre"
+    ,EMP.FechaInicioContrato AS "fechaInicioContrato"
+    ,EMP.FechaFinContrato AS "fechaFinContrato"
+    ,UOP.Descripcion AS "unidadOperativaNombre",
+    (select nombrecompleto from personamast where persona = emp.jeferesponsable) as jefe
+    
+    from PERSONAMAST PER
+    INNER JOIN EMPLEADOMAST EMP ON
+    PER.PERSONA = EMP.EMPLEADO
+    LEFT JOIN ac_costcentermst CC ON
+    EMP.centrocostos = CC.costcenter
+    LEFT JOIN hr_cargosmast CAR ON
+    EMP.cargo = CAR.cargo
+    LEFT JOIN AC_Sucursal SUC ON
+    EMP.Sucursal = SUC.Sucursal
+    LEFT JOIN companyowner COM ON
+    EMP.companiasocio = COM.companyowner
+    LEFT JOIN departmentmst DEP ON
+    EMP.DeptoOrganizacion = DEP.department
+    LEFT JOIN MA_UnidadNegocio UNI ON
+    EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+    LEFT JOIN PR_TipoPlanilla TPL ON
+    EMP.TipoPlanilla = TPL.TipoPlanilla
+    LEFT JOIN HR_PUESTOEMPRESA PUE
+    ON EMP.CodigoCargo = PUE.CodigoPuesto
+    LEFT JOIN HR_TipoContrato TCN
+    ON EMP.TipoContrato = TCN.TipoContrato
+    LEFT JOIN HR_UnidadOperativa UOP
+    ON EMP.UnidadOperativa = UOP.UnidadOperativa
+    WHERE PER.persona = :p_id_persona AND
+    EMP.COMPANIASOCIO = ISNULL(:p_compania,EMP.COMPANIASOCIO)
+
+  </sql-query>
+
+  <sql-query name="empleadomast.listarBusquedaContar2">
+    <![CDATA[
+	select
+        count(1)
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN MA_UnidadNegocio UNI ON
+				EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+			LEFT JOIN MA_MiscelaneosDetalle MEST
+				ON MEST.CodigoTabla='EMPLESTADO' AND MEST.CodigoElemento=EMP.EstadoEmpleado
+			LEFT JOIN hr_puestoempresa PE ON PE.CodigoPuesto = EMP.CodigoCargo
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal,EMP.Sucursal)
+			and ISNULL(EMP.UnidadNegocioAsignada,'X') = isnull(:p_id_unidadnegocio ,ISNULL(EMP.UnidadNegocioAsignada,'X'))
+			and EMP.EMPLEADO = isnull(:p_id_empleado,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull(:p_id_estado,EMP.EstadoEmpleado)
+		    and (rtrim(isnull(PER.Documento,'X')) = rtrim(isnull(:p_documento,ISNULL(PER.Documento,'X'))))
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'
+			and emp.unidadoperativa in 
+	(
+			select * from [dbo].[FNp_HR_TRAER_UNIDADES_SUBORDINADAS](
+				(select UNIDADOPERATIVA from HR_UNIDADOPERATIVA where RESPONSABLE = :p_jefeunidad)
+				)
+			)
+
+	]]>
+  </sql-query>
+  <sql-query name="empleadomast.listarBusquedaPaginacion2">
+    <![CDATA[
+		 select 
+		reg.puestoEmpresaCodigo,
+		reg.puestoEmpresaNombre,
+        reg.companiaId,
+		reg.companiaNombre,
+		reg.personaId,
+		reg.personaNombre,
+		reg.sexo,
+		reg.documento,
+		reg.fechaIngreso,	
+		reg.fechaNacimiento,
+		reg.codigoUsuario,		
+		reg.cargoId,
+		reg.cargoNombre,
+		reg.centroCostosId,
+		reg.centroCostosNombre,
+		reg.sucursalId,
+		reg.sucursalNombre,
+		reg.deptoOrganizacionId,
+		reg.deptoOrganizacionNombre,
+		reg.unidadNegocioAsignadaId,
+		reg.unidadNegocioAsignadaNombre,
+		reg.tipoPlanillaId,
+		reg.tipoPlanillaNombre,
+		reg.estadoEmpleado,
+		reg.estadoEmpleadoNombre,ROW_NUMBER() OVER(ORDER BY reg.estadoEmpleadoNombre ASC) AS seq
+	 from(  
+		select
+         emp.CodigoCargo as "puestoEmpresaCodigo",
+			PE.Descripcion AS "puestoEmpresaNombre",
+         	EMP.COMPANIASOCIO AS "companiaId"
+			,COM.description AS "companiaNombre"
+			,PER.PERSONA AS "personaId"
+			,cast(PER.NombreCompleto as varchar(100)) as "personaNombre"
+			,cast(PER.Sexo as varchar) as "sexo"
+			,PER.Documento as "documento"
+			,EMP.FechaIngreso as "fechaIngreso"		
+			,PER.FechaNacimiento as "fechaNacimiento"
+			,EMP.CodigoUsuario as "codigoUsuario"		
+			,EMP.Cargo AS "cargoId"
+			,CAR.DescripcionLocal AS "cargoNombre"
+			,EMP.CentroCostos AS "centroCostosId"
+			,CC.LocalName AS "centroCostosNombre"
+			,EMP.Sucursal AS "sucursalId"
+			,SUC.DescripcionLocal AS "sucursalNombre"
+			,EMP.DeptoOrganizacion AS "deptoOrganizacionId"
+			,DEP.description AS "deptoOrganizacionNombre"
+			,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaId"
+			,UNI.DESCRIPCION AS "unidadNegocioAsignadaNombre"
+			,EMP.TipoPlanilla AS "tipoPlanillaId"
+			,TPL.Descripcion AS "tipoPlanillaNombre"		
+			,cast(EMP.EstadoEmpleado as varchar) as "estadoEmpleado"
+			,cast(MEST.DescripcionLocal as varchar) AS "estadoEmpleadoNombre" 
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN HR_UNIDADOPERATIVA UNI ON
+				EMP.UNIDADOPERATIVA = UNI.UNIDADOPERATIVA
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+			LEFT JOIN MA_MiscelaneosDetalle MEST
+				ON MEST.CodigoTabla='EMPLESTADO' AND MEST.CodigoElemento=EMP.EstadoEmpleado
+			LEFT JOIN hr_puestoempresa PE ON PE.CodigoPuesto = EMP.CodigoCargo
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal,EMP.Sucursal)
+			and ISNULL(EMP.UnidadNegocioAsignada,'X') = isnull(:p_id_unidadnegocio ,ISNULL(EMP.UnidadNegocioAsignada,'X'))
+			and EMP.EMPLEADO = isnull(:p_id_empleado,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull(:p_id_estado,EMP.EstadoEmpleado)
+		    and (rtrim(isnull(PER.Documento,'X')) = rtrim(isnull(:p_documento,ISNULL(PER.Documento,'X'))))
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'
+			and emp.unidadoperativa in (
+			select * from [dbo].[FNp_HR_TRAER_UNIDADES_SUBORDINADAS](
+				(select UNIDADOPERATIVA from HR_UNIDADOPERATIVA where RESPONSABLE = :p_jefeunidad)
+				)
+			)			
+			) reg
+	]]>
+  </sql-query>
+
+
+
+  <sql-query name="empleadomast.listarBusquedaContar3">
+    <![CDATA[
+	select
+        count(1)
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN MA_UnidadNegocio UNI ON
+				EMP.UnidadNegocioAsignada = UNI.UnidadNegocio
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+			LEFT JOIN MA_MiscelaneosDetalle MEST
+				ON MEST.CodigoTabla='EMPLESTADO' AND MEST.CodigoElemento=EMP.EstadoEmpleado
+			LEFT JOIN hr_puestoempresa PE ON PE.CodigoPuesto = EMP.CodigoCargo
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal,EMP.Sucursal)
+			and ISNULL(EMP.UnidadNegocioAsignada,'X') = isnull(:p_id_unidadnegocio ,ISNULL(EMP.UnidadNegocioAsignada,'X'))
+			and EMP.EMPLEADO = isnull(:p_id_empleado,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull(:p_id_estado,EMP.EstadoEmpleado)
+		    and (rtrim(isnull(PER.Documento,'X')) = rtrim(isnull(:p_documento,ISNULL(PER.Documento,'X'))))
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'
+			
+			and emp.codigocargo = isnull(:p_puesto, emp.codigocargo)
+	]]>
+  </sql-query>
+  <sql-query name="empleadomast.listarBusquedaPaginacion3">
+    <![CDATA[
+		 select 
+		reg.puestoEmpresaCodigo,
+		reg.puestoEmpresaNombre,
+        reg.companiaId,
+		reg.companiaNombre,
+		reg.personaId,
+		reg.personaNombre,
+		reg.sexo,
+		reg.documento,
+		reg.fechaIngreso,	
+		reg.fechaNacimiento,
+		reg.codigoUsuario,		
+		reg.cargoId,
+		reg.cargoNombre,
+		reg.centroCostosId,
+		reg.centroCostosNombre,
+		reg.sucursalId,
+		reg.sucursalNombre,
+		reg.deptoOrganizacionId,
+		reg.deptoOrganizacionNombre,
+		reg.unidadNegocioAsignadaId,
+		reg.unidadNegocioAsignadaNombre,
+		reg.tipoPlanillaId,
+		reg.tipoPlanillaNombre,
+		reg.estadoEmpleado,
+		reg.estadoEmpleadoNombre,ROW_NUMBER() OVER(ORDER BY reg.estadoEmpleadoNombre ASC) AS seq
+	 from(  
+		select
+         emp.CodigoCargo as "puestoEmpresaCodigo",
+			PE.Descripcion AS "puestoEmpresaNombre",
+         	EMP.COMPANIASOCIO AS "companiaId"
+			,COM.description AS "companiaNombre"
+			,PER.PERSONA AS "personaId"
+			,cast(PER.NombreCompleto as varchar(100)) as "personaNombre"
+			,cast(PER.Sexo as varchar) as "sexo"
+			,PER.Documento as "documento"
+			,EMP.FechaIngreso as "fechaIngreso"		
+			,PER.FechaNacimiento as "fechaNacimiento"
+			,EMP.CodigoUsuario as "codigoUsuario"		
+			,EMP.Cargo AS "cargoId"
+			,CAR.DescripcionLocal AS "cargoNombre"
+			,EMP.CentroCostos AS "centroCostosId"
+			,CC.LocalName AS "centroCostosNombre"
+			,EMP.Sucursal AS "sucursalId"
+			,SUC.DescripcionLocal AS "sucursalNombre"
+			,EMP.DeptoOrganizacion AS "deptoOrganizacionId"
+			,DEP.description AS "deptoOrganizacionNombre"
+			,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaId"
+			,UNI.DESCRIPCION AS "unidadNegocioAsignadaNombre"
+			,EMP.TipoPlanilla AS "tipoPlanillaId"
+			,TPL.Descripcion AS "tipoPlanillaNombre"		
+			,cast(EMP.EstadoEmpleado as varchar) as "estadoEmpleado"
+			,cast(MEST.DescripcionLocal as varchar) AS "estadoEmpleadoNombre" 
+		from PERSONAMAST PER
+			INNER JOIN EMPLEADOMAST EMP ON
+				PER.PERSONA = EMP.EMPLEADO
+			LEFT JOIN ac_costcentermst CC ON
+	            EMP.centrocostos = CC.costcenter
+			LEFT JOIN hr_cargosmast CAR ON
+	            EMP.cargo = CAR.cargo
+			LEFT JOIN AC_Sucursal SUC ON
+				EMP.Sucursal = SUC.Sucursal
+			LEFT JOIN companyowner COM ON
+	            EMP.companiasocio = COM.companyowner
+			LEFT JOIN departmentmst DEP ON
+				EMP.DeptoOrganizacion = DEP.department
+			LEFT JOIN HR_UNIDADOPERATIVA UNI ON
+				EMP.UNIDADOPERATIVA = UNI.UNIDADOPERATIVA
+			LEFT JOIN PR_TipoPlanilla TPL ON
+				EMP.TipoPlanilla = TPL.TipoPlanilla
+			LEFT JOIN MA_MiscelaneosDetalle MEST
+				ON MEST.CodigoTabla='EMPLESTADO' AND MEST.CodigoElemento=EMP.EstadoEmpleado
+			LEFT JOIN hr_puestoempresa PE ON PE.CodigoPuesto = EMP.CodigoCargo
+		WHERE 1=1
+			and EMP.COMPANIASOCIO = ISNULL( :p_id_companiasocio ,EMP.COMPANIASOCIO)
+			AND EMP.Sucursal = ISNULL( :p_id_sucursal,EMP.Sucursal)
+			and ISNULL(EMP.UnidadNegocioAsignada,'X') = isnull(:p_id_unidadnegocio ,ISNULL(EMP.UnidadNegocioAsignada,'X'))
+			and EMP.EMPLEADO = isnull(:p_id_empleado,EMP.EMPLEADO)
+			and EMP.EstadoEmpleado = isnull(:p_id_estado,EMP.EstadoEmpleado)
+		    and (rtrim(isnull(PER.Documento,'X')) = rtrim(isnull(:p_documento,ISNULL(PER.Documento,'X'))))
+			and ISNULL(PER.NombreCompleto,'NNCCPP') LIKE '%' + ISNULL( :p_nombreempleado,ISNULL(PER.NombreCompleto,'NNCCPP')) + '%'
+			and emp.codigocargo = isnull(:p_puesto, emp.codigocargo)			
+			) reg
+	]]>
+  </sql-query>
+
+
+  <sql-query name="empleadomast.obtenerHorario">
+    <![CDATA[
+			DECLARE @TIPO INT
+BEGIN
+	 SET @TIPO = (
+	 select isnull(tipodia.tipo, 0) from (
+	 select 
+	 case :inicio -->parametro
+	 when 1 then lunes
+	 when 2 then martes
+	 when 3 then miercoles
+	 when 4 then jueves
+	 when 5 then viernes
+	 when 6 then sabado
+	 when 7 then domingo
+	 else 0
+	 end as tipo
+	 from empleadomast a join as_TipoHorario b on b.tipohorario = a.tipohorario
+	 where a.empleado = :persona and a.companiasocio = :compania) tipodia)
+	
+    
+	 select 
+	 'De ' + CONVERT(VARCHAR(5),HoraInicio.Hora,108)+' a '+CONVERT(VARCHAR(5), HoraFin.Hora,108)	as horario
+	 from 
+	 As_TipoDiaAsistencia join 
+
+	 (
+		  select min ( horainicio ) As Hora , Tipodia AS TipoDia 
+		  from as_tipodiamovimiento join ( select min ( secuencia ) Secuencia from 
+		  as_tipodiamovimiento where tipodia = @TIPO and IntervaloAcceso ='TRAB' ) 
+		  Secuencia on Secuencia.Secuencia =as_tipodiamovimiento.Secuencia 
+		  where Tipodia = @TIPO and IntervaloAcceso ='TRAB' group by Tipodia 
+
+	 ) HoraInicio on HoraInicio.TipoDia = As_TipoDiaAsistencia.TipoDia join
+	 (
+			select max ( HoraFin ) As Hora , Tipodia AS TipoDia from as_tipodiamovimiento 
+			join ( select max ( secuencia ) Secuencia from as_tipodiamovimiento where 
+			tipodia = @TIPO and IntervaloAcceso ='TRAB' ) Secuencia on Secuencia.Secuencia = as_tipodiamovimiento.Secuencia 
+			where tipodia = @TIPO and IntervaloAcceso ='TRAB' group by Tipodia 
+	  
+	  ) HoraFin on HoraFin.TipoDia =As_TipoDiaAsistencia.TipoDia 
+
+	  where As_TipoDiaAsistencia.TipoDia = @TIPO	 
+END
+         
+		]]>
+  </sql-query>
+  <sql-query name="empleadomast.obtenerHoraFinHorarioPorDia">
+    <![CDATA[
+			DECLARE @TIPO INT
+BEGIN
+	 SET @TIPO = (
+	 select isnull(tipodia.tipo, 0) from (
+	 select 
+	 case :inicio -->parametro
+	 when 1 then lunes
+	 when 2 then martes
+	 when 3 then miercoles
+	 when 4 then jueves
+	 when 5 then viernes
+	 when 6 then sabado
+	 when 7 then domingo
+	 else 0
+	 end as tipo
+	 from empleadomast a join as_TipoHorario b on b.tipohorario = a.tipohorario
+	 where a.empleado = :persona and a.companiasocio = :compania) tipodia)
+	
+    
+	 select 
+	 HoraFin.Hora as horario
+	 from 
+	 As_TipoDiaAsistencia join 
+
+	 (
+		  select min ( horainicio ) As Hora , Tipodia AS TipoDia 
+		  from as_tipodiamovimiento join ( select min ( secuencia ) Secuencia from 
+		  as_tipodiamovimiento where tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) ) 
+		  Secuencia on Secuencia.Secuencia =as_tipodiamovimiento.Secuencia 
+		  where Tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) group by Tipodia 
+
+	 ) HoraInicio on HoraInicio.TipoDia = As_TipoDiaAsistencia.TipoDia join
+	 (
+			select max ( HoraFin ) As Hora , Tipodia AS TipoDia from as_tipodiamovimiento 
+			join ( select max ( secuencia ) Secuencia from as_tipodiamovimiento where 
+			tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) ) Secuencia on Secuencia.Secuencia = as_tipodiamovimiento.Secuencia 
+			where tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) group by Tipodia 
+	  
+	  ) HoraFin on HoraFin.TipoDia =As_TipoDiaAsistencia.TipoDia 
+
+	  where As_TipoDiaAsistencia.TipoDia = @TIPO	 
+END
+         
+		]]>
+  </sql-query>
+
+  <sql-query name="empleadomast.obtenerHoraInicioHorarioPorDia">
+    <![CDATA[
+			DECLARE @TIPO INT
+BEGIN
+	 SET @TIPO = (
+	 select isnull(tipodia.tipo, 0) from (
+	 select 
+	 case :inicio -->parametro
+	 when 1 then lunes
+	 when 2 then martes
+	 when 3 then miercoles
+	 when 4 then jueves
+	 when 5 then viernes
+	 when 6 then sabado
+	 when 7 then domingo
+	 else 0
+	 end as tipo
+	 from empleadomast a join as_TipoHorario b on b.tipohorario = a.tipohorario
+	 where a.empleado = :persona and a.companiasocio = :compania) tipodia)
+	
+    
+	 select 
+	 HoraInicio.Hora as horario
+	 from 
+	 As_TipoDiaAsistencia join 
+
+	 (
+		  select min ( horainicio ) As Hora , Tipodia AS TipoDia 
+		  from as_tipodiamovimiento join ( select min ( secuencia ) Secuencia from 
+		  as_tipodiamovimiento where tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) ) 
+		  Secuencia on Secuencia.Secuencia =as_tipodiamovimiento.Secuencia 
+		  where Tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) group by Tipodia 
+
+	 ) HoraInicio on HoraInicio.TipoDia = As_TipoDiaAsistencia.TipoDia join
+	 (
+			select max ( HoraFin ) As Hora , Tipodia AS TipoDia from as_tipodiamovimiento 
+			join ( select max ( secuencia ) Secuencia from as_tipodiamovimiento where 
+			tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) ) Secuencia on Secuencia.Secuencia = as_tipodiamovimiento.Secuencia 
+			where tipodia = @TIPO and (IntervaloAcceso ='TRAB' or 'S' = :conSobretiempo ) group by Tipodia 
+	  
+	  ) HoraFin on HoraFin.TipoDia =As_TipoDiaAsistencia.TipoDia 
+
+	  where As_TipoDiaAsistencia.TipoDia = @TIPO	 
+END
+         
+		]]>
+  </sql-query>
+
+</hibernate-mapping>

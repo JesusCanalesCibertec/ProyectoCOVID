@@ -1,0 +1,107 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="CONSUMO PLANTILLA: {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}">
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button *ngIf="accion != ACCIONES.VER" pButton type="button" icon="fa fa-save" style="width:100%" label="Grabar"
+                    (click)="guardar()"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-8">
+
+            </div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" type="button" style="width:100%" (click)="salir()"></button>
+            </div>
+        </div>
+    </p-panel>
+
+    <p-tabView>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-4">
+                <p-dropdown [options]="instituciones" [disabled]="!puedeEditar" [(ngModel)]="PsConsumoPlantilla.idInstitucion"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 cntrolEtiquetaDivTop">
+                <label>Descripción</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-10">
+                <input pInputText maxlength="500" [disabled]="!puedeEditar" [(ngModel)]="PsConsumoPlantilla.descripcion"
+                    type="text">
+            </div>
+           
+        </div>
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-12 ui-md-3 ui-lg-2">
+                <p-dropdown [options]="estados" [disabled]="!puedeEditar || accion == ACCIONES.NUEVO" [(ngModel)]="PsConsumoPlantilla.estado"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+
+        </div>
+
+
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton label="Adicionar Item" icon="fa fa-plus" [disabled]="!puedeEditar" type="button" class="ui-button"
+                    (click)='adicionarFila()'></button>
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p-dataTable #dtvalores scrollable="true" [responsive]="true" [rows]="5" emptyMessage="Ingrese items"
+                    scrollWidth="100%" [value]="PsConsumoPlantilla.listadetalle">
+
+                    <p-column *ngIf="puedeEditar" header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar">
+                                    <i class="fa fa-trash fa-lg seleccionable" (click)="borrarFila(tx.idItem)"></i>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+
+                    <p-column header="Código" field="idItem" styleClass="textoCentrado" [style]="{'width':'100px'}">
+
+                    </p-column>
+                    <p-column header="Nombre" field="auxNombre" [style]="{'width':'100%'}">
+
+                    </p-column>
+
+
+                </p-dataTable>
+            </div>
+        </div>
+
+    </p-tabView>
+</div>
+
+<app-item-selector (cargarSeleccionEvent)="cargar($event)" (block)="bloquearPagina()" (unBlock)="desbloquearPagina()"></app-item-selector>

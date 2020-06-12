@@ -1,0 +1,119 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE EMPLEADOS" [responsive]="true" [(visible)]="verSelector2" modal="modal" showEffect="fade"
+        hideEffect="size" [style]="{'max-width':'1200px', 'left':'15px', 'right':'15px', 'margin-top':'-5%'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Compañía</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown appendTo="body" [options]="lstCompania" [(ngModel)]="filtro.idCompaniaSocio" [style]="{'width':'100%'}"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Sucursal</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown appendTo="body" [options]="lstSucursal" [(ngModel)]="filtro.idSucursal" [style]="{'width':'100%'}"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <label>Unidad Negocio</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown appendTo="body" [options]="lstUnidad" [(ngModel)]="filtro.idUnidadNegocioAsignada"
+                        [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <p-inputMask mask="99999" [(ngModel)]="filtro.empleadoId" [autoClear]="false" [unmask]="true"></p-inputMask>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Nombre</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <input pInputText type="text" [(ngModel)]="filtro.empleaadoNombreCompleto" />
+                </div>
+                <!-- <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Estado</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <p-dropdown appendTo="body" [options]="lstEstado" [(ngModel)]="filtro.empleadoEstado" [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div> -->
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <label>Documento</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <input pInputText type="text" [(ngModel)]="filtro.empleadoDocumento" />
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-search" type="button" (click)="buscar(dtEmpleado)" class="ui-button"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Aceptar" icon="fa fa-check" type="button" (click)="aceptar()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable #dtEmpleado [responsive]="true" [rows]="7" [paginator]="true" [lazy]="true" scrollWidth="100%"
+                [scrollable]="true" 
+                    scrollHeight="200px" emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado"
+                    selectionMode="single" (onRowDblclick)="onRowSelect($event)" [totalRecords]="filtro.paginacion.registroEncontrados"
+                    (onLazyLoad)="cargarListadoEvent($event)" [value]="filtro.paginacion.listaResultado">
+
+                    <p-column header="Código" field="personaId" [style]="{'width':'10%'}" styleClass="textoCentrado"></p-column>
+                    <p-column header="Nombre" field="personaNombre" [style]="{'width':'35%'}"></p-column>
+                    <p-column header="Documento" field="documento" [style]="{'width':'15%'}" styleClass="textoCentrado"></p-column>
+                    <p-column header="Sucursal" field="sucursalNombre" [style]="{'width':'15%'}"></p-column>
+                    <p-column header="Unidad Negocio" field="unidadNegocioAsignadaNombre" [style]="{'width':'25%'}"></p-column>
+
+                </p-dataTable>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable [responsive]="true" [rows]="7" scrollWidth="100%" [paginator]="true"
+                    emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado" selectionMode="single"
+                    [scrollable]="true" scrollHeight="200px" (onRowDblclick)="onRowSelect($event)" [value]="seleccionados">
+
+                    <p-column header="Código" field="personaId" [style]="{'width':'10%'}" styleClass="textoCentrado"></p-column>
+                    <p-column header="Nombre" field="personaNombre" [style]="{'width':'40%'}"></p-column>
+                    <p-column header="Acción" [style]="{'width':'90px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <i class="fa fa-times fa-lg seleccionable" title="Eliminar" (click)="eliminar(tx)"></i>
+                        </ng-template>
+                    </p-column>
+
+                </p-dataTable>
+            </div>
+        </div>
+
+
+
+
+
+
+    </p-dialog>
+</div>

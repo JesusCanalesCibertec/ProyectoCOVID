@@ -1,0 +1,164 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-g">
+    <div class="ui-g-6 ui-md-4 ui-lg-6">
+    </div>
+    <div class="ui-g-6 ui-md-4 ui-lg-2">
+        <h4>{{'Cantidad de Recursos:  '+ comunicacionServicio.numRecursos}}</h4>
+    </div>
+    <div class="ui-g-6 ui-md-4 ui-lg-2">
+        <h4>{{'Agregados:  '+ this.comunicacionServicio.parametro}}</h4>
+    </div>
+    <div class="ui-g-6 ui-md-4 ui-lg-2">
+        <h4>{{'Faltan:  '+ (comunicacionServicio.numRecursos - this.comunicacionServicio.parametro)}} </h4>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <h4 style="text-decoration: underline">Interesados</h4>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Agregar" icon="fa fa-plus" type="button" [disabled]=""
+                    (click)="adicionarFila()"></button>
+            </div>
+        </div>
+
+        <p-dataTable #datatable scrollable="true" [responsive]="true" scrollWidth="100%" [rows]="5" [paginator]="true"
+            [value]="proyecto.listaRecursos1" emptyMessage="Sin registros">
+
+            <p-column header="N°" field="idRecurso" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Área" field="area" [style]="{'width':'300px'}">
+                <ng-template let-col let-tx="rowData" pTemplate="body">
+                    <div class="ui-g">
+                        <input pInputText [(ngModel)]="tx.nomArea" type="text" disabled style="width:90%">
+                        <button pButton icon="fas fa-search-plus" [disabled]="" (click)="mostrarSelector(tx.idRecurso)"
+                            class="ui-button" style="width:10%" type="button" title="Buscar"></button>
+                    </div>
+                </ng-template>
+            </p-column>
+            <p-column header="Nombre Completo" [style]="{'width':'300px'}">
+                <ng-template let-col let-tx="rowData" pTemplate="body">
+                    <input pInputText *ngIf="tx.area != 989" [(ngModel)]="tx.nombre" type="text">
+                    <p-dropdown *ngIf="tx.area == 989" [(ngModel)]="tx.idPersona" [options]="tx.personas" [disabled]=""
+                        [autoWidth]="false" filter="true" resetFilterOnHide="true" filterBy="label"
+                        emptyFilterMessage="Personal no encontrado" [style]="{'width':'100%'}" appendTo="body"
+                        (onChange)="cargarCargo(tx)">
+                    </p-dropdown>
+                </ng-template>
+            </p-column>
+            <p-column header="Cargo" field="cargo" [style]="{'width':'300px'}">
+                <ng-template let-col let-tx="rowData" pTemplate="body">
+                    <input pInputText [(ngModel)]="tx.cargo" type="text" *ngIf="tx.area != 989">
+                    {{tx.area==989? tx.cargo:null}}
+                </ng-template>
+            </p-column>
+            <p-column header="Rol" field="rol" [style]="{'width':'200px'}">
+                <ng-template let-col let-tx="rowData" pTemplate="body">
+                    <p-dropdown [(ngModel)]="tx.rol" [options]="roles" [disabled]="" [autoWidth]="false"
+                        [style]="{'width':'100%'}" appendTo="body">
+                    </p-dropdown>
+                </ng-template>
+            </p-column>
+            <p-column header="Acción" i18n-header styleClass="textoCentrado" [style]="{ 'width': '50px'} ">
+                <ng-template let-tx="rowData " pTemplate="body ">
+                    <div class="ui-g" [ngStyle]="">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12 " style="cursor: pointer; " title="Eliminar">
+                            <i class="fa fa-times fa-lg seleccionable" (click)="borrarFila(tx.idRecurso, 'I')"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <h4 style="text-decoration: underline">Equipo de Desarrollo</h4>
+    </div>
+</div>
+<div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Agregar" icon="fa fa-plus" type="button" [disabled]=""
+                    (click)="agregar()"></button>
+            </div>
+        </div>
+        <div class="ui-g" style="font-weight: bold; color: darkred; display: none;">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <label>Nota: El primer participante de esta lista será considerado como Líder técnico</label>
+            </div>
+        </div>
+        <p-dataTable #datatable [responsive]="true" scrollable="true" scrollWidth="100%" [rows]="5" [paginator]="true"
+            [value]="proyecto.listaRecursos2" emptyMessage="Sin registros">
+            <p-column header="N°" field="idRecurso" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Nombre Completo" field="nombre" [style]="{'width':'300px'}"></p-column>
+            <p-column header="Cargo" field="cargo" [style]="{'width':'300px'}"></p-column>
+            <p-column header="Conocimientos" field="auxConocimientos" [style]="{'width':'250px'}"></p-column>
+            <p-column header="Periodos" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <i class="far fa-calendar-alt" styleClass="Ver periodos" (click)="listarPeriodos($event,tx,op)"></i>
+                    {{' ('+tx.listaPeriodos.length+')'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Rol" field="rol" [style]="{'width':'200px'}">
+                <ng-template let-col let-tx="rowData" pTemplate="body">
+                    <p-dropdown [(ngModel)]="tx.rol" [options]="roles2" [disabled]="" [autoWidth]="false"
+                        [style]="{'width':'100%'}" appendTo="body">
+                    </p-dropdown>
+                </ng-template>
+            </p-column>
+            <p-column header="Acción" i18n-header styleClass="textoCentrado " [style]="{ 'width': '50px'} ">
+                <ng-template let-tx="rowData " pTemplate="body ">
+                    <div class="ui-g" [ngStyle]="">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12 " style="cursor: pointer; " title="Eliminar"
+                            (click)="borrarFila(tx.idRecurso, 'E')">
+                            <i class="fa fa-times fa-lg seleccionable"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+<p-overlayPanel #op [showCloseIcon]="true">
+    <p-dataTable #dp [value]="recurso.listaPeriodos" [responsive]="true" [rows]="5" [paginator]="true"
+        emptyMessage="No se encontraron registros" [style]="{'width':'500px'}">
+
+        <p-column header="N°" field="idPeriodo" [style]="{'width':'50px'}" styleClass="textoCentrado">
+        </p-column>
+        <p-column header="Inicio" [style]="{'width':'100px'}" styleClass="textoCentrado">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </p-column>
+        <p-column header="Fin" [style]="{'width':'100px'}" styleClass="textoCentrado">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.fechafin | date: 'dd/MM/yyyy'}}
+            </ng-template>
+        </p-column>
+        <p-column header="Horas" field="horas" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+    </p-dataTable>
+</p-overlayPanel>
+
+<app-areaminedu-selector (cargarSeleccionEvent)="cargarArea($event)" (bloquear)="bloquearPagina()"
+    (desbloquear)="desbloquearPagina()"></app-areaminedu-selector>
+
+<app-selector-equipo (cargarSeleccionados)="cargarEquipo($event)" (bloquear)="bloquearPagina()"
+    (desbloquear)="desbloquearPagina()">
+</app-selector-equipo>

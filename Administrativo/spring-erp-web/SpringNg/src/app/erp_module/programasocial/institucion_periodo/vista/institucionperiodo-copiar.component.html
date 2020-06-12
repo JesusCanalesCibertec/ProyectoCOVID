@@ -1,0 +1,89 @@
+<div class="ui-fluid">
+    <p-dialog header="COPIAR PERIODO" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'500px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Institución</label>
+            </div>
+            <div class="ui-g-8 ui-md-8 ui-lg-8 controlEtiquetaDiv">
+                <p-dropdown [options]="instituciones" disabled  [(ngModel)]="dtoPsInstitucionperiodo.codInstitucion" [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Periodo A Copiar</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <input pInputText  [(ngModel)]="dtoPsInstitucionperiodo.codPeriodoCopiar" />
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Nuevo Periodo</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <input pInputText [(ngModel)]="dtoPsInstitucionperiodo.codPeriodo" />
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Fecha Inicio</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [(ngModel)]="dtoPsInstitucionperiodo.fechainicio"
+                    [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body"></p-calendar>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Fecha Fin</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [(ngModel)]="dtoPsInstitucionperiodo.fechafin"
+                    [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body"></p-calendar>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Registro Inicio</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [(ngModel)]="dtoPsInstitucionperiodo.fechainicioregistro"
+                    [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body"></p-calendar>
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-4 ui-lg-4 controlEtiquetaDiv">
+                <label>Registro Fin</label>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [(ngModel)]="dtoPsInstitucionperiodo.fechafinregistro"
+                    [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body"></p-calendar>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Aplicar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                    style="width:100%"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                    style="width:100%"></button>
+            </div>
+
+        </div>
+
+    </p-dialog>
+</div>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrCts
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="prtipoproceso.listarPorPeriodoEmpleado">
+       select TipoProceso, Descripcion from PR_TipoProceso where TipoProceso in (
+		   select distinct tipoproceso from PR_PlanillaEmpleado where empleado =  :p_id_persona and periodo =  :p_periodo and tipoproceso = 'NO0'
+		  )
+    </sql-query>  
+</hibernate-mapping>

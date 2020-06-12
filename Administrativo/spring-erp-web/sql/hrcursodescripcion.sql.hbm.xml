@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrCursodescripcion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+    <sql-query name="hrcursodescripcion.listarContar">
+    	<![CDATA[
+         select	count(1)
+				FROM HR_CURSODESCRIPCION H
+				WHERE 
+				    H.CURSO = isnull(:p_id_curso,H.CURSO)
+				AND H.DESCRIPCION like '%' + isnull(:p_nombre,H.DESCRIPCION) + '%'
+				AND isnull(H.TIPO,'TTTT') = isnull(:p_id_tipo,ISNULL(H.TIPO,'TTTT'))
+				AND ISNULL(H.AREA,'AAAA') = isnull(:p_id_area,ISNULL(H.AREA,'AAAA'))
+				AND H.ESTADO = isnull(:p_id_estado,H.ESTADO)
+		]]>
+    </sql-query>
+    
+    <sql-query name="hrcursodescripcion.listarPaginacion">
+    	<![CDATA[
+         	SELECT 
+			   H.CURSO as "idCurso"
+			   ,H.DESCRIPCION as "nombre"
+			   ,H.TIPO as "tipoId"
+			   ,'' as "tipoNombre"
+			   ,H.AREA as "areaId"
+			   ,M.DESCRIPCIONLOCAL as "areaNombre"
+			   ,cast(H.ESTADO as varchar) as "estadoId"
+			   ,'' as "estadoNombre", ROW_NUMBER() OVER (ORDER BY H.CURSO) AS Seq
+			FROM HR_CURSODESCRIPCION H
+			LEFT JOIN MA_MiscelaneosDetalle M ON M.CODIGOELEMENTO = H.AREA AND M.COMPANIA = '999999' AND APLICACIONCODIGO = 'HR'  and m.CodigoTabla = 'areacurso'
+			WHERE 
+			    H.CURSO = isnull(:p_id_curso,H.CURSO)
+			    AND H.DESCRIPCION like '%' + isnull(:p_nombre,H.DESCRIPCION) + '%'
+				AND isnull(H.TIPO,'TTTT') = isnull(:p_id_tipo,ISNULL(H.TIPO,'TTTT'))
+				AND ISNULL(H.AREA,'AAAA') = isnull(:p_id_area,ISNULL(H.AREA,'AAAA'))
+				AND H.ESTADO = isnull(:p_id_estado,H.ESTADO)
+		]]>
+    </sql-query>
+
+  <sql-query name="hrcursodescripcion.listarCursosGenericos">
+    <![CDATA[
+         SELECT HR_CursoDescripcion.Area, ( 
+          SELECT MA_MiscelaneosDetalle.DescripcionLocal FROM MA_MiscelaneosDetalle WHERE
+           ( MA_MiscelaneosDetalle.AplicacionCodigo = 'HR' ) AND ( MA_MiscelaneosDetalle.Compania = '999999' ) 
+           AND ( MA_MiscelaneosDetalle.CodigoTabla = 'AREACURSO' ) AND CodigoElemento = HR_CursoDescripcion.ARea) 
+           AS areadescripcion FROM HR_CursoDescripcion where 1 = 1 GROUP BY HR_CursoDescripcion.Area
+		]]>
+  </sql-query>
+
+  <sql-query name="hrcursodescripcion.listarCursosPorArea">
+    <![CDATA[
+         SELECT HR_CursoDescripcion.Curso, HR_CursoDescripcion.Descripcion, HR_CursoDescripcion.Estado, 
+          HR_CursoDescripcion.Tipo, HR_CursoDescripcion.Area, ( 
+          SELECT MA_MiscelaneosDetalle.DescripcionLocal FROM MA_MiscelaneosDetalle WHERE
+           ( MA_MiscelaneosDetalle.AplicacionCodigo = 'HR' ) AND ( MA_MiscelaneosDetalle.Compania = '999999' ) 
+           AND ( MA_MiscelaneosDetalle.CodigoTabla = 'AREACURSO' ) AND CodigoElemento = HR_CursoDescripcion.ARea) 
+           AS areadescripcion FROM HR_CursoDescripcion where HR_CursoDescripcion.Area = :p_area
+		]]>
+  </sql-query>
+
+<sql-query name="hrcursodescripcion.filtroContar">
+
+select 
+
+count(1)
+from HR_CURSODESCRIPCION t1 LEFT JOIN MA_MiscelaneosDetalle a on t1.Tipo = a.CodigoElemento AND a.CodigoTabla= 'TIPOCURSO'
+			    LEFT JOIN MA_MiscelaneosDetalle b ON T1.Area = b.CodigoElemento and b.CodigoTabla= 'AREACURSO'
+where 
+ISNULL(t1.Curso, '123') = isnull(:p_id_curso, ISNULL(t1.Curso, '123'))
+and t1.Descripcion like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(t1.Tipo, '123') = isnull(:p_id_tipo, ISNULL(t1.Tipo, '123'))
+and ISNULL(t1.Area, '123') = isnull(:p_id_area, ISNULL(t1.Area, '123'))
+and ISNULL(t1.Estado, '123') = isnull(:p_id_estado, ISNULL(t1.Estado, '123'))
+
+
+     </sql-query>
+
+
+
+
+<sql-query name="hrcursodescripcion.filtroPaginacion">
+
+select 
+t1.Curso,
+t1.Descripcion,
+t1.Tipo,
+a.DescripcionLocal as nomtipo,
+t1.Area,
+b.DescripcionLocal as nomarea,
+case t1.Estado
+when 'A' then 'Activo'
+when 'I' then 'Inactivo'
+end as Estado,
+ROW_NUMBER() OVER (ORDER BY Curso DESC, Descripcion) AS Seq
+from HR_CURSODESCRIPCION t1 LEFT JOIN MA_MiscelaneosDetalle a on t1.Tipo = a.CodigoElemento AND a.CodigoTabla= 'TIPOCURSO'
+			    LEFT JOIN MA_MiscelaneosDetalle b ON T1.Area = b.CodigoElemento and b.CodigoTabla= 'AREACURSO'
+where 
+ISNULL(t1.Curso, '123') = isnull(:p_id_curso, ISNULL(t1.Curso, '123'))
+and t1.Descripcion like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(t1.Tipo, '123') = isnull(:p_id_tipo, ISNULL(t1.Tipo, '123'))
+and ISNULL(t1.Area, '123') = isnull(:p_id_area, ISNULL(t1.Area, '123'))
+and ISNULL(t1.Estado, '123') = isnull(:p_id_estado, ISNULL(t1.Estado, '123'))
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

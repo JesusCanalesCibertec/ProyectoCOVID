@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.hrencuestapregunta
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+
+<sql-query name="libro.obteneranio">
+
+select isnull(max(Codigo),'')+1
+from AS_Libro  where AnoLibro = :p_anio
+
+
+
+     </sql-query>
+    
+
+
+
+
+<sql-query name="hrencuestapregunta.filtrocontar">
+
+  select
+  count(1)
+  from
+  HR_EncuestaPregunta t1 LEFT JOIN MA_MiscelaneosDetalle a on t1.TipoEncuesta = a.CodigoElemento AND a.CodigoTabla= 'TIPOENCUES'
+  LEFT JOIN MA_MiscelaneosDetalle b ON T1.Area = b.CodigoElemento and (b.CodigoTabla in ('AREAENCSAT'))
+  LEFT JOIN MA_MiscelaneosDetalle c ON T1.Area = c.CodigoElemento and (c.CodigoTabla in ('AREASCLIMA'))
+  LEFT JOIN MA_MiscelaneosDetalle d ON T1.Area = d.CodigoElemento and (d.CodigoTabla in ('ARGOINF'))
+
+where 
+ISNULL(t1.Pregunta, '123') = isnull(:p_pregunta, ISNULL(t1.Pregunta, '123'))
+and t1.Descripcion like '%' + isnull(:p_descripcion, '') + '%'
+and ISNULL(t1.TipoEncuesta, '123') = isnull(:p_tipo, ISNULL(t1.TipoEncuesta, '123'))
+and ISNULL(t1.Area, '123') = isnull(:p_area, ISNULL(t1.Area, '123'))
+and ISNULL(t1.Estado, '123') = isnull(:p_estado, ISNULL(t1.Estado, '123'))
+
+
+
+
+</sql-query>
+
+
+
+
+<sql-query name="hrencuestapregunta.filtropaginacion">
+       
+select 
+t1.Pregunta,
+t1.Descripcion,
+t1.TipoEncuesta,
+a.DescripcionLocal as NOMTIPOENCUESTA,
+t1.Area,
+case(t1.TipoEncuesta)
+		when 'SATIS' then b.DescripcionLocal 
+		when 'CLIMA' then c.DescripcionLocal
+		when 'GUIAIN' then d.DescripcionLocal
+		end as Nom_Area,
+case t1.Estado
+when 'A' then 'Activo'
+when 'I' then 'Inactivo'
+end as Estado,
+ROW_NUMBER() OVER (ORDER BY Pregunta DESC) AS Seq
+from HR_EncuestaPregunta t1 LEFT JOIN MA_MiscelaneosDetalle a on t1.TipoEncuesta = a.CodigoElemento AND a.CodigoTabla= 'TIPOENCUES'
+			    LEFT JOIN MA_MiscelaneosDetalle b ON T1.Area = b.CodigoElemento and (b.CodigoTabla in ('AREAENCSAT'))
+				LEFT JOIN MA_MiscelaneosDetalle c ON T1.Area = c.CodigoElemento and (c.CodigoTabla in ('AREASCLIMA'))
+				LEFT JOIN MA_MiscelaneosDetalle d ON T1.Area = d.CodigoElemento and (d.CodigoTabla in ('ARGOINF'))
+where 
+ISNULL(t1.Pregunta, '123') = isnull(:p_pregunta, ISNULL(t1.Pregunta, '123'))
+and t1.Descripcion like '%' + isnull(:p_descripcion, '') + '%'
+and ISNULL(t1.TipoEncuesta, '123') = isnull(:p_tipo, ISNULL(t1.TipoEncuesta, '123'))
+and ISNULL(t1.Area, '123') = isnull(:p_area, ISNULL(t1.Area, '123'))
+and ISNULL(t1.Estado, '123') = isnull(:p_estado, ISNULL(t1.Estado, '123'))
+
+
+ </sql-query>
+ 
+ <sql-query name="hrencuestapregunta.listarPorPlantilla">
+   select b.Pregunta, b.Descripcion, (
+   case when b.TipoEncuesta='CLIMA'
+   THEN (SELECT DescripcionLocal FROM MA_MiscelaneosDetalle WHERE AplicacionCodigo = 'HR' AND CodigoTabla = 'AREASCLIMA' AND CodigoElemento = B.AREA)
+   when b.TipoEncuesta='GUIAIN'
+   THEN (SELECT DescripcionLocal FROM MA_MiscelaneosDetalle WHERE AplicacionCodigo = 'PS' AND CodigoTabla = 'ARGOINF' AND CodigoElemento = B.AREA)
+   when b.TipoEncuesta='SATIS'
+   THEN  (SELECT DescripcionLocal FROM MA_MiscelaneosDetalle WHERE AplicacionCodigo = 'PS' AND CodigoTabla = 'AREAENCSAT' AND CodigoElemento = B.AREA)
+   ELSE
+   ('')
+   END
+   ) AS 'AREA' from HR_EncuestaPlantilladetalle a join HR_EncuestaPregunta b on a.pregunta = b.pregunta where
+   a.plantilla = :p_plantilla
+ </sql-query>
+
+
+
+
+    
+  
+   
+</hibernate-mapping>

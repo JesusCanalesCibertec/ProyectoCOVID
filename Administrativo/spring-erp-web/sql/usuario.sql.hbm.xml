@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : core.Usuario
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<sql-query name="usuario.obtenerUsuarioconpermiso">
+    	<![CDATA[	
+		select 
+			com.COMPANYOWNER,
+			com.DESCRIPTION,
+			CAST(per.ID_PERSONA AS VARCHAR) as Usuariocodigo,
+			per.CORREO,
+			seg.USUARIO,
+			per.NOMBRE,
+			per.APELLIDO,
+			seg.ESTADO
+			from SEGURIDADPERFILUSUARIO seg
+			left join minedu.PERSONA per on seg.USUARIO = per.USUARIO
+			left join COMPANYOWNER com on per.COMPANIA = com.COMPANYOWNER
+			where seg.USUARIO <> 'EACH1' and seg.USUARIO = :p_codigo_usuario
+		]]>
+    </sql-query>
+	
+	<sql-query name="usuario.obtenerSuperAdmin">
+    	<![CDATA[	
+	select 
+				'00020000' AS "companiaSocioCodigo",
+				null,
+				'1' AS "usuarioCodigo",
+				null
+				,u.USUARIO AS  "usuarioLogin",
+				u.NOMBRE AS "personaNombres"
+			from USUARIO u
+			where u.USUARIO =  :p_codigo_usuario
+		]]>
+    </sql-query>
+
+
+
+
+
+
+	<sql-query name="usuario.obtenerDatosEmpleadoMinedu">
+    	<![CDATA[
+			
+			select 
+				c.COMPANYOWNER AS "companiaSocioCodigo"
+				,c.DESCRIPTION AS "companiaSocioNombre"
+				,CAST(per.ID_PERSONA AS VARCHAR) AS "usuarioCodigo"
+				,per.CORREO AS "usuarioCorreoInterno"
+				,per.USUARIO AS  "usuarioLogin"
+				,NULL AS "personaId"
+				,NULL AS "personaTipoDocumento"
+				,NULL AS "personaNroDocumento"
+				,NULL AS "personaNombreCompleto"
+				,per.NOMBRE AS "personaNombres"
+				,per.APELLIDO  AS "personaApellidos"
+				,NULL AS "personaApellidoPaterno"
+				,NULL AS "personaApellidoMaterno"
+				,NULL AS "unidadNegocioAsignadaCodigo"
+				,NULL AS "unidadNegocioAsignadaNombre"
+				,NULL AS "sucursalCodigo"
+				,NULL AS "sucursalNombre"
+				,NULL AS "departamentoCodigo"
+				,NULL AS "departamentoNombre"
+				,NULL AS "puestoEmpresaCodigo"
+				,NULL AS "puestoEmpresaNombre"
+				,NULL AS "centroCostosCodigo"
+				,NULL AS "centroCostosNombre"
+				,NULL AS "tipoPlanilla"
+				,NULL
+				, isnull(per.ESTADO,'2')
+				, isnull(per.ESTADO, 'I')
+				, NULL
+				, null flagConformidadDatos
+				,  isnull(u.EXPIRARPASSWORDFLAG, 'N') exp
+				, u.FECHAEXPIRACION
+				, NULL
+			from minedu.PERSONA per
+				 join dbo.USUARIO u on u.USUARIO = per.USUARIO
+				 join dbo.COMPANYOWNER c ON per.COMPANIA = c.COMPANYOWNER
+			where u.USUARIO =  :p_codigo_usuario 
+		]]>
+    </sql-query>
+
+
+    <sql-query name="usuario.obtenerCompaniaPorDefecto">
+    	<![CDATA[
+        select 
+				  EMP.COMPANIASOCIO  as "idCompaniaSocio"
+			   from EMPLEADOMAST EMP
+			    where EMP.CODIGOUSUARIO = :p_codigo_usuario
+         order by ESTADO,ESTADOEMPLEADO,COMPANIASOCIO
+		]]>
+    </sql-query>
+  
+    <sql-query name="usuario.obtenerEmpleadoEstados">
+    	<![CDATA[
+         select 
+				EMP.EMPLEADO as "idEmpleado"
+				,cast(EMP.ESTADO as varchar) as "idEstado"
+				,cast(EMP.ESTADOEMPLEADO as varchar) as "idEstadoEmpleado"
+				,EMP.codigousuario as "codigoUsuario"
+				,EMP.CompaniaSocio  as "idCompaniaSocio"
+			from EmpleadoMast EMP
+			where EMP.CompaniaSocio = ISNULL(:p_id_compania_socio, EMP.CompaniaSocio)
+			and EMP.codigousuario = :p_codigo_usuario
+		]]>
+    </sql-query>
+    
+    <sql-query name="usuario.obtenerDatosEmpleadoPorUsuario">
+    	<![CDATA[
+         select 
+				EMP.CompaniaSocio AS "companiaSocioCodigo"
+				,COM.description AS "companiaSocioNombre"
+				,CAST(EMP.Empleado AS VARCHAR) AS "usuarioCodigo"
+				,EMP.CorreoInterno AS "usuarioCorreoInterno"
+				,EMP.CodigoUsuario AS  "usuarioLogin"
+				,PER.Persona AS "personaId"
+				,cast(PER.TIPODOCUMENTO as varchar) AS "personaTipoDocumento"
+				,PER.DOCUMENTO AS "personaNroDocumento"
+				,(PER.NOMBRECOMPLETO) AS "personaNombreCompleto"
+				,PER.NOMBRES AS "personaNombres"
+				,RTRIM(ISNULL(PER.APELLIDOPATERNO,'')) +' '+ ISNULL(PER.APELLIDOMATERNO,'')  AS "personaApellidos"
+				,PER.APELLIDOPATERNO AS "personaApellidoPaterno"
+				,PER.APELLIDOMATERNO AS "personaApellidoMaterno"
+				,EMP.UnidadNegocioAsignada AS "unidadNegocioAsignadaCodigo"
+				,UNE.DescripcionLocal AS "unidadNegocioAsignadaNombre"
+				,EMP.Sucursal AS "sucursalCodigo"
+				,SUC.DescripcionLocal AS "sucursalNombre"
+				,EMP.DeptoOrganizacion AS "departamentoCodigo"
+				,DEP.description AS "departamentoNombre"
+				,EMP.CodigoCargo AS "puestoEmpresaCodigo"
+				,PUE.Descripcion AS "puestoEmpresaNombre"
+				,EMP.CentroCostos AS "centroCostosCodigo"
+				,CC.LocalName AS "centroCostosNombre"
+				,EMP.TipoPlanilla AS "tipoPlanilla", emp.CodigoUnidad, isnull(emp.estadoempleado,'2'), isnull(emp.estado, 'I'),
+
+				(select CODIGOCARNET from as_carnetidentificacion where empleado = per.persona),
+				null flagConformidadDatos, 
+        isnull(u.ExpirarPasswordFlag, 'N') exp, u.FechaExpiracion,
+        EMP.unidadoperativa
+			from EmpleadoMast EMP
+				INNER JOIN PersonaMast PER
+					ON PER.PERSONA=EMP.EMPLEADO
+				LEFT JOIN companyowner COM
+					ON EMP.COMPANIASOCIO = COM.COMPANYOWNER
+				LEFT JOIN MA_UnidadNegocio UNE
+					ON EMP.UnidadNegocioAsignada = UNE.UnidadNegocio
+				LEFT JOIN AC_Sucursal SUC
+					ON EMP.Sucursal = SUC.Sucursal
+				LEFT JOIN DEPARTMENTMST DEP
+					ON EMP.DeptoOrganizacion=DEP.department
+				LEFT JOIN HR_PUESTOEMPRESA PUE
+					ON EMP.CodigoCargo = PUE.CodigoPuesto
+				LEFT JOIN AC_COSTCENTERMST CC
+					ON EMP.CentroCostos = CC.CostCenter
+				inner join usuario u on u.usuario = emp.codigousuario
+			where EMP.CompaniaSocio = ISNULL(:p_id_compania_socio,EMP.CompaniaSocio)
+			and EMP.codigousuario = :p_codigo_usuario
+		]]>
+    </sql-query>
+	<sql-query name="usuario.obtenerDatosEmpleadoPorUsuario2">
+    	<![CDATA[
+			DECLARE @INS VARCHAR(8)= :p_id_compania_socio
+			DECLARE @USU VARCHAR(30)=:p_codigo_usuario
+			select A.CODIGOUSUARIO, B.CORREO1, a.CODIGOUSUARIO, a.ID_EMPLEADO, b.ID_TIPO_DOCUMENTO,
+			b.DOCUMENTO, b.NOMBRECOMPLETO, b.NOMBREs, b.APELLIDO_PATERNO, b.APELLIDO_PATERNO, b.APELLIDO_MATERNO,'0' as estado,
+			'A' as estado, c.ExpirarPasswordFlag, c.FechaExpiracion ,a.ID_INSTITUCION, d.NOMBRE
+			 from 
+			sgseguridadsys.PS_EMPLEADO A
+			LEFT JOIN sgseguridadsys.PS_ENTIDAD B ON A.ID_EMPLEADO = B.ID_ENTIDAD
+			join Usuario c on a.CODIGOUSUARIO = c.Usuario
+			join sgseguridadsys.PS_INSTITUCION d on a.ID_INSTITUCION = d.ID_INSTITUCION
+			where A.ID_INSTITUCION = @INS AND A.CODIGOUSUARIO = @USU			
+		]]>
+    </sql-query>
+    
+    <sql-query name="usuario.actualizarCodigoUsuarioDeEmpleado">
+    	<![CDATA[
+         	update EmpleadoMast set CodigoUsuario = :p_codigo_usuario 
+         	where CompaniaSocio = :p_id_compania_socio and Empleado = :p_id_empleado
+		]]>
+    </sql-query>
+    
+    <sql-query name="usuario.existeEmpleado">
+    	<![CDATA[
+         	SELECT Empleado AS "idPersona"
+         	FROM EmpleadoMast  
+         	where CompaniaSocio = :p_id_compania_socio and Empleado = :p_id_empleado
+		]]>
+    </sql-query>
+  <sql-query name="usuario.contarReporteSeguridad">
+    	<![CDATA[
+         	 select count(1)
+		from personamast p join EmpleadoMast e
+		on p.Persona = e.Empleado 
+		join usuario u 
+		on e.CodigoUsuario = u.Usuario
+		where e.Empleado = isnull(:p_id_empleado, e.Empleado) and e.CompaniaSocio = isnull(:p_id_compania, e.CompaniaSocio)
+		and e.Estado = 'A' and u.Estado = 'A'
+		and (u.flagConformidadBoleta = 'S' or 'S' = :p_flag_datos)
+		and (u.flagConformidadDatos = 'S' or 'S' = :p_flag_boletas)
+		]]>
+    </sql-query>
+ <sql-query name="usuario.listarReporteSeguridad">
+    	<![CDATA[
+         	 select Empleado, NombreCompleto , CorreoInterno correo , usuario , CASE :p_flag_boletas WHEN 'S' THEN aprobacionFechaConformidadBoleta ELSE aprobacionFechaConformidadDATOS END fecha,ROW_NUMBER() over(order by nombrecompleto) seq
+		from personamast p join EmpleadoMast e
+		on p.Persona = e.Empleado 
+		join usuario u 
+		on e.CodigoUsuario = u.Usuario
+		where e.Empleado = isnull(:p_id_empleado, e.Empleado) and e.CompaniaSocio = isnull(:p_id_compania, e.CompaniaSocio)
+		and e.Estado = 'A' and u.Estado = 'A'
+		and (u.flagConformidadBoleta = 'S' or 'S' = :p_flag_datos)
+		and (u.flagConformidadDatos = 'S' or 'S' = :p_flag_boletas)
+		]]>
+    </sql-query>
+
+    <sql-query name="usuario.ingresarHistorial">
+    	<![CDATA[                                                                                             
+insert into SY_UsuarioPasswordLog(usuario, secuencia, clave, UltimoUsuario, UltimaFechaModif)
+values(:usuario, (select isnull(max(secuencia), 0)+1 from SY_UsuarioPasswordLog  where usuario = :usuario), :clave, 'MISESF', GETDATE())
+]]>
+</sql-query>
+
+ <sql-query name="usuario.validarClaveHistorico">
+    	<![CDATA[
+		  select 1 from (
+		  select top 10 * from SY_UsuarioPasswordLog  
+		  where usuario = :usuario
+		  order by Secuencia desc) tab
+		  where tab.Clave = :clave
+		  ]]>
+    </sql-query>
+	
+	
+	<sql-query name="usuario.filtroContar">
+
+		select 
+		count(1)
+		from Usuario a
+		where 
+		ISNULL(a.Usuario, '123') = isnull(:p_codigo, ISNULL(a.Usuario, '123'))
+		and a.Nombre like '%' + isnull(:p_nombre, '') + '%'
+
+
+</sql-query>
+
+
+
+
+<sql-query name="usuario.filtroPaginacion">
+
+		select 
+		a.Usuario,
+		a.Nombre,
+		ROW_NUMBER() OVER (ORDER BY a.Usuario ) AS Seq
+		from Usuario a
+		where 
+		ISNULL(a.Usuario, '123') = isnull(:p_codigo, ISNULL(a.Usuario, '123'))
+		and a.Nombre like '%' + isnull(:p_nombre, '') + '%'
+
+
+
+ </sql-query>
+ 
+ 
+
+</hibernate-mapping>

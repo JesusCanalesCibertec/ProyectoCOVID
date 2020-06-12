@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrCts
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="personamast.esJefePorUnidadOperativa">
+         <![CDATA[
+	        select count(*) from EmpleadoMast where
+UNIDADOPERATIVA in
+(select UNIDADOPERATIVA from HR_UNIDADOPERATIVA where RESPONSABLE = :p_id_empleado and estado = 'A')
+and empleado <> :p_id_empleado and estado = 'A' and EstadoEmpleado <> 2
+		]]>
+	</sql-query>
+
+
+    <sql-query name="personamast.obtenerNombrePorJefeUnidadOperativa">
+SELECT personamast.persona,personamast.nombrecompleto
+  FROM personamast
+ WHERE personamast.persona in (
+  SELECT responsable  FROM hr_unidadoperativa
+ WHERE unidadoperativa = :p_unidad)
+    </sql-query>
+   
+
+
+</hibernate-mapping>

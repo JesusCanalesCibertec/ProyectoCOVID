@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="bpprocesoconexioncomunicacion.listarUsuariosPorProcesoConexion">
+	     select e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+		from sgseguridadsys.BP_PROCESO_CONEXION_COMUNICACION CC
+			INNER JOIN EmpleadoMast E
+				ON CC.ID_USUARIO=E.CodigoUsuario
+			INNER JOIN PersonaMast p
+				ON E.Empleado=P.Persona
+		where ID_PROCESO = :p_proceso 
+		and CC.ID_VERSION = :p_version 
+		and CC.ID_CONEXION = :p_conexion
+		and CC.ID_TIPO_COMUNICACION = :p_tipo_comunicacion
+   </sql-query>
+</hibernate-mapping>

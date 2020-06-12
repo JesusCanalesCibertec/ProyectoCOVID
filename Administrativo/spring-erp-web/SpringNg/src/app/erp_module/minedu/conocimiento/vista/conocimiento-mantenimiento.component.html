@@ -1,0 +1,62 @@
+<p-dialog
+    header="Conocimiento : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}"
+    [(visible)]="verModal" [resizable]="false" [contentStyle]="{'overflow':'visible'}" [modal]="true" [width]="450"
+    [style]="{'margin-top':'25px'}" showEffect="fade" hideEffect="size">
+
+    <div class="ui-fluid">
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                <label>Tipo<span style="color:#ff0000">*</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <p-dropdown [(ngModel)]="conocimiento.tipo" [options]="tipos" [disabled]="deshabilitar"
+                    (onChange)='cargarAreas()' [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                <label>Área<span *ngIf="conocimiento.tipo == 'T'" style="color:#ff0000">*</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <p-dropdown [(ngModel)]="conocimiento.area" [options]="areas" [disabled]="deshabilitar || !areabloquear"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                <label>Nombre<span  style="color:#ff0000">*</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <input pInputText [(ngModel)]="conocimiento.nombre" [disabled]="deshabilitar" maxlength="20" type="text">
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-3 ui-lg-3">
+                <label>Descripción</label>
+            </div>
+            <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <textarea [rows]="6" style="width: 100%; resize: none;text-transform: uppercase"
+                    [(ngModel)]="conocimiento.descripcion" [disabled]="deshabilitar" maxlength="500" pInputTextarea></textarea>
+            </div>
+        </div>
+    </div>
+
+    <p-footer>
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                <button *ngIf="!deshabilitar" pButton label="Guardar" icon="fa fa-save" type="button"
+                    (click)="guardar()" style="width: 100%"></button>
+            </div>
+            <div class="ui-g-4 ui-md-6 ui-lg-4">
+            </div>
+            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" type="button" (click)="salir()"
+                    style="width: 100%"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

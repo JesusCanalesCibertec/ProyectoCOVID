@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : contabilidad.AcSucursal -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="prprestamo.solicitudListarContar">
+         <![CDATA[
+	         select 
+				       count(1)
+			      FROM pr_prestamo AS pre 
+				      LEFT JOIN pr_tipoprestamo AS tip 
+					      ON pre.tipoprestamo = tip.tipoprestamo 
+				      LEFT JOIN PersonaMast per 
+					      ON pre.Empleado=per.Persona
+				      LEFT JOIN MA_MiscelaneosDetalle est
+					      ON EST.AplicacionCodigo='PR' AND EST.CodigoTabla='PRESTESTAD' AND pre.Estado=est.CodigoElemento
+				      LEFT JOIN MonedaMast MON ON
+					      pre.MonedaDOcumento=mon.MonedaCodigo
+			      WHERE 1=1        
+              and year(pre.FechaSolicitud) >= (SELECT Numero from ParametrosMast where AplicacionCodigo='PR' and ParametroClave='PREANIOMIN')
+              and pre.Empleado = :p_id_empleado
+				      and pre.TipoPrestamo = isnull(:p_id_tipo_prestamo,pre.TipoPrestamo)
+				      and pre.Estado = isnull(:p_id_estado,pre.Estado)
+				      and ( (:p_desde is null ) or ( pre.FechaSolicitud BETWEEN :p_desde and :p_hasta ) ) 
+         ]]>
+	</sql-query>
+	<sql-query name="prprestamo.solicitudListarPaginacion">
+         <![CDATA[
+	         select 
+				     pre.companiasocio as "companiasocio"
+				    ,pre.nroprestamo as "nroprestamo"
+				    ,pre.tipoprestamo as "tipoprestamo"
+				    ,tip.Descripcion as "tipoprestamoNombre"
+				    ,pre.FechaSolicitud as "fechaSolicitud"
+				    ,pre.MonedaDocumento as "monedaPago"
+				    ,mon.Sigla as "monedaSigla"
+				    ,pre.MontoPrestamo as "montoPrestamo"
+				    ,pre.MontoPagado as "montoPagado"
+				    ,pre.SaldoDeuda as "saldoDeuda"
+				    ,cast(pre.Estado as varchar) as "estado"
+				    ,est.DescripcionLocal as "estadoNombre"
+				    ,pre.Empleado as "solicitanteId"
+				    ,cast(per.NombreCompleto as varchar) as "solicitanteNombre"
+				    ,pre.numeroproceso,ROW_NUMBER() OVER (ORDER BY pre.FechaSolicitud desc) AS Seq	
+			    FROM pr_prestamo AS pre 
+				    LEFT JOIN pr_tipoprestamo AS tip 
+					    ON pre.tipoprestamo = tip.tipoprestamo 
+				    LEFT JOIN PersonaMast per 
+					    ON pre.Empleado=per.Persona
+				    LEFT JOIN MA_MiscelaneosDetalle est
+					    ON EST.AplicacionCodigo='PR' AND EST.CodigoTabla='PRESTESTAD' AND pre.Estado=est.CodigoElemento
+				    LEFT JOIN MonedaMast MON ON
+					    pre.MonedaDOcumento=mon.MonedaCodigo
+			    WHERE 1=1
+            and year(pre.FechaSolicitud) >= (SELECT Numero from ParametrosMast where AplicacionCodigo='PR' and ParametroClave='PREANIOMIN')
+            and pre.Empleado = :p_id_empleado
+				    and pre.TipoPrestamo = isnull(:p_id_tipo_prestamo,pre.TipoPrestamo)
+				    and pre.Estado = isnull(:p_id_estado,pre.Estado)
+				    and ( (:p_desde is null ) or ( pre.FechaSolicitud BETWEEN :p_desde and :p_hasta ) ) 
+		]]>
+	</sql-query>
+	
+	
+	<sql-query name="prprestamo.listarCuentaCorrienteContar">
+         <![CDATA[
+	         select 
+				       count(pre.nroprestamo)
+			      FROM pr_prestamo AS pre 
+				      LEFT JOIN pr_tipoprestamo AS tip 
+					      ON pre.tipoprestamo = tip.tipoprestamo 
+				      LEFT JOIN PersonaMast per 
+					      ON pre.Empleado=per.Persona
+				      LEFT JOIN MA_MiscelaneosDetalle est
+					      ON EST.AplicacionCodigo='PR' AND EST.CodigoTabla='PRESTESTAD' AND pre.Estado=est.CodigoElemento
+				      LEFT JOIN MonedaMast MON ON
+					      pre.monedadocumento=mon.MonedaCodigo
+			      WHERE 1=1
+              and year(pre.FechaSolicitud) >= (SELECT Numero from ParametrosMast where AplicacionCodigo='PR' and ParametroClave='PREANIOMIN')
+              and pre.Empleado = :p_id_empleado
+				      and pre.Estado in ('C','P')
+         ]]>
+	</sql-query>
+	<sql-query name="prprestamo.listarCuentaCorrientePaginacion">
+         <![CDATA[
+	         select 
+				     pre.companiasocio as "companiasocio"
+				    ,pre.nroprestamo as "nroprestamo"
+				    ,pre.tipoprestamo as "tipoprestamo"
+				    ,tip.Descripcion as "tipoprestamoNombre"
+				    ,pre.FechaSolicitud as "fechaSolicitud"
+				    ,pre.fechaaprobacion as "fechaAprobacion"
+				    ,case pre.monedadocumento when 'lo' then 'Local' when 'ex' then 'Extranjera' else '' end as "monedaPago"
+				    ,mon.Sigla as "monedaSigla"
+				    ,pre.MontoPrestamo as "montoPrestamo"
+				    ,pre.MontoPagado as "montoPagado"
+				    ,pre.SaldoDeuda as "saldoDeuda"
+				    ,cast(pre.Estado as varchar) as "estado"
+				    ,est.DescripcionLocal as "estadoNombre"
+				    ,pre.Empleado as "solicitanteId"
+				    ,cast(per.NombreCompleto as varchar) as "solicitanteNombre",ROW_NUMBER() OVER (ORDER BY pre.FechaSolicitud desc ) AS Seq
+			    FROM pr_prestamo AS pre 
+				    LEFT JOIN pr_tipoprestamo AS tip 
+					    ON pre.tipoprestamo = tip.tipoprestamo 
+				    LEFT JOIN PersonaMast per 
+					    ON pre.Empleado=per.Persona
+				    LEFT JOIN MA_MiscelaneosDetalle est
+					    ON EST.AplicacionCodigo='PR' AND EST.CodigoTabla='PRESTESTAD' AND pre.Estado=est.CodigoElemento
+				    LEFT JOIN MonedaMast MON ON
+					    pre.monedadocumento=mon.MonedaCodigo
+			    WHERE 1=1
+            and year(pre.FechaSolicitud) >= (SELECT Numero from ParametrosMast where AplicacionCodigo='PR' and ParametroClave='PREANIOMIN')
+            and pre.Empleado = :p_id_empleado
+				    and pre.Estado in ('C','P')
+		]]>
+	</sql-query>
+	<sql-query name="prprestamo.obtenerClasePagoPorEmpleado">
+         <![CDATA[
+        select cast(b.ClasePago as varchar(1)) as "codigo" from empleadomast a join pr_tipoplanilla b on a.TipoPlanilla = b.TipoPlanilla
+		where a.Empleado = :empleado
+         ]]>
+	</sql-query>
+        
+</hibernate-mapping>

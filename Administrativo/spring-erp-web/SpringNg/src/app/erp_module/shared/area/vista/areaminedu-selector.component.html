@@ -1,0 +1,51 @@
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE ÁREAS DE MINEDU" [(visible)]="verSelector" modal="modal" showEffect="fade"
+        hideEffect="size" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-3 ui-md-2 ui-lg-1">
+                    <label>Siglas</label>
+                </div>
+                <div class="ui-g-9 ui-md-2 ui-lg-3">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombre" (keypress)="defaultBuscar($event)" />
+                </div>
+                <div class="ui-g-3 ui-md-2 ui-lg-2">
+                    <label>Primera estancia</label>
+                </div>
+                <div class="ui-g-9 ui-md-6 ui-lg-6">
+                    <input pInputText type="text" [(ngModel)]="filtro.descripcion" (keypress)="defaultBuscar($event)" />
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fas fa-search" type="button" (click)="buscar(dt)"
+                    class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" class="ui-button" type="button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+        <div class="ui-g" style="font-weight: bold; color: darkred">
+            <label>Dar doble click al área seleccionada</label>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                    <p-dataTable #dt [responsive]="true" scrollable="true" [rows]="registrosPorPagina" [paginator]="true" [lazy]="true"
+                    scrollWidth="100%" emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado"
+                    selectionMode="single" (onRowDblclick)="onRowSelect($event)"
+                    [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargar($event)"
+                    [value]="filtro.paginacion.listaResultado">
+                    <p-column header="Código" field="codigo" [style]="{'width':'70px'}"></p-column>
+                    <p-column header="Primera estancia" field="primero" [style]="{'width':'250px'}"></p-column>
+                    <p-column header="Segunda estancia" field="segundo" [style]="{'width':'250px'}"></p-column>
+                    <p-column header="Última estancia" field="ultimo" [style]="{'width':'250px'}"> </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </p-dialog>
+</div>

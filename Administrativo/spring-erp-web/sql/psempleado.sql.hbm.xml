@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psempleado
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="psempleado.filtroContar">
+    select
+		COUNT(1)
+		from sgseguridadsys.PS_EMPLEADO a
+			 left join sgseguridadsys.PS_ENTIDAD b on a.ID_EMPLEADO = b.ID_ENTIDAD
+	where
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.ID_EMPLEADO, '123') = isnull(:p_id_empleado, ISNULL(a.ID_EMPLEADO, '123'))
+		and b.NOMBRECOMPLETO like '%' + isnull(:p_nombre, '') + '%'
+		and ISNULL(b.DOCUMENTO, '123') = isnull(:p_documento, ISNULL(b.DOCUMENTO, '123'))
+				and isnull(b.edad , 0) = isnull(:p_edad, isnull(b.edad , 0))
+				AND ISNULL(B.ID_AREA_TRABAJO, 'SIN') = isnull(:p_area, ISNULL(B.ID_AREA_TRABAJO, 'SIN'))
+				and id_Sexo = isnull(:p_sexo, id_Sexo)
+
+
+  </sql-query>
+
+  <sql-query name="psempleado.filtroPaginacion">
+    select
+		a.ID_INSTITUCION,
+		a.ID_EMPLEADO,
+		b.NOMBRECOMPLETO,
+		b.DOCUMENTO,
+		(select x.NOMBRE from sgseguridadsys.PS_INSTITUCION x where x.ID_INSTITUCION = a.ID_INSTITUCION) as nom,
+		
+		case when id_Sexo = 'F' then 'Femenino' when id_sexo = 'M' then 'Masculino' else '' end as sexo,
+		b.edad,
+		
+		ROW_NUMBER() OVER (ORDER BY a.ID_EMPLEADO ) AS Seq
+		from sgseguridadsys.PS_EMPLEADO a
+			 left join sgseguridadsys.PS_ENTIDAD b on a.ID_EMPLEADO = b.ID_ENTIDAD
+	where
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.ID_EMPLEADO, '123') = isnull(:p_id_empleado, ISNULL(a.ID_EMPLEADO, '123'))
+		and b.NOMBRECOMPLETO like '%' + isnull(:p_nombre, '') + '%'
+		and ISNULL(b.DOCUMENTO, '123') = isnull(:p_documento, ISNULL(b.DOCUMENTO, '123'))
+				and isnull(b.edad , 0) = isnull(:p_edad, isnull(b.edad , 0))
+				AND ISNULL(B.ID_AREA_TRABAJO, 'SIN') = isnull(:p_area, ISNULL(B.ID_AREA_TRABAJO, 'SIN'))
+				and id_Sexo = isnull(:p_sexo, id_Sexo)
+
+  </sql-query>
+  <sql-query name="psempleado.listarAreas">
+    select ID_AREA, NOMBRE FROM sgseguridadsys.PS_INSTITUCION_AREA_TRABAJO where estado = 'A'
+  </sql-query>
+
+  <sql-query name="psempleado.listarPorCorreoInterno">
+    select ID_ENTIDAD, CODIGOUSUARIO, ID_INSTITUCION, CORREO1
+	from sgseguridadsys.PS_ENTIDAD a join sgseguridadsys.PS_EMPLEADO b on a.ID_ENTIDAD = b.ID_EMPLEADO
+	where CORREO1 = :correo
+  </sql-query>
+
+
+
+</hibernate-mapping>

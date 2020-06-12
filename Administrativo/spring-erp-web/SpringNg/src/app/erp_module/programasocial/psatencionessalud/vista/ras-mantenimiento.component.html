@@ -1,0 +1,424 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="Registro de Atenciones de Salud (RAS)" [toggleable]="true">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion" [options]="listaInstitucion"
+                    (ngModelChange)="onChangeInstitucion($event,dtAtencionSalud)" [(ngModel)]="filtro.idInstitucion">
+                </p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Programa</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [options]="listaPrograma" (onChange)="onChangePrograma(dtAtencionSalud)"
+                    [disabled]="verListaProgramas" [(ngModel)]="filtro.idPrograma"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Fecha</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                    dateFormat="dd/mm/yy" [(ngModel)]="filtro.fechaAtencion"></p-calendar>
+
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombres</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <input pInputText type="text" (keypress)="preBuscar($event, dtAtencionSalud)"
+                    [(ngModel)]="filtro.nombreCompleto" />
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Residencia</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [options]="listaResidencia" [(ngModel)]="filtro.idArea"></p-dropdown>
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sexo</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idSexo" [options]="sexos"></p-dropdown>
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Tipo RAS</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [options]="listaTipoRas" (onChange)="onchangeBuscar(dtAtencionSalud)"
+                    [(ngModel)]="filtro.idTipoAtencion"></p-dropdown>
+            </div>
+
+            <div class="ui-g ui-md ui-lg-1"></div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Registros</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-1">
+                <input pInputText type="text" [(ngModel)]="filtro.cantidadRegistros" />
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4 ui-lg-3">
+                <button pButton label="Agregar Columna" icon="fa fa-plus" (click)="agregarColumna(dtAtencionSalud)"
+                    type="button" class="ui-button"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-4 ui-lg-3">
+                <button pButton label="Ocultar Columna" icon="fa fa-minus" (click)="quitarColumna(dtAtencionSalud)"
+                    type="button" class="ui-button"></button>
+            </div>
+
+            <div class="ui-g ui-md-2 ui-lg-4"></div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-binoculars" (click)="buscar(dtAtencionSalud)" type="button"
+                    class="ui-button"></button>
+            </div>
+
+        </div>
+    </p-panel>
+
+    <p-table #dtAtencionSalud [rows]="filtro.cantidadRegistros" [paginator]="true"
+        [value]="filtro.paginacion.listaResultado" [totalRecords]="filtro.paginacion.registroEncontrados"
+        [scrollable]="true" [responsive]="true" [autoLayout]="true" scrollHeight="260px" [style]="{width:'100%'}">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:55px">Código</th>
+                <th style="width:220px">Nombre Completos</th>
+                <th style="width:120px">Residencia</th>
+                <th style="width:220px">Diagnóstico 1</th>
+                <th style="width:120px">Tratamientos 1</th>
+                <th style="width:220px">Diagnóstico 2</th>
+                <th style="width:120px">Tratamientos 2</th>
+
+                <th style="width:220px">Diagnóstico 3</th>
+                <th style="width:120px">Tratamientos 3</th>
+
+                <th style="width:220px" *ngIf="mostrarColumna(4)">Diagnóstico 4</th>
+                <th style="width:120px" *ngIf="mostrarColumna(4)">Tratamientos 4</th>
+
+                <th style="width:220px" *ngIf="mostrarColumna(5)">Diagnóstico 5</th>
+                <th style="width:120px" *ngIf="mostrarColumna(5)">Tratamientos 5</th>
+                <th style="width:220px">Comentario</th>
+                <th style="width:80px">Acción</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [class.row-hover]="rowData.hover">
+
+                <td style="width:55px">{{rowData.idBeneficiario}}</td>
+                <td style="width:220px">{{rowData.nombreCompleto}}</td>
+                <td style="width:120px">{{rowData.residencia}}</td>
+
+                <!-- DIAGNOSTICO 1 -->
+                <td style="width:220px">
+                    <div class="ui-g-10 ui-md-10 ui-lg-10">
+                        {{rowData.nombreDiagnostico01}}
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-lg-2">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,1)"
+                            title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+                <td style="width:120px">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,1)"
+                            title="Agregar Tratamiento"></button>
+                    </div>
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.idTratamiento01_1!==null || rowData.idTratamiento01_2!=null || rowData.idTratamiento01_3!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+                <!-- DIAGNOSTICO 2 -->
+                <td style="width:220px">
+                    <div class="ui-g-10 ui-md-10 ui-lg-10">
+                        {{rowData.nombreDiagnostico02}}
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-lg-2">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)"
+                            title="Selecccione Diagnóstico"></button>
+                    </div>
+
+                </td>
+
+                <td style="width:120px">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)"
+                            title="Agregar Tratamiento"></button>
+                    </div>
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.idTratamiento02_1!==null || rowData.idTratamiento02_2!=null || rowData.idTratamiento02_3!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+
+                <!-- DIAGNOSTICO 3-->
+                <td style="width:220px">
+                    <div class="ui-g-10 ui-md-10 ui-lg-10">
+                        {{rowData.nombreDiagnostico03}}
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-lg-2">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,3)"
+                            title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:120px">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,3)"
+                            title="Agregar Tratamiento"></button>
+                    </div>
+
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.idTratamiento03_1!==null || rowData.idTratamiento03_2!=null || rowData.idTratamiento03_3!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+                <!-- DIAGNOSTICO 4 -->
+                <td style="width:220px" *ngIf="mostrarColumna(4)">
+                    <div class="ui-g-10 ui-md-10 ui-lg-10">
+                        {{rowData.nombreDiagnostico04}}
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-lg-2">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,4)"
+                            title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:120px" *ngIf="mostrarColumna(4)">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,4)"
+                            title="Agregar Tratamiento"></button>
+                    </div>
+
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.idTratamiento04_1!==null || rowData.idTratamiento04_2!=null || rowData.idTratamiento04_3!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+                <!-- DIAGNOSTICO 5 -->
+                <td style="width:220px" *ngIf="mostrarColumna(5)">
+                    <div class="ui-g-10 ui-md-10 ui-lg-10">
+                        {{rowData.nombreDiagnostico05}}
+                    </div>
+
+                    <div class="ui-g-2 ui-md-2 ui-lg-2">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,5)"
+                            title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:120px" *ngIf="mostrarColumna(5)">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,5)"
+                            title="Agregar Tratamiento"></button>
+                    </div>
+
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.idTratamiento05_1!==null || rowData.idTratamiento05_2!=null || rowData.idTratamiento05_3!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+                <!-- DIAGNOSTICO 6 -->
+                <!-- <td style="width:220px" *ngIf="mostrarColumna(6)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.nombreDiagnostico06}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)" title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:100px" *ngIf="mostrarColumna(6)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.tratamientosNombres06}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)" title="Agregar Tratamiento"></button>
+                    </div>
+                </td> -->
+
+                <!-- DIAGNOSTICO 7 -->
+                <!-- <td style="width:220px" *ngIf="mostrarColumna(7)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.nombreDiagnostico07}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)" title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:100px" *ngIf="mostrarColumna(7)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.tratamientosNombres07}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)" title="Agregar Tratamiento"></button>
+                    </div>
+                </td> -->
+
+                <!-- DIAGNOSTICO 8 -->
+                <!-- <td style="width:220px" *ngIf="mostrarColumna(8)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.nombreDiagnostico08}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)" title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:100px" *ngIf="mostrarColumna(8)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.tratamientosNombres08}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)" title="Agregar Tratamiento"></button>
+                    </div>
+                </td> -->
+
+                <!-- DIAGNOSTICO 9 -->
+                <!-- <td style="width:220px" *ngIf="mostrarColumna(9)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.nombreDiagnostico09}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)" title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:100px" *ngIf="mostrarColumna(9)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.tratamientosNombres09}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)" title="Agregar Tratamiento"></button>
+                    </div>
+                </td> -->
+
+
+                <!-- DIAGNOSTICO 10 -->
+                <!-- <td style="width:220px" *ngIf="mostrarColumna(10)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.nombreDiagnostico010}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="verDiagnosticos(rowData,2)" title="Selecccione Diagnóstico"></button>
+                    </div>
+                </td>
+
+                <td style="width:100px" *ngIf="mostrarColumna(10)">
+                    <div class="ui-g-4 ui-md-2 ui-lg-8">
+                        {{rowData.tratamientosNombres010}}
+                    </div>
+
+                    <div class="ui-g-4 ui-md-2 ui-lg-1">
+                        <button pButton icon="fa fa-search" (click)="mostrarVentanaTratamiento(rowData,2)" title="Agregar Tratamiento"></button>
+                    </div>
+                </td> -->
+
+
+
+
+                <td style="width:120px">
+                    <div class="ui-g-10 ui-md-6 ui-lg-6">
+                        <button pButton icon="fa fa-pencil" (click)="mostrarVentanaComentario(rowData)"
+                            title="Agregar Comentario"></button>
+                    </div>
+                    <div class="ui-g-2 ui-md-6 ui-lg-6"
+                        *ngIf="rowData.comentario!==null">
+                        <i class="fa fa-commenting-o fa-lg "></i>
+                    </div>
+                </td>
+
+
+
+                <td style="width:80px">
+                    <button pButton icon="fa fa-save" (click)="guardar(rowData, dtAtencionSalud)"
+                        title="Guardar"></button>
+                </td>
+
+            </tr>
+
+        </ng-template>
+
+    </p-table>
+</div>
+
+<app-tratamiento (insertaTratamientos)="insertarTratamientos($event)"></app-tratamiento>
+
+
+<p-dialog [header]=" 'Registro de Atenciones de Salud'" [(visible)]="verModalComentario" [modal]="true " [responsive]="true "
+    [resizable]="false " [closable]="false" [closeOnEscape]="false"
+    [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Comentarios">
+        <div class="ui-g ">
+            <div class="ui-g-12 ui-md-12 ui-lg-12 ">
+                <textarea pInputTextarea style="width:100%" [(ngModel)]="comentario" maxlength="2000"></textarea>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-8 ">
+            </div>
+            <div class="ui-g-5 ui-md-4 ui-lg-4 ">
+                <button type="button " pButton icon="fa fa-check" label="Aceptar" (click)="guardarComentario()"></button>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>

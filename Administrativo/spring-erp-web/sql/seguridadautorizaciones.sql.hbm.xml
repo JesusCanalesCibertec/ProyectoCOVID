@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : core.Seguridadautorizaciones
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="seguridadautorizaciones.listarAplicacionPorUsuario">
+         select aut.AplicacionCodigo as 'codigo'
+				,app.DescripcionCorta as 'nombre'
+				,app.DescripcionLarga as 'descripcion'
+			from seguridadautorizaciones aut 
+				inner join AplicacionesMast app
+				on aut.AplicacionCodigo=app.AplicacionCodigo
+			where aut.concepto = 'SECADM' AND aut.usuario = :p_id_usuario AND aut.Estado='A'
+    </sql-query>
+<sql-query name="seguridadautorizaciones.esRRHH">
+      select
+        case WHEN (select count(*) from SeguridadAutorizaciones where AplicacionCodigo='SN' and Grupo='SNGP00' and Concepto ='SNCN02' and
+        Usuario = :p_id_usuario) > 0 THEN 'S' ELSE
+          CASE WHEN
+          (select count(*) from SeguridadAutorizaciones where AplicacionCodigo='SN' and Grupo='SNGP00' and Concepto ='SNCN02' and
+          Usuario in (select Perfil from SeguridadPerfilUsuario where Usuario = :p_id_usuario))  > 0
+          THEN 'S' ELSE 'N' END
+      end
+    </sql-query>
+</hibernate-mapping>

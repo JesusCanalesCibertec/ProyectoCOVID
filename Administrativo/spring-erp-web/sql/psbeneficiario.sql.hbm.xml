@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psbeneficiario
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="psbeneficiario.filtroContar">
+
+select 
+count(1)
+from sgseguridadsys.PS_ENTIDAD e
+  left join sgseguridadsys.PS_BENEFICIARIO b
+  on e.ID_ENTIDAD = b.ID_BENEFICIARIO
+  left join sgseguridadsys.PS_INSTITUCION i
+  on i.ID_INSTITUCION = b.ID_INSTITUCION
+  left join MA_MiscelaneosDetalle ma on e.ID_TIPO_DOCUMENTO = ma.CodigoElemento and ma.CodigoTabla = 'TIPODOCI'
+
+  
+where
+  ISNULL(b.ID_BENEFICIARIO, '123') = isnull(:p_codigo, ISNULL(b.ID_BENEFICIARIO, '123'))
+  and ISNULL(I.ID_INSTITUCION, '123') = isnull(:p_institucion, ISNULL(I.ID_INSTITUCION, '123'))
+  
+  and 
+  (e.APELLIDO_PATERNO+' ' +isnull(e.APELLIDO_MATERNO, '') +' '+e.NOMBRES like '%' + isnull(:p_nombre, '') + '%'
+  
+  or
+  e.NOMBRES+' ' +e.APELLIDO_PATERNO +' '+isnull(e.APELLIDO_MATERNO, '') like '%' + isnull(:p_nombre, '') + '%'
+  )
+  
+  
+  
+  AND ISNULL(E.DOCUMENTO, '') like '%' +  isnull(:p_dni, '') + '%'
+  and ISNULL(E.ID_SEXO, '123') = isnull(:p_sexo, ISNULL(E.ID_SEXO, '123'))
+  AND ((CAST(isnull(e.CREACION_FECHA, '1980-01-01') AS DATE)  between isnull(:p_desdeReg, '1980-01-01') and
+  isnull(:p_hastaReg, '2980-12-31')))
+  AND ((CAST(isnull(e.FECHA_NACIMIENTO, '2980-12-31') AS DATE) between isnull(:p_desdeNac, '1900-01-01') and
+  isnull(:p_hastaNac, '2980-12-31')))
+ 
+ and b.estado = isnull(:p_estado, b.estado) and b.id_programa = isnull(:p_programa, b.id_programa)
+
+
+</sql-query>
+
+  <sql-query name="psbeneficiario.listarPaginacionBeneficiario">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ConsultarBeneficiario
+        :p_nombre,
+        :p_codigo,
+        :p_dni,
+        :p_institucion,
+        :p_sexo,
+        :p_programa,
+        :p_estado,
+        :p_desdeNac
+       ]]>
+  </sql-query>
+
+  <sql-query name="psbeneficiario.filtroPaginacion22">
+    SELECT
+    isnull(U.NOMBRE, ''),
+    isnull(APELLIDO_PATERNO, ''),
+    isnull(APELLIDO_MATERNO, ''),
+    isnull(NOMBRES, ''),
+    isnull(CASE WHEN ID_SEXO = 'F' THEN 'Femenino' when ID_SEXO = 'M' then 'Masculino' else '' END, '') AS SEXO,
+    isnull(CONVERT(VARCHAR(10), FECHA_NACIMIENTO, 103), '') NACIMIENTO,
+    isnull(cast(EDAD as varchar(10)), ''),
+    isnull(C.DescripcionCorta, ''),
+    isnull(D.DescripcionCorta, ''),
+    isnull(E.DescripcionCorta, ''),
+    isnull(F.DescripcionCorta, ''),
+    isnull(B.DOCUMENTO, ''),
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'AN'), '') ACTANACIMIENTO,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'CN'), '') NACIDOVIVO,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'PB'), '') BAUTIZO,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'TV'), '') VACUNACION,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'RP') , '')PELATOSCOPICO,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'CNO') , '')CONSTANCIANOTAS,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_DOCUMENTO aa where aa.ID_ENTIDAD = b.ID_ENTIDAD and aa.ID_TIPO_DOCUMENTO = 'EP') , '')EPICRISIS,
+    isnull(sgseguridadsys.Fn_ObtenerOtrosDocumentosNNA(b.ID_ENTIDAD) , '')OTROSDOCUMENTOS,
+    isnull(CONVERT(VARCHAR(10), G.FECHA_INGRESO, 103) , '')INRGESO,
+    isnull(cast(DATEDIFF(day, G.FECHA_INGRESO, GETDATE()) as varchar(100)) , '')PERMANENCIA,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'VFAM' ), '') VIOLENCIA,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'MFIS' ) , '')MALTRATOFISICO,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'MPSI' ) , '')MALTRATOPSICO,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'MSEX' ) , '')MALTRATOSEXUAL,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'DESFM') , '')DESPROTECCION,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'RDIN' ) , '')DESARROLLOINTEGRAL,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'TADR' ) , '')AFECTACION,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'ACEH' ) , '')CENTROHOSP,
+    isnull((select 'X' from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL BA where BA.ID_INSTITUCION = A.ID_INSTITUCION AND BA.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND BA.ID_INGRESO = A.ID_COMPONENTE_INGRESO AND ID_CAUSAL = 'AVIP' ) , '')VIAPUBLICA,
+    isnull(sgseguridadsys.Fn_ObtenerOtrosCausasNNA(b.ID_ENTIDAD, g.ID_INGRESO, a.ID_INSTITUCION), '') OTROSCAUSALES,
+    isnull(H.DescripcionLocal, '') DERIVA,
+    isnull(I.DescripcionLocal, '') LEGAL,
+    isnull(J.NOMBRE, '') AREA,
+    isnull(G.COMENTARIOS, '') COMENTARIOS_INGRESO,
+    isnull(K.DescripcionCorta, ''),
+    isnull(L.DescripcionCorta, ''),
+    isnull(M.DescripcionCorta, ''),
+    isnull(B.DOMICILIO_DIRECCION, ''),
+    isnull(B.DOMICILIO_REFERENCIA, ''),
+    isnull(N.DescripcionLocal, ''),
+    isnull(O.DescripcionLocal, ''),
+    isnull(P.DescripcionLocal, ''),
+    isnull(Q.DescripcionLocal, ''),
+    isnull(R.DescripcionLocal, ''),
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO Ca where Ca.ID_ENTIDAD = b.ID_ENTIDAD and Ca.ID_EQUIPAMIENTO = 'RAD'), '') RADIO,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO Ca where Ca.ID_ENTIDAD = b.ID_ENTIDAD and Ca.ID_EQUIPAMIENTO = 'TV') , '')TV,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO Ca where Ca.ID_ENTIDAD = b.ID_ENTIDAD and Ca.ID_EQUIPAMIENTO = 'REF') , '')REFRIGERADORA,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO Ca where Ca.ID_ENTIDAD = b.ID_ENTIDAD and Ca.ID_EQUIPAMIENTO = 'COC') , '')COCINA,
+    isnull((select 'X' from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO Ca where Ca.ID_ENTIDAD = b.ID_ENTIDAD and Ca.ID_EQUIPAMIENTO = 'INTE') , '')INTERNET,
+    isnull(sgseguridadsys.Fn_ObtenerOtrosEquipamientosNNA(b.ID_ENTIDAD) , '')OTROSEQUIPAMIENTOS,
+    isnull(B.TELEFONO1, ''),
+    isnull(B.PADRE_NOMBRE, ''),
+    isnull(CASE WHEN B.PADRE_ID_VIVE = 'S' THEN 'Si' when b.PADRE_ID_VIVE = 'N' then 'No' else '' end, '') PAPAVIVE,
+    isnull(B.PADRE_NRO_DOCUMENTO, ''),
+    isnull(S.DescripcionLocal, ''),
+    isnull(B.MADRE_NOMBRE, ''),
+    isnull(CASE WHEN B.MADRE_ID_VIVE = 'S' THEN 'Si' when b.MADRE_ID_VIVE = 'N' then 'No' else '' end, '') MAMAVIVE,
+    isnull(B.MADRE_NRO_DOCUMENTO, ''),
+    isnull(T.DescripcionLocal, ''),
+    isnull(B.APODERADO_NOMBRE, ''),
+    isnull(B.APODERADO_NRO_DOCUMENTO, ''),
+    isnull(B.APODERADO_ESPOSOA, ''),
+    isnull(cast(B.INGRESO_MENSUAL as varchar(100)), '')
+    FROM
+    sgseguridadsys.PS_BENEFICIARIO a JOIN
+    sgseguridadsys.PS_ENTIDAD b ON a.ID_BENEFICIARIO = b.ID_ENTIDAD LEFT JOIN
+    Pais C ON C.Pais = B.ID_NACIMIENTO_PAIS LEFT JOIN
+    Departamento D ON D.Pais = C.Pais AND D.Departamento = SUBSTRING(ISNULL(ID_NACIMIENTO_UBIGEO,''),1, 2)LEFT JOIN
+    Provincia E ON E.Departamento = D.Departamento AND E.Provincia = SUBSTRING(ISNULL(ID_NACIMIENTO_UBIGEO,''),3, 2)LEFT JOIN
+    ZonaPostal F ON F.Departamento = E.Departamento AND F.Provincia = E.Provincia AND F.CodigoPostal = SUBSTRING(ISNULL(ID_NACIMIENTO_UBIGEO,''),5, 2) LEFT JOIN
+    sgseguridadsys.PS_BENEFICIARIO_INGRESO G ON G.ID_INSTITUCION = A.ID_INSTITUCION AND G.ID_BENEFICIARIO = A.ID_BENEFICIARIO AND G.ID_INGRESO = A.ID_COMPONENTE_INGRESO LEFT JOIN
+    MA_MiscelaneosDetalle H ON H.CodigoTabla = 'INSDAAM' AND H.CodigoElemento = G.ID_INSTITUCION_DERIVA LEFT JOIN
+    MA_MiscelaneosDetalle I ON I.CodigoTabla = 'SITLEGNIN' AND I.CodigoElemento = G.ID_SITUACION_LEGAL LEFT JOIN
+    sgseguridadsys.PS_INSTITUCION_AREA J ON J.ID_INSTITUCION = A.ID_INSTITUCION AND J.ID_AREA = A.ID_AREA LEFT JOIN
+    Departamento K ON K.Departamento = SUBSTRING(ISNULL(DOMICILIO_ID_UBIGEO,''),1, 2)LEFT JOIN
+    Provincia L ON L.Departamento = K.Departamento AND L.Provincia = SUBSTRING(ISNULL(DOMICILIO_ID_UBIGEO,''),3, 2)LEFT JOIN
+    ZonaPostal M ON M.Departamento = L.Departamento AND M.Provincia = L.Provincia AND M.CodigoPostal = SUBSTRING(ISNULL(DOMICILIO_ID_UBIGEO,''),5, 2) LEFT JOIN
+    MA_MiscelaneosDetalle N ON N.CodigoTabla = 'TENENCINNA' AND N.CodigoElemento = B.ID_TENENCIA LEFT JOIN
+    MA_MiscelaneosDetalle O ON O.CodigoTabla = 'MATECONST' AND O.CodigoElemento = B.ID_MATERIAL_CONSTRUCCION LEFT JOIN
+    MA_MiscelaneosDetalle P ON P.CodigoTabla = 'SERAGUAPO' AND P.CodigoElemento = B.ID_SERVICIO_AGUA LEFT JOIN
+    MA_MiscelaneosDetalle Q ON Q.CodigoTabla = 'SERDESAGU' AND Q.CodigoElemento = B.ID_SERVICIO_DESAGUE LEFT JOIN
+    MA_MiscelaneosDetalle R ON R.CodigoTabla = 'SERELECTR' AND R.CodigoElemento = B.ID_SERVICIO_ELECTRICIDAD  LEFT JOIN
+    MA_MiscelaneosDetalle S ON S.CodigoTabla = 'OCUPAFUN' AND S.CodigoElemento = B.PADRE_ID_OCUPACION LEFT JOIN
+    MA_MiscelaneosDetalle T ON T.CodigoTabla = 'OCUPAFUN' AND T.CodigoElemento = B.MADRE_ID_OCUPACION LEFT JOIN
+    sgseguridadsys.PS_INSTITUCION U ON U.ID_INSTITUCION = A.ID_INSTITUCION
+    WHERE
+    a.ID_BENEFICIARIO = isnull(:p_codigo, a.ID_BENEFICIARIO) and
+    b.NOMBRECOMPLETO like '%'+isnull(:p_nombre, '')+'%' and
+    isnull(b.DOCUMENTO, 'doc') = isnull(:p_dni, isnull(b.DOCUMENTO, 'doc')) and
+    a.ID_INSTITUCION = isnull(:p_institucion, a.ID_INSTITUCION) and
+    isnull(b.ID_SEXO, 'sins') = isnull(:p_sexo, isnull(b.ID_SEXO, 'sins')) and
+    b.FECHA_NACIMIENTO between isnull(:p_desdeNac, '1800-01-01') and isnull(:p_hastaNac, '2200-01-01') and
+    a.ID_PROGRAMA = isnull(:p_programa, a.ID_PROGRAMA) and
+    a.ESTADO = isnull(:p_estado, a.ESTADO)
+
+
+  </sql-query>
+
+
+<sql-query name="psbeneficiario.filtroPaginacion">
+
+  select
+  i.ID_INSTITUCION,
+  i.NOMBRE,
+  b.ID_BENEFICIARIO,
+  e.APELLIDO_PATERNO+' ' +isnull(e.APELLIDO_MATERNO, '') +' '+e.NOMBRES as Nombre_Completo,
+  e.DOCUMENTO
+  ,ma.DescripcionLocal as Nom_Tipo_Documento
+  ,e.ID_SEXO as SEXO
+  ,edad AS EDAD
+  ,e.CREACION_FECHA,
+  case when b.id_programa='AAM' then 2 else 1 end as 'tipoNUevo',
+  b.id_programa, (
+
+  select DescripcionLocal from MA_MiscelaneosDetalle where CodigoTabla = 'BENEESTA'
+  and CodigoElemento = b.estado
+
+  ) as estado,
+  e.ID_DISCAPACIDAD,
+  b.ID_COMPONENTE_SALUD,
+  b.ID_COMPONENTE_CAPACIDAD,
+  b.ID_COMPONENTE_SOCIO_AMBIENTAL,
+  b.ID_COMPONENTE_NUTRICION,
+  (select ID_MOTIVO_EGRESO from sgseguridadsys.PS_BENEFICIARIO_INGRESO 
+	where ID_INGRESO = (select max(X.ID_INGRESO) from sgseguridadsys.PS_BENEFICIARIO_INGRESO X where X.ID_BENEFICIARIO = b.ID_BENEFICIARIO)
+	and ID_BENEFICIARIO = b.ID_BENEFICIARIO) as Motivo,
+  ROW_NUMBER() OVER (ORDER BY e.APELLIDO_PATERNO+' ' +isnull(e.APELLIDO_MATERNO, '') +' '+e.NOMBRES) AS Seq
+  from sgseguridadsys.PS_ENTIDAD e
+  left join sgseguridadsys.PS_BENEFICIARIO b
+  on e.ID_ENTIDAD = b.ID_BENEFICIARIO
+  left join sgseguridadsys.PS_INSTITUCION i
+  on i.ID_INSTITUCION = b.ID_INSTITUCION
+  left join MA_MiscelaneosDetalle ma on e.ID_TIPO_DOCUMENTO = ma.CodigoElemento and ma.CodigoTabla = 'TIPODOCI'
+  
+  where
+  ISNULL(b.ID_BENEFICIARIO, '123') = isnull(:p_codigo, ISNULL(b.ID_BENEFICIARIO, '123'))
+  and ISNULL(I.ID_INSTITUCION, '123') = isnull(:p_institucion, ISNULL(I.ID_INSTITUCION, '123'))
+  
+  and 
+  (e.APELLIDO_PATERNO+' ' +isnull(e.APELLIDO_MATERNO, '') +' '+e.NOMBRES like '%' + isnull(:p_nombre, '') + '%'
+  
+  or
+  e.NOMBRES+' ' +e.APELLIDO_PATERNO +' '+isnull(e.APELLIDO_MATERNO, '') like '%' + isnull(:p_nombre, '') + '%'
+  )
+  
+  
+  
+  AND ISNULL(E.DOCUMENTO, '') like '%' +  isnull(:p_dni, '') + '%'
+  and ISNULL(E.ID_SEXO, '123') = isnull(:p_sexo, ISNULL(E.ID_SEXO, '123'))
+  AND ((CAST(isnull(e.CREACION_FECHA, '1980-01-01') AS DATE)  between isnull(:p_desdeReg, '1980-01-01') and
+  isnull(:p_hastaReg, '2980-12-31')))
+  AND ((CAST(isnull(e.FECHA_NACIMIENTO, '2980-12-31') AS DATE) between isnull(:p_desdeNac, '1900-01-01') and
+  isnull(:p_hastaNac, '2980-12-31')))
+ 
+ and b.estado = isnull(:p_estado, b.estado) and b.id_programa = isnull(:p_programa, b.id_programa)
+
+
+</sql-query>
+
+<sql-query name="psbeneficiario.eliminarDetalles">
+	delete from sgseguridadsys.PS_BENEFICIARIO_INGRESO_CAUSAL where ID_INGRESO = :ultimoingreso and ID_INSTITUCION = :institucion and ID_BENEFICIARIO = :entidad
+	delete from sgseguridadsys.PS_ENTIDAD_EQUIPAMIENTO where ID_ENTIDAD = :entidad
+	delete from sgseguridadsys.PS_ENTIDAD_DOCUMENTO where ID_ENTIDAD = :entidad
+	delete from sgseguridadsys.PS_ENTIDAD_PARIENTE where ID_ENTIDAD = :entidad
+	delete from sgseguridadsys.PS_ENTIDAD_PROGRAMA_SOCIAL where ID_ENTIDAD = :entidad
+	delete from sgseguridadsys.PS_ENTIDAD_SEGURO_SOCIAL where ID_ENTIDAD = :entidad
+ </sql-query>
+<sql-query name="psbeneficiario.filtroContar2">
+    select
+		COUNT(1)
+		from sgseguridadsys.PS_BENEFICIARIO a
+			 left join sgseguridadsys.PS_ENTIDAD b on a.ID_BENEFICIARIO = b.ID_ENTIDAD
+	where
+		a.ID_BENEFICIARIO not in (select a.ID_EMPLEADO  from sgseguridadsys.PS_EMPLEADO a )
+		and ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.ID_BENEFICIARIO, '123') = isnull(:p_id_beneficiario, ISNULL(a.ID_BENEFICIARIO, '123'))
+		and b.NOMBRECOMPLETO like '%' + isnull(:p_nombre, '') + '%'
+		and ISNULL(b.DOCUMENTO, '123') = isnull(:p_documento, ISNULL(b.DOCUMENTO, '123'))
+		and isnull(b.edad , 0) = isnull(:p_edad, isnull(b.edad , 0))
+						AND ISNULL(A.ID_AREA, 'SIN') = isnull(:p_area, ISNULL(A.ID_AREA, 'SIN'))
+
+
+  </sql-query>
+
+  <sql-query name="psbeneficiario.filtroPaginacion2">
+    select
+		a.ID_INSTITUCION,
+		a.ID_BENEFICIARIO,
+		b.NOMBRECOMPLETO,
+		b.DOCUMENTO,
+		a.id_programa,
+		(select nombre from sgseguridadsys.ps_institucion x where x.ID_INSTITUCION = a.ID_INSTITUCION) as aaux,
+		ROW_NUMBER() OVER (ORDER BY a.ID_BENEFICIARIO ) AS Seq
+		from sgseguridadsys.PS_BENEFICIARIO a
+			 left join sgseguridadsys.PS_ENTIDAD b on a.ID_BENEFICIARIO = b.ID_ENTIDAD
+	where
+		a.ID_BENEFICIARIO not in (select a.ID_EMPLEADO  from sgseguridadsys.PS_EMPLEADO a )
+		and ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_id_institucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.ID_BENEFICIARIO, '123') = isnull(:p_id_beneficiario, ISNULL(a.ID_BENEFICIARIO, '123'))
+		and b.NOMBRECOMPLETO like '%' + isnull(:p_nombre, '') + '%'
+		and ISNULL(b.DOCUMENTO, '123') = isnull(:p_documento, ISNULL(b.DOCUMENTO, '123'))
+		and isnull(b.edad , 0) = isnull(:p_edad, isnull(b.edad , 0))
+		AND ISNULL(A.ID_AREA, 'SIN') = isnull(:p_area, ISNULL(A.ID_AREA, 'SIN'))
+  </sql-query> 
+  <sql-query name="psbeneficiario.listarCorreos">
+	select distinct b.CORREO1 as correo from 
+	sgseguridadsys.PS_INSTITUCION_CORREO A JOIN
+	sgseguridadsys.PS_ENTIDAD B ON A.ID_EMPLEADO = B.ID_ENTIDAD
+	WHERE A.ID_PROCESO = :p_proceso
+	and a.ID_INSTITUCION = :p_institucion
+ </sql-query>
+ 
+  <sql-query name="psbeneficiario.filtroprograma">
+    select
+		a.ID_INSTITUCION,
+		a.ID_BENEFICIARIO,
+		b.NOMBRECOMPLETO,
+		b.DOCUMENTO,
+		a.ID_PROGRAMA
+		from sgseguridadsys.PS_BENEFICIARIO a
+			 left join sgseguridadsys.PS_ENTIDAD b on a.ID_BENEFICIARIO = b.ID_ENTIDAD
+	where
+		 ISNULL(b.DOCUMENTO, '123') = isnull(:p_documento, ISNULL(b.DOCUMENTO, '123'))
+		  and ISNULL(b.APELLIDO_PATERNO, '123') = isnull(:p_apepa, ISNULL(b.APELLIDO_PATERNO, '123'))
+		and ISNULL(b.NOMBRES, '123') = isnull(:p_nom, ISNULL(b.NOMBRES, '123'))
+		and ISNULL(a.ID_PROGRAMA, '123') = isnull(:p_institucion, ISNULL(a.ID_PROGRAMA, '123'))
+		AND A.ESTADO = 'EGR'
+  </sql-query>
+    <sql-query name="psbeneficiario.sinevaluacion">
+        sgseguridadsys.SNp_PS_ListarBeneficiariosSinEvaluacion
+		 :p_IdBeneficiario,
+		 :p_IdInstitucion,
+         :p_IdPeriodo,
+		 :p_IdComponente,
+		 :p_numpagina,
+		 :p_numregistros
+  </sql-query>
+  
+  </hibernate-mapping>

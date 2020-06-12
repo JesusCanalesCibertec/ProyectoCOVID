@@ -1,0 +1,88 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-5">
+        </div>
+        <div class="ui-g-12 ui-md-2" style="text-align: center;">
+            <h3>Selector de Mes</h3>
+            <p-calendar [(ngModel)]="parametro" view="month" dateFormat="MM 'del' yy" [yearNavigator]="true"
+                yearRange="2000:2030" [readonlyInput]="true" [locale]="es" (onSelect)="listar()"
+                [inputStyle]="{'text-align':'center'}">
+            </p-calendar>
+        </div>
+    </div>
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-4">
+        </div>
+        <div class="ui-g-12 ui-md-4" style="text-align: center;">
+            <p-slider [(ngModel)]="mes" [min]="0" [max]="11" [step]="1" (onChange)="cambiarMes(mes)"
+                (onSlideEnd)="slideListar()"></p-slider>
+            <h3>{{cadenaMes}}</h3>
+        </div>
+    </div>
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12" style="margin-bottom: 10px;">
+            <p-table #tabla [value]="listado" [columns]="scrollableCols" [frozenColumns]="frozenCols" frozenWidth="540px"
+                [scrollable]="true" scrollHeight="600px">
+                <ng-template pTemplate="caption">
+                    <div style="text-align: left">        
+                        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                        <input type="text" pInputText size="50" [(ngModel)]="cadena" placeholder="Buscar por nombre" (input)="filtrar(cadena)" style="width:auto">
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="colgroup" let-columns>
+                    <colgroup>
+                        <col *ngFor="let col of columns" [style.width.px]="col.width" [style.borderRight]="col.border">
+                    </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [attr.rowspan]="col.rowspan" [style.height.px]="col.alto">
+                            {{col.header}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th *ngFor="let dia of dias" [style.width.px]="50">
+                            {{dia}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns" [style.textAlign]="col.orientacion" [style.height.px]="41"
+                            [ngStyle]="obtenerEstilosEditar(row[col.field], col.width, col.indice)"
+                            [ngSwitch]="col.field">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="col.field != 'detalle'">
+                                {{row[col.field]}}
+                            </div>
+                            <div class="ui-g" *ngSwitchCase="'detalle'" class="textoCentrado">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Ver detalle">
+                                    <i class="fas fa-calendar-day fa-lg seleccionable" (click)="detallar(row)"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <p-dialog header="{{titulo}} : Detalle" [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'800px','left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <p-schedule #dt [events]="events" [options]="options">
+        </p-schedule>
+
+    </p-dialog>
+</div>

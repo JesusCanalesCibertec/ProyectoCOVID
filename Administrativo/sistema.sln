@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "spring-erp-servicio", "spring-erp-servicio\spring-erp-servicio.csproj", "{96312E30-F4C3-406B-8704-4039FEDDBA28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "spring-framework-core", "spring-framework-core\spring-framework-core.csproj", "{FC6C15C0-61DC-4882-8B54-8D40D068D35B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "spring-framework-util", "spring-framework-util\spring-framework-util.csproj", "{565534ED-4FF8-49B1-9614-2F6110AE5CD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "spring-erp-web", "spring-erp-web\spring-erp-web.csproj", "{3701CC86-CD9A-4943-8F22-CD582D54C4E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CargaExcel", "CargaExcel\CargaExcel.csproj", "{F1D82915-43D0-45DC-9B1B-29FA4D9D9CC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96312E30-F4C3-406B-8704-4039FEDDBA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96312E30-F4C3-406B-8704-4039FEDDBA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96312E30-F4C3-406B-8704-4039FEDDBA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96312E30-F4C3-406B-8704-4039FEDDBA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6C15C0-61DC-4882-8B54-8D40D068D35B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6C15C0-61DC-4882-8B54-8D40D068D35B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6C15C0-61DC-4882-8B54-8D40D068D35B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6C15C0-61DC-4882-8B54-8D40D068D35B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565534ED-4FF8-49B1-9614-2F6110AE5CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565534ED-4FF8-49B1-9614-2F6110AE5CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565534ED-4FF8-49B1-9614-2F6110AE5CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565534ED-4FF8-49B1-9614-2F6110AE5CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3701CC86-CD9A-4943-8F22-CD582D54C4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3701CC86-CD9A-4943-8F22-CD582D54C4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3701CC86-CD9A-4943-8F22-CD582D54C4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3701CC86-CD9A-4943-8F22-CD582D54C4E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1D82915-43D0-45DC-9B1B-29FA4D9D9CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1D82915-43D0-45DC-9B1B-29FA4D9D9CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1D82915-43D0-45DC-9B1B-29FA4D9D9CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1D82915-43D0-45DC-9B1B-29FA4D9D9CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14C3359B-BB15-45BE-9BF0-6D3CCE2F8C55}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="accostcentermst.selectorContar">
+    		<![CDATA[
+			select count(1) from AC_CostCenterMst
+			where CostCenter = isnull(:p_id_costcenter, CostCenter) and Status = isnull(:p_estado, Status) and LocalName like '%'+isnull(:p_nombre, '')+'%'
+	    	]]>
+    	</sql-query>
+	<sql-query name="accostcentermst.selectorListar">
+    		<![CDATA[
+			select costcenter, LocalName,status,ROW_NUMBER() OVER (ORDER BY costcenter) AS Seq  from AC_CostCenterMst
+			where CostCenter = isnull(:p_id_costcenter, CostCenter) and Status = isnull(:p_estado, Status) and LocalName like '%'+isnull(:p_nombre, '')+'%'
+		]]>
+	</sql-query>
+</hibernate-mapping>

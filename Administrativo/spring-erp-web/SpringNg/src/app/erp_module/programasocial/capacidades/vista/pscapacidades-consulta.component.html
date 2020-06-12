@@ -1,0 +1,385 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="Consulta de Registro de Capacidades" [toggleable]="true">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion"
+                    (ngModelChange)="onChangeInstitucion($event,dtCapacidad)" [options]="listaInstitucion"
+                    [(ngModel)]="filtro.idInstitucion"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Programa</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [options]="listaPrograma" (onChange)="onchangeBuscar(dtCapacidad)"
+                    [disabled]="verListaProgramas" [(ngModel)]="filtro.idPrograma"></p-dropdown>
+            </div>
+
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombres</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <input pInputText type="text" (keypress)="preBuscar($event, dtCapacidad)"
+                    [(ngModel)]="filtro.nombreCompleto" />
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Residencia</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idArea" [options]="listaResidencia"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sexo</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idSexo" [options]="sexos"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Registros</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-1">
+                <input pInputText type="text" [(ngModel)]="filtro.cantidadRegistros" />
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Periodo</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [options]="listaPeriodos" [(ngModel)]="filtro.periodo"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Orden por</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.orden" [options]="listaOrden"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sentido</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.sentido" [options]="listaSentido"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-5 ui-md-3 ui-lg-3">
+                <button pButton label="Export Excel" [disabled]="!verBotonExcel" icon="fa fa-table" type="button"
+                    class="ui-button" (click)="export()"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-7 ui-lg-7"></div>
+
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-binoculars" (click)="buscar(dtCapacidad)" type="button"
+                    class="ui-button"></button>
+            </div>
+        </div>
+
+
+    </p-panel>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-table #dtCapacidad (onLazyLoad)="cargarListaEvent($event)" [rows]="filtro.cantidadRegistros"
+                [paginator]="true" [lazy]="true" [value]="filtro.paginacion.listaResultado"
+                [totalRecords]="filtro.paginacion.registroEncontrados" [scrollable]="true" [responsive]="true"
+                [autoLayout]="true" scrollHeight="290px">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:60px" rowspan="2">Código</th>
+                        <th style="width:220px" rowspan="2">Nombre Completo </th>
+
+                        <th style="width:90px" rowspan="2">Edad</th>
+                        <th style="width:90px" rowspan="2">Sexo</th>
+
+                        <th style="width:90px" rowspan="2">Fecha</th>
+                        <th style="width:160px" rowspan="2">{{tituloColumna}}</th>
+                        <th style="width:120px" rowspan="2" *ngIf="mostrarAdultos">Riesgo Caida?</th>
+                        <th style="width:120px" rowspan="2" *ngIf="mostrarAdultos">Riesgo Caida detalle</th>
+
+                        <th style="width:600px" colspan="5" *ngIf="mostrarNinos">Escolaridad</th>
+                        <th style="width:840px" colspan="7" *ngIf="mostrarNinos">Nivel de Rendimiento Educativo
+                            Alcanzado</th>
+
+                        <th style="width:240px" colspan="2">Taller Formativo</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarNinos">Taller Artístico</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarNinos">Taller Deportivo</th>
+
+                        <th style="width:240px" colspan="2" *ngIf="mostrarAdultos">Taller Físico</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarAdultos">Taller Cognitivo</th>
+
+                        <th style="width:90px" rowspan="2">No Evaluado</th>
+
+                        <th style="width:100px" rowspan="2">Comentarios Adicionales de Taller</th>
+
+                        <th style="width:180px" rowspan="2" *ngIf="mostrarAdultos">Habilidades Ocupacionales?</th>
+                        <th style="width:180px" rowspan="2" *ngIf="mostrarAdultos">Evaluado en Hab. Ocupacional?</th>
+                        <th style="width:100px" rowspan="2" *ngIf="mostrarAdultos">Comentarios Adicionales de
+                            Capacitación</th>
+
+                        <th style="width:90px" rowspan="2">Acción</th>
+                    </tr>
+
+                    <tr>
+                        <th style="width:120px" *ngIf="mostrarNinos">Tipo Institución</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Nivel</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Grado Académico Actual</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Años de Retraso Educativo</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comentario SI retraso Educativo</th>
+
+                        <th style="width:120px" *ngIf="mostrarNinos">Lógico Matemático</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comunicación</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comprensión Lectora</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Personal Social</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Ciencia y Ambiente</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Tipo de Comunicación</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comentario de Rendimiento Educativo</th>
+
+
+                        <th style="width:120px">Rendimiento</th>
+                        <th style="width:120px">C. Asistida</th>
+
+                        <th style="width:120px" *ngIf="mostrarNinos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">C. Asistida</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">C. Asistida</th>
+
+                        <th style="width:120px" *ngIf="mostrarAdultos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">C. Asistida</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">C. Asistida</th>
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [class.row-hover]="rowData.hover">
+
+                        <td style="width:60px;text-align: center">{{rowData.secuencia}}</td>
+                        <td style="width:220px">{{rowData.nombreCompleto}}</td>
+
+                        <td style="width:90px;text-align: center">{{rowData.edad}}</td>
+                        <td style="width:90px;text-align: center">
+                            {{rowData.sexo=='F'?'Femenino':rowData.sexo == 'M'?'Masculino':''}}</td>
+
+                        <td style="width:90px">
+                            {{rowData.fechaInforme | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td style="width:160px" *ngIf="verBotonDependencia">
+                            <div class="ui-g-4 ui-md-2 ui-lg-8">
+                                {{rowData.gradoDependenciaBarthel}}
+                            </div>
+                        </td>
+
+                        <td style="width:160px" *ngIf="!verBotonDependencia">
+                            <div class="ui-g-4 ui-md-2 ui-lg-8">
+                                {{rowData.gradoDependenciaKatz}}
+                            </div>
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarAdultos">
+                            {{rowData.idRiesgoCaida | labelFromItem:listaRiesgoCaida}}
+                        </td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">
+                            {{rowData.idRiesgoCaidaDetalle | labelFromItem:listaRiesgoCaidaDetalle}}
+                        </td>
+
+                        <!-- ESCOLARIDAD -->
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.idTipoInstitucion | labelFromItem:listaTipoInstitucion}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.idNivel | labelFromItem:listaNivel}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+
+                            {{rowData.idGradoEducativo}}
+
+
+                            <!-- <div *ngIf="tx.entregaIdEstado == 'PARC'">
+                                            PARCIAL
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'PEND'">
+                                            PENDIENTE
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'RECH'">
+                                            RECHAZADO
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'NOEN'">
+                                            NO ENTREGADO
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'ENTR'">
+                                            ENTREGADO
+                                        </div> -->
+
+                            <!-- {{rowData.idGradoEducativo | labelFromItem:listaGradoAcademico}} -->
+
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.anioRetraso}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            <div class="ui-g">
+                                <div class="ui-g-3 ui-md-3 ui-lg-6">
+                                    <button pButton icon="fa fa-search" (click)="mostrarComentario(rowData,'Retraso')"
+                                        title="Ver Comentario Retraso Educativo"></button>
+                                </div>
+
+                                <div class="ui-g-3 ui-md-3 ui-lg-6" *ngIf="rowData.comentarioRetraso">
+                                    <i class="fa fa-commenting-o fa-lg "></i>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <!-- NIVEL DE RENDIMIENTO -->
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.notaLogicoMatematico | labelFromItem:listaCapacodadPromedio}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.notaComunicacion | labelFromItem:listaCapacodadPromedio}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.notaComprensionLectora | labelFromItem:listaCapacodadPromedio}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.notaPersonalSocial | labelFromItem:listaCapacodadPromedio}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.notaCienciaAmbiente | labelFromItem:listaCapacodadPromedio}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            {{rowData.idTipoComunicacion | labelFromItem:listaTipoComunicacion}}
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            <div class="ui-g-3 ui-md-3 ui-lg-6">
+                                <button pButton icon="fa fa-search" (click)="mostrarComentario(rowData,'Rendimiento')"
+                                    title="Ver Comentario Rendimiento Educativo"></button>
+
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-6" *ngIf="rowData.comentarioRendimiento">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+
+                        <!-- TALLERES -->
+                        <td style="width:120px">{{rowData.idNotaTallerFormativo}}</td>
+                        <td style="width:120px">{{rowData.cantidadTallerFormativo}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.idNotaTallerArtistico}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.cantidadTallerArtistico}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.idNotaTallerDeportivo}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.cantidadTallerDeportivo}}</td>
+
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.idNotaTallerFisico}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.cantidadTallerFisico}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.idNotaTallerCognitivo}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.cantidadTallerCognitivo}}</td>
+
+                        <td style="width:90px">
+                            {{rowData.evaluado}}
+                        </td>
+
+                        <td style="width:100px">
+                            <div class="ui-g-3 ui-md-3 ui-lg-6">
+                                <button pButton icon="fa fa-search" (click)="mostrarComentario(rowData,'Taller')"
+                                    title="Ver Comentario Adicionales Taller"></button>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-6" *ngIf="rowData.comentarioTalleres">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+
+                        <td style="width:180px" *ngIf="mostrarAdultos">
+                            {{rowData.nombreHabilidadOcupacional}}
+                        </td>
+
+                        <td style="width:180px" *ngIf="mostrarAdultos">
+                            {{rowData.idEvaluarOcupacional | labelFromItem:listaRiesgoCaida}}
+                        </td>
+
+
+                        <td style="width:100px" *ngIf="mostrarAdultos">
+                            <div class="ui-g-3 ui-md-3 ui-lg-6">
+                                <button pButton icon="fa fa-search" (click)="mostrarComentario(rowData,'Capacitacion')"
+                                    title="Ver Comentario Adicionales Capacitación"></button>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-6" *ngIf="rowData.comentarioCapacidad">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+
+        </div>
+    </div>
+
+</div>
+
+<p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+    <p-footer>
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-confirmDialog>
+
+<!-- <app-lista-barthel (insertaBarthel)="obtenerBarthel($event)"></app-lista-barthel>
+<app-lista-katz (insertaKatz)="obtenerKatz($event)"></app-lista-katz> -->
+<app-capacidadcomentario></app-capacidadcomentario>

@@ -1,0 +1,21 @@
+CANEVARO	
+
+1 control calendar y hora OK
+4 hidden para todos 	OK
+5 disabled				OK
+8 mandar datos por default en controles, usuario registrador por ejemplo OK
+8.2 mandar datos por default al darle nuevo en una tabla 	OK
+9 expresiones regulares OK
+3 selector dentro de tabla OK
+6 cuando seleccione un check, un item de combo, un radiobutton, habilitar y ocultar componentes
+	COMBO OCULTAR					OK
+	COMBO DESHABILITAR			OK
+	RADIO OCULTAR					OK
+	RADIO DESHABILITAR			OK
+	CHECK OCULTAR					OK
+	CHECK DESHABILITAR			OK
+10 poner fechas en la tabla y que el output sea con formato, dd/mm/yyyy    dd-mm-yyyy OK
+11 formato en montos en la tabla OK
+2 combos anidados
+7 selector multiple, llevar registros a una tabla(selector multiple de personas, cargar tabla, pasar el maximo) OK
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrContratos-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="hrcontratos.contarContratos">
+    	<![CDATA[	    SELECT	      COUNT(*)      FROM        HR_CONTRATOS C INNER JOIN PERSONAMAST P        ON C.Empleado = P.Persona LEFT JOIN HR_TipoContrato T        ON C.TipoContrato = T.TipoContrato      WHERE        C.EMPLEADO = :p_empleado AND        (CAST(C.FechaDesde AS DATE) >= isnull(:p_fechadesde, '1753-01-01')) AND        (CAST(C.FechaDesde AS DATE) <= isnull(:p_fechahasta, '9999-12-30')) AND        C.CompaniaSocio = :p_compania  and c.estado = isnull(:p_estado, c.estado)  	]]>
+    </sql-query>
+
+  <sql-query name="hrcontratos.listarContratos">
+    <![CDATA[	  SNp_HR_Reporte_Contratos
+           :p_fechadesde,
+           :p_fechahasta,
+           :p_compania,
+	   :p_empleado,
+           :p_estado,
+           :p_usuario,
+           :p_jefe, :p_numpagina,:p_numregistros]]>
+  </sql-query>
+
+  <sql-query name="hrcontratos.contarContratosVencimiento">
+
+    <![CDATA[	      SELECT          COUNT(1)          FROM          HR_CONTRATOS A          JOIN EMPLEADOMAST B ON A.EMPLEADO = B.EMPLEADO AND A.COMPANIASOCIO = B.COMPANIASOCIO          JOIN PERSONAMAST C ON B.EMPLEADO = C.PERSONA          LEFT JOIN HR_PUESTOEMPRESA D ON B.CODIGOCARGO = D.CODIGOPUESTO          LEFT JOIN HR_TIPOCONTRATO E ON A.TIPOCONTRATO = E.TIPOCONTRATO          LEFT JOIN (	SELECT EMPLEADO, COMPANIASOCIO, SECUENCIA, ISNULL(MAX(SECUENCIASOLICITUD),0) AS SECUENCIASOLICITUD          FROM          HR_CONTRATOS_SOLRENOVACION          WHERE ESTADO <> 'R'           GROUP BY          EMPLEADO, COMPANIASOCIO, SECUENCIA) F ON F.EMPLEADO = A.EMPLEADO AND F.COMPANIASOCIO = A.COMPANIASOCIO AND F. SECUENCIA = A.SECUENCIA          WHERE          A.ESTADO = 'A'          AND ISNULL(A.ESTADORENOVACION,'P') = 'P'          AND B.ESTADOEMPLEADO = '0'          AND B.JEFERESPONSABLE = :p_jeferesponsable AND B.COMPANIASOCIO IN          (SELECT COMPANYOWNER FROM SEGURIDADAUTORIZACIONCOMPANIA WHERE USUARIO = :p_codigousuario)           and ((( ABS(DATEDIFF(DAY, GETDATE(), FECHAHASTA )) <= (SELECT Numero FROM ParametrosMast WHERE ParametroClave = 'DALERTCON')) )            OR (DATEDIFF(DAY, FECHAHASTA, GETDATE())) >= 0)     	]]>
+    
+  </sql-query>
+
+  <sql-query name="hrcontratos.listarContratosVencimiento">
+
+    <![CDATA[	      SELECT A.EMPLEADO,          A.COMPANIASOCIO,          A.SECUENCIA,          C.NOMBRECOMPLETO AS NOMBRE,          UPPER(D.DESCRIPCION) AS PUESTO_DESC,          UPPER(E.DESCRIPCION) AS TIPOCONTRATO_DE,          A.FECHAHASTA,          'S' AS FLAGBLOQUEARTIEMPORENOVACION,          ISNULL(F.SECUENCIASOLICITUD,0) AS SOLICITUD,          (SELECT ESTADO FROM HR_CONTRATOS_SOLRENOVACION WHERE EMPLEADO = F.EMPLEADO AND COMPANIASOCIO = F.COMPANIASOCIO AND SECUENCIA = F.SECUENCIA AND SECUENCIASOLICITUD = F.SECUENCIASOLICITUD) AS ESTADOSOLICITUD,          (SELECT NIVELAPROBACION FROM HR_CONTRATOS_SOLRENOVACION WHERE EMPLEADO = F.EMPLEADO AND COMPANIASOCIO = F.COMPANIASOCIO AND SECUENCIA = F.SECUENCIA AND SECUENCIASOLICITUD = F.SECUENCIASOLICITUD) AS NIVELAPROBACION,          ROW_NUMBER() OVER (ORDER BY A.EMPLEADO) AS Seq          FROM          HR_CONTRATOS A          JOIN EMPLEADOMAST B ON A.EMPLEADO = B.EMPLEADO AND A.COMPANIASOCIO = B.COMPANIASOCIO          JOIN PERSONAMAST C ON B.EMPLEADO = C.PERSONA          LEFT JOIN HR_PUESTOEMPRESA D ON B.CODIGOCARGO = D.CODIGOPUESTO          LEFT JOIN HR_TIPOCONTRATO E ON A.TIPOCONTRATO = E.TIPOCONTRATO          LEFT JOIN (	SELECT EMPLEADO, COMPANIASOCIO, SECUENCIA, ISNULL(MAX(SECUENCIASOLICITUD),0) AS SECUENCIASOLICITUD          FROM          HR_CONTRATOS_SOLRENOVACION          WHERE ESTADO <> 'R'      GROUP BY          EMPLEADO, COMPANIASOCIO, SECUENCIA) F ON F.EMPLEADO = A.EMPLEADO AND F.COMPANIASOCIO = A.COMPANIASOCIO AND F. SECUENCIA = A.SECUENCIA          WHERE          A.ESTADO = 'A'          AND ISNULL(A.ESTADORENOVACION,'P') = 'P'          AND B.ESTADOEMPLEADO = '0'          AND B.JEFERESPONSABLE = :p_jeferesponsable AND B.COMPANIASOCIO IN          (SELECT COMPANYOWNER FROM SEGURIDADAUTORIZACIONCOMPANIA WHERE USUARIO = :p_codigousuario)           and ((( ABS(DATEDIFF(DAY, GETDATE(), FECHAHASTA )) <= (SELECT Numero FROM ParametrosMast WHERE ParametroClave = 'DALERTCON')) )            OR (DATEDIFF(DAY, FECHAHASTA, GETDATE())) >= 0)     	]]>
+
+  </sql-query>
+    
+</hibernate-mapping>

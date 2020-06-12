@@ -1,0 +1,147 @@
+<div class="ui-fluid">
+    <p-dialog header="GRADO DE DEPENDENCIA" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <div class="bordeGenerico">
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Comida
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel1"
+                        [options]="listaComida"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Lavarse(baño)
+                </div>
+
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel2"
+                        [options]="listaLavarse"></p-dropdown>
+                </div>
+            </div>
+
+
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Vestido
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel3"
+                        [options]="listaVestido"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Arreglarse
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel4"
+                        [options]="listaArreglarse"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Deposición
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel5"
+                        [options]="listaDeposicion"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Micción
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel6"
+                        [options]="listaMiccion"></p-dropdown>
+                </div>
+            </div>
+
+
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Uso del Retrete
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel7"
+                        [options]="listaUsoRetrete"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Trasladarse
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel8"
+                        [options]="listaTrasladarse"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Deambulación
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel9"
+                        [options]="listaDeambular"></p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                    Escaleras
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-4">
+                    <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [(ngModel)]="dtoBarthel.barthel10"
+                        [options]="listaEscaleras"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="bordeGenerico">
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-4 ui-md-4 ui-lg-2">
+                    Puntuación
+                </div>
+
+                <div class="ui-g-2 ui-md-2 ui-lg-2">
+                    <input pInputText type="text" disabled [(ngModel)]="dtoBarthel.porcentajeGradoBarthel" />
+                </div>
+
+                <div class="ui-g-6 ui-md-3 ui-lg-2">
+                    (rango de 0 a 100)
+                </div>
+
+                <div class="ui-g-12 ui-md-3 ui-lg-2">
+                    <button pButton label="Calcular" icon="fa fa-plus" type="button" class="ui-button" (click)="calcular()"
+                        style="width:100%"></button>
+                </div>
+
+            </div>
+
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-6 ui-md-4 ui-lg-2">
+                    Grado Dependencia
+                </div>
+
+                <div class="ui-g-6 ui-md-8 ui-lg-4">
+                    <input pInputText type="text" disabled [(ngModel)]="dtoBarthel.gradoDependenciaBarthel" />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Guardar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                    style="width:100%"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                    style="width:100%"></button>
+            </div>
+
+        </div>
+    </p-dialog>
+</div>
