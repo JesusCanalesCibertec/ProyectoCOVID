@@ -1,7 +1,7 @@
-#Mon Jun 08 17:35:20 COT 2020
-base.0=C\:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+#Fri Jun 12 01:32:31 COT 2020
+base.0=D\:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=C\:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
+base.1=D\:\\CIBERTEC\\6_Sexto Ciclo\\Proyecto Integrador\\02. PROYECTO\\ProyectoCOVID\\AppCovid\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
