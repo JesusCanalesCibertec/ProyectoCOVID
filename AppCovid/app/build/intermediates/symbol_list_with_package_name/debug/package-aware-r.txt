@@ -1587,11 +1587,14 @@ id item_touch_helper_previous_elevation
 id labeled
 id largeLabel
 id lbApellido
+id lbDepartamento
+id lbDistrito
 id lbDocumento
 id lbFechaNac
 id lbNacionalidad
 id lbNombre
 id lbNumDoc
+id lbProvincia
 id lbTest2Tit
 id lbTest2sub1
 id lbTest3Tit
@@ -1601,6 +1604,7 @@ id lbTest4Tit
 id lbTest4sub1
 id lbTest4sub2
 id lbTest4sub3
+id lbVivienda
 id lblApellidos
 id lblFechanacimiento
 id lblNacionalidad
@@ -1720,8 +1724,11 @@ id snap
 id snapMargins
 id spacer
 id split_action_bar
+id spnDepartamento
+id spnDistrito
 id spnDocumento
 id spnNacionalidad
+id spnProvincia
 id spnTipodocumento
 id spread
 id spread_inside
@@ -1786,6 +1793,7 @@ id txtNroPersonas
 id txtNumDoc
 id txtTest1Tit1
 id txtTest1Tit2
+id txtVivienda
 id unchecked
 id uniform
 id unlabeled

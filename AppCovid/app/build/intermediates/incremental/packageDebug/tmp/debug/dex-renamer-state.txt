@@ -1,4 +1,4 @@
-#Mon Jun 08 17:35:20 COT 2020
+#Sat Jun 13 04:00:10 COT 2020
 base.0=C\:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex

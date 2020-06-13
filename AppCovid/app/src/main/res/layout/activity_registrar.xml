@@ -8,161 +8,248 @@
     android:padding="16dp"
     tools:context=".ui.registrar.RegistrarActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-            android:id="@+id/lbNombre"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombres" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <EditText
-                android:id="@+id/txtNombre"
+            android:orientation="vertical">
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-        </TableRow>
+                android:layout_height="match_parent">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/lbApellido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apellidos" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/lbNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombres"
+                    android:textStyle="bold" />
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <EditText
-                android:id="@+id/txtApellido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="textPersonName" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginTop="5dp"
+                    android:inputType="textPersonName" />
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbApellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apellidos"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lbNacionalidad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Nacionalidad"/>
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtApellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginTop="5dp"
+                    android:inputType="textPersonName" />
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbNacionalidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nacionalidad"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
 
-            <Spinner
-                android:id="@+id/spnNacionalidad"
-                android:layout_width="275dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/lbDocumento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="140dp"
+                    android:text="Tipo de Documento"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/lbDocumento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="16dp"
-                android:text="Tipo de Documento"/>
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/spnNacionalidad"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/spnDocumento"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:entries="@array/carga_spin_doc" />
+            </TableRow>
 
-            <Spinner
-                android:id="@+id/spnDocumento"
-                android:layout_width="275dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:entries="@array/carga_spin_doc" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbNumDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número de documento"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/lbNumDoc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Número de documento" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtNumDoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <EditText
-                android:id="@+id/txtNumDoc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"/>
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbFechaNac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Fecha de nacimiento"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtFecNac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:hint="dd/mm/aaaa"
+                    android:focusable="false"
+                    android:inputType="textPersonName" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/lbFechaNac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Fecha de nacimiento"/>
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbVivienda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Vivienda actual"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/txtVivienda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/txtFecNac"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="dd/mm/aaaa"
-                android:focusable="false"
-                android:inputType="textPersonName" />
-        </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbDepartamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Departamento"
+                    android:textStyle="bold"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <Button
-                android:id="@+id/btnRegistrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Registrarse"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/lbProvincia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Provincia"
+                    android:textStyle="bold"/>
+            </TableRow>
 
-    </LinearLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/spnDepartamento"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"/>
+
+                <Spinner
+                    android:id="@+id/spnProvincia"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/lbDistrito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Distrito"
+                    android:textStyle="bold"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/spnDistrito"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/btnRegistrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="125dp"
+                    android:text="Registrarse"/>
+            </TableRow>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
