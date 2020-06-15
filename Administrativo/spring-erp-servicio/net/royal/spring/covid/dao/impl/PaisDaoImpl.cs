@@ -115,5 +115,12 @@ namespace net.royal.spring.covid.dao.impl
         {
             return base.obtenerPorId(pk.obtenerArreglo());
         }
+
+        public List<Pais> listar()
+        {
+            IQueryable<Pais> query = this.getCriteria();
+            query = query.OrderBy(p => p.Descripcion);
+            return query.ToList();
+        }
     }
 }

@@ -14,11 +14,11 @@ using net.royal.spring.core.dominio;
 namespace net.royal.spring.core
 {
     [Route("api/spring/core/[controller]")]
-    public class ZonapostalController : SecuredBaseController
+    public class ZonapostalController : BaseController
     {
         private IServiceProvider servicioProveedor;
         private ZonapostalServicio zonapostalServicio;
-        public ZonapostalController(IServiceProvider _servicioProveedor, IHttpContextAccessor httpContextAccessor) : base(_servicioProveedor, httpContextAccessor)
+        public ZonapostalController(IServiceProvider _servicioProveedor, IHttpContextAccessor httpContextAccessor) : base( httpContextAccessor, _servicioProveedor)
         {
             servicioProveedor = _servicioProveedor;
             zonapostalServicio = servicioProveedor.GetService<ZonapostalServicio>();

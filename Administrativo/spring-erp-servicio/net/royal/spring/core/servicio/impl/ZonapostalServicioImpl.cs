@@ -31,11 +31,11 @@ public class ZonapostalServicioImpl : GenericoServicioImpl, ZonapostalServicio {
 
         public List<Zonapostal> listarActivosPorProvincia(string idDepartamento, string idProvincia)
         {
-            FiltroZonaPostal filtro = new FiltroZonaPostal();
-            filtro.IdDepartamento = idDepartamento;
-            filtro.IdProvincia = idProvincia;
-            filtro.Estado = "A";
-            return listar(filtro);
+            //FiltroZonaPostal filtro = new FiltroZonaPostal();
+            //filtro.IdDepartamento = idDepartamento;
+            //filtro.IdProvincia = idProvincia;
+            //filtro.Estado = "A";
+            return zonapostalDao.listar(idDepartamento, idProvincia);
         }
 
         public List<Zonapostal> listarTodos()
@@ -50,7 +50,7 @@ public class ZonapostalServicioImpl : GenericoServicioImpl, ZonapostalServicio {
             Zonapostal p = zonapostalDao.obtenerPorId(new ZonapostalPk(departamento, provincia, distrito));
             if (p == null)
                 return "";
-            return p.Descripcioncorta;
+            return p.Descripcion;
         }
     }
 }

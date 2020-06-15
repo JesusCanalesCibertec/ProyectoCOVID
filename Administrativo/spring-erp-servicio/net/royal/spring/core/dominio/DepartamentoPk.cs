@@ -17,10 +17,8 @@ namespace net.royal.spring.core.dominio
         private String _Departamento;
 
 	    [Key]
-	    [Display(Name = "Departamento")]
-	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("DEPARTAMENTO")]
+	    [Column("ID_DEPARTAMENTO")]
 	    public String Departamento
         {
             get { return (_Departamento == null) ? "" : _Departamento.Trim(); }

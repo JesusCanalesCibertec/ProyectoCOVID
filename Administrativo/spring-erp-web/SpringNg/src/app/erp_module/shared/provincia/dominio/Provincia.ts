@@ -5,6 +5,6 @@ export class ProvinciaPk {
 
 }
 export class Provincia extends ProvinciaPk {
-    descripcioncorta: string;
+    descripcion: string;
     estado: string;
 }

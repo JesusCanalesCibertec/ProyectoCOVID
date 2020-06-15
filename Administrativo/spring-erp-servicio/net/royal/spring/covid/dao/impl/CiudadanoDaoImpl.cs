@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using net.royal.spring.covid.dominio.filtro;
+using net.royal.spring.framework.core;
 
 namespace net.royal.spring.covid.dao.impl
 {
@@ -25,6 +26,12 @@ namespace net.royal.spring.covid.dao.impl
         public ParametroPaginacionGenerico listarPaginacion(ParametroPaginacionGenerico paginacion, FiltroCiudadano filtro)
         {
 
+            if (!UString.estaVacio(filtro.documento))
+            {
+                if (filtro.documento.Length < 8)
+                    filtro.documento = null;
+            }
+                
             List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
             List<DtoCiudadano> lstResultado = new List<DtoCiudadano>();
 

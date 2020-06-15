@@ -11,7 +11,6 @@
 </p-blockUI>
 
 <div class="ui-fluid" #frm>
-
     <div class="ui-g ui-md ui-lg">
         <div class="ui-g-12 ui-md-12 ui-lg-12">
             <p-table #dt [columns]="cols" [scrollable]="true" selectionMode="single" [responsive]="true"
@@ -39,24 +38,25 @@
                     </tr>
                     <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                            <input *ngSwitchCase="'documento'" pInputText type="text" placeholder=""
+                                [(ngModel)]="filtro.documento" (input)="buscar(dt)">
                             <input *ngSwitchCase="'nombrecompleto'" pInputText type="text"
                                 placeholder="Buscar por nombre" [(ngModel)]="filtro.nombre" (input)="buscar(dt)">
                             <p-dropdown *ngSwitchCase="'nompais'" [options]="paises" [(ngModel)]="filtro.pais"
                                 (onChange)='buscar(dt)' [autoWidth]="false" appendTo="body">
                             </p-dropdown>
-                            <!-- <p-dropdown *ngSwitchCase="'nompais'" [options]="paises" [(ngModel)]="filtro.pais"
-                                (onChange)='cargarAreas();buscar(dt)' [autoWidth]="false" appendTo="body">
-                            </p-dropdown> -->
-
-
-                            <!-- <div class="ui-g-12 ui-md-4 ui-lg-4" *ngSwitchCase="'estado'">
-                                <p-checkbox *ngSwitchCase="'estado'" [(ngModel)]="estadoBol" binary="!true"
-                                    (onChange)='buscar(dt)'></p-checkbox>
-
-                            </div>
-                            <div class="ui-g-3 ui-md-8 ui-lg-8" *ngSwitchCase="'estado'">
-                                <label>{{estadoBol==true?'Activo':'Inactivo'}}</label>
-                            </div>  -->
+                            <p-dropdown *ngSwitchCase="'nomdepartamento'" [options]="departamentos"
+                                [(ngModel)]="filtro.departamento" (onChange)='cargarProvincias();buscar(dt)'
+                                [autoWidth]="false" appendTo="body">
+                            </p-dropdown>
+                            <p-dropdown *ngSwitchCase="'nomprovincia'" [options]="provincias"
+                                [(ngModel)]="filtro.provincia" (onChange)='cargarDistritos();buscar(dt)'
+                                [autoWidth]="false" appendTo="body">
+                            </p-dropdown>
+                            <p-dropdown *ngSwitchCase="'nomdistrito'" [options]="distritos"
+                                [(ngModel)]="filtro.distrito" (onChange)='buscar(dt)' [autoWidth]="false"
+                                appendTo="body">
+                            </p-dropdown>
                         </th>
                     </tr>
                 </ng-template>
@@ -78,6 +78,10 @@
                                 </div>
                                 <div class="ui-g-4 ui-md-4 ui-lg-4" title="Ver">
                                     <i class="fa fa-eye fa-lg seleccionable" (click)="ver(row)"></i>
+                                </div>
+                                <div class="ui-g-4 ui-md-4 ui-lg-4" title="Eliminar">
+                                    <i class="fas fa-trash fa-lg seleccionable"
+                                        (click)="cambiarestado(row,dt)"></i>
                                 </div>
                                 <!-- <div class="ui-g-4 ui-md-4 ui-lg-4" title="Inactivar" *ngIf="row.estado == 'A'">
                                     <i class="far fa-thumbs-down fa-lg seleccionable"

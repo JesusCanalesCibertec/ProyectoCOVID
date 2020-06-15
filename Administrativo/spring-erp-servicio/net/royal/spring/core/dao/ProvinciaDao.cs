@@ -15,5 +15,6 @@ namespace net.royal.spring.core.dao
     {
         Provincia obtenerPorId(ProvinciaPk pk);
         List<Provincia> listar(FiltroProvincia filtro);
+        List<Provincia> listar(string idDepartamento);
     }
 }

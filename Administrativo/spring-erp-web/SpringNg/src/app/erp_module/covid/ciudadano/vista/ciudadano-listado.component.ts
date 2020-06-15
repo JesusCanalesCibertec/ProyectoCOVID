@@ -8,6 +8,9 @@ import { Ciudadano, CiudadanoPk } from '../dominio/Ciudadano';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { FiltroCiudadano } from '../dominio/filtroCiudadano';
 import { PaisServicio } from '../../pais/servicio/PaisServicio';
+import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
+import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/ProvinciaServicio';
+import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
 
 
 
@@ -29,8 +32,10 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     private cdref: ChangeDetectorRef,
     private ciudadanoServicio: CiudadanoService,
     private paisServicio: PaisServicio,
+    private departamentoServicio: DepartamentoServicio,
+    private provinciaServicio: ProvinciaServicio,
+    private distritoServicio: ZonapostalServicio,
     private confirmationService: ConfirmationService,
-
   ) {
     super(noAuthorizationInterceptor, messageService);
   }
@@ -55,10 +60,11 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   }
 
   ngOnInit() {
-    this.bloquearPagina();
     super.ngOnInit();
+    this.bloquearPagina();
     this.cargarColumnas();
     this.cargarPaises();
+    this.cargarDepartamentos();
   }
 
   cargarColumnas() {
@@ -78,27 +84,47 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
 
 
   cargarPaises() {
+    this.paises = [];
     this.paises.push({ value: null, label: '--Todos--' });
-    this.paisServicio.listarTodos().then(res=>{
-        res.forEach(obj=> this.paises.push({value:obj.idPais,label:obj.descripcion}))
+    this.paisServicio.listarTodos().then(res => {
+      res.forEach(obj => this.paises.push({ value: obj.idPais, label: obj.descripcion }))
     });
   }
 
-  cargarAreas() {
-    // this.areabloquear = true;
-    // this.areas = [];
-    // this.areas.push({ value: null, label: '--Todos--' });
+  cargarDepartamentos() {
+    this.departamentos = [];
+    this.departamentos.push({ value: null, label: '--Todos--' });
+    this.departamentoServicio.listarTodos().then(res => {
+      res.forEach(obj => this.departamentos.push({ value: obj.departamento, label: obj.descripcion }))
+    })
+  }
 
-    // if (this.filtro.valor1 == 'T') {
-    //   this.miscelaneoServicio.listarActivos('MP', 'AREATCON')
-    //     .then(res => {
-    //       res.forEach(obj => this.areas.push({ value: obj.codigoelemento, label: obj.descripcionlocal }));
-    //     });
-    // } else {
-    //   this.areas = [];
-    //   this.areabloquear = false;
-    //   this.filtro.valor2 = null;
-    // }
+  cargarProvincias() {
+    this.provincias = [];
+    if (this.estaVacio(this.filtro.departamento)) {
+      this.provincias = [];
+      this.distritos = [];
+      this.filtro.provincia = null;
+      this.filtro.distrito = null;
+      return;
+    }
+    this.provincias.push({ value: null, label: '--Todos--' });
+    this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
+      res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
+    })
+  }
+
+  cargarDistritos() {
+    this.distritos = [];
+    if (this.estaVacio(this.filtro.provincia)) {
+      this.distritos = [];
+      this.filtro.distrito = null;
+      return;
+    }
+    this.distritos.push({ value: null, label: '--Todos--' });
+    this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
+      res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));
+    })
   }
 
   cargarPaginacion(event: LazyLoadEvent) {
@@ -106,15 +132,24 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     this.filtro.paginacion.listaResultado = [];
     this.filtro.paginacion.registroInicio = event.first;
     this.filtro.paginacion.cantidadRegistrosDevolver = event.rows;
-
     this.ciudadanoServicio.listarPaginacion(this.filtro)
       .then(res => {
         this.filtro.paginacion = res;
+        this.desbloquearPagina();
       })
-    this.desbloquearPagina();
   }
 
   buscar(dt: any) {
+    if (!this.estaVacio(this.filtro.documento)) {
+      if (this.filtro.documento.length < 8) {
+        return;
+      }
+    }
+    if (!this.estaVacio(this.filtro.nombre)) {
+      if (this.filtro.nombre.length < 5) {
+        return;
+      }
+    }
     dt.reset();
   }
 
@@ -125,12 +160,12 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
 
   editar(bean: Ciudadano) {
 
-   // this.CiudadanoMantenimientoComponent.iniciarComponente(this.ACCIONES.EDITAR, bean.idCiudadano);
+    // this.CiudadanoMantenimientoComponent.iniciarComponente(this.ACCIONES.EDITAR, bean.idCiudadano);
   }
 
   ver(bean: Ciudadano) {
 
-   // this.CiudadanoMantenimientoComponent.iniciarComponente(this.ACCIONES.VER, bean.idCiudadano);
+    // this.CiudadanoMantenimientoComponent.iniciarComponente(this.ACCIONES.VER, bean.idCiudadano);
   }
 
 

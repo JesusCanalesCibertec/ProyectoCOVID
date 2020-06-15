@@ -15,11 +15,11 @@ using net.royal.spring.core.dominio.filtro;
 namespace net.royal.spring.core
 {
     [Route("api/spring/core/[controller]")]
-    public class ProvinciaController : SecuredBaseController
+    public class ProvinciaController : BaseController
     {
         private IServiceProvider servicioProveedor;
         private ProvinciaServicio provinciaServicio;
-        public ProvinciaController(IServiceProvider _servicioProveedor, IHttpContextAccessor httpContextAccessor) : base(_servicioProveedor, httpContextAccessor)
+        public ProvinciaController(IServiceProvider _servicioProveedor, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor, _servicioProveedor)
         {
             servicioProveedor = _servicioProveedor;
             provinciaServicio = servicioProveedor.GetService<ProvinciaServicio>();

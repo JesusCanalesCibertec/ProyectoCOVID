@@ -15,8 +15,8 @@ namespace net.royal.spring.covid.dao
     public interface PaisDao : GenericoDao<Pais>
     {
         Pais obtenerPorId(PaisPk pk);
-
         DtoTabla obtenerUbigeo(String ubigeo);
         ParametroPaginacionGenerico listarUbigeoPorFiltro(ParametroPaginacionGenerico paginacion, DtoTabla filtro);
+        List<Pais> listar();
     }
 }

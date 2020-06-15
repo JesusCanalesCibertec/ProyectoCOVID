@@ -6,7 +6,7 @@ export class ZonapostalPk {
 }
 export class Zonapostal extends ZonapostalPk {
 
-    descripcioncorta: string;
+    descripcion: string;
     estado: string;
 
 }

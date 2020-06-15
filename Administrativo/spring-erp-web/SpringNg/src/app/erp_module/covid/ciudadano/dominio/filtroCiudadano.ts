@@ -5,7 +5,7 @@ export class FiltroCiudadano {
     nombre: string;
     pais: string;
     departamento: string;
-    provincia: Date;
+    provincia: string;
     distrito: string;
     direccion: string;
     estado: number;

@@ -2782,6 +2782,16 @@ body a {
   text-align: right;
 }
 
+
+/* body .ui-widget-header .ui-button, .ui-widget-content .ui-button, .ui-widget.ui-button, .ui-button {
+  border: 1px solid #485562 !important;
+  color: #FFFFFF;
+  background: #485562 !important;
+  -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+} */
+
 /*AGREGADOS DEL THEME BLUE POR ERNESTO*/
 /*LINEAS DEL TABLE
 .ui-table .ui-table-thead>tr>th, .ui-table .ui-table-tbody>tr>td, .ui-table .ui-table-tfoot>tr>td {

@@ -25,7 +25,7 @@ public class PaisServicioImpl : GenericoServicioImpl, PaisServicio {
 
         public List<Pais> listarTodos()
         {
-            return paisDao.listarTodos();
+            return paisDao.listar();
         }
 
         public ParametroPaginacionGenerico listarUbigeoPorFiltro(ParametroPaginacionGenerico paginacion, DtoTabla filtro)
