@@ -1,0 +1,125 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-table #dt [columns]="cols" [scrollable]="true" selectionMode="single" [responsive]="true"
+                [paginator]="true" [value]="filtro.paginacion.listaResultado" [lazy]="true"
+                (onLazyLoad)="cargarPaginacion($event)" [rows]="15"
+                [totalRecords]="filtro.paginacion.registroEncontrados">
+                <ng-template pTemplate="caption">
+                    <div class="ui-g">
+                        <div class="ui-g-3 ui-md-2 ui-lg-2">
+                            <button pButton label="Nuevo" icon="fas fa-plus" type="button" class="ui-button"
+                                (click)="nuevo()"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="colgroup" let-columns>
+                    <colgroup>
+                        <col *ngFor="let col of columns" [style.width.px]="col.width">
+                    </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                            <input *ngSwitchCase="'nombrecompleto'" pInputText type="text"
+                                placeholder="Buscar por nombre" [(ngModel)]="filtro.nombre" (input)="buscar(dt)">
+                            <p-dropdown *ngSwitchCase="'nompais'" [options]="paises" [(ngModel)]="filtro.pais"
+                                (onChange)='buscar(dt)' [autoWidth]="false" appendTo="body">
+                            </p-dropdown>
+                            <!-- <p-dropdown *ngSwitchCase="'nompais'" [options]="paises" [(ngModel)]="filtro.pais"
+                                (onChange)='cargarAreas();buscar(dt)' [autoWidth]="false" appendTo="body">
+                            </p-dropdown> -->
+
+
+                            <!-- <div class="ui-g-12 ui-md-4 ui-lg-4" *ngSwitchCase="'estado'">
+                                <p-checkbox *ngSwitchCase="'estado'" [(ngModel)]="estadoBol" binary="!true"
+                                    (onChange)='buscar(dt)'></p-checkbox>
+
+                            </div>
+                            <div class="ui-g-3 ui-md-8 ui-lg-8" *ngSwitchCase="'estado'">
+                                <label>{{estadoBol==true?'Activo':'Inactivo'}}</label>
+                            </div>  -->
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-row let-columns="columns">
+                    <tr [pSelectableRow]="row">
+                        <td class="textoCentrado">{{row.codigo}}</td>
+                        <td class="textoCentrado">{{row.documento}}</td>
+                        <td>{{row.nombrecompleto}}</td>
+                        <td>{{row.nompais}}</td>
+                        <td>{{row.direccion}}</td>
+                        <td>{{row.nomdepartamento}}</td>
+                        <td>{{row.nomprovincia}}</td>
+                        <td>{{row.nomdistrito}}</td>
+                        <td class="textoCentrado">{{row.nomestado}}</td>
+                        <td class="textoCentrado">
+                            <div class="ui-g">
+                                <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
+                                    <i class="far fa-edit fa-lg seleccionable" (click)="editar(row)"></i>
+                                </div>
+                                <div class="ui-g-4 ui-md-4 ui-lg-4" title="Ver">
+                                    <i class="fa fa-eye fa-lg seleccionable" (click)="ver(row)"></i>
+                                </div>
+                                <!-- <div class="ui-g-4 ui-md-4 ui-lg-4" title="Inactivar" *ngIf="row.estado == 'A'">
+                                    <i class="far fa-thumbs-down fa-lg seleccionable"
+                                        (click)="cambiarestado(row,dt)"></i>
+                                </div>
+                                <div class="ui-g-4 ui-md-4 ui-lg-4" title="Activar" *ngIf="row.estado == 'I'">
+                                    <i class="far fa-thumbs-up fa-lg seleccionable" (click)="cambiarestado(row,dt)">
+                                    </i>
+                                </div> -->
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td [attr.colspan]="columns.length">
+                            No se encontraron registros
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    Registros encontrados : {{filtro.paginacion.registroEncontrados}}
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+</div>
+<!-- 
+<app-conocimiento-mantenimiento (bloquear)="bloquearPagina()" (desbloquear)="desbloquearPagina()"
+    (buscarpadre)="buscar(dt)">
+</app-conocimiento-mantenimiento> -->

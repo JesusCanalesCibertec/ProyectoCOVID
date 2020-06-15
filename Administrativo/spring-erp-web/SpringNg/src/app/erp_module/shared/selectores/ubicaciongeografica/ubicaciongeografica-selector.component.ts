@@ -2,10 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LazyLoadEvent, SelectItem } from 'primeng/primeng';
 import { DtoTabla } from '../../dominio/dto/DtoTabla';
 import { DtoUbigeo } from './dominio/dto/DtoUbigeo';
-import { PaisServicio } from '../../pais/servicio/PaisServicio';
-import { Pais } from '../../pais/dominio/Pais';
 import { DepartamentoServicio } from '../../departamento/servicio/DepartamentoServicio';
 import { ProvinciaServicio } from '../../provincia/servicio/ProvinciaServicio';
+import { PaisServicio } from 'src/app/erp_module/covid/pais/servicio/PaisServicio';
 
 @Component({
     selector: 'app-selector-ubicaciongeografica',
@@ -37,7 +36,7 @@ export class UbicacionGeograficaSelectorComponent implements OnInit {
         this.paises.push({ label: '-Seleccione-', value: null });
         this.paisServicio.listarTodos().then(respuesta => {
             respuesta.forEach(dep => {
-                this.paises.push({ label: dep.descripcioncorta, value: dep.pais.trim() });
+               // this.paises.push({ label: dep.descripcioncorta, value: dep.pais.trim() });
 
             });
             this.filtro.valor1 = "001";

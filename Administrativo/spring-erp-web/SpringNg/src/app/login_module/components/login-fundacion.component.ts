@@ -28,6 +28,7 @@ export class LoginFundacionComponent extends PrincipalBaseComponent implements O
     ngOnInit() {
         super.ngOnInit();
         this.usuario.usuario = null;//'ALTORRES';
+        this.router.navigate(['spring']);
     }
 
     loginPress(event?: any) {

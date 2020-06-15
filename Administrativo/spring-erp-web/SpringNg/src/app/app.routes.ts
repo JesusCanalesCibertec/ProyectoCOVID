@@ -42,14 +42,21 @@ import { ProyectoMantenimientoComponent } from './erp_module/minedu/proyecto/vis
 import { ResumenlistadoComponent } from './erp_module/minedu/proyecto/vista/resumen-listado.component';
 import { OcupacionlistadoComponent } from './erp_module/minedu/persona/vista/ocupacion-listado.componente';
 import { UsuarioListadoComponent } from './erp_module/minedu/usuario/vista/usuario-listado.component';
+import { CiudadanoListadoComponent } from './erp_module/covid/ciudadano/vista/ciudadano-listado.component';
 export const routes: Routes = [
     //{ path: '', component: LoginComponent },
     //{ path: 'spring/institucion-login', component: LoginInstitucionComponent },
     { path: '', component: LoginFundacionComponent },
+    //{ path: '', component: DashboardDemoComponent },
     {
         path: 'spring', component: LayoutComponent,
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         children: [
+
+            //minedu inicio
+            { path: 'ciudadano-listado', component: CiudadanoListadoComponent },
+
+            //minedu final
             
             //minedu inicio
             { path: 'persona-listado', component: PersonaListadoComponent },
@@ -65,7 +72,7 @@ export const routes: Routes = [
             //minedu final
 
 
-            { path: '', component: DashboardDemoComponent },
+            //{ path: '', component: DashboardDemoComponent },
             { path: 'dashboard', component: DashboardDemoComponent },
             { path: 'sample', component: SampleDemoComponent },
             { path: 'forms', component: FormsDemoComponent },

@@ -22,6 +22,7 @@ using net.royal.spring.core.dominio;
 using net.royal.spring.framework.correo.dominio;
 using net.royal.spring.sistema.servicio;
 using net.royal.spring.sistema.dominio.dto;
+using net.royal.spring.covid.dao;
 
 namespace net.royal.spring.programasocial.servicio.impl {
 
