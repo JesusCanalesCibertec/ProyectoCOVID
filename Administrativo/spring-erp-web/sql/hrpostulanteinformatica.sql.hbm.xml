@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulanteinformatica.listarPorPostulante">
+		
+		SELECT
+		H.CENTROESTUDIOS as "Centroestudios",
+		H.POSTULANTE as "pkPostulante",
+		H.INFORMATICA as "pkInformatica",
+		H.NIVEL as "Nivel",
+		H.ULTIMOUSUARIO as "UltimoUsuario",
+		H.ULTIMAFECHAMODIF as "UltimaFechaModif",
+		CAST(D.DESCRIPCIONLOCAL as varchar(200)) as "auxInformatica",
+		LE.DescripcionLocal as "auxNivel", h.anotermino, b.Descripcion
+		FROM HR_POSTULANTEINFORMATICA H
+		LEFT JOIN (select * from MA_MiscelaneosDetalle where CodigoTabla = 'INFORMNIVE' ) LE
+		ON H.NIVEL=LE.CodigoElemento
+		INNER JOIN MA_MISCELANEOSDETALLE D
+		ON D.APLICACIONCODIGO='HR'
+		AND D.CODIGOTABLA='INFORMAT'
+		AND D.CODIGOELEMENTO = H.INFORMATICA
+		left join HR_CentroEstudios b on b.Centro = h.CentroEstudios
+		WHERE H.POSTULANTE = :p_postulante
+	
+	</sql-query>
+</hibernate-mapping>

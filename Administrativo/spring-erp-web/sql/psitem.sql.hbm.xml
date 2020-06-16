@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrCursodescripcion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+  
+<sql-query name="psitem.filtroContar">
+
+select 
+count(1)
+from sgseguridadsys.PS_ITEM a 
+	 left join  MA_MiscelaneosDetalle b on a.ID_TIPO_ITEM = b.CodigoElemento and b.CodigoTabla= 'ITEMTIPO'
+	 left join  MA_MiscelaneosDetalle c on a.ID_CLASE = c.CodigoElemento and c.CodigoTabla= 'ITEMCLASE'
+	 left join  MA_MiscelaneosDetalle d on a.ID_GRUPO = d.CodigoElemento and d.CodigoTabla= 'ITEMGRUPO'
+	 left join  UnidadesMast e on a.ID_UNIDAD_MEDIDA = e.UnidadCodigo
+WHERE
+a.ID_ITEM like '%' + isnull(:p_id_item, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(a.Estado, '123') = isnull(:p_id_estado,ISNULL(a.Estado, '123'))
+
+
+     </sql-query>
+
+
+
+
+<sql-query name="psitem.filtroPaginacion">
+
+select 
+a.ID_ITEM,
+a.NOMBRE,
+b.DescripcionLocal as desTipo,
+c.DescripcionLocal as desClase,
+d.DescripcionLocal as desGrupo,
+a.ESTADO,
+e.DescripcionCorta,
+a.COEFICIENTE,
+ROW_NUMBER() OVER (ORDER BY a.ID_ITEM desc,a.CREACION_FECHA desc) AS Seq
+from sgseguridadsys.PS_ITEM a 
+	 left join  MA_MiscelaneosDetalle b on a.ID_TIPO_ITEM = b.CodigoElemento and b.CodigoTabla= 'ITEMTIPO'
+	 left join  MA_MiscelaneosDetalle c on a.ID_CLASE = c.CodigoElemento and c.CodigoTabla= 'ITEMCLASE'
+	 left join  MA_MiscelaneosDetalle d on a.ID_GRUPO = d.CodigoElemento and d.CodigoTabla= 'ITEMGRUPO'
+	 left join  UnidadesMast e on a.ID_UNIDAD_MEDIDA = e.UnidadCodigo
+WHERE
+a.ID_ITEM like '%' + isnull(:p_id_item, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(a.Estado, '123') = isnull(:p_id_estado,ISNULL(a.Estado, '123'))
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

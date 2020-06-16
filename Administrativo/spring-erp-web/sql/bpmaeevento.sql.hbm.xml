@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaeproceso
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<sql-query name="bpmaeevento.listarEventosPorConexion">
+		select EVE.OBJETO_BASE_DATOS as
+		"objetoBaseDatos",
+		EVE.ID_TIPO_EVENTO as "idTipoEvento",
+		EVE.ID_TIPO_OBJETO as "idTipoObjeto",
+		EVE.OBJETO_NET_CORE as
+		"objetoJavaSpring"
+		from sgseguridadsys.BP_PROCESO_CONEXION_EVENTO
+		CON
+		INNER JOIN sgseguridadsys.BP_MAE_EVENTO EVE ON
+		CON.ID_EVENTO=EVE.ID_EVENTO
+		WHERE CON.ID_PROCESO = :p_id_proceso
+			AND
+			CON.ID_VERSION = :p_id_version
+			AND CON.ID_CONEXION = :p_id_conexion
+			AND
+			EVE.ESTADO='A'
+			AND EVE.ID_TIPO_EVENTO = :p_id_tipo_evento
+		ORDER BY isnull(orden,0)
+	</sql-query>
+</hibernate-mapping>

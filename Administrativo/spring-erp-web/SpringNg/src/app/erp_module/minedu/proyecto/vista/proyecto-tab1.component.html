@@ -1,0 +1,194 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<p-fieldset legend="Datos del Sistema">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-7 ui-lg-6">
+            <div *ngIf="checked" class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Nombre</label>
+            </div>
+            <div *ngIf="!checked" class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Nombre</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <p-dropdown [options]="sistemas" [disabled]="!checked" [style]="{'width':'100%'}" [autoWidth]="false"
+                    [(ngModel)]="proyecto.idSistema" filter="true" emptyFilterMessage=" Sistema no encontrado"
+                    filterBy="label" resetFilterOnHide="true" (onChange)='obtenerSiglas(proyecto.idSistema)'>
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-6">
+            <div *ngIf="checked" class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Siglas</label>
+            </div>
+            <div *ngIf="!checked" class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Siglas</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input pInputText type="text" style="width:100" [(ngModel)]="proyecto.siglas" disabled />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <label>Vincular?</label>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <p-inputSwitch [(ngModel)]="checked" (onChange)="vincular()"></p-inputSwitch>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <label>{{checked==true?'Sí':'No'}}</label>
+            </div>
+        </div>
+    </div>
+</p-fieldset>
+
+<p-fieldset legend="Datos del Proyecto">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-7 ui-lg-6">
+            <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Código</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <input pInputText type="text" style="width:100" [(ngModel)]="proyecto.codigoproyecto" disabled />
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Nombre</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <input pInputText type="text" style="width:100%" [(ngModel)]="proyecto.nombre" [disabled]=""
+                    maxlength="500" />
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Nombre Corto</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <input pInputText type="text" style="width:100%" [(ngModel)]="proyecto.nombrecorto" [disabled]=""
+                    maxlength="25" />
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4" style="color: crimson; font-weight: bold;">
+                <label>Área</label>
+            </div>
+
+            <div class="ui-g-10 ui-md-7 ui-lg-6">
+                <input pInputText type="text" disabled style="width:20%" [(ngModel)]="proyecto.area" />
+                <input pInputText type="text" disabled style="width:78%" [(ngModel)]="niveles" />
+            </div>
+            <div class="ui-g-1 ui-md-1 ui-lg-1">
+                <button pButton icon="fas fa-search-plus" (click)="mostrarSelector()" [disabled]="" class="ui-button"
+                    type="button" title="Buscar">
+                </button>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Descripción</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <textarea [rows]="3" style="width: 100%; resize: none;text-transform: uppercase"
+                    [(ngModel)]="proyecto.asunto" maxlength="500" pInputTextarea></textarea>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Proceso que atiende</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-7">
+                <input pInputText type="text" style="width:100%" [(ngModel)]="proyecto.proceso" [disabled]=""
+                    maxlength="200" />
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Fec. Inicio</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-5">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                    [locale]="es" [disabledDays]="[0,6]" appendTo="body"
+                    [(ngModel)]="comunicacionServicio.proyectocomunica.fechainicio" dateFormat="dd/mm/yy" [disabled]="">
+                </p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <label>Fec. Fin</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-5">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                    [locale]="es" [disabledDays]="[0,6]" appendTo="body"
+                    [(ngModel)]="comunicacionServicio.proyectocomunica.fechafin" dateFormat="dd/mm/yy" [disabled]="">
+                </p-calendar>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-5 ui-lg-6">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4" style="color: crimson; font-weight: bold;">
+                    <label>Tipo</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-7">
+                    <p-dropdown [options]="tiposproyect" [disabled]="" [style]="{'width':'100%'}"
+                        [(ngModel)]="proyecto.tipoproyecto" [autoWidth]="false">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4" style="color: crimson; font-weight: bold;">
+                    <label>Coordinación</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-7">
+                    <p-dropdown [options]="coordinaciones" [disabled]="" [style]="{'width':'100%'}" [autoWidth]="false"
+                        [(ngModel)]="proyecto.coordinacion">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4">
+                    <label>N° Expediente SINAD</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-7">
+                    <input pInputText type="text" style="width:100%" [(ngModel)]="proyecto.expediente" [disabled]=""
+                        maxlength="100" />
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4">
+                    <label>Fecha de Expediente</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-5">
+                    <p-calendar [monthNavigator]="true" [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                        [locale]="es" [disabledDays]="[0,6]" appendTo="body" [(ngModel)]="proyecto.fechaexpediente"
+                        dateFormat="dd/mm/yy" [disabled]="">
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4">
+                    <label>Observaciones</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-7">
+                    <textarea [rows]="3" style="width: 100%; resize: none;text-transform: uppercase"
+                        [(ngModel)]="proyecto.observacion" maxlength="500" pInputTextarea></textarea>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-5 ui-lg-4">
+                    <label>Cantidad de Recursos</label>
+                </div>
+                <div class="ui-g-12 ui-md-7 ui-lg-3">
+                    <p-spinner [(ngModel)]="comunicacionServicio.numRecursos" [min]="0"
+                        (input)="validarRecursos(comunicacionServicio.numRecursos)"
+                        (onChange)="validarRecursos(comunicacionServicio.numRecursos)" type="text">
+                    </p-spinner>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</p-fieldset>
+
+<app-areaminedu-selector (cargarSeleccionEvent)="cargarArea($event)" (bloquear)="bloquearPagina()"
+    (desbloquear)="desbloquearPagina()"></app-areaminedu-selector>

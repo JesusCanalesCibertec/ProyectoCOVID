@@ -1,0 +1,298 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="BENEFICIARIOS : Filtros de búsqueda">
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Código</label>
+            </div>
+            <div class="ui-g-8 ui-md-1 ui-lg-1">
+                <input pInputText (keypress)="defaultBuscar($event)" [(ngModel)]="filtro.codigo" type="number">
+            </div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>DNI</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+                <input pInputText (keypress)="defaultBuscar($event)" [pKeyFilter]="solonumeros"
+                    [(ngModel)]="filtro.dni">
+            </div>
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombre</label>
+            </div>
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <input pInputText (keypress)="defaultBuscar($event)" [(ngModel)]="filtro.nombre" type="text">
+            </div>
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Sexo</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="sexos" [(ngModel)]="filtro.sexo" [autoWidth]="false"></p-dropdown>
+            </div>
+
+        </div>
+        <div class="ui-g">
+
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+            <div class="ui-g-8 ui-md-10 ui-lg-4 controlEtiquetaDivTop">
+                <p-dropdown [options]="instituciones" [(ngModel)]="filtro.institucion" [autoWidth]="false"
+                    (onChange)="cargarProgramaArea()" [disabled]="!cambiarInstitucion"></p-dropdown>
+            </div>
+
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDiv">
+                <label>Programa</label>
+            </div>
+            <div class="ui-g-8 ui-md-7 ui-lg-3 controlEtiquetaDivTop">
+                <p-dropdown [options]="programas" [(ngModel)]="filtro.programa" [autoWidth]="false"
+                    [disabled]="programas.length==2" (onChange)="cargarEdades()"></p-dropdown>
+            </div>
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+                <p-dropdown [options]="listaEstado" [(ngModel)]="filtro.estado" [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g" style="display: none">
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <label>Fecha de nacimiento</label>
+            </div>
+            <div class="ui-g-8 ui-md-1 ui-lg-1">
+                <p-checkbox [(ngModel)]="filtrofechaNac" binary="true"></p-checkbox>
+            </div>
+
+
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Desde</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtrofechaNac?'':filtro.desdeNac" (keypress)="defaultBuscar($event)"
+                    [showIcon]="true" dateFormat="dd/mm/yy" [disabled]="!filtrofechaNac"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-1 ui-lg-1"></div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Hasta</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtrofechaNac?'':filtro.hastaNac" (keypress)="defaultBuscar($event)"
+                    [showIcon]="true" dateFormat="dd/mm/yy" [disabled]="!filtrofechaNac"></p-calendar>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Edad</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+                <p-dropdown [options]="listaEdades" [(ngModel)]="filtro.edad" [autoWidth]="false"></p-dropdown>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+            </div>
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Orden por</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.orden" [options]="listaOrden"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sentido</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.sentido" [options]="listaSentido"></p-dropdown>
+            </div>
+        </div>
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <label>Fecha de registro</label>
+            </div>
+            <div class="ui-g-8 ui-md-1 ui-lg-1">
+                <p-checkbox [(ngModel)]="filtrofechaReg" binary="true"></p-checkbox>
+            </div>
+
+
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Desde</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtrofechaReg?'':filtro.desdeReg" (keypress)="defaultBuscar($event)"
+                    [showIcon]="true" dateFormat="dd/mm/yy" [disabled]="!filtrofechaReg"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-1 ui-lg-1"></div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Hasta</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtrofechaReg?'':filtro.hastaReg" (keypress)="defaultBuscar($event)"
+                    [showIcon]="true" dateFormat="dd/mm/yy" [disabled]="!filtrofechaReg"></p-calendar>
+            </div>
+        </div>
+
+
+
+
+    </p-panel>
+
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button" (click)="nuevo()"></button>
+
+        </div>
+        <div class="ui-g-5 ui-md-3 ui-lg-3">
+            <button pButton label="Export Excel" icon="fa fa-table" type="button" class="ui-button"
+                (click)="export()"></button>
+        </div>
+
+        <div class="ui-g-1 ui-md-5 ui-lg-5">
+
+        </div>
+
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Buscar" icon="fa fa-binoculars" type="button" class="ui-button"
+                (click)="buscar(dt)"></button>
+        </div>
+    </div>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="6" emptyMessage="No se encontraron registros"
+                [paginator]="true" [lazy]="true" [totalRecords]="filtro.paginacion.registroEncontrados"
+                (onLazyLoad)="cargarPaginacion($event)" [value]="filtro.paginacion.listaResultado" scrollWidth="100%">
+
+                <p-column header="Código" [style]="{'width':'80px'}" field="idBeneficiario" styleClass="textoCentrado">
+                </p-column>
+                <p-column header="Beneficiario" field="beneficiario" [style]="{'width':'350px'}"></p-column>
+                <p-column header="DNI" [style]="{'width':'100px'}" field="dni" styleClass="textoCentrado"></p-column>
+                <p-column header="Edad" [style]="{'width':'50px'}" field="edad" styleClass="textoCentrado"></p-column>
+                <p-column header="Sexo" [style]="{'width':'80px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.sexo=='F'?'Femenino':tx.sexo == 'M'?'Masculino':''}}
+                    </ng-template>
+                </p-column>
+
+                <p-column header="Estado" [style]="{'width':'100px'}" field="estado" styleClass="textoCentrado">
+                </p-column>
+
+                <p-column header="Reingreso y Egreso" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Reingresar">
+                            <i class="fa fa-level-up fa-lg seleccionable" (click)="reingresar(tx)"
+                                *ngIf="tx.idMotivo != 'DECE'"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Egresar">
+                            <i class="fa fa-level-down fa-lg seleccionable" (click)="egresar(tx)"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Historial">
+                            <i class="fa fa-list-alt fa-lg seleccionable" (click)="historial(tx)"></i>
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Editar">
+                            <!-- *ngIf="tx.estado=='ACTIVO'" -->
+                            <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Anular">
+                            <i class="fa fa-trash fa-lg seleccionable" (click)="anular(tx)"
+                                *ngIf="tx.estado=='ACTIVO'"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-4 ui-lg-4" title="Ver">
+                            <i class="fa fa-eye fa-lg seleccionable" (click)="ver(tx)"></i>
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column header="Componentes" [style]="{'width':'150px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g-12 ui-md-3 ui-lg-3" title="Salud" style="color:#ffeb3b">
+                            <i class="fa fa-ambulance fa-lg seleccionable" (click)="irASalud(tx)"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-3 ui-lg-3" title="Socio Ambiental" style="color:#8bc34a">
+                            <i class="fa fa-users fa-lg seleccionable" (click)="mostrarSocioAmbiental(tx)"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-3 ui-lg-3" title="Capacidades" style="color:#03a9f4">
+                            <i class=" fa fa-book fa-lg seleccionable" (click)="mostrarCapaciadades(tx)"></i>
+                        </div>
+                        <div class="ui-g-12 ui-md-3 ui-lg-3" title="Nutrición" style="color:#ff9800">
+                            <i class="fa fa-user fa-lg seleccionable" (click)="mostrarNutricion(tx)"></i>
+                        </div>
+                    </ng-template>
+                </p-column>
+            </p-dataTable>
+
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+        </div>
+    </div>
+
+    <aprobacion-preguntas></aprobacion-preguntas>
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+
+
+</div>
+<app-beneficiariocapacidades (volverAbuscar)="buscar(dt)"></app-beneficiariocapacidades>
+
+
+<p-dialog header="Seleccione un tipo de beneficiario" [(visible)]="verModalSeleccion" [modal]="true "
+    [responsive]="true " [resizable]="false "
+    [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Tipo ">
+        <div class="ui-g ">
+            <div class="ui-g-12 ui-md-12 ui-lg-11">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="tipoNuevo"
+                    [options]="tipos"></p-dropdown>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-1 ">
+                <button type="button " pButton icon="fa fa-plus" (click)="seleccionar()"></button>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>
+<app-beneficiario-egreso-registro (buscarpadre)="buscar(dt)"></app-beneficiario-egreso-registro>
+<app-beneficiario-ingreso-registro (buscarpadre)="buscar(dt)"></app-beneficiario-ingreso-registro>
+<app-beneficiario-ingreso-listado></app-beneficiario-ingreso-listado>

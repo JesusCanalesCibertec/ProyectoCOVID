@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="prdiaspuente.listarPorPaginacionContar">
+         <![CDATA[
+	         	  
+select  count(1)
+from PR_CalendarioDiaPuente
+where FechaMesDia = isnull(null, FechaMesDia) and
+estado = isnull(:p_estado, estado) and
+descripcion like '%'+isnull(:p_descipcion, '')+'%' and
+				(
+				SUBSTRING(FechaMesDia, 5,4) + '-' +
+				SUBSTRING(FechaMesDia, 3,2) + '-' + 
+				SUBSTRING(FechaMesDia, 0,3) + ''
+				between :p_desde and :p_hasta) 
+         ]]>
+	</sql-query>
+	<sql-query name="prdiaspuente.listarPorPaginacion">
+         <![CDATA[
+	        select FechaMesDia, 
+
+ SUBSTRING(FechaMesDia, 0,3) + '/' +
+			  SUBSTRING(FechaMesDia, 3,2) + '/' + 
+			  SUBSTRING(FechaMesDia, 5,4)
+				
+				 as e
+
+,estado, case estado when 'A' then 'Activo' else 'Inactivo' end AS estadodes, descripcion, ultimoUsuario, ultimaFechaModif
+,ROW_NUMBER() OVER (ORDER BY (
+	 
+	 cast(
+				SUBSTRING(FechaMesDia, 5,4)   + '-' +
+				SUBSTRING(FechaMesDia, 3,2) + '-' + 
+				 SUBSTRING(FechaMesDia, 0,3)+ '' as date)
+)desc) AS Seq
+from PR_CalendarioDiaPuente
+where FechaMesDia = isnull(null, FechaMesDia) and
+estado = isnull(:p_estado, estado) and
+descripcion like '%'+isnull(:p_descipcion, '')+'%' and
+(SUBSTRING(FechaMesDia, 5,4) + '-' +
+				SUBSTRING(FechaMesDia, 3,2) + '-' + 
+				SUBSTRING(FechaMesDia, 0,3) + '-'
+				between :p_desde and :p_hasta) 
+		]]>
+	</sql-query>
+</hibernate-mapping>

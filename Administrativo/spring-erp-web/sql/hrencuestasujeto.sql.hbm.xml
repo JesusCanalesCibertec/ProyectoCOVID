@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrencuestasujeto.anularSujeto">
+    	delete from HR_EncuestaSujeto where  Secuencia = :p_secuencia and PERIODO = :p_periodo and Sujeto = :p_sujeto --and CompaniaSocio = :p_compania 
+	</sql-query>
+	<sql-query name="hrencuestasujeto.copiar">
+		declare @compania varchar(20) = :p_compania
+		declare @per varchar(20) = :p_periodo
+		declare @sec int = :p_secuencia
+
+		declare @periodo varchar(6) = ''+cast(year(getdate())as varchar(4))+ right('00'+cast(month(getdate())as varchar(2)), 2)
+		declare @secuencia int = (select isnull(max(b.secuencia),0)+1 from HR_Encuesta b where b.CompanyOwner = @compania and b.Periodo = @periodo) 
+
+		insert into HR_Encuesta
+		(
+		CompanyOwner, Periodo, Secuencia, 
+		Muestra, Fecha, INSTRUCCIONES, ESTADO, 
+		ID_INSTITUCION, ID_INSTITUCION_AREA, ID_PROGRAMA, ID_COMPONENTE, ID_MISCELANEO_HEADER1,ID_MISCELANEO_HEADER2, ID_MISCELANEO_HEADER3, ID_MISCELANEO_HEADER4, TIPO )
+		select 
+		a.companyowner, 
+		@periodo as periodo, 
+		@secuencia as secuencia,
+		0, getdate(), a.INSTRUCCIONES, 'A', a.ID_INSTITUCION, a.ID_INSTITUCION_AREA, a.ID_PROGRAMA, a.ID_COMPONENTE, a.ID_MISCELANEO_HEADER1,
+		a.ID_MISCELANEO_HEADER2,
+		a.ID_MISCELANEO_HEADER3,
+		a.ID_MISCELANEO_HEADER4,
+		a.tipo
+		from HR_Encuesta a where a.companyowner = @compania and a.Periodo =@per and a.Secuencia = @sec
+
+
+		insert into HR_EncuestaDetalle (CompanyOwner, Periodo, Secuencia, Pregunta, Orden, ID_INDICADOR, GRUPO)
+		select companyowner, @periodo, @secuencia, Pregunta, Orden, ID_INDICADOR, GRUPO from HR_EncuestaDetalle  where companyowner = @compania and Periodo = @per and Secuencia = @sec
+
+
+		select @compania, @periodo, @secuencia
+		
+	</sql-query>
+</hibernate-mapping>

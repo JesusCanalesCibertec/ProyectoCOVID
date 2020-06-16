@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : kpi.rtindicador
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="rtindicador.filtroContar">
+
+select 
+count(1)
+FROM sgseguridadsys.RT_INDICADOR a 
+	LEFT JOIN sgseguridadsys.PS_PROGRAMA b on a.ID_PROGRAMA = b.ID_PROGRAMA
+	LEFT JOIN sgseguridadsys.PS_COMPONENTE c on a.ID_COMPONENTE = c.ID_COMPONENTE
+where 
+a.ID_INDICADOR like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(a.ESTADO, '123') = isnull(:p_estado, ISNULL(a.ESTADO, '123'))
+
+
+</sql-query>
+
+
+
+
+<sql-query name="rtindicador.filtroPaginacion">
+
+ SELECT 
+ a.ID_INDICADOR,
+ a.NOMBRE as NOM_INDICADOR,
+ case(a.ID_PROGRAMA)
+ when 'NCD' then 'Programa Niñas, Niños y Adolescentes con Discapacidad'
+ else b.NOMBRE
+ end as NOM_PROGRAMA,
+ c.NOMBRE as NOM_COMPONENTE,
+ case a.ESTADO
+ when 'A' then 'Activo'
+ when 'I' then 'Inactivo'
+ end as Estado,
+ case when (select count(1) from sgseguridadsys.RT_INDICADOR_META x where x.ID_INDICADOR = a.ID_INDICADOR) > 0 then 'Si' else 'No' end as estado2, 
+ ROW_NUMBER() OVER (ORDER BY ID_INDICADOR desc) AS Seq
+ FROM sgseguridadsys.RT_INDICADOR a 
+	LEFT JOIN sgseguridadsys.PS_PROGRAMA b on a.ID_PROGRAMA = b.ID_PROGRAMA
+	LEFT JOIN sgseguridadsys.PS_COMPONENTE c on a.ID_COMPONENTE = c.ID_COMPONENTE
+where 
+a.ID_INDICADOR like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+and ISNULL(a.ESTADO, '123') = isnull(:p_estado, ISNULL(a.ESTADO, '123'))
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

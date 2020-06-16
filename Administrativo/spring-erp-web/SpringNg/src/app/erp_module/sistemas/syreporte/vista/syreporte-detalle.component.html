@@ -1,0 +1,55 @@
+<div class="ui-fluid" #frm>
+    <div class="ui-g">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button" (click)='nuevo()'></button>
+        </div>
+        <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Salir" icon="fa fa-mail-reply" type="button" class="ui-button" (click)="salir()"></button>
+        </div>
+    </div>
+
+    <p-dataTable #dt [responsive]="true" scrollable= "true" scrollWidth="100%" [rows]="8" scrollWidth="100%" [paginator]="true" [lazy]="true" [totalRecords]="filtro.paginacion.registroEncontrados"
+        (onLazyLoad)="cargar($event)" emptyMessage="No se encontraron registros" [value]="filtro.paginacion.listaResultado">
+
+        <p-column header="Aplicación" field="aplicacionDescripcion" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Código" field="reporteCodigo" styleClass="textoCentrado" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Compañia" field="companiaSocio" [style]="{'width':'200px'}"></p-column>
+        <p-column header="Periodo" field="periodo" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Version" field="version" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Estado" field="estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.estado == 'A'?'Activo':'Inactivo'}}
+            </ng-template>
+        </p-column>
+        <p-column header="{{'Acción'}}" styleClass="textoCentrado" [style]="{'width':'100px'}">
+            <ng-template let-tx="rowData" pTemplate="body">
+                <div class="ui-g">
+                    <div class="ui-g-3 ui-md-3 ui-lg-3" title="Editar">
+                        <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                    </div>
+                    <div *ngIf="tx.estado=='A'" class="ui-g-3 ui-md-3 ui-lg-3" title="Eliminar">
+                        <i class="fa fa-times fa-lg seleccionable" (click)="eliminar(tx)"></i>
+                    </div>
+                    <div class="ui-g-3 ui-md-3 ui-lg-3" title="Subir Archivo">
+                        <input #fileUpload type="file" class="form-control" style="display:none" (change)="cargarArchivo(fileUpload)" accept="text/html">
+                        <i class="fa fa-upload fa-lg seleccionable" (click)="subirArchivo(tx, fileUpload)"></i>
+                    </div>
+                    <div class="ui-g-3 ui-md-3 ui-lg-3" title="Bajar Archivo">
+                        <i class="fa fa-download fa-lg seleccionable" (click)="bajarArchivo(tx)"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+    <p-confirmDialog #c>
+        <p-footer>
+            <button type="button" pButton icon="fa fa-check" label="Si" (click)="c.accept()"></button>
+            <button type="button" pButton icon="fa fa-close" label="No" (click)="c.reject()"></button>
+        </p-footer>
+    </p-confirmDialog>
+</div>
+
+<app-popsyreportedetalle (cargarSeleccionEvent)="listar()"></app-popsyreportedetalle>
+<app-syreportearchivo></app-syreportearchivo> 

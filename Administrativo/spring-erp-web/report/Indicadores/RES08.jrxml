@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES08" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="1.3310000000000128"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA_INICIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA_FIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TIPO_RAS" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INSTITUCION" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIAGNOSTICO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOM_TIPO_RAS" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOM_INSTITUCION" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOM_DIAGNOSTICO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FILA" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[[sgseguridadsys].[SNp_PS_ListarReportePorcPrevalencia]$P{FECHA_INICIO},$P{FECHA_FIN},$P{DIAGNOSTICO},$P{TIPO_RAS},$P{INSTITUCION}]]>
+	</queryString>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="CANTIDAD" class="java.lang.Integer"/>
+	<field name="PORCENTAJE" class="java.math.BigDecimal"/>
+	<title>
+		<band height="126">
+			<rectangle>
+				<reportElement positionType="Float" x="52" y="111" width="284" height="15" backcolor="#CCCCCC" uuid="3d4b2abe-e778-4c0e-b4f5-0b4b251ac73a"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="52" y="111" width="284" height="15" uuid="2c878ac9-67c2-4a02-91be-5cc143070aba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Diagnóstico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="18" width="555" height="25" uuid="b3036ded-7f8e-48d4-b976-2b95b3f2edc9"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="20" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RES08 - Prevalencia de grupos de enfermedades]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="336" y="111" width="102" height="15" backcolor="#CCCCCC" uuid="4c3f7734-d5b0-4956-a40c-45524ea25f71"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="438" y="111" width="102" height="15" backcolor="#CCCCCC" uuid="8db47afe-04d0-4cb8-b93b-3cb098111830"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="336" y="111" width="102" height="15" uuid="b12687b7-cebf-421a-800a-b096e183cf7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Actividad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="438" y="111" width="102" height="15" uuid="190a9306-c590-45d9-b195-8830c627fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Asistencia %]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="84" y="72" width="456" height="15" uuid="c32ea58d-8c19-4203-ba4d-9b6c119ac442"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[!$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?$P{NOM_DIAGNOSTICO}:
+!$P{DIAGNOSTICO}.equals(null)&&$P{INSTITUCION}.equals(null)?$P{NOM_DIAGNOSTICO}:
+$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?$P{NOM_INSTITUCION}:null
+
+
+]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="57" width="68" height="15" uuid="fba5b01e-6dba-47d6-acca-77b0fc984de1"/>
+				<box leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha inicio:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="84" y="57" width="80" height="15" uuid="270101b3-5b81-4422-ab23-79e474e714ca"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_INICIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="174" y="57" width="56" height="15" uuid="011ec072-8b0e-4c05-8518-f945ca325aa1"/>
+				<box leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha fin:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="230" y="57" width="80" height="15" uuid="5bff8ed7-9d44-4ce3-b71a-4e68256ffd2a"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_FIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="310" y="57" width="68" height="15" uuid="bfa0abb6-851c-499a-82e1-2762a8a6d8e8">
+					<printWhenExpression><![CDATA[$P{TIPO_RAS}.equals(null)?false:true]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Tipo RAS:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="378" y="57" width="162" height="15" uuid="18fc9fa3-6e1e-48d0-9599-9aae89f19ab7"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOM_TIPO_RAS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="84" y="87" width="456" height="15" uuid="6b23cd52-966f-46bc-a573-b3c237ca8d98"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[!$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?$P{NOM_INSTITUCION}:
+!$P{DIAGNOSTICO}.equals(null)&&$P{INSTITUCION}.equals(null)?null:null
+
+
+
+]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="72" width="68" height="15" uuid="0a7affd5-a029-4add-8036-d9d2336c9cbf"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[!$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?"Diagnóstico:":
+!$P{DIAGNOSTICO}.equals(null)&&$P{INSTITUCION}.equals(null)?"Diagnóstico:":
+$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?"Institución:":null
+
+
+]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="87" width="68" height="15" uuid="866e87ca-664a-42b0-a7fd-079162a8b30e"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[!$P{DIAGNOSTICO}.equals(null)&&!$P{INSTITUCION}.equals(null)?"Institución:":
+!$P{DIAGNOSTICO}.equals(null)&&$P{INSTITUCION}.equals(null)?null:null
+
+
+
+]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="111" width="36" height="15" backcolor="#CCCCCC" uuid="d1a14218-7fd3-480a-b964-6d71c1b6bb0f"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="111" width="36" height="15" uuid="81937970-6649-4a63-aecb-74730bb51b39"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="0" width="36" height="15" uuid="292e14c2-8dbc-4b6e-a96d-dd54d3e65d70"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="336" y="0" width="102" height="15" uuid="c51c0cf5-3006-4115-b77d-ba63182b666f"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="336" y="0" width="102" height="15" uuid="42325d74-a062-4cbc-ab3c-195ccf5549ca"/>
+				<box topPadding="0" leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="52" y="0" width="284" height="15" uuid="faa51e3d-54a7-42c1-b39d-7894b5b36076"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="438" y="0" width="102" height="15" uuid="b2911a6d-290f-4325-b103-98f3cb6fe4ba"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="438" y="0" width="102" height="15" uuid="fb21b17f-7f3a-446f-b27d-0ef2693ffd64"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PORCENTAJE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="52" y="0" width="284" height="15" uuid="650047fc-9cc2-4729-a326-73544bb36f80"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="0" width="36" height="15" uuid="acd43b62-2f0c-41ad-a428-95514c78a3f2"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}.equals($P{FILA})?null:$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

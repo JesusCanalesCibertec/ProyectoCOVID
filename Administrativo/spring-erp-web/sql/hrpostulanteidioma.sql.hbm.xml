@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulanteidioma.listarPorPostulante">
+		SELECT
+		H.CENTROESTUDIOS as "Centroestudios",
+		CES.DESCRIPCION as "auxCentroEstudios",
+		H.IDIOMA as "pkIdioma",
+		H.POSTULANTE as "pkPostulante",
+		H.NIVELLECTURA as "Nivellectura",
+		H.NIVELORAL as "Niveloral",
+		H.NIVELESCRITURA as "Nivelescritura",
+		H.NIVELGENERAL as "Nivelgeneral",
+		
+		H.ULTIMOUSUARIO as "UltimoUsuario",
+		H.ULTIMAFECHAMODIF as "UltimaFechaModif",
+		I.DESCRIPCIONLOCAL as "auxIdioma",
+		LE.des as "auxNivellectura",
+		ORA.des as "auxNiveloral",
+		ES.des as "auxNivelescritura",
+		GE.des as "auxNivelgeneral", h.anotermino
+		FROM HR_POSTULANTEIDIOMA H
+		INNER JOIN .HR_IDIOMASMAST I
+		ON H.IDIOMA=I.IDIOMA
+		LEFT JOIN (SELECT 'BÁSICO' as des,'B' as nivel
+		UNION ALL
+		SELECT 'INTERMEDIO' as des,'I' as nivel
+		UNION ALL
+		SELECT 'AVANZADO' as des,'A' as nivel ) LE
+		ON H.NIVELLECTURA=LE.NIVEL
+		LEFT JOIN (SELECT 'BÁSICO' as des,'B' as nivel
+		UNION ALL
+		SELECT 'INTERMEDIO' as des,'I' as nivel
+		UNION ALL
+		SELECT 'AVANZADO' as des,'A' as nivel ) ORA
+		ON H.NIVELORAL=ORA.NIVEL
+		LEFT JOIN (SELECT 'BÁSICO' as des,'B' as nivel
+		UNION ALL
+		SELECT 'INTERMEDIO' as des,'I' as nivel
+		UNION ALL
+		SELECT 'AVANZADO' as des,'A' as nivel ) ES
+		ON H.NIVELESCRITURA=ES.NIVEL
+		LEFT JOIN .HR_CENTROESTUDIOS CES
+		ON H.CENTROESTUDIOS = CES.CENTRO
+		LEFT JOIN (SELECT 'BÁSICO' as des,'B' as nivel
+		UNION ALL
+		SELECT 'INTERMEDIO' as des,'I' as nivel
+		UNION ALL
+		SELECT 'AVANZADO' as des,'A' as nivel ) GE
+		ON H.NIVELGENERAL=GE.NIVEL
+		WHERE H.POSTULANTE = :p_postulante
+		ORDER BY I.DESCRIPCIONLOCAL
+	</sql-query>
+</hibernate-mapping>

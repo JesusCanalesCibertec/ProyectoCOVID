@@ -1,0 +1,140 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="Contratación : Filtros de búsqueda">
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Modalidad</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="modalidades" [(ngModel)]="filtro.valor1" [autoWidth]="false"></p-dropdown>
+            </div>
+
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombre</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-5">
+                <input pInputText [(ngModel)]="filtro.nombre" type="text">
+            </div>
+
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="estados" [(ngModel)]="filtro.estado" [autoWidth]="false"></p-dropdown>
+            </div>
+
+        </div>
+    </p-panel>
+
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button" (click)="nuevo()"></button>
+        </div>
+        <div class="ui-g-3 ui-md-2 ui-lg-8">
+
+        </div>
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Buscar" icon="fas fa-search" type="button" class="ui-button"
+                (click)="buscar(dt)"></button>
+        </div>
+    </div>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="filtro.paginacion.cantidadRegistrosDevolver"
+                emptyMessage="No se encontraron registros" [paginator]="true" [lazy]="true"
+                [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargarPaginacion($event)"
+                [value]="filtro.paginacion.listaResultado" scrollWidth="100%">
+                <p-column header="ID" [style]="{'width':'50px'}" field="idContratacion" styleClass="textoCentrado">
+                </p-column>
+                <p-column header="Modalidad" [style]="{'width':'150px'}" field="modalidad" styleClass="textoCentrado">
+                </p-column>
+                <p-column header="Nombre" [style]="{'width':'250px'}" field="persona"></p-column>
+                <p-column header="Cargo / Servicio" [style]="{'width':'200px'}" field="cargo">
+                </p-column>
+                <p-column header="Fecha de Inicio" [style]="{'width':'100px'}" field="fechainicio"
+                    styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Fecha de Fin" [style]="{'width':'100px'}" field="fechafin" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.fechafin | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Estado" [style]="{'width':'100px'}" field="estado" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.estado=='A'?'Activo':'Inactivo'}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Entregables / Adendas" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="tx.idModalidad == 'OS'" title="Entregables">
+                                <i class="fas fa-layer-group fa-lg seleccionable" (click)="listar(tx)"></i>
+                            </div>
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" *ngIf="tx.idModalidad != 'OS'" title="Adendas">
+                                <i class="far fa-handshake fa-lg seleccionable" (click)="listar(tx)"></i>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
+                                <i class="far fa-edit fa-lg seleccionable" (click)="editar(tx)"></i>
+                            </div>
+                            <div class="ui-g-4 ui-md-4 ui-lg-4" title="Ver">
+                                <i class="fa fa-eye fa-lg seleccionable" (click)="ver(tx)"></i>
+                            </div>
+                            <div class="ui-g-4 ui-md-4 ui-lg-4" title="Eliminar">
+                                <i class="fas fa-trash-alt fa-lg seleccionable" (click)="cambiarestado(tx)"></i>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-column>
+
+            </p-dataTable>
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+        </div>
+    </div>
+
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+</div>
+
+<app-contratacionentregable-listado (bloquear)="bloquearPagina()" (desbloquear)="desbloquearPagina()">
+</app-contratacionentregable-listado>
+<app-contratacionadenda-listado (bloquear)="bloquearPagina()" (desbloquear)="desbloquearPagina()">
+</app-contratacionadenda-listado>
+<app-contratacion-mantenimiento (bloquear)="bloquearPagina()" (desbloquear)="desbloquearPagina()"
+    (buscarpadre)="buscar(dt)">
+</app-contratacion-mantenimiento>

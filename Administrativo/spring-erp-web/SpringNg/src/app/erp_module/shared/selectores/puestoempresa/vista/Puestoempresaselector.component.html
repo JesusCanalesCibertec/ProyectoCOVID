@@ -1,0 +1,48 @@
+<p-dialog header="SELECTOR DE PUESTOS" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+    appendTo="body" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <div class="ui-fluid">
+        <p-panel header="Filtros de Búsqueda">
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <input pInputText (keypress)="defaultBuscar($event)" type="text" [(ngModel)]="filtro.codigo" />
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Nombre</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-8">
+                    <input pInputText (keypress)="defaultBuscar($event)" type="text"  [(ngModel)]="filtro.nombre"/>
+                </div>
+
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-save" type="button" (click)="buscar(dt)" class="ui-button"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-8"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-12" style="font-weight: bold; color: darkred">
+                <label>Dar DOBLE CLICK sobre una fila de la grilla para seleccionarlo</label>
+            </div>
+        </div>
+
+
+        <p-dataTable #dt [responsive]="true" [rows]="registrosPorPagina" [paginator]="true" [lazy]="true" scrollWidth="100%"
+            emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado" selectionMode="single"
+            (onRowDblclick)="onRowSelect($event)" [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargar($event)"
+            [value]="filtro.paginacion.listaResultado">
+            <p-column header="Código" field="codigoPuesto" [style]="{'width':'100px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Nombre" field="descripcion"></p-column>
+        </p-dataTable>
+    </div>
+</p-dialog>

@@ -1,0 +1,875 @@
+2020-05-21T14:55:11.8006554-05:00 0HLVT34GC9E9D:00000006 [INF] Request finished in 71656001.7704ms 101  (791a596a)
+2020-05-21T14:55:14.9171013-05:00 0HLVT34GC9E9H:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1590090914898   (ca22a1cb)
+2020-05-21T14:55:16.0361252-05:00 0HLVT34GC9E9H:00000001 [INF] Request finished in 1119.0325ms 200 application/json; charset=UTF-8 (791a596a)
+2020-05-21T14:55:16.0445073-05:00 0HLVT34GC9E9H:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/841/2o0mucle/websocket   (ca22a1cb)
+2020-05-21T14:55:16.0464214-05:00 0HLVT34GC9E9H:00000002 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:55:17.9044604-05:00 0HLVT34GC9E9I:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/   (ca22a1cb)
+2020-05-21T14:55:17.9305212-05:00 0HLVT34GC9E9I:00000001 [INF] Request finished in 26.121ms 304  (791a596a)
+2020-05-21T14:55:17.9505483-05:00 0HLVT34GC9E9I:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/theme/theme-blue.css   (ca22a1cb)
+2020-05-21T14:55:17.9533801-05:00 0HLVT34GC9E9J:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-05-21T14:55:17.9591234-05:00 0HLVT34GC9E9J:00000001 [INF] Request finished in 6.9214ms 304  (791a596a)
+2020-05-21T14:55:17.9863406-05:00 0HLVT34GC9E9J:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-05-21T14:55:17.9894433-05:00 0HLVT34GC9E9J:00000002 [INF] Request finished in 3.1269ms 304  (791a596a)
+2020-05-21T14:55:17.9929788-05:00 0HLVT34GC9E9J:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/css/all.css   (ca22a1cb)
+2020-05-21T14:55:17.9958381-05:00 0HLVT34GC9E9K:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/runtime.js   (ca22a1cb)
+2020-05-21T14:55:17.9991502-05:00 0HLVT34GC9E9J:00000003 [INF] Request finished in 6.0743ms 304  (791a596a)
+2020-05-21T14:55:18.0607141-05:00 0HLVT34GC9E9J:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/polyfills.js   (ca22a1cb)
+2020-05-21T14:55:18.0654406-05:00 0HLVT34GC9E9J:00000004 [INF] Request finished in 4.7161ms 304  (791a596a)
+2020-05-21T14:55:18.1290235-05:00 0HLVT34GC9E9H:00000002 [INF] Request finished in 2084.4884ms 101  (791a596a)
+2020-05-21T14:55:18.2671192-05:00 0HLVT34GC9E9J:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:61813/styles.js   (ca22a1cb)
+2020-05-21T14:55:18.2712018-05:00 0HLVT34GC9E9J:00000005 [INF] Request finished in 4.104ms 304  (791a596a)
+2020-05-21T14:55:18.5563158-05:00 0HLVT34GC9E9J:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:61813/scripts.js   (ca22a1cb)
+2020-05-21T14:55:18.5613943-05:00 0HLVT34GC9E9J:00000006 [INF] Request finished in 5.1407ms 304  (791a596a)
+2020-05-21T14:55:18.9727342-05:00 0HLVT34GC9E9I:00000002 [INF] Request finished in 1022.1941ms 304  (791a596a)
+2020-05-21T14:55:19.0146338-05:00 0HLVT34GC9E9K:00000001 [INF] Request finished in 1018.7931ms 304  (791a596a)
+2020-05-21T14:55:24.1984297-05:00 0HLVT34GC9E9I:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/main.js   (ca22a1cb)
+2020-05-21T14:55:24.1984297-05:00 0HLVT34GC9E9J:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:61813/vendor.js   (ca22a1cb)
+2020-05-21T14:55:24.6394091-05:00 0HLVT34GC9E9K:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-05-21T14:55:25.2217275-05:00 0HLVT34GC9E9J:00000007 [INF] Request finished in 1023.2944ms 304  (791a596a)
+2020-05-21T14:55:25.2262275-05:00 0HLVT34GC9E9I:00000003 [INF] Request finished in 1027.797ms 304  (791a596a)
+2020-05-21T14:55:25.8355472-05:00 0HLVT34GC9E9K:00000002 [INF] Request finished in 1196.1092ms 304  (791a596a)
+2020-05-21T14:55:41.1719915-05:00 0HLVT34GC9E9J:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-05-21T14:55:41.1719915-05:00 0HLVT34GC9E9I:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-700.woff2   (ca22a1cb)
+2020-05-21T14:55:41.1757666-05:00 0HLVT34GC9E9I:00000004 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:55:41.1771066-05:00 0HLVT34GC9E9J:00000008 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:55:41.9000272-05:00 0HLVT34GC9E9K:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/info?t=1590090941897   (ca22a1cb)
+2020-05-21T14:55:42.1798331-05:00 0HLVT34GC9E9J:00000008 [INF] Request finished in 1007.8913ms 304  (791a596a)
+2020-05-21T14:55:42.2763076-05:00 0HLVT34GC9E9I:00000004 [INF] Request finished in 1104.365ms 304  (791a596a)
+2020-05-21T14:55:42.9047269-05:00 0HLVT34GC9E9K:00000003 [INF] Request finished in 1004.6993ms 200 application/json; charset=UTF-8 (791a596a)
+2020-05-21T14:55:42.9205370-05:00 0HLVT34GC9E9J:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:61813/sockjs-node/701/xcad4lzw/websocket   (ca22a1cb)
+2020-05-21T14:55:42.9245207-05:00 0HLVT34GC9E9J:00000009 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:12.3214886-05:00 0HLVT34GC9E9I:00000005 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/Usuario/login application/json 54 (ca22a1cb)
+2020-05-21T14:56:12.3246456-05:00 0HLVT34GC9E9K:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-05-21T14:56:12.3259003-05:00 0HLVT34GC9E9I:00000005 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:12.3276567-05:00 0HLVT34GC9E9K:00000004 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:12.3300058-05:00 0HLVT34GC9E9I:00000005 [INF] Route matched with "{action = \"Login\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult Login(Angular.Controllers.net.royal.spring.LoginUser)" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:12.3396866-05:00 0HLVT34GC9E9I:00000005 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:12.6402722-05:00 0HLVT34GC9E9I:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:12.7063927-05:00 0HLVT34GC9E9I:00000005 [INF] Accessing expired session, Key:"0302aa19-01d7-3960-7799-b7bca1fbd3e4" (08c5a9e7)
+2020-05-21T14:56:12.7343287-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("8"ms) [Parameters=["@__idUsuario_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[PERFIL], [p].[USUARIO], [p].[CREACION_FECHA], [p].[ESTADO], [p].[ULTIMAFECHAMODIF], [p].[ULTIMOUSUARIO], [p].[ULTIMA_CONEXION]
+FROM [SEGURIDADPERFILUSUARIO] AS [p]
+WHERE ([p].[USUARIO] = @__idUsuario_0) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T14:56:12.7779550-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("38"ms) [Parameters=["@p5='?' (Size = 20), @p6='?' (Size = 20), @p0='?' (DbType = DateTime2), @p1='?' (Size = 2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [SEGURIDADPERFILUSUARIO] SET [CREACION_FECHA] = @p0, [ESTADO] = @p1, [ULTIMAFECHAMODIF] = @p2, [ULTIMOUSUARIO] = @p3, [ULTIMA_CONEXION] = @p4
+WHERE [PERFIL] = @p5 AND [USUARIO] = @p6;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2020-05-21T14:56:12.8087658-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("10"ms) [Parameters=["@__idAplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[GRUPO], [p].[CONCEPTO], [p].[USUARIO], [p].[ESTADO], [p].[OPCIONAGREGARFLAG], [p].[OPCIONAPROBARFLAG], [p].[OPCIONBORRARFLAG], [p].[OPCIONMODIFICARFLAG]
+FROM [SEGURIDADAUTORIZACIONES] AS [p]
+WHERE ([p].[USUARIO] IN (N'GESTOR') AND ([p].[APLICACIONCODIGO] = @__idAplicacion_1)) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T14:56:12.8168096-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:12.8269892-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("7"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T14:56:12.8368063-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("6"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:12.8440067-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:12.8508115-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T14:56:12.8590650-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:12.8700117-05:00 0HLVT34GC9E9I:00000005 [INF] Executed DbCommand ("8"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:12.8719963-05:00 0HLVT34GC9E9I:00000005 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 529.5425ms. (50a9e262)
+2020-05-21T14:56:12.8737751-05:00 0HLVT34GC9E9I:00000005 [INF] Executing JsonResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (2f513669)
+2020-05-21T14:56:12.8755415-05:00 0HLVT34GC9E9I:00000005 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" in 543.7837ms (afa2e885)
+2020-05-21T14:56:12.8775897-05:00 0HLVT34GC9E9I:00000005 [INF] Session started; Key:"0302aa19-01d7-3960-7799-b7bca1fbd3e4", Id:"a4cfd90e-13c3-5ce3-5a87-c4e795f7329a" (1d7cf8c0)
+2020-05-21T14:56:12.8794831-05:00 0HLVT34GC9E9I:00000005 [INF] Request finished in 558.0595ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:12.9255803-05:00 0HLVT34GC9E9I:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/Empleadomast/obtenerInformacionPorIdPersonaUsuarioActual   (ca22a1cb)
+2020-05-21T14:56:12.9320711-05:00 0HLVT34GC9E9L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/Usuario/obtenerMenu   (ca22a1cb)
+2020-05-21T14:56:12.9343203-05:00 0HLVT34GC9E9I:00000006 [INF] Route matched with "{action = \"obtenerInformacionPorIdPersonaUsuarioActual\", controller = \"Empleadomast\", page = \"\"}". Executing controller action with signature "net.royal.spring.core.dominio.dto.DtoEmpleadoBasico obtenerInformacionPorIdPersonaUsuarioActual()" on controller "net.royal.spring.core.EmpleadomastController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:12.9365953-05:00 0HLVT34GC9E9M:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T14:56:12.9367295-05:00 0HLVT34GC9E9L:00000001 [INF] Route matched with "{action = \"obtenerMenu\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult obtenerMenu()" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:12.9432867-05:00 0HLVT34GC9E9I:00000006 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:12.9483197-05:00 0HLVT34GC9E9M:00000001 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:12.9503734-05:00 0HLVT34GC9E9I:00000006 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:12.9552060-05:00 0HLVT34GC9E9L:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:12.9577069-05:00 0HLVT34GC9E9M:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:12.9590139-05:00 0HLVT34GC9E9L:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:12.9621844-05:00 0HLVT34GC9E9M:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:12.9680608-05:00 0HLVT34GC9E9I:00000006 [INF] Executing action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:12.9706825-05:00 0HLVT34GC9E9I:00000006 [INF] Executed action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 0.1135ms. (50a9e262)
+2020-05-21T14:56:12.9774631-05:00 0HLVT34GC9E9M:00000001 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:12.9751873-05:00 0HLVT34GC9E9I:00000006 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.core.dominio.dto.DtoEmpleadoBasico"'. (8a1b66c8)
+2020-05-21T14:56:12.9831646-05:00 0HLVT34GC9E9I:00000006 [INF] Executed action "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" in 42.3814ms (afa2e885)
+2020-05-21T14:56:12.9856207-05:00 0HLVT34GC9E9M:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:12.9904444-05:00 0HLVT34GC9E9I:00000006 [INF] Request finished in 64.8697ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:12.9932840-05:00 0HLVT34GC9E9L:00000001 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:12.9932977-05:00 0HLVT34GC9E9N:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T14:56:12.9973396-05:00 0HLVT34GC9E9L:00000001 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 1.3517ms. (50a9e262)
+2020-05-21T14:56:12.9998094-05:00 0HLVT34GC9E9N:00000001 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:12.9998214-05:00 0HLVT34GC9E9L:00000001 [INF] Executing JsonResult, writing value of type '"Angular.Controllers.net.royal.spring.Menu"'. (2f513669)
+2020-05-21T14:56:13.0058364-05:00 0HLVT34GC9E9N:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:13.0058918-05:00 0HLVT34GC9E9L:00000001 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" in 54.6338ms (afa2e885)
+2020-05-21T14:56:13.0122304-05:00 0HLVT34GC9E9N:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:13.0142007-05:00 0HLVT34GC9E9M:00000001 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 33.0496ms. (50a9e262)
+2020-05-21T14:56:13.0142085-05:00 0HLVT34GC9E9L:00000001 [INF] Request finished in 82.175ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:13.0185459-05:00 0HLVT34GC9E9M:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:13.0216559-05:00 0HLVT34GC9E9O:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T14:56:13.0256636-05:00 0HLVT34GC9E9M:00000001 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 69.6489ms (afa2e885)
+2020-05-21T14:56:13.0307500-05:00 0HLVT34GC9E9O:00000001 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:13.0524590-05:00 0HLVT34GC9E9M:00000001 [INF] Request finished in 115.8398ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:13.0585601-05:00 0HLVT34GC9E9O:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:13.0641692-05:00 0HLVT34GC9E9O:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:13.0778677-05:00 0HLVT34GC9E9N:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:13.0807847-05:00 0HLVT34GC9E9I:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/images/logo.png   (ca22a1cb)
+2020-05-21T14:56:13.0850363-05:00 0HLVT34GC9E9O:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:13.0879670-05:00 0HLVT34GC9E9M:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-05-21T14:56:13.1098005-05:00 0HLVT34GC9E9N:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:13.1175274-05:00 0HLVT34GC9E9O:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:13.1443388-05:00 0HLVT34GC9E9L:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-05-21T14:56:13.1501228-05:00 0HLVT34GC9E9L:00000002 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:13.1555975-05:00 0HLVT34GC9E9N:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 72.7546ms. (50a9e262)
+2020-05-21T14:56:13.1581063-05:00 0HLVT34GC9E9N:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:13.1664306-05:00 0HLVT34GC9E9O:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 78.8714ms. (50a9e262)
+2020-05-21T14:56:13.1703524-05:00 0HLVT34GC9E9N:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 166.8369ms (afa2e885)
+2020-05-21T14:56:13.1729963-05:00 0HLVT34GC9E9O:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:13.1755202-05:00 0HLVT34GC9E9N:00000001 [INF] Request finished in 182.203ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:13.1808109-05:00 0HLVT34GC9E9O:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 124.5365ms (afa2e885)
+2020-05-21T14:56:13.1900223-05:00 0HLVT34GC9E9O:00000001 [INF] Request finished in 167.4944ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:13.3571991-05:00 0HLVT34GC9E9K:00000004 [INF] Request finished in 1032.5426ms 304  (791a596a)
+2020-05-21T14:56:14.0948238-05:00 0HLVT34GC9E9M:00000002 [INF] Request finished in 1006.8414ms 304  (791a596a)
+2020-05-21T14:56:14.1021902-05:00 0HLVT34GC9E9I:00000007 [INF] Request finished in 1021.7925ms 304  (791a596a)
+2020-05-21T14:56:14.1647915-05:00 0HLVT34GC9E9L:00000002 [INF] Request finished in 1020.374ms 304  (791a596a)
+2020-05-21T14:56:23.5567027-05:00 0HLVT34GC9E9N:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/Usuario/login application/json 47 (ca22a1cb)
+2020-05-21T14:56:23.5588242-05:00 0HLVT34GC9E9N:00000002 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:23.5607295-05:00 0HLVT34GC9E9N:00000002 [INF] Route matched with "{action = \"Login\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult Login(Angular.Controllers.net.royal.spring.LoginUser)" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:23.5690490-05:00 0HLVT34GC9E9N:00000002 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:23.5710614-05:00 0HLVT34GC9E9N:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:23.5849525-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("12"ms) [Parameters=["@__parametro_0='?' (Size = -1), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T14:56:23.5951775-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE ([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)" (0723d8ff)
+2020-05-21T14:56:23.6055717-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("8"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T14:56:23.6166638-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("7"ms) [Parameters=["@__get_Item_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[USUARIO], [e].[CLAVE], [e].[ESTADO], [e].[EXPIRARPASSWORDFLAG], [e].[FECHAEXPIRACION], [e].[NOMBRE], [e].[NUMEROLOGINSDISPONIBLE], [e].[NUMEROLOGINSUSADOS], [e].[SQLLOGIN], [e].[SQLPASSWORD], [e].[ULTIMAFECHAMODIF], [e].[ULTIMOUSUARIO], [e].[ULTIMOLOGIN], [e].[USUARIOPERFIL]
+FROM [USUARIO] AS [e]
+WHERE [e].[USUARIO] = @__get_Item_0" (0723d8ff)
+2020-05-21T14:56:23.6313126-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("8"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T14:56:23.6359245-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idUsuario_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[PERFIL], [p].[USUARIO], [p].[CREACION_FECHA], [p].[ESTADO], [p].[ULTIMAFECHAMODIF], [p].[ULTIMOUSUARIO], [p].[ULTIMA_CONEXION]
+FROM [SEGURIDADPERFILUSUARIO] AS [p]
+WHERE ([p].[USUARIO] = @__idUsuario_0) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T14:56:23.6520937-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("9"ms) [Parameters=["@p5='?' (Size = 20), @p6='?' (Size = 20), @p0='?' (DbType = DateTime2), @p1='?' (Size = 2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [SEGURIDADPERFILUSUARIO] SET [CREACION_FECHA] = @p0, [ESTADO] = @p1, [ULTIMAFECHAMODIF] = @p2, [ULTIMOUSUARIO] = @p3, [ULTIMA_CONEXION] = @p4
+WHERE [PERFIL] = @p5 AND [USUARIO] = @p6;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2020-05-21T14:56:23.6604294-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idAplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[GRUPO], [p].[CONCEPTO], [p].[USUARIO], [p].[ESTADO], [p].[OPCIONAGREGARFLAG], [p].[OPCIONAPROBARFLAG], [p].[OPCIONBORRARFLAG], [p].[OPCIONMODIFICARFLAG]
+FROM [SEGURIDADAUTORIZACIONES] AS [p]
+WHERE ([p].[USUARIO] IN (N'SUPERADMIN') AND ([p].[APLICACIONCODIGO] = @__idAplicacion_1)) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T14:56:23.6664833-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.6792648-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T14:56:23.6850697-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.6907356-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7072843-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7129903-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T14:56:23.7180219-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7234555-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7303748-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("3"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7364253-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T14:56:23.7413834-05:00 0HLVT34GC9E9N:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T14:56:23.7433933-05:00 0HLVT34GC9E9N:00000002 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 172.6567ms. (50a9e262)
+2020-05-21T14:56:23.7453551-05:00 0HLVT34GC9E9N:00000002 [INF] Executing JsonResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (2f513669)
+2020-05-21T14:56:23.7472809-05:00 0HLVT34GC9E9N:00000002 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" in 184.7843ms (afa2e885)
+2020-05-21T14:56:23.7495961-05:00 0HLVT34GC9E9N:00000002 [INF] Request finished in 192.9117ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:23.8027294-05:00 0HLVT34GC9E9O:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/Empleadomast/obtenerInformacionPorIdPersonaUsuarioActual   (ca22a1cb)
+2020-05-21T14:56:23.8057493-05:00 0HLVT34GC9E9K:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/Usuario/obtenerMenu   (ca22a1cb)
+2020-05-21T14:56:23.8058314-05:00 0HLVT34GC9E9M:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T14:56:23.8108478-05:00 0HLVT34GC9E9O:00000002 [INF] Route matched with "{action = \"obtenerInformacionPorIdPersonaUsuarioActual\", controller = \"Empleadomast\", page = \"\"}". Executing controller action with signature "net.royal.spring.core.dominio.dto.DtoEmpleadoBasico obtenerInformacionPorIdPersonaUsuarioActual()" on controller "net.royal.spring.core.EmpleadomastController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:23.8220004-05:00 0HLVT34GC9E9M:00000003 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:23.8260487-05:00 0HLVT34GC9E9K:00000005 [INF] Route matched with "{action = \"obtenerMenu\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult obtenerMenu()" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:23.8334253-05:00 0HLVT34GC9E9M:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:23.8434897-05:00 0HLVT34GC9E9K:00000005 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:23.8487444-05:00 0HLVT34GC9E9M:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:23.8578829-05:00 0HLVT34GC9E9K:00000005 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:23.8696480-05:00 0HLVT34GC9E9O:00000002 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:23.9188845-05:00 0HLVT34GC9E9M:00000003 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:23.9288336-05:00 0HLVT34GC9E9K:00000005 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:23.9310423-05:00 0HLVT34GC9E9O:00000002 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:23.9370223-05:00 0HLVT34GC9E9K:00000005 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 1.6025ms. (50a9e262)
+2020-05-21T14:56:23.9370897-05:00 0HLVT34GC9E9M:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:23.9462355-05:00 0HLVT34GC9E9K:00000005 [INF] Executing JsonResult, writing value of type '"Angular.Controllers.net.royal.spring.Menu"'. (2f513669)
+2020-05-21T14:56:23.9506602-05:00 0HLVT34GC9E9M:00000003 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 18.4862ms. (50a9e262)
+2020-05-21T14:56:23.9550370-05:00 0HLVT34GC9E9K:00000005 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" in 118.6869ms (afa2e885)
+2020-05-21T14:56:23.9579677-05:00 0HLVT34GC9E9M:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:23.9601149-05:00 0HLVT34GC9E9K:00000005 [INF] Request finished in 154.3549ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:23.9626038-05:00 0HLVT34GC9E9M:00000003 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 133.195ms (afa2e885)
+2020-05-21T14:56:23.9656580-05:00 0HLVT34GC9E9M:00000003 [INF] Request finished in 159.7916ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:23.9686345-05:00 0HLVT34GC9E9I:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T14:56:23.9712326-05:00 0HLVT34GC9E9O:00000002 [INF] Executing action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:23.9776273-05:00 0HLVT34GC9E9I:00000008 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:23.9837712-05:00 0HLVT34GC9E9O:00000002 [INF] Executed action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 3.3719ms. (50a9e262)
+2020-05-21T14:56:23.9863556-05:00 0HLVT34GC9E9I:00000008 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:23.9879232-05:00 0HLVT34GC9E9O:00000002 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.core.dominio.dto.DtoEmpleadoBasico"'. (8a1b66c8)
+2020-05-21T14:56:23.9898432-05:00 0HLVT34GC9E9I:00000008 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:23.9923384-05:00 0HLVT34GC9E9O:00000002 [INF] Executed action "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" in 122.5899ms (afa2e885)
+2020-05-21T14:56:23.9948096-05:00 0HLVT34GC9E9O:00000002 [INF] Request finished in 192.091ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:23.9974840-05:00 0HLVT34GC9E9L:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T14:56:24.0021749-05:00 0HLVT34GC9E9L:00000003 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:56:24.0113267-05:00 0HLVT34GC9E9L:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:56:24.0139372-05:00 0HLVT34GC9E9L:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:56:24.0165343-05:00 0HLVT34GC9E9I:00000008 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:24.0193934-05:00 0HLVT34GC9E9I:00000008 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:24.0228814-05:00 0HLVT34GC9E9L:00000003 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:56:24.0255106-05:00 0HLVT34GC9E9L:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:56:24.0291248-05:00 0HLVT34GC9E9I:00000008 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 10.2451ms. (50a9e262)
+2020-05-21T14:56:24.0325950-05:00 0HLVT34GC9E9I:00000008 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:24.0348832-05:00 0HLVT34GC9E9L:00000003 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 9.878ms. (50a9e262)
+2020-05-21T14:56:24.0435955-05:00 0HLVT34GC9E9L:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:56:24.0435955-05:00 0HLVT34GC9E9I:00000008 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 59.7964ms (afa2e885)
+2020-05-21T14:56:24.0481365-05:00 0HLVT34GC9E9L:00000003 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 37.2564ms (afa2e885)
+2020-05-21T14:56:24.0481621-05:00 0HLVT34GC9E9I:00000008 [INF] Request finished in 79.5376ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:24.0503692-05:00 0HLVT34GC9E9L:00000003 [INF] Request finished in 52.8578ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:56:24.1265893-05:00 0HLVT34GC9E9N:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/webfonts/fa-brands-400.woff2   (ca22a1cb)
+2020-05-21T14:56:24.1312520-05:00 0HLVT34GC9E9N:00000003 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:56:25.1903284-05:00 0HLVT34GC9E9N:00000003 [INF] Request finished in 1063.7551ms 304  (791a596a)
+2020-05-21T14:57:14.7578074-05:00 0HLVT34GC9E9K:00000006 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/spring/minedu/MpPersona/listarPaginacion application/json 86 (ca22a1cb)
+2020-05-21T14:57:14.7578074-05:00 0HLVT34GC9E9L:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/CARGOMIN   (ca22a1cb)
+2020-05-21T14:57:14.7620758-05:00 0HLVT34GC9E9K:00000006 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:57:14.7684709-05:00 0HLVT34GC9E9K:00000006 [INF] Route matched with "{action = \"ListarPaginacion\", controller = \"MpPersona\", page = \"\"}". Executing controller action with signature "net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico ListarPaginacion(net.royal.spring.framework.core.dominio.dto.DtoTabla)" on controller "net.royal.spring.minedu.MpPersonaController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:14.7912760-05:00 0HLVT34GC9E9L:00000004 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:14.8133514-05:00 0HLVT34GC9E9K:00000006 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:14.8152115-05:00 0HLVT34GC9E9L:00000004 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:14.8289972-05:00 0HLVT34GC9E9K:00000006 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:14.8434473-05:00 0HLVT34GC9E9L:00000004 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:14.8577855-05:00 0HLVT34GC9E9L:00000004 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:14.8841432-05:00 0HLVT34GC9E9L:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:14.9373186-05:00 0HLVT34GC9E9K:00000006 [INF] Executing action method "net.royal.spring.minedu.MpPersonaController.ListarPaginacion (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:14.9401055-05:00 0HLVT34GC9E9L:00000004 [INF] Executed DbCommand ("11"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T14:57:14.9637575-05:00 0HLVT34GC9E9I:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:61813/primeicons.ttf   (ca22a1cb)
+2020-05-21T14:57:14.9664223-05:00 0HLVT34GC9E9I:00000009 [INF] Policy execution successful. (0204925d)
+2020-05-21T14:57:14.9777248-05:00 0HLVT34GC9E9K:00000006 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:15.0284215-05:00 0HLVT34GC9E9L:00000004 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 168.2249ms. (50a9e262)
+2020-05-21T14:57:15.0579884-05:00 0HLVT34GC9E9L:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:57:15.0664496-05:00 0HLVT34GC9E9K:00000006 [INF] Executed action method "net.royal.spring.minedu.MpPersonaController.ListarPaginacion (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 126.3101ms. (50a9e262)
+2020-05-21T14:57:15.0737204-05:00 0HLVT34GC9E9K:00000006 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico"'. (8a1b66c8)
+2020-05-21T14:57:15.0886316-05:00 0HLVT34GC9E9L:00000004 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 275.0118ms (afa2e885)
+2020-05-21T14:57:15.1039046-05:00 0HLVT34GC9E9K:00000006 [INF] Executed action "net.royal.spring.minedu.MpPersonaController.ListarPaginacion (spring-erp-web)" in 310.6298ms (afa2e885)
+2020-05-21T14:57:15.1166963-05:00 0HLVT34GC9E9O:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/CARGOMIN   (ca22a1cb)
+2020-05-21T14:57:15.1167654-05:00 0HLVT34GC9E9L:00000004 [INF] Request finished in 358.9837ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:57:15.1205883-05:00 0HLVT34GC9E9K:00000006 [INF] Request finished in 362.0652ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:57:15.1249012-05:00 0HLVT34GC9E9O:00000003 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:15.1308214-05:00 0HLVT34GC9E9O:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:15.1343952-05:00 0HLVT34GC9E9O:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:15.1396331-05:00 0HLVT34GC9E9O:00000003 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:15.1417233-05:00 0HLVT34GC9E9O:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:15.1469006-05:00 0HLVT34GC9E9O:00000003 [INF] Executed DbCommand ("3"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T14:57:15.1540798-05:00 0HLVT34GC9E9O:00000003 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 12.691ms. (50a9e262)
+2020-05-21T14:57:15.1581987-05:00 0HLVT34GC9E9O:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:57:15.1605098-05:00 0HLVT34GC9E9O:00000003 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 30.1289ms (afa2e885)
+2020-05-21T14:57:15.1630285-05:00 0HLVT34GC9E9O:00000003 [INF] Request finished in 46.3414ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:57:15.9764798-05:00 0HLVT34GC9E9I:00000009 [INF] Request finished in 1012.7437ms 304  (791a596a)
+2020-05-21T14:57:17.1362539-05:00 0HLVT34GC9E9N:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T14:57:17.1389041-05:00 0HLVT34GC9E9M:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T14:57:17.1411156-05:00 0HLVT34GC9E9N:00000004 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:17.1458212-05:00 0HLVT34GC9E9M:00000004 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:17.1484638-05:00 0HLVT34GC9E9N:00000004 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:17.1507674-05:00 0HLVT34GC9E9M:00000004 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:17.1569691-05:00 0HLVT34GC9E9M:00000004 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:17.1570098-05:00 0HLVT34GC9E9N:00000004 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:17.1858993-05:00 0HLVT34GC9E9N:00000004 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:17.1907513-05:00 0HLVT34GC9E9N:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:17.1935253-05:00 0HLVT34GC9E9M:00000004 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:17.1959359-05:00 0HLVT34GC9E9M:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:17.2021609-05:00 0HLVT34GC9E9M:00000004 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 6.5536ms. (50a9e262)
+2020-05-21T14:57:17.2022010-05:00 0HLVT34GC9E9N:00000004 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 13.0156ms. (50a9e262)
+2020-05-21T14:57:17.2068925-05:00 0HLVT34GC9E9M:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:57:17.2103877-05:00 0HLVT34GC9E9N:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:57:17.2227221-05:00 0HLVT34GC9E9M:00000004 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 72.6233ms (afa2e885)
+2020-05-21T14:57:17.2251344-05:00 0HLVT34GC9E9N:00000004 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 79.8373ms (afa2e885)
+2020-05-21T14:57:17.2288584-05:00 0HLVT34GC9E9N:00000004 [INF] Request finished in 92.5474ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:57:17.2337328-05:00 0HLVT34GC9E9M:00000004 [INF] Request finished in 94.556ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T14:57:17.2406098-05:00 0HLVT34GC9E9L:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T14:57:17.2443113-05:00 0HLVT34GC9E9L:00000005 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T14:57:17.2495300-05:00 0HLVT34GC9E9L:00000005 [INF] Successfully validated the token. (60169667)
+2020-05-21T14:57:17.2566778-05:00 0HLVT34GC9E9L:00000005 [INF] Authorization was successful. (0d575a54)
+2020-05-21T14:57:17.2642491-05:00 0HLVT34GC9E9L:00000005 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T14:57:17.2700946-05:00 0HLVT34GC9E9L:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T14:57:17.2844277-05:00 0HLVT34GC9E9L:00000005 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 15.4652ms. (50a9e262)
+2020-05-21T14:57:17.2863518-05:00 0HLVT34GC9E9L:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T14:57:17.2884747-05:00 0HLVT34GC9E9L:00000005 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 39.2106ms (afa2e885)
+2020-05-21T14:57:17.2925908-05:00 0HLVT34GC9E9L:00000005 [INF] Request finished in 50.8482ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:46.1277839-05:00 0HLVT34GC9E9P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/TIPOPROYEC   (ca22a1cb)
+2020-05-21T15:43:46.1297172-05:00 0HLVT34GC9E9Q:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/ESTPROYECT   (ca22a1cb)
+2020-05-21T15:43:46.1537317-05:00 0HLVT34GC9E9Q:00000001 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:46.1561352-05:00 0HLVT34GC9E9Q:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:46.1586108-05:00 0HLVT34GC9E9Q:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:46.1666641-05:00 0HLVT34GC9E9Q:00000001 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:46.1689981-05:00 0HLVT34GC9E9Q:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:46.1821262-05:00 0HLVT34GC9E9Q:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:46.2087666-05:00 0HLVT34GC9E9Q:00000001 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 40.0871ms. (50a9e262)
+2020-05-21T15:43:46.2114523-05:00 0HLVT34GC9E9Q:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:46.2152294-05:00 0HLVT34GC9E9Q:00000001 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 59.4091ms (afa2e885)
+2020-05-21T15:43:46.2221954-05:00 0HLVT34GC9E9Q:00000001 [INF] Request finished in 92.4869ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:46.2545202-05:00 0HLVT34GC9E9P:00000001 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:46.2576377-05:00 0HLVT34GC9E9P:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:46.2599594-05:00 0HLVT34GC9E9P:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:46.2711507-05:00 0HLVT34GC9E9P:00000001 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:46.2739212-05:00 0HLVT34GC9E9P:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:46.2801045-05:00 0HLVT34GC9E9P:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:46.2878416-05:00 0HLVT34GC9E9P:00000001 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 14.0112ms. (50a9e262)
+2020-05-21T15:43:46.2949623-05:00 0HLVT34GC9E9P:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:46.2982313-05:00 0HLVT34GC9E9P:00000001 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 41.0519ms (afa2e885)
+2020-05-21T15:43:46.3011757-05:00 0HLVT34GC9E9P:00000001 [INF] Request finished in 173.4628ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:48.3381870-05:00 0HLVT34GC9E9Q:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/Contratosactivos   (ca22a1cb)
+2020-05-21T15:43:48.3423982-05:00 0HLVT34GC9E9Q:00000002 [INF] Route matched with "{action = \"Contratosactivos\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.minedu.dominio.dto.DtoContratacion] Contratosactivos()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:48.3443839-05:00 0HLVT34GC9E9Q:00000002 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:48.3463145-05:00 0HLVT34GC9E9Q:00000002 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:48.3506369-05:00 0HLVT34GC9E9Q:00000002 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.Contratosactivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:48.3542125-05:00 0HLVT34GC9E9Q:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:48.3736193-05:00 0HLVT34GC9E9Q:00000002 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.Contratosactivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 21.3056ms. (50a9e262)
+2020-05-21T15:43:48.3764216-05:00 0HLVT34GC9E9Q:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.minedu.dominio.dto.DtoContratacion, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:48.3875886-05:00 0HLVT34GC9E9Q:00000002 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.Contratosactivos (spring-erp-web)" in 43.3574ms (afa2e885)
+2020-05-21T15:43:48.3898060-05:00 0HLVT34GC9E9Q:00000002 [INF] Request finished in 51.6194ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:48.7212953-05:00 0HLVT34GC9E9P:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/webfonts/fa-regular-400.woff2   (ca22a1cb)
+2020-05-21T15:43:48.7260095-05:00 0HLVT34GC9E9P:00000002 [INF] Policy execution successful. (0204925d)
+2020-05-21T15:43:48.7336512-05:00 0HLVT34GC9E9Q:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/TIPOPROYEC   (ca22a1cb)
+2020-05-21T15:43:48.7558487-05:00 0HLVT34GC9E9Q:00000003 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:48.7681454-05:00 0HLVT34GC9E9Q:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:48.7746551-05:00 0HLVT34GC9E9Q:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:48.7821982-05:00 0HLVT34GC9E9Q:00000003 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:48.7853834-05:00 0HLVT34GC9E9Q:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:48.7904736-05:00 0HLVT34GC9E9Q:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:48.7947944-05:00 0HLVT34GC9E9Q:00000003 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 9.7422ms. (50a9e262)
+2020-05-21T15:43:48.7987951-05:00 0HLVT34GC9E9Q:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:48.8027379-05:00 0HLVT34GC9E9Q:00000003 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 35.0244ms (afa2e885)
+2020-05-21T15:43:48.8058799-05:00 0HLVT34GC9E9Q:00000003 [INF] Request finished in 72.2681ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:48.8447287-05:00 0HLVT34GC9E9Q:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/COORDINAMP   (ca22a1cb)
+2020-05-21T15:43:48.8479222-05:00 0HLVT34GC9E9Q:00000004 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:48.8501871-05:00 0HLVT34GC9E9Q:00000004 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:48.8526675-05:00 0HLVT34GC9E9Q:00000004 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:48.8567241-05:00 0HLVT34GC9E9Q:00000004 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:48.8606110-05:00 0HLVT34GC9E9Q:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:48.8657730-05:00 0HLVT34GC9E9Q:00000004 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:48.8691918-05:00 0HLVT34GC9E9Q:00000004 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 8.8869ms. (50a9e262)
+2020-05-21T15:43:48.8714020-05:00 0HLVT34GC9E9Q:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:48.8760207-05:00 0HLVT34GC9E9Q:00000004 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 26.0532ms (afa2e885)
+2020-05-21T15:43:48.8792271-05:00 0HLVT34GC9E9Q:00000004 [INF] Request finished in 34.5146ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:48.8998280-05:00 0HLVT34GC9E9Q:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpSistema/ListarSistemas   (ca22a1cb)
+2020-05-21T15:43:48.9055387-05:00 0HLVT34GC9E9Q:00000005 [INF] Route matched with "{action = \"ListarSistemas\", controller = \"MpSistema\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.minedu.dominio.MpSistema] ListarSistemas()" on controller "net.royal.spring.minedu.MpSistemaController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:48.9112543-05:00 0HLVT34GC9E9Q:00000005 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:48.9137029-05:00 0HLVT34GC9E9Q:00000005 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:48.9211356-05:00 0HLVT34GC9E9Q:00000005 [INF] Executing action method "net.royal.spring.minedu.MpSistemaController.ListarSistemas (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:49.2860082-05:00 0HLVT34GC9E9Q:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"MySqlDbContext"' using provider '"Pomelo.EntityFrameworkCore.MySql"' with options: "None" (9958f5bb)
+2020-05-21T15:43:49.7792392-05:00 0HLVT34GC9E9P:00000002 [INF] Request finished in 1057.9425ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-05-21T15:43:49.8460966-05:00 0HLVT34GC9E9Q:00000005 [INF] Executed DbCommand ("33"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT `x`.`id_si`, `x`.`codigo_si`, `x`.`estado`, `x`.`nombre_si`, `x`.`siglas`
+FROM `sistema_informacion` AS `x`
+ORDER BY `x`.`nombre_si`" (0723d8ff)
+2020-05-21T15:43:49.9363944-05:00 0HLVT34GC9E9Q:00000005 [INF] Executed action method "net.royal.spring.minedu.MpSistemaController.ListarSistemas (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1012.6191ms. (50a9e262)
+2020-05-21T15:43:49.9388074-05:00 0HLVT34GC9E9Q:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.minedu.dominio.MpSistema, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:49.9436180-05:00 0HLVT34GC9E9Q:00000005 [INF] Executed action "net.royal.spring.minedu.MpSistemaController.ListarSistemas (spring-erp-web)" in 1032.7192ms (afa2e885)
+2020-05-21T15:43:49.9461875-05:00 0HLVT34GC9E9Q:00000005 [INF] Request finished in 1046.4714ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:49.9598958-05:00 0HLVT34GC9E9P:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/ROLPROYECT   (ca22a1cb)
+2020-05-21T15:43:49.9621117-05:00 0HLVT34GC9E9P:00000003 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:49.9651224-05:00 0HLVT34GC9E9P:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:49.9692085-05:00 0HLVT34GC9E9P:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:49.9743140-05:00 0HLVT34GC9E9P:00000003 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:49.9763729-05:00 0HLVT34GC9E9P:00000003 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:49.9813130-05:00 0HLVT34GC9E9P:00000003 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:49.9849980-05:00 0HLVT34GC9E9P:00000003 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 8.9365ms. (50a9e262)
+2020-05-21T15:43:49.9871567-05:00 0HLVT34GC9E9P:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:49.9896824-05:00 0HLVT34GC9E9P:00000003 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 24.6174ms (afa2e885)
+2020-05-21T15:43:49.9918135-05:00 0HLVT34GC9E9P:00000003 [INF] Request finished in 31.83ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:50.0029124-05:00 0HLVT34GC9E9Q:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/ROLPROYECT   (ca22a1cb)
+2020-05-21T15:43:50.0050554-05:00 0HLVT34GC9E9Q:00000006 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:50.0070864-05:00 0HLVT34GC9E9Q:00000006 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:50.0090351-05:00 0HLVT34GC9E9Q:00000006 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:50.0139990-05:00 0HLVT34GC9E9Q:00000006 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:50.0163966-05:00 0HLVT34GC9E9Q:00000006 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:50.0210544-05:00 0HLVT34GC9E9Q:00000006 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:50.0236856-05:00 0HLVT34GC9E9Q:00000006 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 7.6536ms. (50a9e262)
+2020-05-21T15:43:50.0254199-05:00 0HLVT34GC9E9Q:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:50.0272113-05:00 0HLVT34GC9E9Q:00000006 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 20.3518ms (afa2e885)
+2020-05-21T15:43:50.0292397-05:00 0HLVT34GC9E9Q:00000006 [INF] Request finished in 26.3365ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:50.0402394-05:00 0HLVT34GC9E9P:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/ESTPROYECT   (ca22a1cb)
+2020-05-21T15:43:50.0433962-05:00 0HLVT34GC9E9P:00000004 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:50.0466923-05:00 0HLVT34GC9E9P:00000004 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:50.0485850-05:00 0HLVT34GC9E9P:00000004 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:50.0530781-05:00 0HLVT34GC9E9P:00000004 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:50.0548312-05:00 0HLVT34GC9E9P:00000004 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:50.0595792-05:00 0HLVT34GC9E9P:00000004 [INF] Executed DbCommand ("3"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:50.0663050-05:00 0HLVT34GC9E9P:00000004 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 11.692ms. (50a9e262)
+2020-05-21T15:43:50.0678487-05:00 0HLVT34GC9E9P:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:50.0696651-05:00 0HLVT34GC9E9P:00000004 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 23.2605ms (afa2e885)
+2020-05-21T15:43:50.0717237-05:00 0HLVT34GC9E9P:00000004 [INF] Request finished in 31.4793ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:50.0846342-05:00 0HLVT34GC9E9Q:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/FASEGEST   (ca22a1cb)
+2020-05-21T15:43:50.0867636-05:00 0HLVT34GC9E9Q:00000007 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:50.0890062-05:00 0HLVT34GC9E9Q:00000007 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:50.0915451-05:00 0HLVT34GC9E9Q:00000007 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:50.0958412-05:00 0HLVT34GC9E9Q:00000007 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:50.0976952-05:00 0HLVT34GC9E9Q:00000007 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:50.1019146-05:00 0HLVT34GC9E9Q:00000007 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:50.1055811-05:00 0HLVT34GC9E9Q:00000007 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 8.0781ms. (50a9e262)
+2020-05-21T15:43:50.1075261-05:00 0HLVT34GC9E9Q:00000007 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:50.1093073-05:00 0HLVT34GC9E9Q:00000007 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 20.699ms (afa2e885)
+2020-05-21T15:43:50.1112400-05:00 0HLVT34GC9E9Q:00000007 [INF] Request finished in 26.6136ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:43:50.1221538-05:00 0HLVT34GC9E9P:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/TIPOINGE   (ca22a1cb)
+2020-05-21T15:43:50.1246633-05:00 0HLVT34GC9E9P:00000005 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:43:50.1270654-05:00 0HLVT34GC9E9P:00000005 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:43:50.1290679-05:00 0HLVT34GC9E9P:00000005 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:43:50.1349483-05:00 0HLVT34GC9E9P:00000005 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:43:50.1382748-05:00 0HLVT34GC9E9P:00000005 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:43:50.1426071-05:00 0HLVT34GC9E9P:00000005 [INF] Executed DbCommand ("2"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:43:50.1447448-05:00 0HLVT34GC9E9P:00000005 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 6.8054ms. (50a9e262)
+2020-05-21T15:43:50.1465857-05:00 0HLVT34GC9E9P:00000005 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:43:50.1483238-05:00 0HLVT34GC9E9P:00000005 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 21.6039ms (afa2e885)
+2020-05-21T15:43:50.1503522-05:00 0HLVT34GC9E9P:00000005 [INF] Request finished in 28.209ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:44:10.5212832-05:00 0HLVT34GC9E9Q:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/TIPOPROYEC   (ca22a1cb)
+2020-05-21T15:44:10.5212832-05:00 0HLVT34GC9E9P:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/MaMiscelaneosdetalle/listarActivos/MP/ESTPROYECT   (ca22a1cb)
+2020-05-21T15:44:10.5256666-05:00 0HLVT34GC9E9P:00000006 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:44:10.5256669-05:00 0HLVT34GC9E9Q:00000008 [INF] Route matched with "{action = \"listarActivos\", controller = \"MaMiscelaneosdetalle\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.core.dominio.MaMiscelaneosdetalle] listarActivos(System.String, System.String)" on controller "net.royal.spring.core.MaMiscelaneosdetalleController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:44:10.5322539-05:00 0HLVT34GC9E9Q:00000008 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:44:10.5322539-05:00 0HLVT34GC9E9P:00000006 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:44:10.5409743-05:00 0HLVT34GC9E9Q:00000008 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:44:10.5409730-05:00 0HLVT34GC9E9P:00000006 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:44:10.5607575-05:00 0HLVT34GC9E9Q:00000008 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:44:10.5607571-05:00 0HLVT34GC9E9P:00000006 [INF] Executing action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:44:10.5685429-05:00 0HLVT34GC9E9P:00000006 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:44:10.5701553-05:00 0HLVT34GC9E9Q:00000008 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:44:10.5769537-05:00 0HLVT34GC9E9Q:00000008 [INF] Executed DbCommand ("3"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:44:10.5806412-05:00 0HLVT34GC9E9Q:00000008 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 14.9859ms. (50a9e262)
+2020-05-21T15:44:10.6002694-05:00 0HLVT34GC9E9Q:00000008 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:44:10.6030535-05:00 0HLVT34GC9E9P:00000006 [INF] Executed DbCommand ("3"ms) [Parameters=["@__filtro_CodigoAplicacion_0='?' (Size = 2), @__filtro_CodigoTabla_1='?' (Size = 10), @__filtro_Estado_2='?' (Size = 1)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[CODIGOTABLA], [p].[COMPANIA], [p].[CODIGOELEMENTO], [p].[DESCRIPCIONLOCAL], [p].[ESTADO], [p].[ORDEN], [p].[VALORCODIGO1], [p].[VALORCODIGO2], [p].[VALORCODIGO4], [p].[VALORNUMERICO], [p].[VALORNUMERICO2]
+FROM [MA_MISCELANEOSDETALLE] AS [p]
+WHERE (([p].[APLICACIONCODIGO] = @__filtro_CodigoAplicacion_0) AND ([p].[CODIGOTABLA] = @__filtro_CodigoTabla_1)) AND ([p].[ESTADO] = @__filtro_Estado_2)
+ORDER BY [p].[DESCRIPCIONLOCAL]" (0723d8ff)
+2020-05-21T15:44:10.6056835-05:00 0HLVT34GC9E9Q:00000008 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 78.0507ms (afa2e885)
+2020-05-21T15:44:10.6080612-05:00 0HLVT34GC9E9Q:00000008 [INF] Request finished in 86.8518ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:44:10.6154923-05:00 0HLVT34GC9E9P:00000006 [INF] Executed action method "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 47.234ms. (50a9e262)
+2020-05-21T15:44:10.6174243-05:00 0HLVT34GC9E9P:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.MaMiscelaneosdetalle, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:44:10.6210799-05:00 0HLVT34GC9E9P:00000006 [INF] Executed action "net.royal.spring.core.MaMiscelaneosdetalleController.listarActivos (spring-erp-web)" in 89.0451ms (afa2e885)
+2020-05-21T15:44:10.6280582-05:00 0HLVT34GC9E9P:00000006 [INF] Request finished in 106.8502ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:49:42.3545019-05:00 0HLVT34GC9E9R:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T15:49:42.3609199-05:00 0HLVT34GC9E9S:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T15:49:42.3609374-05:00 0HLVT34GC9E9R:00000001 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:49:42.3704115-05:00 0HLVT34GC9E9R:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:49:42.3704498-05:00 0HLVT34GC9E9T:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T15:49:42.3715668-05:00 0HLVT34GC9E9S:00000001 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:49:42.3735447-05:00 0HLVT34GC9E9R:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:49:42.3770361-05:00 0HLVT34GC9E9T:00000001 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T15:49:42.3770963-05:00 0HLVT34GC9E9S:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:49:42.3819819-05:00 0HLVT34GC9E9S:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:49:42.3831944-05:00 0HLVT34GC9E9T:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T15:49:42.3864166-05:00 0HLVT34GC9E9T:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T15:49:42.3902839-05:00 0HLVT34GC9E9R:00000001 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:49:42.3929559-05:00 0HLVT34GC9E9R:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:49:42.3960522-05:00 0HLVT34GC9E9S:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:49:42.3990510-05:00 0HLVT34GC9E9S:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:49:42.4022543-05:00 0HLVT34GC9E9T:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T15:49:42.4056848-05:00 0HLVT34GC9E9T:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T15:49:42.4113056-05:00 0HLVT34GC9E9R:00000001 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 19.088ms. (50a9e262)
+2020-05-21T15:49:42.4166527-05:00 0HLVT34GC9E9R:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:49:42.4198994-05:00 0HLVT34GC9E9R:00000001 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 50.7148ms (afa2e885)
+2020-05-21T15:49:42.4260605-05:00 0HLVT34GC9E9S:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 27.625ms. (50a9e262)
+2020-05-21T15:49:42.4291174-05:00 0HLVT34GC9E9R:00000001 [INF] Request finished in 74.6661ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:49:42.4318435-05:00 0HLVT34GC9E9S:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:49:42.4373298-05:00 0HLVT34GC9E9T:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 32.5395ms. (50a9e262)
+2020-05-21T15:49:42.4402766-05:00 0HLVT34GC9E9S:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 64.478ms (afa2e885)
+2020-05-21T15:49:42.4486730-05:00 0HLVT34GC9E9T:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T15:49:42.4551977-05:00 0HLVT34GC9E9S:00000001 [INF] Request finished in 94.0928ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:49:42.4639733-05:00 0HLVT34GC9E9T:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 82.7083ms (afa2e885)
+2020-05-21T15:49:42.4697668-05:00 0HLVT34GC9E9T:00000001 [INF] Request finished in 99.2989ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T15:49:45.2487300-05:00 0HLVT34GC9E9U:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-05-21T15:49:45.2518373-05:00 0HLVT34GC9E9R:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/css/all.css   (ca22a1cb)
+2020-05-21T15:49:45.2597055-05:00 0HLVT34GC9E9S:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-05-21T15:49:45.2628497-05:00 0HLVT34GC9E9T:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/theme/theme-blue.css   (ca22a1cb)
+2020-05-21T15:49:45.3283320-05:00 0HLVT34GC9E9V:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/polyfills.js.map   (ca22a1cb)
+2020-05-21T15:49:45.3388456-05:00 0HLVT34GC9EA0:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/runtime.js.map   (ca22a1cb)
+2020-05-21T15:49:46.2860947-05:00 0HLVT34GC9E9T:00000002 [INF] Request finished in 1023.2229ms 304  (791a596a)
+2020-05-21T15:49:46.2881584-05:00 0HLVT34GC9E9R:00000002 [INF] Request finished in 1036.1931ms 304  (791a596a)
+2020-05-21T15:49:46.2932814-05:00 0HLVT34GC9E9U:00000001 [INF] Request finished in 1044.5631ms 304  (791a596a)
+2020-05-21T15:49:46.3094812-05:00 0HLVT34GC9E9R:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/styles.js.map   (ca22a1cb)
+2020-05-21T15:49:46.3094812-05:00 0HLVT34GC9E9T:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/scripts.js.map   (ca22a1cb)
+2020-05-21T15:49:46.3116400-05:00 0HLVT34GC9E9U:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/vendor.js.map   (ca22a1cb)
+2020-05-21T15:49:46.3118521-05:00 0HLVT34GC9E9S:00000002 [INF] Request finished in 1052.1407ms 304  (791a596a)
+2020-05-21T15:49:46.3439617-05:00 0HLVT34GC9E9T:00000003 [INF] Request finished in 34.4931ms 304  (791a596a)
+2020-05-21T15:49:46.3498241-05:00 0HLVT34GC9E9S:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/main.js.map   (ca22a1cb)
+2020-05-21T15:49:46.3571295-05:00 0HLVT34GC9E9U:00000002 [INF] Request finished in 45.5008ms 304  (791a596a)
+2020-05-21T15:49:46.3675616-05:00 0HLVT34GC9EA0:00000001 [INF] Request finished in 1028.7081ms 304  (791a596a)
+2020-05-21T15:49:46.5367840-05:00 0HLVT34GC9E9R:00000003 [INF] Request finished in 227.2844ms 200 application/json; charset=UTF-8 (791a596a)
+2020-05-21T15:49:46.5409124-05:00 0HLVT34GC9E9V:00000001 [INF] Request finished in 1212.5588ms 200 application/json; charset=UTF-8 (791a596a)
+2020-05-21T15:49:46.8107183-05:00 0HLVT34GC9E9S:00000003 [INF] Request finished in 460.9108ms 200 application/json; charset=UTF-8 (791a596a)
+2020-05-21T16:48:58.1991134-05:00 0HLVT34GC9EA1:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/Usuario/login application/json 54 (ca22a1cb)
+2020-05-21T16:48:58.2029540-05:00 0HLVT34GC9EA1:00000001 [INF] Policy execution successful. (0204925d)
+2020-05-21T16:48:58.2049226-05:00 0HLVT34GC9EA1:00000001 [INF] Route matched with "{action = \"Login\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult Login(Angular.Controllers.net.royal.spring.LoginUser)" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:48:58.2209975-05:00 0HLVT34GC9EA1:00000001 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:06.0348734-05:00 0HLVT34GC9EA1:00000001 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" in 7827.7082ms (afa2e885)
+2020-05-21T16:49:06.4871854-05:00 0HLVT34GC9EA1:00000001 [INF] Request finished in 8288.0193ms 606 application/json (791a596a)
+2020-05-21T16:49:21.4646033-05:00 0HLVT34GC9EA1:00000002 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/Usuario/login application/json 54 (ca22a1cb)
+2020-05-21T16:49:21.4782097-05:00 0HLVT34GC9EA1:00000002 [INF] Policy execution successful. (0204925d)
+2020-05-21T16:49:21.4802659-05:00 0HLVT34GC9EA1:00000002 [INF] Route matched with "{action = \"Login\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult Login(Angular.Controllers.net.royal.spring.LoginUser)" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.4890983-05:00 0HLVT34GC9EA1:00000002 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.5072686-05:00 0HLVT34GC9EA1:00000002 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:49:21.5405000-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idUsuario_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[PERFIL], [p].[USUARIO], [p].[CREACION_FECHA], [p].[ESTADO], [p].[ULTIMAFECHAMODIF], [p].[ULTIMOUSUARIO], [p].[ULTIMA_CONEXION]
+FROM [SEGURIDADPERFILUSUARIO] AS [p]
+WHERE ([p].[USUARIO] = @__idUsuario_0) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T16:49:21.5591682-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("14"ms) [Parameters=["@p5='?' (Size = 20), @p6='?' (Size = 20), @p0='?' (DbType = DateTime2), @p1='?' (Size = 2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [SEGURIDADPERFILUSUARIO] SET [CREACION_FECHA] = @p0, [ESTADO] = @p1, [ULTIMAFECHAMODIF] = @p2, [ULTIMOUSUARIO] = @p3, [ULTIMA_CONEXION] = @p4
+WHERE [PERFIL] = @p5 AND [USUARIO] = @p6;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2020-05-21T16:49:21.5730889-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__idAplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[GRUPO], [p].[CONCEPTO], [p].[USUARIO], [p].[ESTADO], [p].[OPCIONAGREGARFLAG], [p].[OPCIONAPROBARFLAG], [p].[OPCIONBORRARFLAG], [p].[OPCIONMODIFICARFLAG]
+FROM [SEGURIDADAUTORIZACIONES] AS [p]
+WHERE ([p].[USUARIO] IN (N'GESTOR') AND ([p].[APLICACIONCODIGO] = @__idAplicacion_1)) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T16:49:21.5825046-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("4"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:49:21.5979373-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T16:49:21.6035249-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:49:21.6102278-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:49:21.6151842-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T16:49:21.6201125-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:49:21.6246864-05:00 0HLVT34GC9EA1:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:49:21.6266748-05:00 0HLVT34GC9EA1:00000002 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 133.7509ms. (50a9e262)
+2020-05-21T16:49:21.6283831-05:00 0HLVT34GC9EA1:00000002 [INF] Executing JsonResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (2f513669)
+2020-05-21T16:49:21.6301300-05:00 0HLVT34GC9EA1:00000002 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" in 147.9463ms (afa2e885)
+2020-05-21T16:49:21.6330052-05:00 0HLVT34GC9EA1:00000002 [INF] Request finished in 168.4271ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:49:21.6669476-05:00 0HLVT34GC9EA1:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/Empleadomast/obtenerInformacionPorIdPersonaUsuarioActual   (ca22a1cb)
+2020-05-21T16:49:21.6837242-05:00 0HLVT34GC9EA2:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/Usuario/obtenerMenu   (ca22a1cb)
+2020-05-21T16:49:21.6915965-05:00 0HLVT34GC9EA1:00000003 [INF] Route matched with "{action = \"obtenerInformacionPorIdPersonaUsuarioActual\", controller = \"Empleadomast\", page = \"\"}". Executing controller action with signature "net.royal.spring.core.dominio.dto.DtoEmpleadoBasico obtenerInformacionPorIdPersonaUsuarioActual()" on controller "net.royal.spring.core.EmpleadomastController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.7003471-05:00 0HLVT34GC9EA3:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T16:49:21.7005271-05:00 0HLVT34GC9EA2:00000001 [INF] Route matched with "{action = \"obtenerMenu\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult obtenerMenu()" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.7210262-05:00 0HLVT34GC9EA1:00000003 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:49:21.7212804-05:00 0HLVT34GC9EA3:00000001 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.7279143-05:00 0HLVT34GC9EA1:00000003 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:49:21.7281605-05:00 0HLVT34GC9EA2:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:49:21.7323076-05:00 0HLVT34GC9EA3:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:49:21.7460264-05:00 0HLVT34GC9EA3:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:49:21.7473074-05:00 0HLVT34GC9EA2:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:49:21.7531865-05:00 0HLVT34GC9EA1:00000003 [INF] Executing action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.7669311-05:00 0HLVT34GC9EA2:00000001 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.7687525-05:00 0HLVT34GC9EA3:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.8083766-05:00 0HLVT34GC9EA1:00000003 [INF] Executed action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.4783ms. (50a9e262)
+2020-05-21T16:49:21.8725494-05:00 0HLVT34GC9EA2:00000001 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 63.5741ms. (50a9e262)
+2020-05-21T16:49:21.8791233-05:00 0HLVT34GC9EA3:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:49:21.8875516-05:00 0HLVT34GC9EA1:00000003 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.core.dominio.dto.DtoEmpleadoBasico"'. (8a1b66c8)
+2020-05-21T16:49:21.8875790-05:00 0HLVT34GC9EA2:00000001 [INF] Executing JsonResult, writing value of type '"Angular.Controllers.net.royal.spring.Menu"'. (2f513669)
+2020-05-21T16:49:21.8928925-05:00 0HLVT34GC9EA2:00000001 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" in 169.1582ms (afa2e885)
+2020-05-21T16:49:21.8962878-05:00 0HLVT34GC9EA3:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 18.7435ms. (50a9e262)
+2020-05-21T16:49:21.8964092-05:00 0HLVT34GC9EA1:00000003 [INF] Executed action "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" in 195.0599ms (afa2e885)
+2020-05-21T16:49:21.9167415-05:00 0HLVT34GC9EA2:00000001 [INF] Request finished in 233.1275ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:49:21.9231054-05:00 0HLVT34GC9EA1:00000003 [INF] Request finished in 256.281ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:49:21.9271151-05:00 0HLVT34GC9EA3:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:49:21.9339525-05:00 0HLVT34GC9EA4:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T16:49:21.9362745-05:00 0HLVT34GC9EA5:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T16:49:21.9364959-05:00 0HLVT34GC9EA3:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 204.6886ms (afa2e885)
+2020-05-21T16:49:21.9432628-05:00 0HLVT34GC9EA4:00000001 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.9510660-05:00 0HLVT34GC9EA5:00000001 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:49:21.9565179-05:00 0HLVT34GC9EA3:00000001 [INF] Request finished in 256.178ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:49:21.9602596-05:00 0HLVT34GC9EA5:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:49:21.9645790-05:00 0HLVT34GC9EA4:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:49:21.9681471-05:00 0HLVT34GC9EA5:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:49:21.9731147-05:00 0HLVT34GC9EA4:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:49:21.9815601-05:00 0HLVT34GC9EA4:00000001 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.9842431-05:00 0HLVT34GC9EA5:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:49:21.9842458-05:00 0HLVT34GC9EA4:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:49:21.9909799-05:00 0HLVT34GC9EA5:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:49:21.9981246-05:00 0HLVT34GC9EA4:00000001 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 14.6756ms. (50a9e262)
+2020-05-21T16:49:22.0036968-05:00 0HLVT34GC9EA4:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:49:22.0063721-05:00 0HLVT34GC9EA4:00000001 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 42.0967ms (afa2e885)
+2020-05-21T16:49:22.0091071-05:00 0HLVT34GC9EA5:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 21.1243ms. (50a9e262)
+2020-05-21T16:49:22.0106166-05:00 0HLVT34GC9EA4:00000001 [INF] Request finished in 78.0486ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:49:22.0139475-05:00 0HLVT34GC9EA5:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:49:22.0177044-05:00 0HLVT34GC9EA5:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 60.2723ms (afa2e885)
+2020-05-21T16:49:22.0212390-05:00 0HLVT34GC9EA5:00000001 [INF] Request finished in 84.9616ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:58.5971771-05:00 0HLVT34GC9EA6:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:61813/api/Usuario/login application/json 47 (ca22a1cb)
+2020-05-21T16:56:58.5999917-05:00 0HLVT34GC9EA6:00000001 [INF] Policy execution successful. (0204925d)
+2020-05-21T16:56:58.6024803-05:00 0HLVT34GC9EA6:00000001 [INF] Route matched with "{action = \"Login\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult Login(Angular.Controllers.net.royal.spring.LoginUser)" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.6199110-05:00 0HLVT34GC9EA6:00000001 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:58.6260416-05:00 0HLVT34GC9EA6:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:56:58.6426785-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("7"ms) [Parameters=["@__parametro_0='?' (Size = -1), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T16:56:58.6552078-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE ([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)" (0723d8ff)
+2020-05-21T16:56:58.6656235-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("8"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T16:56:58.6708667-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[USUARIO], [e].[CLAVE], [e].[ESTADO], [e].[EXPIRARPASSWORDFLAG], [e].[FECHAEXPIRACION], [e].[NOMBRE], [e].[NUMEROLOGINSDISPONIBLE], [e].[NUMEROLOGINSUSADOS], [e].[SQLLOGIN], [e].[SQLPASSWORD], [e].[ULTIMAFECHAMODIF], [e].[ULTIMOUSUARIO], [e].[ULTIMOLOGIN], [e].[USUARIOPERFIL]
+FROM [USUARIO] AS [e]
+WHERE [e].[USUARIO] = @__get_Item_0" (0723d8ff)
+2020-05-21T16:56:58.6854765-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("7"ms) [Parameters=["@__parametro_0='?' (Size = 10), @__aplicacion_1='?' (Size = 2), @__compania_2='?' (Size = 10)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[PARAMETROCLAVE], [p].[COMPANIACODIGO], [p].[DESCRIPCIONPARAMETRO], [p].[ESTADO], [p].[EXPLICACION], [p].[FECHA], [p].[FINANCECOMUNFLAG], [p].[NUMERO], [p].[TEXTO], [p].[TIPODEDATOFLAG]
+FROM [PARAMETROSMAST] AS [p]
+WHERE (([p].[PARAMETROCLAVE] = @__parametro_0) AND ([p].[APLICACIONCODIGO] = @__aplicacion_1)) AND ([p].[COMPANIACODIGO] = @__compania_2)" (0723d8ff)
+2020-05-21T16:56:58.6892522-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__idUsuario_0='?' (Size = 20)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[PERFIL], [p].[USUARIO], [p].[CREACION_FECHA], [p].[ESTADO], [p].[ULTIMAFECHAMODIF], [p].[ULTIMOUSUARIO], [p].[ULTIMA_CONEXION]
+FROM [SEGURIDADPERFILUSUARIO] AS [p]
+WHERE ([p].[USUARIO] = @__idUsuario_0) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T16:56:58.7034584-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("10"ms) [Parameters=["@p5='?' (Size = 20), @p6='?' (Size = 20), @p0='?' (DbType = DateTime2), @p1='?' (Size = 2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+UPDATE [SEGURIDADPERFILUSUARIO] SET [CREACION_FECHA] = @p0, [ESTADO] = @p1, [ULTIMAFECHAMODIF] = @p2, [ULTIMOUSUARIO] = @p3, [ULTIMA_CONEXION] = @p4
+WHERE [PERFIL] = @p5 AND [USUARIO] = @p6;
+SELECT @@ROWCOUNT;" (0723d8ff)
+2020-05-21T16:56:58.7229872-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__idAplicacion_1='?' (Size = 2)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[APLICACIONCODIGO], [p].[GRUPO], [p].[CONCEPTO], [p].[USUARIO], [p].[ESTADO], [p].[OPCIONAGREGARFLAG], [p].[OPCIONAPROBARFLAG], [p].[OPCIONBORRARFLAG], [p].[OPCIONMODIFICARFLAG]
+FROM [SEGURIDADAUTORIZACIONES] AS [p]
+WHERE ([p].[USUARIO] IN (N'SUPERADMIN') AND ([p].[APLICACIONCODIGO] = @__idAplicacion_1)) AND ([p].[ESTADO] = N'A')" (0723d8ff)
+2020-05-21T16:56:58.7286002-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7345224-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T16:56:58.7403263-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7450086-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7496506-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7535090-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("1"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T16:56:58.7578831-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7656170-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("3"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7707232-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7753101-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[DESCRIPCION]
+FROM [SEGURIDADGRUPO] AS [e]
+WHERE ([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)" (0723d8ff)
+2020-05-21T16:56:58.7799935-05:00 0HLVT34GC9EA6:00000001 [INF] Executed DbCommand ("2"ms) [Parameters=["@__get_Item_0='?' (Size = 2), @__get_Item_1='?' (Size = 6), @__get_Item_2='?' (Size = 6)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [e].[APLICACIONCODIGO], [e].[GRUPO], [e].[CONCEPTO], [e].[DESCRIPCION], [e].[ESTADO], [e].[OBJETO], [e].[OBJETOWINDOW], [e].[ORDEN], [e].[TIPODEACCESO], [e].[TIPODEDETALLE], [e].[TIPODEOBJETO], [e].[VISIBLEFLAG], [e].[WEBACTION], [e].[WEBFLAG], [e].[WEBPAGE]
+FROM [SEGURIDADCONCEPTO] AS [e]
+WHERE (([e].[APLICACIONCODIGO] = @__get_Item_0) AND ([e].[GRUPO] = @__get_Item_1)) AND ([e].[CONCEPTO] = @__get_Item_2)" (0723d8ff)
+2020-05-21T16:56:58.7817732-05:00 0HLVT34GC9EA6:00000001 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 157.7771ms. (50a9e262)
+2020-05-21T16:56:58.7835160-05:00 0HLVT34GC9EA6:00000001 [INF] Executing JsonResult, writing value of type '"<>f__AnonymousType5`1[[System.String, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"'. (2f513669)
+2020-05-21T16:56:58.7852676-05:00 0HLVT34GC9EA6:00000001 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.Login (spring-erp-web)" in 180.337ms (afa2e885)
+2020-05-21T16:56:58.7876427-05:00 0HLVT34GC9EA6:00000001 [INF] Request finished in 190.509ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:58.8356767-05:00 0HLVT34GC9EA6:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/core/Empleadomast/obtenerInformacionPorIdPersonaUsuarioActual   (ca22a1cb)
+2020-05-21T16:56:58.8399843-05:00 0HLVT34GC9EA7:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/Usuario/obtenerMenu   (ca22a1cb)
+2020-05-21T16:56:58.8415519-05:00 0HLVT34GC9EA6:00000002 [INF] Route matched with "{action = \"obtenerInformacionPorIdPersonaUsuarioActual\", controller = \"Empleadomast\", page = \"\"}". Executing controller action with signature "net.royal.spring.core.dominio.dto.DtoEmpleadoBasico obtenerInformacionPorIdPersonaUsuarioActual()" on controller "net.royal.spring.core.EmpleadomastController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.8444926-05:00 0HLVT34GC9EA8:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T16:56:58.8560985-05:00 0HLVT34GC9EA7:00000001 [INF] Route matched with "{action = \"obtenerMenu\", controller = \"Usuario\", page = \"\"}". Executing controller action with signature "Microsoft.AspNetCore.Mvc.JsonResult obtenerMenu()" on controller "Angular.Controllers.net.royal.spring.UsuarioController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.8622164-05:00 0HLVT34GC9EA6:00000002 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:56:58.8658724-05:00 0HLVT34GC9EA8:00000001 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.8682601-05:00 0HLVT34GC9EA7:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:56:58.8705992-05:00 0HLVT34GC9EA8:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:56:58.8728702-05:00 0HLVT34GC9EA7:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:56:58.8755187-05:00 0HLVT34GC9EA8:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:56:58.8814740-05:00 0HLVT34GC9EA6:00000002 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:56:58.8889352-05:00 0HLVT34GC9EA8:00000001 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:58.8919496-05:00 0HLVT34GC9EA6:00000002 [INF] Executing action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:58.8945361-05:00 0HLVT34GC9EA8:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:56:58.8960959-05:00 0HLVT34GC9EA6:00000002 [INF] Executed action method "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1.2289ms. (50a9e262)
+2020-05-21T16:56:58.8990139-05:00 0HLVT34GC9EA6:00000002 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.core.dominio.dto.DtoEmpleadoBasico"'. (8a1b66c8)
+2020-05-21T16:56:58.9012829-05:00 0HLVT34GC9EA6:00000002 [INF] Executed action "net.royal.spring.core.EmpleadomastController.obtenerInformacionPorIdPersonaUsuarioActual (spring-erp-web)" in 39.5216ms (afa2e885)
+2020-05-21T16:56:58.9040082-05:00 0HLVT34GC9EA6:00000002 [INF] Request finished in 68.5561ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:58.9053432-05:00 0HLVT34GC9EA8:00000001 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 13.5138ms. (50a9e262)
+2020-05-21T16:56:58.9078886-05:00 0HLVT34GC9EA9:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T16:56:58.9099598-05:00 0HLVT34GC9EA8:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:56:58.9162820-05:00 0HLVT34GC9EA9:00000001 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.9187850-05:00 0HLVT34GC9EA8:00000001 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 49.7373ms (afa2e885)
+2020-05-21T16:56:58.9210927-05:00 0HLVT34GC9EA9:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:56:58.9233261-05:00 0HLVT34GC9EA8:00000001 [INF] Request finished in 78.9204ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:58.9256454-05:00 0HLVT34GC9EA9:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:56:58.9299037-05:00 0HLVT34GC9EAA:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T16:56:58.9335122-05:00 0HLVT34GC9EAA:00000001 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T16:56:58.9364412-05:00 0HLVT34GC9EAA:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T16:56:58.9431830-05:00 0HLVT34GC9EA7:00000001 [INF] Executing action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:58.9432460-05:00 0HLVT34GC9EAA:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T16:56:58.9507557-05:00 0HLVT34GC9EA7:00000001 [INF] Executed action method "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.JsonResult" in 1.2921ms. (50a9e262)
+2020-05-21T16:56:58.9536775-05:00 0HLVT34GC9EA7:00000001 [INF] Executing JsonResult, writing value of type '"Angular.Controllers.net.royal.spring.Menu"'. (2f513669)
+2020-05-21T16:56:58.9569136-05:00 0HLVT34GC9EA7:00000001 [INF] Executed action "Angular.Controllers.net.royal.spring.UsuarioController.obtenerMenu (spring-erp-web)" in 88.8392ms (afa2e885)
+2020-05-21T16:56:58.9601967-05:00 0HLVT34GC9EA9:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:58.9630969-05:00 0HLVT34GC9EA7:00000001 [INF] Request finished in 122.2361ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:58.9652612-05:00 0HLVT34GC9EA9:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:56:58.9702327-05:00 0HLVT34GC9EAB:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/images/logo.png   (ca22a1cb)
+2020-05-21T16:56:58.9751234-05:00 0HLVT34GC9EA9:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 11.4426ms. (50a9e262)
+2020-05-21T16:56:58.9910089-05:00 0HLVT34GC9EA9:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:56:58.9994657-05:00 0HLVT34GC9EA6:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:61813/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-05-21T16:56:59.0565516-05:00 0HLVT34GC9EA9:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 136.9765ms (afa2e885)
+2020-05-21T16:56:59.0594011-05:00 0HLVT34GC9EA9:00000001 [INF] Request finished in 151.5084ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:56:59.0656610-05:00 0HLVT34GC9EAA:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T16:56:59.0843850-05:00 0HLVT34GC9EAA:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T16:56:59.0960946-05:00 0HLVT34GC9EAA:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 14.5176ms. (50a9e262)
+2020-05-21T16:56:59.0989352-05:00 0HLVT34GC9EAA:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T16:56:59.1019857-05:00 0HLVT34GC9EAA:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 165.7941ms (afa2e885)
+2020-05-21T16:56:59.1050887-05:00 0HLVT34GC9EAA:00000001 [INF] Request finished in 175.183ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T16:57:00.1466650-05:00 0HLVT34GC9EAB:00000001 [INF] Request finished in 1176.4153ms 304  (791a596a)
+2020-05-21T16:57:00.1489921-05:00 0HLVT34GC9EA6:00000003 [INF] Request finished in 1149.4478ms 304  (791a596a)
+2020-05-21T17:37:24.9590108-05:00 0HLVT34GC9EAC:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpContratacion/listarpie   (ca22a1cb)
+2020-05-21T17:37:24.9655933-05:00 0HLVT34GC9EAD:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraTipos   (ca22a1cb)
+2020-05-21T17:37:24.9655933-05:00 0HLVT34GC9EAE:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:61813/api/spring/minedu/MpProyecto/ListarBarraEstados   (ca22a1cb)
+2020-05-21T17:37:24.9710431-05:00 0HLVT34GC9EAC:00000001 [INF] Route matched with "{action = \"ListarPie\", controller = \"MpContratacion\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarPie()" on controller "net.royal.spring.minedu.MpContratacionController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T17:37:24.9710818-05:00 0HLVT34GC9EAE:00000001 [INF] Route matched with "{action = \"ListarBarraEstados\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraEstados()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T17:37:24.9732367-05:00 0HLVT34GC9EAD:00000001 [INF] Route matched with "{action = \"ListarBarraTipos\", controller = \"MpProyecto\", page = \"\"}". Executing controller action with signature "System.Collections.Generic.List`1[net.royal.spring.framework.core.dominio.dto.DtoTabla] ListarBarraTipos()" on controller "net.royal.spring.minedu.MpProyectoController" ("spring-erp-web"). (122b2fdf)
+2020-05-21T17:37:24.9794467-05:00 0HLVT34GC9EAC:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T17:37:24.9796054-05:00 0HLVT34GC9EAE:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T17:37:25.0245749-05:00 0HLVT34GC9EAD:00000001 [INF] Successfully validated the token. (60169667)
+2020-05-21T17:37:25.0284433-05:00 0HLVT34GC9EAE:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T17:37:25.0304721-05:00 0HLVT34GC9EAC:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T17:37:25.0344111-05:00 0HLVT34GC9EAD:00000001 [INF] Authorization was successful. (0d575a54)
+2020-05-21T17:37:25.1147236-05:00 0HLVT34GC9EAC:00000001 [INF] Executing action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T17:37:25.1204536-05:00 0HLVT34GC9EAD:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T17:37:25.1244947-05:00 0HLVT34GC9EAC:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T17:37:25.1248512-05:00 0HLVT34GC9EAE:00000001 [INF] Executing action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-05-21T17:37:25.1346720-05:00 0HLVT34GC9EAD:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T17:37:25.1387765-05:00 0HLVT34GC9EAE:00000001 [INF] Entity Framework Core "2.1.11-servicing-32099" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-05-21T17:37:25.1510698-05:00 0HLVT34GC9EAC:00000001 [INF] Executed action method "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 31.8471ms. (50a9e262)
+2020-05-21T17:37:25.1557596-05:00 0HLVT34GC9EAC:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T17:37:25.1618471-05:00 0HLVT34GC9EAC:00000001 [INF] Executed action "net.royal.spring.minedu.MpContratacionController.ListarPie (spring-erp-web)" in 186.8993ms (afa2e885)
+2020-05-21T17:37:25.1666578-05:00 0HLVT34GC9EAD:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 39.9424ms. (50a9e262)
+2020-05-21T17:37:25.1741284-05:00 0HLVT34GC9EAC:00000001 [INF] Request finished in 214.4251ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T17:37:25.1787742-05:00 0HLVT34GC9EAD:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T17:37:25.1929509-05:00 0HLVT34GC9EAD:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraTipos (spring-erp-web)" in 212.6621ms (afa2e885)
+2020-05-21T17:37:25.2005830-05:00 0HLVT34GC9EAE:00000001 [INF] Executed action method "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 70.1952ms. (50a9e262)
+2020-05-21T17:37:25.2027223-05:00 0HLVT34GC9EAD:00000001 [INF] Request finished in 237.0568ms 200 application/json; charset=utf-8 (791a596a)
+2020-05-21T17:37:25.2075833-05:00 0HLVT34GC9EAE:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.framework.core.dominio.dto.DtoTabla, spring-framework-util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-05-21T17:37:25.2136690-05:00 0HLVT34GC9EAE:00000001 [INF] Executed action "net.royal.spring.minedu.MpProyectoController.ListarBarraEstados (spring-erp-web)" in 234.1296ms (afa2e885)
+2020-05-21T17:37:25.2201831-05:00 0HLVT34GC9EAE:00000001 [INF] Request finished in 254.6053ms 200 application/json; charset=utf-8 (791a596a)

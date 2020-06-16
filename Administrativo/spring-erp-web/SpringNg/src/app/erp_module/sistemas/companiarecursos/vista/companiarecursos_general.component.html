@@ -1,0 +1,24 @@
+<!-- <p-panel header="RECURSOS : Edición">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-1">
+            <button pButton label="Grabar" icon="fa fa-save" class="ui-button" type="button" (click)='guardar()'></button>
+        </div>
+
+        <div class="ui-g-12 ui-md-6 ui-lg-10"></div>
+
+        <div class="ui-g-12 ui-md-6 ui-lg-1">
+            <button pButton label="Salir" icon="fa fa-history" class="ui-button" type="button" (click)='salir()'></button>
+        </div>
+    </div>
+</p-panel> -->
+
+<!--  -->
+<p-tabView>
+    <p-tabPanel header="Informacion">
+        <app-companiarecursosmantenimiento></app-companiarecursosmantenimiento>
+    </p-tabPanel>
+
+    <p-tabPanel header="Detalle" >
+        <app-companiarecursosdetalle></app-companiarecursosdetalle>
+    </p-tabPanel>
+</p-tabView>

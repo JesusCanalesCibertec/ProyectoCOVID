@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.pscomponente
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="psnutricion.listarNutricionPaginacion">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ListarNutricion
+        :p_nombreCompleto,
+        :p_periodo,
+        :p_tipoEdad,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+        :p_idValoracion
+        
+       ]]>
+  </sql-query>
+
+  <sql-query name="psnutricion.obtenerCalculos">
+    <![CDATA[  
+        sgseguridadsys.SNp_NUTRICION_CALCULOS
+        :pIdPersona,
+        :pPeso,
+        :pTalla,
+        :pHemoglobina,
+        :pTipoProceso,
+        :pIdProceso        
+       ]]>
+  </sql-query>
+
+  <sql-query name="psnutricion.consultarNutricion">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ConsultarNutricion
+        :p_nombreCompleto,
+        :p_periodo,
+        NULL,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+		:p_orden,
+		:p_sentido
+        
+       ]]>
+  </sql-query>
+  
+  <sql-query name="psnutricion.listarNutricion">
+    select  TOP :p_cantidad
+    bene.ID_BENEFICIARIO,
+    entidad.NOMBRECOMPLETO,
+    nutricion.FECHA_INFORME,
+    nutricion.PESO,
+    nutricion.TALLA,
+    nutricion.PESO_EDAD,
+    nutricion.TALLA_EDAD,
+    nutricion.PESO_TALLA,
+    nutricion.IMC,
+    nutricion.ID_VALORACION,
+    nutricion.ID_TIPO_DIETA,
+    nutricion.TIPO_DIETA_POR_DIA,
+    nutricion.ID_SUPLEMENTO_NUTRICIONAL,
+    nutricion.SUPLEMENTO_NUTRICIONAL_POR_DIA,
+    nutricion.COMENTARIOS,
+    nutricion.ID_NUTRICION,
+    nutricion.ID_INSTITUCION,
+    nutricion.estado,
+    nutricion.ID_PERIODO
+    from sgseguridadsys.PS_BENEFICIARIO bene
+    JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO
+    JOIN sgseguridadsys.PS_NUTRICION nutricion ON nutricion.ID_BENEFICIARIO=bene.ID_BENEFICIARIO
+    AND nutricion.ID_INSTITUCION=bene.ID_INSTITUCION
+    WHERE nutricion.ID_PERIODO=:p_periodo
+    AND  (ISNULL(entidad.edad,0) BETWEEN COALESCE(:p_edad, ISNULL(entidad.edad,0)) AND COALESCE(:p_hasta,ISNULL(entidad.edad,0)))
+    AND ISNULL(bene.id_area,'XX')=ISNULL(:p_area,ISNULL(bene.id_area,'XX'))
+    AND ISNULL(entidad.ID_SEXO,'XX')=ISNULL(:p_sexo,ISNULL(entidad.ID_SEXO,'XX'))
+
+
+    UNION ALL
+
+    select  TOP :p_cantidad
+    bene.ID_BENEFICIARIO,
+    entidad.NOMBRECOMPLETO,
+    SYSDATETIME(),
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+    from sgseguridadsys.PS_BENEFICIARIO bene
+    JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO
+
+    WHERE
+    not  exists(
+    SELECT nutricion.ID_BENEFICIARIO FROM sgseguridadsys.PS_NUTRICION nutricion
+    WHERE nutricion.ID_BENEFICIARIO=bene.ID_BENEFICIARIO
+    AND nutricion.ID_INSTITUCION=bene.ID_INSTITUCION
+    AND nutricion.ID_PERIODO=:p_periodo
+    )
+    AND  (ISNULL(entidad.edad,0) BETWEEN COALESCE(:p_edad, ISNULL(entidad.edad,0)) AND COALESCE(:p_hasta,ISNULL(entidad.edad,0)))
+    AND ISNULL(bene.id_area,'XX')=ISNULL(:p_area,ISNULL(bene.id_area,'XX'))
+    AND ISNULL(entidad.ID_SEXO,'XX')=ISNULL(:p_sexo,ISNULL(entidad.ID_SEXO,'XX'))
+
+  </sql-query>
+
+  <sql-query name="psnutricion.contarNutricion">
+    SELECT COUNT(1) FROM (
+    select
+    bene.ID_BENEFICIARIO
+    from sgseguridadsys.PS_BENEFICIARIO bene
+    JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO
+    JOIN sgseguridadsys.PS_NUTRICION nutricion ON nutricion.ID_BENEFICIARIO=bene.ID_BENEFICIARIO
+    AND nutricion.ID_INSTITUCION=bene.ID_INSTITUCION
+    WHERE nutricion.ID_PERIODO=:p_periodo
+    UNION
+
+    select
+    bene.ID_BENEFICIARIO
+    from sgseguridadsys.PS_BENEFICIARIO bene
+    JOIN sgseguridadsys.PS_ENTIDAD entidad ON entidad.ID_ENTIDAD=bene.ID_BENEFICIARIO
+
+    WHERE
+    not  exists(
+    SELECT nutricion.ID_BENEFICIARIO FROM sgseguridadsys.PS_NUTRICION nutricion
+    WHERE nutricion.ID_BENEFICIARIO=bene.ID_BENEFICIARIO
+    AND nutricion.ID_INSTITUCION=bene.ID_INSTITUCION
+    AND nutricion.ID_PERIODO=:p_periodo)
+    ) as record
+  </sql-query>
+
+
+
+</hibernate-mapping>

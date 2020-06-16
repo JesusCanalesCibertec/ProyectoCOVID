@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<sql-query name="bptransaccion.listarTransaccionSeguimiento">
+    	SELECT 
+			ELE.ID_ROL AS "idRol", 
+			NULL "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T
+			INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+			INNER JOIN EmpleadoMast E ON T.ID_PERSONA_SOLICITANTE=E.Empleado AND E.Estado='A'
+			INNER JOIN PersonaMast P ON E.Empleado=P.Persona			
+			LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+			LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			INNER JOIN HR_PuestoEmpresa PUE ON PUE.CodigoPuesto=E.CodigoCargo
+			WHERE ELE.ID_NIVEL_SEGURIDAD IN ('SOLOSOLICITANTE','SOLICI_Y_RESPON','INCLUIRSOLICITA')
+			AND T.ID_TRANSACCION= :p_id_transaccion
+		UNION ALL
+		SELECT 
+			ELE.ID_ROL AS "idRol", 
+			NULL AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T
+			INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+			INNER JOIN EmpleadoMast E ON T.ID_PERSONA_APROBADOR=E.Empleado AND E.Estado='A'
+			INNER JOIN PersonaMast P ON E.Empleado=P.Persona			
+			LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+			LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			INNER JOIN HR_PuestoEmpresa PUE ON PUE.CodigoPuesto=E.CodigoCargo
+			WHERE ELE.ID_NIVEL_SEGURIDAD IN ('SOLOAPROBADOR','INCLUIRAPROBADO')
+			AND T.ID_TRANSACCION= :p_id_transaccion
+		UNION ALL
+		SELECT 
+			ELE.ID_ROL AS "idRol", 
+			NULL AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T
+			INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+			INNER JOIN EmpleadoMast E ON T.ID_PERSONA_RESPONSABLE=E.Empleado AND E.Estado='A'
+			INNER JOIN PersonaMast P ON E.Empleado=P.Persona			
+			LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+			LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			INNER JOIN HR_PuestoEmpresa PUE ON PUE.CodigoPuesto=E.CodigoCargo
+			WHERE ELE.ID_NIVEL_SEGURIDAD IN ('SOLORESPONSABLE','SOLICI_Y_RESPON','INCLUIRRESPONSA')
+			AND T.ID_TRANSACCION= :p_id_transaccion
+		UNION ALL
+		SELECT 
+			RU.ID_ROL AS "idRol", 
+			RU.ID_TIPO_SEGURIDAD AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T 
+					INNER JOIN EmpleadoMast EMP ON T.ID_PERSONA_SOLICITANTE=EMP.Empleado
+					INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+					INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO RU ON ELE.ID_PROCESO=RU.ID_PROCESO AND ELE.ID_ROL=RU.ID_ROL AND RU.ID_CENTRO_COSTOS=EMP.CentroCostos
+					INNER JOIN HR_PuestoEmpresa PUE ON RU.ID_PUESTO=PUE.CodigoPuesto
+					INNER JOIN EmpleadoMast E ON PUE.CodigoPuesto=E.CodigoCargo AND E.Estado='A'
+					INNER JOIN PersonaMast P ON E.Empleado=P.Persona			
+					LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+					LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			WHERE ID_TIPO_SEGURIDAD='CCSOLI_RHPUESTO'
+			AND T.ID_TRANSACCION= :p_id_transaccion
+			AND e.CompaniaSocio = :p_compania_socio
+		UNION ALL
+		SELECT RU.ID_ROL AS "idRol", 
+			RU.ID_TIPO_SEGURIDAD AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T 
+					INNER JOIN EmpleadoMast EMP ON T.ID_PERSONA_SOLICITANTE=EMP.Empleado
+					INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+					INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO RU ON ELE.ID_PROCESO=RU.ID_PROCESO AND ELE.ID_ROL=RU.ID_ROL AND RU.ID_SUCURSAL=EMP.Sucursal
+		
+					INNER JOIN HR_PuestoEmpresa PUE ON RU.ID_PUESTO=PUE.CodigoPuesto
+					INNER JOIN EmpleadoMast E ON PUE.CodigoPuesto=E.CodigoCargo AND E.Estado='A'
+					INNER JOIN PersonaMast P ON E.Empleado=P.Persona
+					LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+					LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			WHERE ID_TIPO_SEGURIDAD='SUCSOL_RHPUESTO'
+			AND T.ID_TRANSACCION= :p_id_transaccion
+			AND e.CompaniaSocio = :p_compania_socio
+		UNION ALL				
+		SELECT 
+			RU.ID_ROL AS "idRol", 
+			RU.ID_TIPO_SEGURIDAD AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T 
+				 INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+					INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO RU ON ELE.ID_PROCESO=RU.ID_PROCESO AND ELE.ID_ROL=RU.ID_ROL
+					INNER JOIN HR_PuestoEmpresa PUE ON RU.ID_PUESTO=PUE.CodigoPuesto
+					INNER JOIN EmpleadoMast E ON PUE.CodigoPuesto=E.CodigoCargo AND E.Estado='A'
+					INNER JOIN PersonaMast P ON E.Empleado=P.Persona
+					LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+					LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			WHERE ID_TIPO_SEGURIDAD='RRHHPUESTO'
+			AND ELE.ID_NIVEL_SEGURIDAD = 'TODOS'
+			AND T.ID_TRANSACCION = :p_id_transaccion
+		UNION ALL
+		SELECT	
+			RU.ID_ROL AS "idRol", 
+			RU.ID_TIPO_SEGURIDAD AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T 
+				 INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+				 
+				 INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO RU ON ELE.ID_PROCESO=RU.ID_PROCESO AND ELE.ID_ROL=RU.ID_ROL
+				INNER JOIN Usuario U ON RU.ID_USUARIO = U.Usuario
+				INNER JOIN EmpleadoMast E ON RU.ID_USUARIO = E.CodigoUsuario AND E.Estado='A'
+				INNER JOIN PersonaMast P ON E.Empleado=P.Persona
+		
+				INNER JOIN HR_PuestoEmpresa PUE ON PUE.CodigoPuesto=E.CodigoCargo
+				LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+				LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			WHERE RU.ID_TIPO_SEGURIDAD='USUARIO'
+			AND ELE.ID_NIVEL_SEGURIDAD = 'TODOS'
+			AND T.ID_TRANSACCION = :p_id_transaccion
+		UNION ALL
+		SELECT	
+			RU.ID_ROL AS "idRol", 
+			RU.ID_TIPO_SEGURIDAD AS "idTipoSeguridad", 
+			E.Empleado AS "IdPersona", 
+			cast(P.NombreCompleto as varchar) AS "nombrePersona",
+			E.CodigoUsuario AS "usuarioCodigo", 
+			PUE.Descripcion AS "puesto", 
+			E.Sucursal AS "sucursal",
+			suc.DescripcionLocal AS "nombreSucursal", 
+			E.CentroCostos AS "centroCosto", 
+			cc.LocalName AS "nombreCentroCosto"
+			,e.CorreoInterno as "correoInterno", e.CorreoExterno as "correoExterno", p.CorreoElectronico as "correoElectronico"
+			FROM sgseguridadsys.BP_TRANSACCION T 
+				 INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+		
+						INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO RU ON ELE.ID_PROCESO=RU.ID_PROCESO AND ELE.ID_ROL=RU.ID_ROL
+						INNER JOIN PersonaMast P ON ru.ID_PERSONA=p.Persona
+						LEFT JOIN EmpleadoMast E ON P.Persona=E.Empleado AND E.Estado='A'
+				INNER JOIN HR_PuestoEmpresa PUE ON PUE.CodigoPuesto=E.CodigoCargo
+				LEFT JOIN AC_Sucursal suc ON E.Sucursal=suc.Sucursal
+				LEFT JOIN AC_CostCenterMst cc ON e.CentroCostos=cc.CostCenter
+			WHERE ID_TIPO_SEGURIDAD='PERSONA'
+			AND ELE.ID_NIVEL_SEGURIDAD = 'TODOS'
+			AND T.ID_TRANSACCION = :p_id_transaccion
+    </sql-query>
+	<sql-query name="bptransaccion.obtenerContenidoCorreo">
+		select sgseguridadsys.FN_OBTENER_CONTENIDO_CORREO(:p_tipo, :p_id_transaccion) as "descripcion"
+	</sql-query>
+	<sql-query name="bptransaccion.listarTransaccionesPorUsuario">
+    	<![CDATA[
+    		SELECT 
+	    		TRA.ID_TRANSACCION AS "idTransaccion", 
+	    		TRA.DESCRIPCION AS "descripcion",
+	    		PRO.COMPONENTE AS "componente", 
+	    		PRO.NOMBRE_CORTO AS "nombreCorto",
+	    		TRA.ID_PROCESO AS "idProceso"
+			FROM sgseguridadsys.BP_TRANSACCION TRA
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO PRO
+				ON TRA.ID_PROCESO = PRO.ID_PROCESO
+			WHERE 1=1
+			AND TRA.ID_TRANSACCION IN
+			(
+				SELECT T.ID_TRANSACCION FROM sgseguridadsys.BP_TRANSACCION T
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO PE
+					ON T.ACTUAL_ID_PROCESO=PE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=PE.ID_ELEMENTO 
+				LEFT JOIN sgseguridadsys.BP_MAE_PROCESO_ROL PR
+					ON PE.ID_PROCESO=PR.ID_PROCESO AND PE.ID_ROL=PR.ID_ROL
+				WHERE PE.ID_TIPO_ELEMENTO<>'FIN' AND ISNULL(T.FLG_OCULTAR_BANDEJA_PENDIENTE,'N') = 'N'
+				AND	(	(T.ACTUAL_ID_TIPO_SEGURIDAD='TODOS' AND PE.ID_NIVEL_SEGURIDAD='TODOS') OR
+								(PE.ID_NIVEL_SEGURIDAD='SOLOSOLICITANTE' AND T.ID_PERSONA_SOLICITANTE = :p_session_id_persona ) OR								
+								(PE.ID_NIVEL_SEGURIDAD='SOLOAPROBADOR'   AND T.ID_PERSONA_APROBADOR = :p_session_id_persona ) OR	
+								(PE.ID_NIVEL_SEGURIDAD='SOLORESPONSABLE' AND T.ID_PERSONA_RESPONSABLE = :p_session_id_persona ) OR							
+								(PE.ID_NIVEL_SEGURIDAD='SOLICI_Y_RESPON' AND T.ID_PERSONA_SOLICITANTE = :p_session_id_persona ) OR
+								(PE.ID_NIVEL_SEGURIDAD='SOLICI_Y_RESPON' AND T.ID_PERSONA_RESPONSABLE = :p_session_id_persona ) OR
+																
+								(PE.ID_NIVEL_SEGURIDAD='INCLUIRSOLICITA' AND T.ID_PERSONA_SOLICITANTE = :p_session_id_persona ) OR
+								(PE.ID_NIVEL_SEGURIDAD='INCLUIRAPROBADO' AND T.ID_PERSONA_APROBADOR = :p_session_id_persona ) OR
+								(PE.ID_NIVEL_SEGURIDAD='INCLUIRRESPONSA' AND T.ID_PERSONA_RESPONSABLE = :p_session_id_persona )
+							)
+				UNION				
+				SELECT T2.ID_TRANSACCION FROM sgseguridadsys.BP_TRANSACCION T2
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO PE2
+					ON T2.ACTUAL_ID_PROCESO=PE2.ID_PROCESO AND T2.ACTUAL_ID_ELEMENTO=PE2.ID_ELEMENTO
+				LEFT  JOIN sgseguridadsys.BP_MAE_PROCESO_ROL PR2 
+				 	ON PE2.ID_PROCESO=PR2.ID_PROCESO AND PE2.ID_ROL=PR2.ID_ROL
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO PRU2				
+					ON PR2.ID_PROCESO=PRU2.ID_PROCESO AND PR2.ID_ROL=PRU2.ID_ROL AND PR2.ID_TIPO_SEGURIDAD=PRU2.ID_TIPO_SEGURIDAD
+				LEFT JOIN Empleadomast esol
+					ON T2.ID_PERSONA_SOLICITANTE = esol.empleado
+				WHERE PE2.ID_TIPO_ELEMENTO<>'FIN' AND ISNULL(T2.FLG_OCULTAR_BANDEJA_PENDIENTE,'N') = 'N'
+				AND	(	(PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PR2.ID_TIPO_SEGURIDAD='USUARIO' 		AND PRU2.ID_USUARIO = :p_session_id_usuario) OR
+						(PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PR2.ID_TIPO_SEGURIDAD='RRHHPUESTO' 		AND PRU2.ID_PUESTO = :p_session_id_puesto) OR						
+						(PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PR2.ID_TIPO_SEGURIDAD='CCSOLI_RHPUESTO' AND PRU2.ID_CENTRO_COSTOS = esol.CentroCostos 
+																		AND PRU2.ID_PUESTO = :p_session_id_puesto ) OR
+						(PE2.ID_NIVEL_SEGURIDAD='TODOS' AND PR2.ID_TIPO_SEGURIDAD='SUCSOL_RHPUESTO' AND PRU2.ID_SUCURSAL = esol.Sucursal 
+																		AND PRU2.ID_PUESTO = :p_session_id_puesto )
+																		
+				)				
+			)
+			
+			AND TRA.ID_PROCESO = ISNULL(:idProceso, TRA.ID_PROCESO)
+			
+    	]]>
+    </sql-query>
+</hibernate-mapping>

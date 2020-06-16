@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulantecursos.listarPorPostulante">
+		SELECT
+		H.POSTULANTE as "pkPostulante",
+		H.SECUENCIA as "pkSecuencia",
+		H.CURSO as "Curso",
+		H.TIPOCURSO as "Tipocurso",
+		H.CENTROESTUDIOS as "Centroestudios",
+		H.FECHAINICIO as "Fechainicio",
+		H.FECHAFIN as "Fechafin",
+		H.AUSPICIO as "Auspicio",
+		H.DIAS as "Dias",
+		H.OBSERVACIONES as "Observaciones",
+		H.TOTALHORAS as "Totalhoras",
+		H.CURSODESCRIPCION as "Cursodescripcion",
+		H.VIGENCIA as "Vigencia",
+		CE.DESCRIPCION as "auxCentroestudios",
+		CU.DESCRIPCION as "auxCurso",
+		CAST(CU.AREA  as varchar(200))as "auxArea",
+		CAST(D.DESCRIPCIONLOCAL as varchar(200)) as "auxTipocurso"
+		FROM HR_POSTULANTECURSOS H
+		LEFT JOIN HR_CENTROESTUDIOS CE
+		ON H.CENTROESTUDIOS = CE.CENTRO
+		LEFT JOIN HR_CURSODESCRIPCION CU
+		ON H.CURSO = CU.CURSO
+		LEFT JOIN MA_MISCELANEOSDETALLE D
+		ON D.APLICACIONCODIGO='HR'
+		AND D.CODIGOTABLA='TIPOCURSO'
+		AND D.CODIGOELEMENTO = H.TIPOCURSO
+		WHERE H.POSTULANTE = :p_postulante
+
+	</sql-query>
+</hibernate-mapping>

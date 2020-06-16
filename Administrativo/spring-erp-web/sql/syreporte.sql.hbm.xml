@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder :  -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="syreporte.solicitudListarContar">
+    	<![CDATA[
+       select
+		COUNT(1)
+		from SY_REPORTE rep
+		JOIN AplicacionesMast apl ON apl.AplicacionCodigo=rep.APLICACIONCODIGO
+		WHERE rep.ESTADO = ISNULL(:p_id_estado, rep.ESTADO) AND rep.APLICACIONCODIGO = ISNULL(:p_aplicacion, rep.APLICACIONCODIGO)
+		AND rep.ReporteCodigo = ISNULL(:p_codigo, ReporteCodigo)
+		AND REP.aplicacioncodigo in ('PS','HR', 'SN')
+		]]>
+	</sql-query>
+
+	<sql-query name="syreporte.solicitudListarPaginacion">
+    	<![CDATA[
+         select
+		rep.APLICACIONCODIGO AS "aplicacionCodigo",
+		rep.ReporteCodigo AS reporteCodigo,
+		rep.DescripcionLocal AS "nombre",
+		rep.Tiporeporte AS "tipoReporte",
+		CAST(rep.ESTADO as varchar) AS "estado",
+		apl.DescripcionLarga as "aplicacionDescripcion", ROW_NUMBER() OVER (ORDER BY rep.APLICACIONCODIGO) AS Seq	
+		from SY_REPORTE rep
+		JOIN AplicacionesMast apl ON apl.AplicacionCodigo=rep.APLICACIONCODIGO
+		WHERE rep.ESTADO = ISNULL(:p_id_estado, rep.ESTADO) AND rep.APLICACIONCODIGO = ISNULL(:p_aplicacion, rep.APLICACIONCODIGO)
+		AND rep.ReporteCodigo = ISNULL(:p_codigo, ReporteCodigo)
+		AND REP.aplicacioncodigo in ('PS','HR', 'SN')
+		]]>
+	</sql-query>
+
+	
+	
+</hibernate-mapping>

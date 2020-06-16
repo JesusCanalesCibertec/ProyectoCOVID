@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaeproceso
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="bpmaeproceso.filtroContar">
+
+select 
+count(1)
+from sgseguridadsys.BP_MAE_PROCESO a left join sgseguridadsys.BP_PROCESO b on a.ID_PROCESO = b.ID_PROCESO
+where  
+a.ID_PROCESO like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+
+
+</sql-query>
+
+
+
+
+<sql-query name="bpmaeproceso.filtroPaginacion">
+
+select 
+a.ID_PROCESO,
+a.NOMBRE,
+b.ID_VERSION,
+ROW_NUMBER() OVER (ORDER BY a.NOMBRE ) AS Seq
+from sgseguridadsys.BP_MAE_PROCESO a left join sgseguridadsys.BP_PROCESO b on a.ID_PROCESO = b.ID_PROCESO
+where 
+a.ID_PROCESO like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+
+
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

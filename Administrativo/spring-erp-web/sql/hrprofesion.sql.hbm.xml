@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrProfesion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrprofesion.listarPorArea">
+      SELECT
+      HR_Profesion.Area,
+      HR_Profesion.Descripcion,
+      HR_Profesion.Profesion
+      FROM
+      HR_Profesion
+      WHERE
+      HR_Profesion.Area = :p_area
+      ORDER BY
+      HR_Profesion.Descripcion ASC
+    </sql-query>
+	<sql-query name="hrprofesion.listarPorInstitucion">
+               	  SELECT Rtrim(P.profesion)   AS "Profesion", 
+			             Rtrim(P.descripcion) AS "Descripcion"
+			      FROM   hr_profesion P 
+			             JOIN hr_centroestudiosprofesion C 
+			               ON P.profesion = C.profesion 
+			      WHERE  c.centro = :centro and p.estado = 'A'
+			      ORDER  BY descripcion 
+    </sql-query>
+</hibernate-mapping>

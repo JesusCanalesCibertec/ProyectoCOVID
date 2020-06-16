@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RES06" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="cad012cc-658e-4bfe-98b9-426371684f20">
+	<property name="ireport.zoom" value="1.3310000000000128"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA_INICIO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA_FIN" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[[sgseguridadsys].[SNp_PS_ListarReporteActPreventivasBenActividad] '2018-01-01','2019-02-01']]>
+	</queryString>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="ACTIVIDAD" class="java.lang.Integer"/>
+	<field name="ASISTENCIA" class="java.lang.Integer"/>
+	<field name="ACT_PORC" class="java.math.BigDecimal"/>
+	<field name="ASIS_PORC" class="java.math.BigDecimal"/>
+	<title>
+		<band height="120">
+			<rectangle>
+				<reportElement positionType="Float" x="440" y="105" width="50" height="15" backcolor="#CCCCCC" uuid="1a043197-0b83-481b-84d2-43350135d872"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="180" y="90" width="160" height="30" backcolor="#CCCCCC" uuid="206abc0f-6f90-4e91-9b78-18448196340c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="90" width="164" height="30" backcolor="#CCCCCC" uuid="3d4b2abe-e778-4c0e-b4f5-0b4b251ac73a"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="90" width="164" height="30" uuid="2c878ac9-67c2-4a02-91be-5cc143070aba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="180" y="90" width="160" height="30" uuid="50d8a60a-79e4-489e-9eb5-596422f651b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="18" width="555" height="25" uuid="b3036ded-7f8e-48d4-b976-2b95b3f2edc9"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="15" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RES06 - Actividades preventivas de salud integral]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="340" y="105" width="50" height="15" backcolor="#CCCCCC" uuid="4c3f7734-d5b0-4956-a40c-45524ea25f71"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="390" y="105" width="50" height="15" backcolor="#CCCCCC" uuid="8db47afe-04d0-4cb8-b93b-3cb098111830"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="340" y="105" width="50" height="15" uuid="b12687b7-cebf-421a-800a-b096e183cf7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="390" y="105" width="50" height="15" uuid="190a9306-c590-45d9-b195-8830c627fab6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="176" y="58" width="56" height="15" uuid="85b9bcc3-7832-4efc-a3de-26381030bd4b"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="84" y="58" width="92" height="15" uuid="09bed738-f074-45bf-b251-5e2bbc427d93"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_INICIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="16" y="58" width="68" height="15" uuid="e8614c2f-10f9-4424-9bfc-08997eb0d74b"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="232" y="58" width="104" height="15" uuid="52dc1f8d-6b8f-49e9-a3bf-9216c06f7962"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FECHA_FIN}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="340" y="90" width="100" height="15" backcolor="#CCCCCC" uuid="92481276-1b77-4c98-90af-6d3f21131143"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="340" y="90" width="100" height="15" uuid="d4fd4296-389b-44e1-b881-4136a228da11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Actividades]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="440" y="90" width="100" height="15" backcolor="#CCCCCC" uuid="05c8e1d8-9015-4282-bd39-c34253f0074d"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="440" y="105" width="50" height="15" uuid="33bd20ab-3d1f-4430-8d6d-4d327e0ce821"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="440" y="90" width="100" height="15" uuid="c70edb26-48a8-4566-a305-06d230f7a6af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Asistencia]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="490" y="105" width="50" height="15" backcolor="#CCCCCC" uuid="a48db0b3-454e-4aa3-aa0b-9e150f77c73c"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="490" y="105" width="50" height="15" uuid="af52f627-56e2-458b-8b06-6c114bfc0c7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15">
+			<rectangle>
+				<reportElement positionType="Float" x="340" y="0" width="50" height="15" uuid="1c852df7-f8c4-451e-ada1-749530acba8c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="390" y="0" width="50" height="15" uuid="dadceff9-5432-4253-9165-c56ce67c0c96"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="390" y="0" width="50" height="15" uuid="a7f6d247-d38c-4a91-8a3d-88440b20a89d"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACT_PORC}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="340" y="0" width="50" height="15" uuid="3500a4e8-1596-4345-8d61-1f121c84cfaf"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACTIVIDAD}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="16" y="0" width="164" height="15" uuid="faa51e3d-54a7-42c1-b39d-7894b5b36076"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="180" y="0" width="160" height="15" uuid="4a0c9566-b51c-4b6e-aea8-128581a5b8b4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="440" y="0" width="50" height="15" uuid="c51c0cf5-3006-4115-b77d-ba63182b666f"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="180" y="0" width="160" height="15" uuid="c399f96a-4b9b-4083-90db-517e8f0df055"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="440" y="0" width="50" height="15" uuid="42325d74-a062-4cbc-ab3c-195ccf5549ca"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ASISTENCIA}
+]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="16" y="0" width="164" height="15" uuid="650047fc-9cc2-4729-a326-73544bb36f80"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="490" y="0" width="50" height="15" uuid="b2911a6d-290f-4325-b103-98f3cb6fe4ba"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="490" y="0" width="50" height="15" uuid="0863d62c-d06a-4606-a3cf-4a8888dbe4d3"/>
+				<box leftPadding="4" rightPadding="4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ASIS_PORC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band/>
+	</noData>
+</jasperReport>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrEmpleadofolios
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrempleadofolios.xxxxxx">
+         select sysdate from dual
+    </sql-query>
+    
+    <sql-query name="hrempleadofolios.obtenernombredocumento">
+         select DescripcionLocal from MA_MiscelaneosDetalle 
+		where CodigoTabla = 'DOCUMENTOS' and compania = '999999'
+		and codigoelemento = :documento
+    </sql-query>
+    
+     <sql-query name="hrempleadofolios.eliminarporempleado">
+		delete from hr_empleadofolios where empleado = :empleado and companyowner = :compania
+	</sql-query>
+</hibernate-mapping>

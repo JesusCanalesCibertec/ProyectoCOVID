@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : asistencia.AsAutorizacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+
+  <sql-query name="asautorizacion.obtenerNombreHorario">
+    <![CDATA[
+          select			HoraInicio.Hora,HoraFin.Hora
+
+		from			As_TipoDiaAsistencia
+						join	(
+								select		min(horainicio) As Hora,			Tipodia AS TipoDia
+								from		as_tipodiamovimiento
+											join	(
+													select  min(secuencia) Secuencia
+													from	as_tipodiamovimiento
+													where	tipodia = :p_tipoDias	and 
+															IntervaloAcceso = 'TRAB'		
+													)	Secuencia
+											on		Secuencia.Secuencia = as_tipodiamovimiento.Secuencia
+								where		Tipodia = :p_tipoDias
+											and IntervaloAcceso = 'TRAB'
+								group by	Tipodia 
+								)			HoraInicio
+								on			HoraInicio.TipoDia = As_TipoDiaAsistencia.TipoDia
+						join
+								(
+								select		max(HoraFin) As Hora,					Tipodia AS TipoDia	
+								from		as_tipodiamovimiento
+											join	(
+													select  max(secuencia) Secuencia
+													from	as_tipodiamovimiento
+													where	tipodia = :p_tipoDias	and 
+															IntervaloAcceso = 'TRAB'		
+													)	Secuencia
+											on		Secuencia.Secuencia = as_tipodiamovimiento.Secuencia
+								where		tipodia = :p_tipoDias
+											and IntervaloAcceso = 'TRAB'
+								group by	Tipodia 
+								)			HoraFin	
+								on			HoraFin.TipoDia = As_TipoDiaAsistencia.TipoDia
+		where	As_TipoDiaAsistencia.TipoDia = :p_tipoDias;
+        ]]>
+  </sql-query>
+
+
+<sql-query name="asautorizacion.obtenerCantidadSolicitudesParaAprobar">
+    <![CDATA[
+         select count(1) from ##tmp_solicitudes where  aprobar='S'
+        ]]>
+  </sql-query>
+
+  <sql-query name="asautorizacion.obtenerProgramacion">
+    <![CDATA[
+           SELECT max(isnull(AS_EmpleadoExcepcionDetalle.TipoDia,0))
+           FROM AS_EmpleadoExcepcion, AS_EmpleadoExcepcionDetalle
+          WHERE	AS_EmpleadoExcepcion.Empleado = :p_empleado
+          and AS_EmpleadoExcepcion.fecha <= :p_date 
+          and AS_EmpleadoExcepcion.fechahasta >= :p_date 
+          and AS_EmpleadoExcepcion.FECHA = AS_EmpleadoExcepcionDetalle.FECHA
+          and AS_EmpleadoExcepcion.EMPLEADO = AS_EmpleadoExcepcionDetalle.EMPLEADO;
+        ]]>
+  </sql-query>
+
+
+  <sql-query name="asautorizacion.listarSolicitudesContar">
+    <![CDATA[
+         select count(1) from ##tmp_solicitudes 
+         where aprobar=ISNULL(:p_aprobar1,aprobar) OR aprobar=ISNULL(:p_aprobar2,aprobar)
+        ]]>
+  </sql-query>
+  <sql-query name="asautorizacion.listarSolicitudesPaginacion">
+    <![CDATA[
+         	select
+				[secuencia] as "secuencia", 
+				[aplicacionCodigo] as "aplicacionCodigo",
+				[aplicacionNombre] as "aplicacionNombre",
+				[procesoCodigo] as "procesoCodigo",
+				[procesoNombre] as "procesoNombre",
+				[procesoNro] as "procesoNro",
+				[nivelActual] as "nivelActual",
+				[nivelAprobar] as "nivelAprobar",
+				[documentoReferencia] as "documentoReferencia",
+				[fechaSolicitud] as "documentoFecha",
+				[companiaCodigo] as "companiaCodigo",
+				[companiaNombre] as "companiaNombre",
+				[unidadReplicacionCodigo] as "unidadReplicacionCodigo",
+				[unidadReplicacionNombre] as "unidadReplicacionNombre",
+				[solicitanteId] as "solicitanteId",
+				[solicitanteNombre] as "solicitanteNombre",
+				[estadoCodigo] as "estadoCodigo",
+				[estadoNombre] as "estadoNombre",
+				[observaciones] as "observaciones",
+				[fechaSolicitud] as "fechaSolicitud",
+				[uuid] as "uuid",
+				[procesoAprobar] as "procesoAprobar",
+				[procesoInternoAprobar] as "procesoInternoAprobar",
+				[llave] as "llave",
+				[capacitaciones] as "capacitaciones",
+        [idTransaccion] as "idTransaccion",
+        
+         [inicio]  as "inicio",
+				 [fin] as "fin",
+				 [concepto]  as "concepto",
+				 [desde] as "desde" ,
+				 [hasta] as "hasta" ,
+				 [autorizadopor] as "autorizado",
+				 aprobar  as "aprobar",
+        ROW_NUMBER() OVER (ORDER BY fechaSolicitud desc) AS Seq		
+         	from ##tmp_solicitudes 
+          where aprobar=ISNULL(:p_aprobar1,aprobar) OR aprobar=ISNULL(:p_aprobar2,aprobar)
+     
+        ]]>
+  </sql-query>
+  <sql-query name="asautorizacion.prepararSolicitudes">
+    <![CDATA[
+
+      exec SNp_RRHH_LISTADO_APROBACIONES_PERMISOS
+			      :p_tipo,
+			      :p_compania_socio,
+			      :p_aplicacion,
+			      :p_proceso, 
+			      :p_proceso_interno, 
+			      :p_numero_proceso,
+			      :p_documento, 
+			      :p_fecha, 
+			      :p_fecha_desde, 
+			      :p_fecha_hasta, 
+			      :p_unidad_replicacion, 
+			      :p_id_persona_solicitante, 
+			      :p_nivel, 
+			      :p_id_persona_actual, 
+			      :p_plan, 
+			      :p_estado,
+			      :p_uuid,
+            :p_concepto,
+            :solicitud;
+      ]]>
+  </sql-query>
+    
+    <sql-query name="asautorizacion.listarPermisos">
+    	<![CDATA[
+	    	SELECT 
+				distinct Convert(Varchar(10),a.fechasolicitud,103) as "fechaSolicitud",
+				Convert(Varchar(90), A.TipoAutorizacion) AS "tipoautorizacion",
+				A.Empleado AS "codigo" ,
+				Convert(Varchar(10),A.Fecha,103) AS "inicio",
+				Convert(Varchar(10),A.FechaFin,103) AS "fin",
+				C.DescripcionLocal AS "concepto",
+				Convert(Varchar(5),A.Desde,108) AS "desde",
+				Convert(Varchar(5),A.Hasta,108) AS "hasta",
+				case when a.estado = 'A' then (select Nombre from Usuario where usuario = A.AutorizadoPor) else '' end AS "autorizadopor",
+				cast(P.NombreCompleto as varchar) AS "nombre",
+				P.PersonaAnt AS "personaant",
+				P.DocumentoIdentidad AS "docidentidad",
+				(CASE 
+					WHEN Convert(Varchar(10),A.Fecha,103) = Convert(Varchar(10),A.FechaFin,103) THEN 1
+					ELSE convert(int, (datediff(DAY,A.Fecha,A.FechaFin))) + 1
+				END) AS "dias",
+				0 AS "autogenerado",
+				A.ConceptoAcceso AS "conceptoacceso",
+				(CASE 
+					WHEN a.Estado='S' THEN 'Solicitado'
+					WHEN a.Estado='A' THEN 'Aprobado'
+					WHEN a.Estado='R' THEN 'Rechazado'
+					WHEN a.Estado='N' THEN 'Anulado'
+          WHEN a.Estado='P' THEN 'Pre Preparación'
+					WHEN a.Estado=NULL THEN ''
+				END) AS "estado",
+				MotivoRechazo AS "motivorechazo",
+				A.NumeroProceso AS "numeroproceso", A.Fecha, a.desde,  CAST(C.EXPRESADOEN as varchar) expresadoen,A.fechasolicitud
+      
+			FROM 
+				AS_Autorizacion A (nolock), 
+				AS_ConceptoAcceso C (nolock), 
+				EmpleadoMast E (nolock), 
+				PersonaMast P (nolock)
+						WHERE 
+				(A.Empleado = E.Empleado)
+				AND (E.Empleado = P.Persona)
+				AND (CAST(A.Fecha AS DATE) >= isnull(:fechadesde, '1980-01-01')) 
+				AND (CAST(A.Fecha AS DATE) <= isnull(:fechahasta, '2980-12-31'))
+				--AND (E.Empleado = isnull(:empleado, e.Empleado))
+				AND (C.ConceptoAcceso = A.ConceptoAcceso)
+				AND (E.CompaniaSocio = isnull(:compania, e.companiasocio))
+				-- AND ((ISNULL(E.unidadoperativa, 'S') in (select UNIDADOPERATIVA from HR_UNIDADOPERATIVA where RESPONSABLE = :empleado and estado = 'A' and UNIDADOPERATIVA = isnull(:unidad, unidadoperativa))) or e.Empleado = :empleado)
+        and e.unidadoperativa in (select * from [FNp_HR_TRAER_UNIDADES_SUBORDINADAS] (isnull(:unidad, (select top 1 unidadoperativa from empleadomast where empleado = :empleado))) )
+				AND (C.ConceptoAcceso = ISNULL(:conceptoacceso, C.ConceptoAcceso))
+				AND (ISNULL(A.estado, '0') = ISNULL(:estado, ISNULL(A.estado, '0')))
+				and cast(a.fechasolicitud as date) = isnull(cast(:fecharegistro as date),cast(a.fechasolicitud as date))				
+				order by A.fechasolicitud desc
+    	]]>
+    </sql-query>
+<sql-query name="asautorizacion.listarPermisosSinSerJefe">
+    	<![CDATA[
+	    	SELECT 
+				distinct Convert(Varchar(10),a.fechasolicitud,103) as "fechaSolicitud",
+				Convert(Varchar(90), A.TipoAutorizacion) AS "tipoautorizacion",
+				A.Empleado AS "codigo" ,
+				Convert(Varchar(10),A.Fecha,103) AS "inicio",
+				Convert(Varchar(10),A.FechaFin,103) AS "fin",
+				C.DescripcionLocal AS "concepto",
+				Convert(Varchar(5),A.Desde,108) AS "desde",
+				Convert(Varchar(5),A.Hasta,108) AS "hasta",
+				case when a.estado = 'A' then (select Nombre from Usuario where usuario = A.AutorizadoPor) else '' end AS "autorizadopor",
+				cast(P.NombreCompleto as varchar) AS "nombre",
+				P.PersonaAnt AS "personaant",
+				P.DocumentoIdentidad AS "docidentidad",
+				(CASE 
+					WHEN Convert(Varchar(10),A.Fecha,103) = Convert(Varchar(10),A.FechaFin,103) THEN 1
+					ELSE convert(int, (datediff(DAY,A.Fecha,A.FechaFin))) + 1
+				END) AS "dias",
+				0 AS "autogenerado",
+				A.ConceptoAcceso AS "conceptoacceso",
+				(CASE 
+					WHEN a.Estado='S' THEN 'Solicitado'
+					WHEN a.Estado='A' THEN 'Aprobado'
+					WHEN a.Estado='R' THEN 'Rechazado'
+					WHEN a.Estado='N' THEN 'Anulado'
+					WHEN a.Estado=NULL THEN ''
+				END) AS "estado",
+				MotivoRechazo AS "motivorechazo",
+				A.NumeroProceso AS "numeroproceso", A.Fecha, a.desde,  CAST(C.EXPRESADOEN as varchar) expresadoen,A.fechasolicitud
+      
+			FROM 
+				AS_Autorizacion A (nolock), 
+				AS_ConceptoAcceso C (nolock), 
+				EmpleadoMast E (nolock), 
+				PersonaMast P (nolock)
+						WHERE 
+				(A.Empleado = E.Empleado)
+				AND (E.Empleado = P.Persona)
+				AND (CAST(A.Fecha AS DATE) >= isnull(:fechadesde, '1980-01-01')) 
+				AND (CAST(A.Fecha AS DATE) <= isnull(:fechahasta, '2980-12-31'))
+				AND (E.Empleado = isnull(:empleado, e.Empleado))
+				AND (C.ConceptoAcceso = A.ConceptoAcceso)
+				AND (E.CompaniaSocio = isnull(:compania, e.companiasocio))	
+        
+				AND (C.ConceptoAcceso = ISNULL(:conceptoacceso, C.ConceptoAcceso))
+				AND (ISNULL(A.estado, '0') = ISNULL(:estado, ISNULL(A.estado, '0')))
+				and cast(a.fechasolicitud as date) = isnull(cast(:fecharegistro as date),cast(a.fechasolicitud as date))				
+				order by A.fechasolicitud desc
+    	]]>
+    </sql-query>
+    
+    <sql-query name="asautorizacion.listarPermisosDetalleAutorizacion">
+    	<![CDATA[
+	    	SELECT 
+	    		AS_Autorizacion.Fecha AS "fecha",   
+				AS_Autorizacion.FechaFin AS "fechafin",   
+				AS_Autorizacion.AutorizadoPor AS "autorizadopor",   
+				AS_Autorizacion.FechaAutorizacion AS "fechaautorizacion",   
+				AS_Autorizacion.Observacion AS "observacion",
+				DATEDIFF(day, fecha, fechafin) + 1 AS "numdias"
+			FROM 
+				AS_Autorizacion  
+			WHERE 
+				( AS_Autorizacion.Empleado= :empleado )  AND  
+				( AS_Autorizacion.ConceptoAcceso = :conceptoacceso )  AND   
+				(Year(fecha)= Year(getdate())) AND
+				( Year(Fecha)= Year(FechaFin)) AND
+        ( AS_Autorizacion.Estado = 'A')
+	
+			UNION
+	
+			SELECT 
+				AS_Autorizacion.Fecha AS "fecha",  
+				AS_Autorizacion.FechaFin AS "fechafin",   
+				AS_Autorizacion.AutorizadoPor AS "autorizadopor",  
+				AS_Autorizacion.FechaAutorizacion AS "fechaautorizacion",   
+				AS_Autorizacion.Observacion AS "observacion",
+				DATEDIFF(day, fecha, fechafin) + 1 AS "numdias"
+			FROM 
+				AS_Autorizacion  
+			WHERE 
+				( AS_Autorizacion.Empleado= :empleado )  AND  
+				( AS_Autorizacion.ConceptoAcceso = :conceptoacceso )  AND   
+				(Year(fecha)= Year(getdate())) AND
+				( Year(Fecha)<> Year(FechaFin)) AND
+        ( AS_Autorizacion.Estado = 'A')
+    	]]>
+    </sql-query>
+    
+    <sql-query name="asautorizacion.listarPermisosDetalleMarcas">
+    	<![CDATA[
+	    	SELECT
+				convert(varchar,A.fecha,103) AS "fecha", 
+				convert(varchar,A.hora,108) AS "hora",
+				A.CarnetId as "carnet",
+				A.Empleado as "codigoempleado",
+				P.NombreCompleto as "nombre",
+				e.descripcion as "estacion",
+				a.Clasificacion as "tipo",
+				a.Observacion as "observacion"
+			FROM AS_ACCESOSDIARIOS A
+				LEFT JOIN PersonaMast P on P.Persona = A.Empleado
+				LEFT JOIN AS_Estacion E on e.estacion = a.LugarRecoleccion
+			WHERE 
+				Empleado = :empleado AND
+				CAST(A.fecha AS DATE) BETWEEN :desde AND :hasta
+			ORDER BY 
+				A.fecha, 
+				A.hora
+    	]]>
+    </sql-query>
+    
+      <sql-query name="asautorizacion.listarCruces">
+    	<![CDATA[
+	    	SELECT  cast('dummy' as varchar) as "codigo"
+			from AS_Autorizacion where empleado = :empleado and estado in( 'A', 'S')
+			
+			and
+			
+			DATEADD(HOUR,  DATEPART(HOUR, CAST(:horaDesde AS DATETIME)),DATEADD(MINUTE, DATEPART(MINUTE, CAST(:horaDesde AS DATETIME)), CAST(CAST(CAST(cast(CAST(:fechaDesde AS DATETIME) as date)AS DATETIME) AS DATE) AS DATETIME)))
+			>=
+			DATEADD(HOUR,  DATEPART(HOUR, DESDE),DATEADD(MINUTE, DATEPART(MINUTE, DESDE), CAST(CAST(CAST(cast(fecha as date)AS DATETIME) AS DATE) AS DATETIME))) 
+			and
+			DATEADD(HOUR,  DATEPART(HOUR, CAST(:horaHasta AS DATETIME)),DATEADD(MINUTE, DATEPART(MINUTE, CAST(:horaHasta  AS DATETIME)), CAST(CAST(CAST(cast(CAST(:fechaHasta AS DATETIME) as date)AS DATETIME) AS DATE) AS DATETIME)))
+			<=
+			DATEADD(HOUR, DATEPART(HOUR, Hasta),DATEADD(MINUTE, DATEPART(MINUTE, Hasta), CAST(CAST(CAST(cast(fechafin as date) AS DATETIME) AS DATE) AS DATETIME)))
+			
+			and (NUMEROPROCESO <> :numeroProceso OR :numeroProceso IS NULL)
+    	]]>
+    </sql-query>
+  
+    <sql-query name="asautorizacion.contarCupoerasNuevo">
+    	<![CDATA[
+	    	SELECT  count(*)
+			   	FROM AS_Autorizacion 
+					INNER JOIN AS_ConceptoAcceso
+						ON AS_Autorizacion.ConceptoAcceso = AS_ConceptoAcceso.ConceptoAcceso
+							 AND AS_ConceptoAcceso.FlagEsCuponera = 'S'
+												 
+					INNER JOIN (
+									SELECT 	FechaDesde, FechaHasta
+									FROM 	AS_Periodo
+									WHERE  :p_fecha BETWEEN AS_Periodo.FechaDesde and AS_Periodo.FechaHasta
+												AND TipoPlanilla = (SELECT TipoPlanilla FROM EmpleadoMast WHERE Empleado = :p_empleado )
+												AND Estado = 'A'
+									) A
+						ON AS_Autorizacion.Fecha BETWEEN A.FechaDesde and A.FechaHasta
+         where AS_Autorizacion.Empleado = :p_empleado 
+				 AND AS_Autorizacion.Estado IN ('S','A')
+    	]]>
+    </sql-query>
+  
+   <sql-query name="asautorizacion.contarCupoerasEdicion">
+    	<![CDATA[
+	    	SELECT  count(*)
+			   	FROM AS_Autorizacion 
+					INNER JOIN AS_ConceptoAcceso
+						ON AS_Autorizacion.ConceptoAcceso = AS_ConceptoAcceso.ConceptoAcceso
+							 AND AS_ConceptoAcceso.FlagEsCuponera = 'S'
+												 
+					INNER JOIN (
+									SELECT 	FechaDesde, FechaHasta
+									FROM 	AS_Periodo
+									WHERE  :p_fecha BETWEEN AS_Periodo.FechaDesde and AS_Periodo.FechaHasta
+												AND TipoPlanilla = (SELECT TipoPlanilla FROM EmpleadoMast WHERE Empleado = :p_empleado )
+												AND Estado = 'A'
+									) A
+						ON AS_Autorizacion.Fecha BETWEEN A.FechaDesde and A.FechaHasta
+         where AS_Autorizacion.Empleado = :p_empleado 
+         AND AS_Autorizacion.Fecha <> :p_fecha
+				 AND AS_Autorizacion.Estado IN ('S','A')
+    	]]>
+    </sql-query>
+  
+   <sql-query name="asautorizacion.contarValidarFechaIngresoNuevo">
+    	<![CDATA[
+	    	SELECT Count(1)
+				FROM 	AS_Autorizacion 
+				WHERE 	Empleado = :p_empleado
+							AND ConceptoAcceso = :p_concepto
+							AND Convert(char(6),fecha,112) = :p_periodo
+							AND AS_Autorizacion.Estado IN ('S','A')
+    	]]>
+    </sql-query>
+  
+     <sql-query name="asautorizacion.obtenerComportamientoSobretiempo">
+    	<![CDATA[
+	      SELECT Max (ComportamientoSobretiempo) 
+        FROM AS_CarnetIdentificacion 
+        WHERE Empleado = :p_empleado
+	        AND Estado = 'A'
+    	]]>
+    </sql-query>
+  
+  <sql-query name="asautorizacion.contarValidarFechaIngresoEdicion">
+    	<![CDATA[
+	    	SELECT Count(1)
+				FROM 	AS_Autorizacion 
+				WHERE Empleado = :p_empleado
+							AND ConceptoAcceso = :p_concepto
+							AND Fecha <> :p_fechaini
+							AND FECHAFIN <> :p_fechafin
+							AND AS_Autorizacion.Estado IN ('S','A')
+    	]]>
+    </sql-query>
+
+ <sql-query name="asautorizacion.obtenerNoGeneraAsistencia">
+    <![CDATA[
+	    	select c.NoGeneraAsistencia 
+        from AS_CarnetIdentificacion c
+        inner join empleadomast e
+        on c.empleado = e.empleado
+        where c.Empleado = :p_empleado and 
+        e.CompaniaSocio = :p_compania and 
+        c.estado = 'A'
+    	]]>
+  </sql-query>
+    <sql-query name="asautorizacion.contarValidarFechaCumpleanosNuevo">
+    	<![CDATA[
+	    	SELECT Count(1)
+				FROM 	AS_Autorizacion 
+				WHERE 	Empleado = :p_empleado
+							AND ConceptoAcceso = :p_concepto
+							AND Convert(char(6),fecha,112) = :p_periodo
+							AND AS_Autorizacion.Estado IN ('S','A','J')
+    	]]>
+    </sql-query>
+  
+  <sql-query name="asautorizacion.contarValidarFechaCumpleanosEdicion">
+    	<![CDATA[
+	    	SELECT Count(1)
+				FROM 	AS_Autorizacion 
+				WHERE Empleado = :p_empleado
+							AND ConceptoAcceso = :p_concepto
+							AND Fecha <> :p_fechaini
+							AND FECHAFIN <> :p_fechafin
+							AND AS_Autorizacion.Estado IN ('S','A','J')
+    	]]>
+    </sql-query>
+
+  <sql-query name="asautorizacion.listarPermisosReporte">
+    <![CDATA[
+        SNp_AS_ListarPermisos :p_fechadesde, :p_fechahasta, :p_compania,
+        :p_empleado, :p_jefe, :p_concepto, :p_estado, :p_usuario, :p_unidadoperativa,
+        :p_numpagina, :p_numregistros
+    	]]>
+  </sql-query>
+<sql-query name="asautorizacion.contarCuponerasHorasLibres">
+    <![CDATA[
+        select count(1) as cruce from AS_AUTORIZACION where estado not in ('N', 'R') and empleado = :p_empleado and CONCEPTOACCESO in ('29', '30') AND :p_fecha BETWEEN
+  DATEADD(HOUR,  0,DATEADD(MINUTE, 0, CAST(CAST(CAST(cast(fecha as date)AS DATETIME) AS DATE) AS DATETIME))) AND
+  DATEADD(HOUR,  0,DATEADD(MINUTE, 0, CAST(CAST(CAST(cast(FECHAFIN as date)AS DATETIME) AS DATE) AS DATETIME))) 
+    	]]>
+  </sql-query> 
+
+ <sql-query name="asautorizacion.contarCumpleanios">
+    <![CDATA[
+        select count(1) as cruce from AS_AUTORIZACION where estado not in ('N', 'R') and empleado = :p_empleado and CONCEPTOACCESO = '31' AND :p_fecha BETWEEN
+  DATEADD(HOUR,  0,DATEADD(MINUTE, 0, CAST(CAST(CAST(cast(fecha as date)AS DATETIME) AS DATE) AS DATETIME))) AND
+  DATEADD(HOUR,  0,DATEADD(MINUTE, 0, CAST(CAST(CAST(cast(FECHAFIN as date)AS DATETIME) AS DATE) AS DATETIME))) 
+    	]]>
+  </sql-query> 
+  
+   <sql-query name="asautorizacion.obtenerPorId">
+    <![CDATA[
+  select COUNT(1) from AS_AUTORIZACION
+	 where Empleado=:p_empleado  
+   and  Fecha=:p_fecha
+   and  Conceptoacceso=:p_concepto
+   and Desde=:p_desde
+       	]]>
+  </sql-query> 
+
+ <sql-query name="asautorizacion.contarVacaciones">
+    <![CDATA[
+          select count(1) as cruce from pr_solicitudvacacion where empleado = :p_empleado and estado not in ('R', 'N')
+  and (
+
+(:p_inicio >= FECHAINICIO and :p_inicio < FECHAFIN )
+or
+(:p_fin <= FECHAFIN and :p_fin > FECHAINICIO)
+
+)
+    	]]>
+  </sql-query>
+
+ <sql-query name="asautorizacion.obtenerPorDbPk">
+    <![CDATA[
+          select cast(EMPLEADO as int) from AS_AUTORIZACION where fecha = :p_fecha and desde = :p_desde and CONCEPTOACCESO = :p_concepto and empleado = :p_empleado
+    	]]>
+  </sql-query>
+</hibernate-mapping>

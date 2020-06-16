@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="pmpublicacion.listarEnEvaluacion">
+    		select UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR(publicacion, 4000,1)) test from PM_PUBLICACION where estado  ='ACTI'
+    </sql-query>
+	<sql-query name="pmpublicacion.listarContar">
+        <![CDATA[
+    		select 
+			count(1)
+			from [sgseguridadsys].pm_publicacion a join aplicacionesmast b on a.id_aplicacion = b.aplicacioncodigo
+			join ma_miscelaneosdetalle c on c.codigotabla = 'TIPPUBLI' and c.codigoelemento = a.id_tipo_publicacion
+			join ma_miscelaneosdetalle d on d.codigotabla = 'TIPSEGPUBL' and d.codigoelemento = a.id_tipo_seguridad
+			join ma_miscelaneosdetalle e on e.codigotabla = 'PUBLIESTAD' and e.codigoelemento = a.estado
+			where a.id_aplicacion = isnull(:p_aplicacion, a.id_aplicacion)
+			and a.ESTADO = isnull(:p_estado, a.estado)
+			and a.id_tipo_publicacion = isnull(:p_publicacion, a.id_tipo_publicacion)
+			AND ((CAST(a.fecha_inicio AS DATE) between isnull(:p_desde, '1980-01-01') and
+			 isnull(:p_hasta, '2980-12-31')))
+			AND ((CAST(a.fecha_fin AS DATE) between isnull(:p_desde, '1900-01-01') and
+			 isnull(:p_hasta, '2980-12-31')))
+			 ]]></sql-query>
+	<sql-query name="pmpublicacion.listarPaginacion">
+        <![CDATA[
+    		select 
+			a.id_aplicacion, 
+			a.id_publicacion SECUENCIA, 
+			b.DESCRIPCIONCORTA APLICACION,
+			c.DESCRIPCIONLOCAL TIPO, 
+			d.DESCRIPCIONLOCAL SEGURIDAD, 
+			E.DESCRIPCIONLOCAL ESTADO, 
+			a.fecha_inicio, 
+			a.fecha_fin,
+			a.descripcion,
+			ROW_NUMBER() OVER (ORDER BY a.fecha_inicio desc) AS Seq
+			from [sgseguridadsys].pm_publicacion a join aplicacionesmast b on a.id_aplicacion = b.aplicacioncodigo
+			join ma_miscelaneosdetalle c on c.codigotabla = 'TIPPUBLI' and c.codigoelemento = a.id_tipo_publicacion
+			join ma_miscelaneosdetalle d on d.codigotabla = 'TIPSEGPUBL' and d.codigoelemento = a.id_tipo_seguridad
+			join ma_miscelaneosdetalle e on e.codigotabla = 'PUBLIESTAD' and e.codigoelemento = a.estado
+			where a.id_aplicacion = isnull(:p_aplicacion, a.id_aplicacion)
+			and a.ESTADO = isnull(:p_estado, a.estado)
+			and a.id_tipo_publicacion = isnull(:p_publicacion, a.id_tipo_publicacion)
+			AND ((CAST(a.fecha_inicio AS DATE) between isnull(:p_desde, '1980-01-01') and
+			 isnull(:p_hasta, '2980-12-31')))
+			AND ((CAST(a.fecha_fin AS DATE) between isnull(:p_desde, '1900-01-01') and
+			 isnull(:p_hasta, '2980-12-31')))
+			]]></sql-query>
+	<sql-query name="pmpublicacion.listarIndicadores"><![CDATA[			
+			select COUNT(1) from hr_evaluacionempleado where estado = 'PR' AND EMPLEADOEVALUADOR = :p_empleado
+			UNION ALL
+			select COUNT(1) from hr_evaluacionempleado where estado = 'EV' AND EMPLEADOEVALUADOR = :p_empleado
+			UNION ALL
+			select COUNT(1) from hr_evaluacionempleado where estado = 'CE' AND EMPLEADOEVALUADOR = :p_empleado
+	]]></sql-query>
+</hibernate-mapping>

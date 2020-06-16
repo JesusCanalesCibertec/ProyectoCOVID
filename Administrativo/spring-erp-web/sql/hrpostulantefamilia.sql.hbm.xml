@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulantefamilia.listarPorPostulante">
+		SELECT dep.TipoFamiliar TipoFamiliar,
+		dep.NombreCompleto NombreCompleto,
+		dep.FechaNacimiento FechaNacimiento,
+		dep.Documento Documento,
+		dep.Ocupacion Ocupacion,
+		dep.Domicilio Domicilio,
+		dep.Tipo Tipo,
+		dep.Postulante Postulante,
+		dep.Secuencia Secuencia,
+		dep.Telefono Telefono,
+		ma.DescripcionLocal auxTipoVinculo, dep.FlagDependiente,	dep.FechaMatrimonio, dep.UnidadNegocio, dep.UltimoUsuario, dep.UltimaFechaModif, dep.TipoDocumento,
+NroDocumentoPaternidad,TipoDocumentoPaternidad, TipoSangre, CorreoElectronico, PaisEmisor, TipoVinculo, MesConcepcion, MotivoBaja, FechaAlta, FechaBaja, 
+		Sexo, CodigoPostal, FlagCentroAsistencia, FlagViveConEmpleado, coneps, FlagBeneficio, FlagSMF
+		FROM HR_PostulanteFamilia dep
+		left JOIN MA_MiscelaneosDetalle ma ON
+		ma.CodigoTabla='TIPOVINC'  and
+		ma.AplicacionCodigo='HR'
+		AND ma.Compania='999999'
+		and ma.CodigoElemento=TipoFamiliar
+		WHERE dep.Postulante=:p_postulante
+		and dep.tipo=:p_tipo
+	</sql-query>
+</hibernate-mapping>

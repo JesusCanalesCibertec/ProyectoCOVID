@@ -48,7 +48,8 @@ int animator mtrl_fab_hide_motion_spec 0x7f02000b
 int animator mtrl_fab_show_motion_spec 0x7f02000c
 int animator mtrl_fab_transformation_sheet_collapse_spec 0x7f02000d
 int animator mtrl_fab_transformation_sheet_expand_spec 0x7f02000e
-int array carga_spin_doc 0x7f030000
+int array base 0x7f030000
+int array carga_spin_doc 0x7f030001
 int attr action 0x7f040000
 int attr actionBarDivider 0x7f040001
 int attr actionBarItemBackground 0x7f040002

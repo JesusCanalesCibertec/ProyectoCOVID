@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="syplantilla.solicitudListarContar">
+    	<![CDATA[
+       select COUNT(1)
+		from SY_PLANTILLA WHERE ESTADO = ISNULL(:p_id_estado, ESTADO) AND APLICACIONCODIGO = ISNULL(:p_aplicacion, APLICACIONCODIGO)
+		AND PLANTILLACODIGO = ISNULL(:p_plantilla, PLANTILLACODIGO)
+
+		]]>
+	</sql-query>
+
+	<sql-query name="syplantilla.solicitudListarPaginacion">
+    	<![CDATA[
+         select
+		APLICACIONCODIGO AS "aplicacionCodigo",
+		PLANTILLACODIGO AS plantillaCodigo,
+		nombre AS "nombre",
+		TIPOPLANTILLA AS "tipoPlantilla",
+		ESTADO AS "estado",
+		CASE APLICACIONCODIGO WHEN 'HR' THEN 'Recursos Humanos' WHEN 'PR' THEN 'Planillas y RRHH.' WHEN 'AS' THEN 'Asistencia' ELSE '' END AS "aplicacionDescripcion"
+		from SY_PLANTILLA WHERE ESTADO = ISNULL(:p_id_estado, ESTADO) AND APLICACIONCODIGO = ISNULL(:p_aplicacion, APLICACIONCODIGO)
+		AND PLANTILLACODIGO = ISNULL(:p_plantilla, PLANTILLACODIGO)
+
+		]]>
+	</sql-query>
+</hibernate-mapping>

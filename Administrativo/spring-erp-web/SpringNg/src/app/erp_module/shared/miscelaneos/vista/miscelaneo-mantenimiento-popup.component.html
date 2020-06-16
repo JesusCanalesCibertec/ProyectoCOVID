@@ -1,0 +1,71 @@
+<div class="ui-fluid" #frm>
+    <p-dialog header="MANTENIMIENTO MISCELANEOS" [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size"
+    [style]="{'max-width':'700px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+       <div class="bordeGenerico">
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+                <label>Aplicación Código</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <input pInputText disabled [(ngModel)]="maMiscelaneosdetalle.aplicacioncodigo" type="text">
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+                <label>Código Tabla</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <input pInputText disabled [(ngModel)]="maMiscelaneosdetalle.codigotabla" type="text">
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+                <label>Compañia</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <input pInputText disabled [(ngModel)]="maMiscelaneosdetalle.compania" type="text">
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+                <label>Código Elemento</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-4">
+                <input pInputText maxlength="10"
+                [(ngModel)]="maMiscelaneosdetalle.codigoelemento" type="text">
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-3 controlEtiquetaDivTop">
+                <label>Descripcion</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-8">
+                <input pInputText maxlength="900"
+                [(ngModel)]="maMiscelaneosdetalle.descripcionlocal" type="text">
+            </div>
+        </div>
+    </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Guardar" icon="fa fa-save" type="button" (click)="guardar()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-8"></div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="verModal=false"></button>
+            </div>
+        </div>
+
+
+    </p-dialog>
+</div>

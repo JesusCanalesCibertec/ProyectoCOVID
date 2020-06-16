@@ -1,0 +1,218 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel
+        header="CONSUMOS : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}">
+
+    </p-panel>
+
+    <p-tabView>
+
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDiv">
+                <label>Institución</label>
+            </div>
+            <div class="ui-g-12 ui-md-8 ui-lg-4 controlEtiquetaDivTop">
+                <p-dropdown [options]="instituciones" [(ngModel)]="psConsumo.idInstitucion"
+                    [disabled]="!cambiarInstitucion" [autoWidth]="false"></p-dropdown>
+            </div>
+
+
+
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-2">
+                <label>Fecha de solicitud<span style="color:#ff0000"> *</span>
+                </label>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                    [(ngModel)]="psConsumo.fechainicio" [disabled]="!puedeEditar" yearRange="1900:2050 "
+                    appendTo="body"></p-calendar>
+            </div>
+
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-2">
+                <label>Rango de fecha de consumos
+                </label>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                    [(ngModel)]="psConsumo.inicioConsumo" [disabled]="!puedeEditar" yearRange="1900:2050 "
+                    appendTo="body"></p-calendar>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                    [(ngModel)]="psConsumo.finConsumo" [disabled]="!puedeEditar" yearRange="1900:2050 " appendTo="body">
+                </p-calendar>
+            </div>
+
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-2">
+                <label>Fecha de despacho
+                </label>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-calendar [showIcon]="true" dateFormat="dd/mm/yy" [yearNavigator]="true " [monthNavigator]="true "
+                    [(ngModel)]="psConsumo.fechaDespacho" [disabled]="!puedeEditar" yearRange="1900:2050 "
+                    [showTime]="true" appendTo="body"></p-calendar>
+            </div>
+
+        </div>
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDiv">
+                <label>Aportante<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="aportantes" [(ngModel)]="psConsumo.aportante" [autoWidth]="false"
+                    [disabled]="!puedeEditar"></p-dropdown>
+            </div>
+
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 cntrolEtiquetaDivTop">
+                <label>Descripción<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-12 ui-md-10 ui-lg-10">
+                <input pInputText maxlength="500" [disabled]="!puedeEditar" [(ngModel)]="psConsumo.descripcion"
+                    type="text">
+            </div>
+
+
+        </div>
+
+        <div class="ui-g ui-md ui-lg" *ngIf="psConsumo.estado=='C'">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 cntrolEtiquetaDivTop">
+                <label>Comentario</label>
+            </div>
+            <div class="ui-g-12 ui-md-10 ui-lg-10">
+                <textarea pInputTextarea style="width:100%" [(ngModel)]="psConsumo.comentario" maxlength="2000"
+                    [disabled]="!puedeEditar"></textarea>
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg" *ngIf="psConsumo.estado=='C'">
+            <div class="ui-g-12 ui-md-2 ui-lg-2 cntrolEtiquetaDivTop">
+                <label>Valoracion ({{psConsumo.valoracion}})</label>
+            </div>
+            <div class="ui-g-12 ui-md-10 ui-lg-10">
+                <p-rating [(ngModel)]="psConsumo.valoracion" [disabled]="!puedeEditar"></p-rating>
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-12 ui-md-2 ui-lg-2 controlEtiquetaDiv">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="estados" [(ngModel)]="psConsumo.estado" [autoWidth]="false"
+                    [disabled]="accion != ACCIONES.EDITAR"></p-dropdown>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-6 ui-md-4 ui-lg-3">
+                <button pButton label="Cargar plantilla" icon="fa fa-plus" [disabled]="!puedeEditar" type="button"
+                    class="ui-button" (click)='modalPlantilla()'></button>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-3">
+                <button pButton label="Agregar item" icon="fa fa-plus" [disabled]="!puedeEditar" type="button"
+                    class="ui-button" (click)='modalItem()'></button>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-3">
+                <input #photoInputFoto type="file" class="form-control" style="display:none"
+                    (change)="cargarFoto(photoInputFoto)" id="upload">
+                <button pButton label="Subir Excel" icon="fa fa-plus" class="ui-button" type="button"
+                    (click)="photoInputFoto.click()"></button>
+            </div>
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="20" emptyMessage="Ingrese datos"
+                    [paginator]="true" scrollWidth="100%" [value]="listado">
+                    <p-column header="Código" [style]="{'width':'80px'}" field="codItem" styleClass="textoCentrado"
+                        [editable]="false">
+                    </p-column>
+                    <p-column header="Nombre" [style]="{'width':'250px'}" field="nomItem" [editable]="true"></p-column>
+
+                    <p-column header="Unidad de medida" [style]="{'width':'150px'}" field="nomUnidad">
+                    </p-column>
+                    <p-column header="Cantidad solicitada *" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                        <ng-template let-col let-tx="rowData" pTemplate="body">
+                            <input pInputText [(ngModel)]="tx.cantidadsolicitada" [disabled]="!puedeEditar"
+                                type="number">
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Comentarios" [style]="{'width':'100%'}" styleClass="textoCentrado">
+                        <ng-template let-col let-tx="rowData" pTemplate="body">
+                            <input pInputText [(ngModel)]="tx.comentarios" [disabled]="!puedeEditar" type="text">
+                        </ng-template>
+                    </p-column>
+
+                    <p-column *ngIf="puedeEditar" header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" title="Borrar">
+                                    <i class="fa fa-trash fa-lg seleccionable" style="font-size:100%"
+                                        (click)="borrarFila(tx.codItem)"></i>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-column>
+
+
+
+
+
+                </p-dataTable>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton type="button" icon="fa fa-save" style="width:100%" [disabled]="!puedeEditar"
+                    label="Grabar" (click)="guardar()"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-8 ui-lg-8">
+
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" type="button" style="width:100%"
+                    (click)="salir()"></button>
+            </div>
+
+        </div>
+
+    </p-tabView>
+</div>
+
+<app-item-selector (cargarSeleccionEvent)="cargar($event)" (block)="bloquearPagina()" (unBlock)="desbloquearPagina()">
+</app-item-selector>
+<consumo-plantilla-selector (cargarSeleccionEvent)="cargarPlantilla($event)" (block)="bloquearPagina()"
+    (unBlock)="desbloquearPagina()"></consumo-plantilla-selector>

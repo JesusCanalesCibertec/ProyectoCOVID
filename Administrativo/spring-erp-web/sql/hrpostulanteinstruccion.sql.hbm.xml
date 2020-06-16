@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulanteinstruccion.listarPorPostulante">
+		SELECT
+		H.POSTULANTE as "pkPostulante",
+		H.SECUENCIA as "pkSecuencia",
+		H.NIVELACADEMICO as "Nivelacademico",
+		
+		H.CENTROESTUDIOS as "Centroestudios",
+		H.OTROCENTROESTUDIOS as "Otrocentroestudios",
+		H.FECHADESDE as "Fechadesde",
+		H.FECHAHASTA as "Fechahasta",
+		
+		H.ESPECIALIDAD as "Especialidad",
+		H.AREA as "Area",
+		H.CARRERA as "Carrera",
+		
+		H.ULTIMOUSUARIO as "UltimoUsuario",
+		H.ULTIMAFECHAMODIF as "UltimaFechaModif",
+		GI.DESCRIPCION as "auxNivelacademico",
+		CAST(AP.DESCRIPCIONLOCAL as varchar(200)) as "auxArea",
+		CA.DESCRIPCION as "auxCarrera",
+		CES.DESCRIPCION as "auxCentroestudios", h.observaciones, h.otracarrera
+		FROM
+		HR_POSTULANTEINSTRUCCION H
+		LEFT JOIN
+		HR_GRADOINSTRUCCION GI
+		ON H.NIVELACADEMICO = GI.GRADOINSTRUCCION
+		LEFT JOIN
+		MA_MISCELANEOSDETALLE AP
+		ON AP.APLICACIONCODIGO = 'HR'
+		AND AP.CODIGOTABLA = 'AREAS'
+		AND AP.CODIGOELEMENTO = H.AREA
+		LEFT JOIN
+		HR_PROFESION CA
+		ON H.CARRERA = CA.PROFESION
+		LEFT JOIN
+		HR_CENTROESTUDIOS CES
+		ON H.CENTROESTUDIOS = CES.CENTRO
+		WHERE
+		H.POSTULANTE = :p_postulante
+	</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,212 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="CONSUMOS: Filtros de Búsqueda">
+
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2 controlEtiquetaDiv">
+                <label>Institución</label>
+            </div>
+            <div class="ui-g-8 ui-md-5 ui-lg-5 controlEtiquetaDivTop">
+                <p-dropdown [options]="instituciones" [disabled]="!cambiarInstitucion"
+                    [(ngModel)]="filtro.codigoInstitucion" [autoWidth]="false"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+
+            </div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Estado</label>
+            </div>
+            <div class="ui-g-8 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <p-dropdown [options]="estados" [(ngModel)]="filtro.estado" [autoWidth]="false"></p-dropdown>
+            </div>
+
+        </div>
+
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-5 ui-md-2 ui-lg-2 controlEtiquetaDivTop">
+                <label>Rango de fechas</label>
+            </div>
+            <div class="ui-g-7 ui-md-1 ui-lg-1">
+                <p-checkbox [(ngModel)]="filtroRango" binary="true"></p-checkbox>
+            </div>
+
+
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Desde</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtroRango?'':filtro.fechainicial" (keypress)="defaultBuscar($event)"
+                    [showIcon]="true" dateFormat="dd/mm/yy" [disabled]="!filtroRango"></p-calendar>
+            </div>
+
+            <div class="ui-g ui-md-1 ui-lg-1"></div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                <label>Hasta</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-3 ui-lg-3">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                    [(ngModel)]="!filtroRango?'':filtro.fechafinal" (keypress)="defaultBuscar($event)" [showIcon]="true"
+                    dateFormat="dd/mm/yy" [disabled]="!filtroRango"></p-calendar>
+            </div>
+        </div>
+
+
+
+    </p-panel>
+
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button"
+                (click)='nuevo(filtro.codigoInstitucion)'></button>
+        </div>
+
+        <div class="ui-g-6 ui-md-8 ui-lg-8">
+
+        </div>
+
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Buscar" icon="fa fa-binoculars" type="button" class="ui-button"
+                (click)="buscar(dt)"></button>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="6" emptyMessage="No se encontraron registros"
+                [paginator]="true" [lazy]="true" [totalRecords]="filtro.paginacion.registroEncontrados"
+                (onLazyLoad)="cargarPaginacion($event)" [value]="filtro.paginacion.listaResultado" scrollWidth="100%">
+
+                <p-column header="Código" [style]="{'width':'100px'}" field="codConsumo" styleClass="textoCentrado">
+                </p-column>
+                <p-column header="Institución" [style]="{'width':'250px'}" field="nomInstitucion"></p-column>
+                <p-column header="Descripción" [style]="{'width':'300px'}" field="descripcion"></p-column>
+                <p-column header="Inst. Aportante" [style]="{'width':'150px'}" field="aportante">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.aportante=='F'?'Fundación':tx.aportante =='O'?'Otros':''}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Fecha informe" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Estado" field="estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        {{tx.estado=='A'?'Activo':tx.estado=='C'?'Cerrado':tx.estado=='I'?'Inactivo':''}}
+                    </ng-template>
+                </p-column>
+                <p-column header="Excel" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Exportar">
+                                <i class="fa fa-file-excel-o  fa-lg seleccionable" (click)="exportar(tx)"></i>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column header="Pdf" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12" title="Exportar">
+                                <i class="fa fa-file-pdf-o  fa-lg seleccionable" (click)="exportarPDF(tx)"></i>
+                            </div>
+
+                        </div>
+                    </ng-template>
+                </p-column>
+                <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <div class="ui-g">
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Editar">
+                                <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"
+                                    *ngIf="tx.estado=='A'"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Ver">
+                                <i class="fa fa-eye fa-lg seleccionable" (click)="ver(tx)"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Anular">
+                                <i class="fa fa-trash fa-lg seleccionable" *ngIf="tx.estado=='A'"
+                                    (click)="anular(tx)"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Dar conformidad" *ngIf="tx.estado=='A'">
+                                <i class="fa fa-get-pocket fa-lg seleccionable" (click)="cerrar(tx)"></i>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-3" title="Activar" *ngIf="tx.estado=='C'&&puedeActivar">
+                                <i class="fa fa-unlock fa-lg seleccionable" (click)="activar(tx)"></i>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-column>
+
+
+
+
+
+            </p-dataTable>
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+        </div>
+    </div>
+
+    <!-- (reiniciarSeleccionados)="reiniciarSeleccionados()" (mostrarMensajeEjecutar)="mostrarMensajeEjecutar($event)" -->
+    <aprobacion-preguntas></aprobacion-preguntas>
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+
+
+</div>
+<p-dialog [header]="'Dar conformidad'" [(visible)]="verModalComentario" [modal]="true " [responsive]="true "
+    [resizable]="false" [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Comentario y Valoración">
+        <div class="ui-g ">
+            <div class="ui-g-12 ui-md-12 ui-lg-12 ">
+                <textarea pInputTextarea style="width:100%" [(ngModel)]="comentario" maxlength="2000"></textarea>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: right">
+                <h3 style="margin: auto;"> Valor : {{valoracion}}</h3>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-6" style="text-align: right">
+                <p-rating [(ngModel)]="valoracion"></p-rating>
+            </div>
+
+            <div class="ui-g-5 ui-md-4 ui-lg-4 ">
+                <button type="button " pButton icon="fa fa-save" label="Aceptar" (click)="cerrarAccionFinal()"></button>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>

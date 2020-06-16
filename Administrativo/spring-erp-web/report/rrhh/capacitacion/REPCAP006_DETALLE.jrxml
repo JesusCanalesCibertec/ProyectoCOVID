@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REPCAP006_DETALLE" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1ad3f2e5-66c3-43cc-9c63-6043d42be447">
+	<property name="ireport.zoom" value="1.9487171000000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_Capacitacion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ROW_NUMBER() over(order by b.nombrecompleto asc) N,a.empleado COD,b.nombrecompleto NOMBRE, a.Calificacion CALIFICACION, comentario from HR_empleadocapacitacion a join PersonaMast b on a.empleado = b.persona
+join hr_capacitacion c on c.capacitacion = a.capacitacion
+where a.capacitacion = $P{id_Capacitacion}  and FLAGASISTIO = 's'
+and c.id_origen_capacitacion = 'SEGU']]>
+	</queryString>
+	<field name="N" class="java.lang.Long"/>
+	<field name="COD" class="java.lang.Integer"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="CALIFICACION" class="java.lang.String"/>
+	<field name="comentario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" backcolor="#CCCCCC" uuid="ba34957f-dd3d-4f79-8bba-421e2f23190c"/>
+			</rectangle>
+			<line>
+				<reportElement x="21" y="0" width="1" height="20" uuid="c9279adf-e24d-48e1-a487-0218c46e7a39"/>
+			</line>
+			<line>
+				<reportElement x="90" y="0" width="1" height="20" uuid="f5ed46ff-1fd1-4d1d-ac96-a56edc5e3cb2"/>
+			</line>
+			<line>
+				<reportElement x="323" y="0" width="1" height="20" uuid="13c4351a-67b1-4877-a0e8-4fff3af3eefa"/>
+			</line>
+			<line>
+				<reportElement x="371" y="0" width="1" height="20" uuid="b226d37a-6330-4888-a838-cc0497ea9e32"/>
+			</line>
+			<staticText>
+				<reportElement x="371" y="0" width="183" height="20" uuid="7cfb231d-aa25-4a15-86b2-1cc2e476a73a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="0" width="47" height="20" uuid="afd99c61-5877-46d6-a283-d56a8011b2fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="232" height="20" uuid="0bd253d6-49bc-467f-a7d5-003470603d64"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="0" width="70" height="20" uuid="9352d2f6-25f3-4fa8-acc8-5b9e48fd7dff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[COD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="0" width="21" height="20" uuid="d0df6e6f-b384-42a6-bf8c-c23a32a430ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="555" height="15" uuid="7bec1949-b29f-49c1-a05b-330ce66af609"/>
+			</rectangle>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="371" y="0" width="1" height="15" uuid="841016c3-3ba9-4a6c-af37-583a10406fed"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="323" y="0" width="1" height="15" uuid="6538cb35-d267-49aa-b5f6-c26aeb44f016"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="90" y="0" width="1" height="15" uuid="894ba0ef-06ce-46d2-aa66-215d374e6518"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="21" y="0" width="1" height="15" uuid="93ab0128-48b0-40b8-8379-5e691c224cb9"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="21" height="15" uuid="29016b18-ebd2-4059-b1a3-95817bda6e07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{N}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="22" y="0" width="68" height="15" uuid="5ae73cfe-c025-4a2b-b3f0-6a91ef33cc99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="95" y="0" width="228" height="15" uuid="ff0009b7-bc0e-40c3-86ee-d84f215228b2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="324" y="0" width="47" height="15" uuid="1ac8a416-aabe-4652-85b3-42bfdf3f6deb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CALIFICACION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="376" y="0" width="179" height="15" uuid="51efccd3-f8c5-4e65-b28a-80ba935b4d07"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

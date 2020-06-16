@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.pscomponente
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+ <sql-query name="pssalud.listarPaginacion">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ListarSalud
+        :p_nombreCompleto,
+        :p_periodo,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma
+       ]]>
+  </sql-query>
+
+  <sql-query name="pssalud.listarPaginacionConsulta">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ConsultarSalud
+        :p_nombreCompleto,
+        :p_periodo,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+		:p_orden,
+		:p_sentido
+       ]]>
+  </sql-query>
+  
+  <sql-query name="pssalud.eliminarDetalleSalud">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_EliminarDetalleSalud
+         :p_institucion,
+         :p_idBeneficiario,
+         :p_Salud
+       ]]>
+  </sql-query>
+  
+
+  <sql-query name="pssalud.listarTratamientos">
+    select
+    tra.DescripcionLocal,
+    COUNT(tratamiento.ID_DIAGNOSTICO)
+    from
+    sgseguridadsys.PS_ATENCION atencion
+    JOIN sgseguridadsys.PS_ATENCION_DETALLE detalle
+    ON detalle.ID_ATENCION=atencion.ID_ATENCION
+    JOIN sgseguridadsys.PS_ATENCION_TRATAMIENTO tratamiento
+    ON tratamiento.ID_ATENCION=detalle.ID_ATENCION
+    AND tratamiento.ID_DIAGNOSTICO=DETALLE.ID_DIAGNOSTICO
+
+    JOIN sgseguridadsys.SS_ge_diagnostico diagnostico ON
+    diagnostico.IdDiagnostico=tratamiento.ID_DIAGNOSTICO
+
+    JOIN MA_MiscelaneosDetalle tra ON tra.AplicacionCodigo='PS'
+    AND tra.CodigoElemento=tratamiento.ID_TRATAMIENTO AND tra.CodigoTabla='RASTRATA'
+    WHERE
+    tratamiento.ID_DIAGNOSTICO=:pIdDiagnostico
+    AND atencion.ID_BENEFICIARIO=:p_Beneficiario
+    GROUP BY
+    tratamiento.ID_DIAGNOSTICO,
+    tra.DescripcionLocal
+
+  </sql-query>
+
+  <sql-query name="pssalud.listarDiagnosticos">
+        <![CDATA[
+    SELECT
+    record.ID_BENEFICIARIO,
+    record.ID_INSTITUCION,
+    COUNT(record.IdDiagnostico)cantDiagnosticos,
+    record.Nombre,
+    record.IdDiagnostico,
+    record.tipo,
+    ROW_NUMBER() OVER(ORDER BY record.IdDiagnostico ASC) AS sec
+    FROM (
+    select
+    atencion.ID_BENEFICIARIO,
+    atencion.ID_INSTITUCION,
+    diagnostico.Nombre,
+    diagnostico.IdDiagnostico,
+    CASE
+    WHEN atencion.ID_TIPO_ATENCION ='I' THEN 'Interno'
+    WHEN atencion.ID_TIPO_ATENCION ='E' THEN 'Externo'
+    END as tipo
+    from sgseguridadsys.PS_ATENCION atencion
+    JOIN sgseguridadsys.PS_ATENCION_DETALLE detalle
+    ON detalle.ID_ATENCION=atencion.ID_ATENCION
+    JOIN sgseguridadsys.SS_ge_diagnostico diagnostico ON
+    diagnostico.IdDiagnostico=detalle.ID_DIAGNOSTICO
+    WHERE atencion.ID_BENEFICIARIO=:pIdBeneficiario
+    AND atencion.ID_INSTITUCION=:pInstitucion
+    AND atencion.ID_TIPO_ATENCION= ISNULL(:TipoRas, atencion.ID_TIPO_ATENCION)
+    AND FLG_CRONICO IS NULL
+
+      UNION ALL
+
+      select DISTINCT
+      atencion.ID_BENEFICIARIO,
+      atencion.ID_INSTITUCION,
+      diagnostico.Nombre,
+      diagnostico.IdDiagnostico,
+      CASE
+      WHEN atencion.ID_TIPO_ATENCION ='I' THEN 'Interno'
+      WHEN atencion.ID_TIPO_ATENCION ='E' THEN 'Externo'
+      END as tipo
+      from sgseguridadsys.PS_ATENCION atencion
+      JOIN sgseguridadsys.PS_ATENCION_DETALLE detalle
+      ON detalle.ID_ATENCION=atencion.ID_ATENCION
+      JOIN sgseguridadsys.SS_ge_diagnostico diagnostico ON
+      diagnostico.IdDiagnostico=detalle.ID_DIAGNOSTICO
+      WHERE atencion.ID_BENEFICIARIO=:pIdBeneficiario
+      AND atencion.ID_INSTITUCION=:pInstitucion
+      AND atencion.ID_TIPO_ATENCION= ISNULL(:TipoRas, atencion.ID_TIPO_ATENCION)
+      AND FLG_CRONICO='S'
+      ) as record
+
+      GROUP BY
+      record.ID_BENEFICIARIO,
+      record.ID_INSTITUCION,
+      record.Nombre,
+      record.IdDiagnostico,
+      record.tipo
+      ]]>
+    </sql-query>
+
+
+
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : rrhh.HrRequerimiento
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="hrrequerimientoreemplazo.xxxxxx">
+         select sysdate from dual
+    </sql-query>
+    
+     <sql-query name="hrrequerimientoreemplazo.eliminarporrequerimiento">
+         delete from hr_Requerimientoreemplazo where requerimiento = :requerimiento
+    </sql-query>
+    
+</hibernate-mapping>

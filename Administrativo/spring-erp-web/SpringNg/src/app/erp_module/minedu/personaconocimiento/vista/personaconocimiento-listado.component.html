@@ -1,0 +1,105 @@
+<div class="ui-fluid">
+    <p-dialog header="{{titulo}} : Conocimientos" [(visible)]="verModal" modal="modal" showEffect="fade"
+        hideEffect="size" [style]="{'max-width':'800px','left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Nuevo" [disabled]="deshabilitar" icon="fa fa-plus" type="button"
+                    (click)="nuevo()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" class="ui-button" type="button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable #dt [responsive]="true" scrollable="true" [rows]="registrosPorPagina" [paginator]="true"
+            scrollWidth="100%" [value]="listado" emptyMessage="No se encontraron registros">
+
+            <p-column header="Tipo" field="valor2" [style]="{'width':'70px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Nombre" field="nombre" [style]="{'width':'200px'}"></p-column>
+            <p-column header="Nivel" field="valor1" [style]="{'width':'100px'}"></p-column>
+            <p-column header="Área" field="valor3" [style]="{'width':'300px'}"></p-column>
+            <p-column *ngIf="!deshabilitar" header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <i class="fa fa-times fa-lg seleccionable" title="Eliminar" (click)="eliminar(tx)"></i>
+                </ng-template>
+            </p-column>
+
+        </p-dataTable>
+
+    </p-dialog>
+
+    <div class="ui-fluid">
+        <p-dialog header="REGISTRO DE CONOCIMIENTO" [(visible)]="verModalFolio" [modal]="true" [responsive]="true"
+            [resizable]="false" [draggable]="true" [closable]="true" [closeOnEscape]="true"
+            [contentStyle]="{'overflow':'visible'}" [modal]="true" [width]="450" [style]="{'margin-top':'25px'}">
+
+            <div class="ui-fluid" #frm>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Tipo<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="tipos" [disabled]="!puedeEditar" (onChange)='cargarAreas()'
+                            [(ngModel)]="Personaconocimiento.tipo" [autoWidth]="false"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Área<span style="color:#ff0000" *ngIf="Personaconocimiento.tipo == 'T'">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="areas" [disabled]="areabloquear" (onChange)='cargarConocimientos()'
+                            [(ngModel)]="Personaconocimiento.area" [autoWidth]="false"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Conocimiento<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="conocimientos" [disabled]="!puedeEditar"
+                            [(ngModel)]="Personaconocimiento.idConocimiento" [autoWidth]="false"></p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Nivel<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="niveles" [disabled]="!puedeEditar"
+                            [(ngModel)]="Personaconocimiento.nivel" [autoWidth]="false"></p-dropdown>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button *ngIf="puedeEditar" pButton label="Guardar" (click)="guardar()" icon="fa fa-save"
+                        type="button" class="ui-button"></button>
+                </div>
+
+                <div class="ui-g-4 ui-md-6 ui-lg-4">
+
+                </div>
+
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" type="button"
+                        class="ui-button" (click)="verModalFolio=false"></button>
+                </div>
+            </div>
+        </p-dialog>
+
+    </div>
+</div>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+  <sql-query name="mpContratacion.filtroContar">
+select 
+	COUNT(1)
+		from  minedu.CONTRATACION t1	
+		LEFT JOIN minedu.PERSONA t2 ON t1.ID_PERSONA = t2.ID_PERSONA
+		left join MA_MISCELANEOSDETALLE m on t1.CARGO = m.CODIGOELEMENTO and m.CODIGOTABLA = 'CARGOMIN' AND m.APLICACIONCODIGO = 'MP'
+		where
+		ISNULL(t1.ID_MODALIDAD, '') = isnull(:p_modalidad, ISNULL(t1.ID_MODALIDAD, '')) and
+		(t2.NOMBRE like '%'+ isnull(:p_nombre, t2.NOMBRE) + '%' COLLATE Latin1_General_CI_AI OR 
+		t2.APELLIDO like '%'+ isnull(:p_nombre, t2.APELLIDO) + '%' COLLATE Latin1_General_CI_AI) and 
+		ISNULL(t1.CARGO, '') = isnull(:p_cargo, ISNULL(t1.CARGO, '')) AND
+		ISNULL(t1.ESTADO, '') = isnull(:p_estado, ISNULL(t1.ESTADO, ''))
+		AND ((CAST(isnull(t1.FECHA_FIN, '1980-01-01') AS DATE)  between isnull(:p_desde, '1980-01-01') and
+        isnull(:p_hasta, '2980-12-31')))
+        
+  </sql-query>
+  
+  <sql-query name="mpContratacion.filtroPaginacion">
+		select 
+		t1.ID_CONTRATACION,
+		t1.ID_MODALIDAD,
+		CASE t1.ID_MODALIDAD
+		WHEN 'OS' THEN 'ORDEN DE SERVICIO'
+		WHEN 'MDF' THEN 'PRÁCTICAS'
+		ELSE 'CAS'
+		END AS 'MODALIDAD',
+		t2.NOMBRE+' '+t2.APELLIDO AS 'PERSONA',
+	    m.DESCRIPCIONLOCAL AS 'CARGO/SERVICIO',
+		t1.FECHA_INICIO,
+		t1.FECHA_FIN,
+		t1.ESTADO,
+		t1.NUMERO_ORDEN,
+		ROW_NUMBER() OVER (ORDER BY t1.ID_CONTRATACION desc) AS Seq
+		from  minedu.CONTRATACION t1	
+		LEFT JOIN minedu.PERSONA t2 ON t1.ID_PERSONA = t2.ID_PERSONA
+		left join MA_MISCELANEOSDETALLE m on t1.CARGO = m.CODIGOELEMENTO and m.CODIGOTABLA = 'CARGOMIN' AND m.APLICACIONCODIGO = 'MP'
+		where
+		ISNULL(t1.ID_MODALIDAD, '') = isnull(:p_modalidad, ISNULL(t1.ID_MODALIDAD, '')) and
+		(t2.NOMBRE like '%'+ isnull(:p_nombre, t2.NOMBRE) + '%' COLLATE Latin1_General_CI_AI OR 
+		t2.APELLIDO like '%'+ isnull(:p_nombre, t2.APELLIDO) + '%' COLLATE Latin1_General_CI_AI) and 
+		ISNULL(t1.CARGO, '') = isnull(:p_cargo, ISNULL(t1.CARGO, '')) AND
+		ISNULL(t1.ESTADO, '') = isnull(:p_estado, ISNULL(t1.ESTADO, ''))
+		AND ((CAST(isnull(t1.FECHA_FIN, '1980-01-01') AS DATE)  between isnull(:p_desde, '1980-01-01') and
+        isnull(:p_hasta, '2980-12-31')))
+  </sql-query>
+
+	<sql-query name="mpContratacion.contratosactivos"> 
+select 
+		t1.ID_CONTRATACION,
+				t1.ID_MODALIDAD,
+				CASE t1.ID_MODALIDAD
+				WHEN 'OS' THEN 'ORDEN DE SERVICIOS'
+				WHEN 'MF' THEN 'MODALIDAD FORMATIVA'
+				ELSE 'CAS'
+				END AS 'MODALIDAD',
+				t2.APELLIDO+', '+t2.NOMBRE AS 'PERSONA',
+				m.DESCRIPCIONLOCAL AS 'CARGO/SERVICIO',
+				t1.FECHA_INICIO,
+				t1.FECHA_FIN,
+				t1.ESTADO,
+				t1.NUMERO_ORDEN,
+				t2.ID_PERSONA
+		 from minedu.CONTRATACION t1
+		 LEFT JOIN minedu.PERSONA t2 ON t1.ID_PERSONA = t2.ID_PERSONA
+		 left join MA_MISCELANEOSDETALLE m on t1.CARGO = m.CODIGOELEMENTO and m.CODIGOTABLA = 'CARGOMIN' AND m.APLICACIONCODIGO = 'MP'
+		 where 
+		 t1.ID_CONTRATACION = (select max(ID_CONTRATACION) from minedu.CONTRATACION aux where aux.ID_PERSONA = t1.ID_PERSONA)
+		 and t1.ESTADO = 'A'
+		 order by t2.APELLIDO
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarpersonaldisponiblecontar1">
+		select
+			count(1)
+			from 
+			UFN_OBTENER_PERSONAL_DISPONIBLE
+			(
+			:p_cargo,
+			:p_nivel,
+			:p_conocimiento,
+			:p_nombre,
+			:p_proyecto_desde,
+			:p_proyecto_hasta,
+			:p_inicio,
+			:p_fin,:p_horas
+			) X
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarpersonaldisponible1">
+		select
+			X.ID_PERSONA,
+			X.NOMBRE,
+			X.ID_CARGO,
+			X.NOM_CARGO,
+			X.CONOCIMIENTOS,
+			X.ID_CONTRATACION,
+			ROW_NUMBER() OVER (ORDER BY X.ID_PERSONA) AS Seq
+			from 
+			UFN_OBTENER_PERSONAL_DISPONIBLE
+			(
+			:p_cargo,
+			:p_nivel,
+			:p_conocimiento,
+			:p_nombre,
+			:p_proyecto_desde,
+			:p_proyecto_hasta,
+			:p_inicio,
+			:p_fin,:p_horas
+			) X
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarpersonaldisponible">
+	declare @inicio datetime = :p_desde, @fin datetime = :p_hasta
+	select DISTINCT
+			p.ID_PERSONA,
+			p.APELLIDO + ' '+ p.NOMBRE,
+			c.CARGO,
+			ma1.DESCRIPCIONLOCAL AS 'Cargo',
+			(
+			SELECT STUFF(
+				(SELECT ', ' + s1.NOMBRE
+					FROM minedu.CONOCIMIENTO s1
+					left join minedu.PERSONA_CONOCIMIENTO s2 ON s1.ID_CONOCIMIENTO = s2.ID_CONOCIMIENTO
+					WHERE s2.ID_PERSONA = c.ID_PERSONA 
+					order by s1.NOMBRE
+					FOR XML PATH ('')),
+			1,2, '')
+			) as Conocimientos,
+			c.ID_CONTRATACION
+			from minedu.CONTRATACION c
+			left join minedu.PERSONA p on c.ID_PERSONA = p.ID_PERSONA 
+			left join MA_MISCELANEOSDETALLE ma1 on c.CARGO = ma1.CODIGOELEMENTO and CODIGOTABLA= 'CARGOMIN' and APLICACIONCODIGO = 'MP'
+			left join minedu.PERSONA_CONOCIMIENTO pc on pc.ID_PERSONA = p.ID_PERSONA
+			where 
+			isnull(c.CARGO,'') =   ISNULL(:p_cargo, ISNULL(c.CARGO, ''))
+			and c.ID_CONTRATACION = (select max(c2.ID_CONTRATACION) from minedu.CONTRATACION c2 where c2.ID_PERSONA = c.ID_PERSONA)
+			and isnull(pc.NIVEL,'') =   ISNULL(:p_nivel, ISNULL(pc.NIVEL, ''))
+			and isnull(pc.ID_CONOCIMIENTO,'') =   ISNULL(:p_conocimiento, ISNULL(pc.ID_CONOCIMIENTO, ''))
+			and(p.NOMBRE like '%'+ isnull(:p_nombre, p.NOMBRE) + '%' COLLATE Latin1_General_CI_AI OR p.APELLIDO like '%'+ isnull(:p_nombre, p.APELLIDO) + '%' c Latin1_General_CI_AI)
+			and c.ESTADO = 'A'
+			and
+			(@inicio is null and @fin is null or 
+				(select count(1) from dbo.UFN_OBTENER_FECHAS_DISPONIBLES (0,c.ID_CONTRATACION, :p_proyecto_desde,:p_proyecto_hasta,:p_horas) temp where 
+				temp.estado = '1' and temp.fecha between isnull(@inicio, :p_proyecto_desde) and isnull(@fin, :p_proyecto_hasta)) = 0)
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarpie">
+	
+		<![CDATA[
+			DECLARE @TABLA2 TABLE (NOMBRE VARCHAR(500), CANTIDAD INT)
+			DECLARE @TOTAL INT = (SELECT COUNT(1) FROM minedu.CONTRATACION C WHERE C.ESTADO <> 'I')
+
+			INSERT INTO @TABLA2
+			select DISTINCT 
+			case   c.ID_MODALIDAD when 'MDF' then 'PRÁCTICAS' else c.ID_MODALIDAD end as Nombre,
+			(select count(1)   from 
+			minedu.CONTRATACION AUX where AUX.ID_MODALIDAD = c.ID_MODALIDAD)
+			from minedu.CONTRATACION c
+
+			SELECT *,
+			CAST(ROUND(case T.CANTIDAD when 0 then 0 else T.CANTIDAD*100.00/@TOTAL end,2) AS DECIMAL(5,2)) AS PORCENTAJE
+			FROM @TABLA2 T
+
+		]]>
+		
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarcontratosporpersona">
+		select 
+			CAST(ROW_NUMBER() OVER(ORDER BY c.ID_CONTRATACION ASC) AS INT) AS Row#,
+			c.ID_MODALIDAD,
+			CASE c.ID_MODALIDAD
+			WHEN 'OS' THEN 'ORDEN DE SERVICIOS'
+			WHEN 'MDF' THEN 'PRÁCTICAS'
+			ELSE 'CAS' END AS 'MODALIDAD',																
+			c.CARGO,
+			ma.DESCRIPCIONLOCAL as 'NomCargo',
+			c.NUMERO_ORDEN,
+			c.NUMERO_PLAZO,
+			c.FECHA_INICIO,
+			c.FECHA_FIN
+			from minedu.CONTRATACION c
+			left join MA_MISCELANEOSDETALLE ma on ma.CODIGOELEMENTO = c.CARGO and ma.CODIGOTABLA = 'CARGOMIN'
+			where ID_PERSONA = :id_persona
+			order by Row# desc
+	</sql-query>
+	
+	<sql-query name="mpContratacion.listarfechasnodisponibles">
+	
+		 select * from dbo.UFN_OBTENER_FECHAS_DISPONIBLES 
+		 (
+		 :p_idproyecto,
+		 :p_idcontratacion,
+         :p_proyecto_desde,
+         :p_proyecto_hasta,
+		 :p_horas
+		 ) tmp
+				where tmp.estado = 1
+
+	</sql-query>
+	
+
+
+</hibernate-mapping>

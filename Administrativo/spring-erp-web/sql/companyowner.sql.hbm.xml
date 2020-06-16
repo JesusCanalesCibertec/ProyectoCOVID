@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : core.Direccion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <sql-query name="companyowner.listarActivos">
+    select companyowner, description from companyowner where company in (
+    select CompaniaCodigo from CompaniaMast where estado  = 'A')
+
+  </sql-query>
+
+  <sql-query name="companyowner.listarCompaniaPorSeguridad">
+    SELECT
+    companyowner.companyowner,
+    companyowner.description
+    FROM
+    companyowner
+    INNER JOIN CompaniaMast
+    ON (companyowner.company = CompaniaMast.CompaniaCodigo)
+    INNER JOIN SeguridadAutorizacionCompania
+    ON (companyowner.companyowner = SeguridadAutorizacionCompania.CompanyOwner)
+    WHERE
+    ( CompaniaMast.Estado = 'A' ) AND
+    ( SeguridadAutorizacionCompania.Estado = 'A' )
+    AND SeguridadAutorizacionCompania.Usuario =:p_usuario
+    ORDER BY
+    companyowner.companyowner ASC
+
+  </sql-query>
+
+</hibernate-mapping>

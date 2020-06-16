@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<html>
+
+<head>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>PrimeNG California </title>
+
+    <!-- <link id="theme-css" rel="stylesheet" type="text/css" href="/theme-blue.css">
+    <link id="layout-css" rel="stylesheet" type="text/css" href="/layout-blue.css">
+    <link rel="stylesheet" type="text/css" href="/primeng.min.css"> -->
+</head>
+
+<body class="login-body">
+    <div class="login-topbar">
+        <a href="#" class="logo">
+                <img src="/logo.png" alt="california-layout" style="display: none;" />
+            </a>
+    </div>
+
+    <img class="login-image" src="/image-access.png" alt="california-layout" />
+
+    <div class="login-panel ui-fluid">
+        <div class="ui-g">
+            <div class="ui-g-12 login-icon-container">
+                <img class="login-icon" src="/logo.png" alt="california-layout" />
+            </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12 logo-container">
+                <span class="login-summary">SpringNet Institución</span>
+                <div class="login-detail">
+                    <span>Bienvenido, ingrese sus credenciales.</span>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+                <div class="input-wrapper">
+                    <label>Usuario</label>
+                    <input type="text" autocomplete="off" placeholder="Usuario" class="ui-inputtext ui-widget"
+                        pInputText [(ngModel)]="usuario.usuario" (blur)="cargarCompaniasPorUsuario()">
+                </div>
+            </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+                <div class="input-wrapper">
+                    <label>Institución</label>
+                    <p-dropdown [options]="companias" [(ngModel)]="usuario.compania" [ngStyle]="{'height':'100%'}"
+                        [style]="{'width':'100%','height':'32px'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-lg-12 ui-md-12">
+                <div class="input-wrapper">
+                    <label>Clave</label>
+                    <input type="password" autocomplete="off" placeholder="Clave" class="ui-inputtext ui-widget"
+                        [(ngModel)]="usuario.clave" (keypress)="loginPress($event)">
+                </div>
+            </div>
+            <div class="ui-g-12 ui-lg-6 ui-md-6">
+                <div class="input-wrapper">
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                        (click)="login()">
+                        <span class="ui-button-text ui-c">Ingresar</span>
+                    </button>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-lg-6 ui-md-6">
+                <div class="input-wrapper">
+                    <a (click)="mostrarDialogRecuperarClave()" style="float: right;">Recuperar clave</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<p-dialog header="RECUPERAR CLAVE" [(visible)]="verModalRecuperarClave" [modal]="true" [responsive]="true " [resizable]="false "
+    [closable]="true" [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Correo">
+        <div class="ui-g ">
+            <div class="ui-g-7 ui-md-8 ui-lg-12 ">
+                <input pInputText type="text" [(ngModel)]="correoRecuperarClave" style="width: 100%" />
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-9 ">
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <button pButton (click)="enviarRecuperarClave()" type="button " class="ui-button ui-widget ui-state-default ui-corner-all
+                ui-button-text-only blue-btn raised-btn ">
+                    <span class="ui-button-text ui-c ">Enviar</span>
+                </button>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>
+
+</html>

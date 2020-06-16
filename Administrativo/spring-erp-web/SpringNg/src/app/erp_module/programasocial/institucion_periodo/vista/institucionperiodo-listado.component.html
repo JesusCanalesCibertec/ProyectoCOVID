@@ -1,0 +1,125 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+
+    <p-panel header="SEGURIDAD DE CONCEPTO POR PERIODO">
+        <div class="ui-g ui-md ui-lg">
+
+            <div class="ui-g-3 ui-md-2 ui-lg-1 controlEtiquetaDiv">
+                <label>Institución<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-9 ui-md-10 ui-lg-4 controlEtiquetaDivTop">
+                <p-dropdown [options]="instituciones" [disabled]="admin" [(ngModel)]="PsInstitucionperiodo.idInstitucion"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+
+            <!-- (onChange)='cargarListado()' -->
+
+            <div class="ui-g-3 ui-md-2 ui-lg-1 controlEtiquetaDiv">
+                <label>Periodo<span style="color:#ff0000"> *</span></label>
+            </div>
+            <div class="ui-g-3 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <input pInputText  [(ngModel)]="PsInstitucionperiodo.idPeriodo"  (keypress)="defaultBuscar($event)" />
+            </div>
+            <div class="ui-g-3 ui-md-6 ui-lg-3">
+                
+            </div>
+
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-binoculars" (click)="buscar()" type="button"
+                    class="ui-button"></button>
+            </div>
+
+
+        </div>
+
+
+    </p-panel>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="12" emptyMessage="No se encontraron registros"
+                [paginator]="true"  scrollHeight="290px" scrollWidth="100%" [value]="listado" [editable]="true">
+
+                <p-column header="Código" [style]="{'width':'100px'}" field="codConcepto" styleClass="textoCentrado"></p-column>
+                <p-column header="Proceso" [style]="{'width':'200px'}" field="nomConcepto"></p-column>
+
+                <p-column header="Periodo" [style]="{'width':'80px'}" field="codPeriodo">
+                </p-column>
+
+                <p-column header="Fecha Inicio" [style]="{'width':'100px'}">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <p-calendar [monthNavigator]="true"  [(ngModel)]="tx.fechainicio" dateFormat="dd/mm/yy"
+                            appendTo="body"></p-calendar>
+                    </ng-template>
+                </p-column>
+                <p-column header="Fecha Fin" [style]="{'width':'100px'}">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <p-calendar [monthNavigator]="true"  [(ngModel)]="tx.fechafin" dateFormat="dd/mm/yy"
+                            appendTo="body"></p-calendar>
+                    </ng-template>
+                </p-column>
+
+                <p-column header="Fecha Inicio Registro" [style]="{'width':'100px'}">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <p-calendar [monthNavigator]="true"  [(ngModel)]="tx.fechainicioregistro" dateFormat="dd/mm/yy"
+                            appendTo="body"></p-calendar>
+                    </ng-template>
+                </p-column>
+
+                <p-column header="Fecha Fin Registro" [style]="{'width':'100px'}">
+                    <ng-template let-tx="rowData" pTemplate="body">
+                        <p-calendar [monthNavigator]="true"  [(ngModel)]="tx.fechafinregistro" dateFormat="dd/mm/yy"
+                            appendTo="body"></p-calendar>
+                    </ng-template>
+                </p-column>
+
+            </p-dataTable>
+        </div>
+    </div>
+
+    <!-- (reiniciarSeleccionados)="reiniciarSeleccionados()" (mostrarMensajeEjecutar)="mostrarMensajeEjecutar($event)" -->
+    <aprobacion-preguntas></aprobacion-preguntas>
+
+    <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+        <p-footer>
+            <div class="ui-g ui-g-nopad">
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-5">
+                    <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+                </div>
+            </div>
+        </p-footer>
+    </p-confirmDialog>
+
+
+    <div class="ui-g ui-md ui-lg">
+
+        <div class="ui-g-5 ui-md-3 ui-lg-3">
+            <button pButton label="Copiar Periodo" icon="fa fa-save" type="button" class="ui-button" (click)="copiarPeriodo()"
+           ></button>
+        </div>
+
+        <div class="ui-g-3 ui-md-6 ui-lg-7"></div>
+
+        <div class="ui-g-4 ui-md-3 ui-lg-2">
+            <button pButton label="Actualizar" icon="fa fa-save" type="button" class="ui-button" (click)="guardar()"
+                [disabled]="!puedeEditar"></button>
+        </div>
+
+    </div>
+
+</div>
+
+<app-institucionperiodocopiar (volverABuscar)="cargar($event)"></app-institucionperiodocopiar>

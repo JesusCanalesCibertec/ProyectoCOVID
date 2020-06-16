@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaeprocesoestado
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+     <sql-query name="bpprocesorequerimiento.filtro">
+      select
+a.ID_VERSION,
+a.ID_PROCESO,
+c.NOMBRE as nomProceso,
+a.ID_REQUERIMIENTO,
+b.NOMBRE as nomRequerimiento,
+a.FLG_OBLIGATORIO,
+ROW_NUMBER() OVER (ORDER BY b.NOMBRE ) AS Seq
+from sgseguridadsys.BP_PROCESO_REQUERIMIENTO a 
+		join sgseguridadsys.BP_MAE_REQUERIMIENTO b on a.ID_REQUERIMIENTO = b.ID_REQUERIMIENTO
+		join sgseguridadsys.BP_MAE_PROCESO c       on a.ID_PROCESO = c.ID_PROCESO												
+where 
+a.ID_PROCESO like '%' +  isnull(:p_IdProceso, '') + '%'
+
+
+</sql-query>
+
+
+
+
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    	<![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+	</sql-query>
+   
+</hibernate-mapping>

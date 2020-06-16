@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaerequerimiento
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="bpmaerequerimiento.filtroContar">
+
+select 
+count(1)
+from sgseguridadsys.BP_MAE_REQUERIMIENTO a
+where
+a.ID_REQUERIMIENTO like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+
+
+</sql-query>
+
+
+
+
+<sql-query name="bpmaerequerimiento.filtroPaginacion">
+
+select 
+a.ID_REQUERIMIENTO,
+a.NOMBRE,
+a.DESCRIPCION,
+ROW_NUMBER() OVER (ORDER BY a.NOMBRE ) AS Seq
+from sgseguridadsys.BP_MAE_REQUERIMIENTO a
+where 
+a.ID_REQUERIMIENTO like '%' +  isnull(:p_codigo, '') + '%'
+and a.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+
+
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

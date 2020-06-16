@@ -1,0 +1,87 @@
+
+<!-- <p-blockUI #pnl [blocked]="blocked">
+  <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+      <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+      <strong>Procesando</strong>
+    </div>
+  </div>
+</p-blockUI> -->
+<div class="ui-fluid" #frm>
+    <p-panel header="SYREPORTE : Filtros de Búsqueda">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-1">
+                <label>Aplicación</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-4">
+                <p-dropdown [options]="lstAplicacion" filter="true" [(ngModel)]="filtro.aplicacionCodigo"
+                    [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+            </div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1">
+                <label>Código</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+                <input pInputText type="text" [(ngModel)]="filtro.reporteCodigo" />
+            </div>
+
+            <div class="ui-g-4 ui-md-1 ui-lg-1">
+                <label>Estado</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-2 ui-lg-2">
+                <p-dropdown [options]="lstEstado" [(ngModel)]="filtro.estado" [style]="{'width':'100%'}"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+    </p-panel>
+
+    <div class="ui-g">
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button" (click)='nuevo()'></button>
+        </div>
+        <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Buscar" icon="fa fa-binoculars" class="ui-button" type="button"
+                (click)='buscar(dt)'></button>
+        </div>
+    </div>
+
+    <p-dataTable #dt [responsive]="true" scrollable = "true" scrollWidth="100%" [rows]="8" scrollWidth="100%"
+        [paginator]="true" [lazy]="true" [totalRecords]="filtro.paginacion.registroEncontrados"
+        (onLazyLoad)="cargar($event)" emptyMessage="No se encontraron registros" [value]="filtro.paginacion.listaResultado">
+
+        <p-column header="Aplicación" field="aplicacionCodigo" styleClass="textoCentrado" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Código" field="reporteCodigo" styleClass="textoCentrado" [style]="{'width':'100px'}"></p-column>
+        <p-column header="Nombre" field="nombre" [style]="{'width':'300px'}"></p-column>
+        <p-column header="Tipo" field="tipoReporte" [style]="{'width':'150px'}"></p-column>
+        <p-column header="Estado" field="estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.estado == 'A'?'Activo':'Inactivo'}}
+            </ng-template>
+        </p-column>
+        <p-column header="{{'Acción'}}" styleClass="textoCentrado" [style]="{'width':'100px'}">
+            <ng-template let-tx="rowData" pTemplate="body">
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-6 ui-lg-6" title="Editar">
+                        <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                    </div>
+                    <div *ngIf="tx.estado=='A'" class="ui-g-6 ui-md-6 ui-lg-6" title="Inactivar">
+                        <i class="fa fa-times fa-lg seleccionable" (click)="inactivar(tx)"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+    <p-confirmDialog #c>
+        <p-footer>
+            <button type="button" pButton icon="fa fa-check" label="Si" (click)="c.accept()"></button>
+            <button type="button" pButton icon="fa fa-close" label="No" (click)="c.reject()"></button>
+        </p-footer>
+    </p-confirmDialog>

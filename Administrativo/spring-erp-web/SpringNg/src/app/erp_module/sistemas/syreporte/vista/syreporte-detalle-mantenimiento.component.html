@@ -1,0 +1,95 @@
+
+<!-- <p-blockUI [blocked]="blocked">
+  <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
+      <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+      <strong>Procesando</strong>
+    </div>
+  </div>
+</p-blockUI>  -->
+
+<div class="ui-fluid">
+    <p-dialog header="SYREPORTE ARCHIVO" [(visible)]="verSelector" modal="modal" [style]="{'max-width':'1200px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="">
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Guardar" icon="fa fa-save" type="button" class="ui-button"
+                        (click)='guardar()'></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-8">
+                </div>
+                <div class="ui-g-4 ui-md-3 ui-lg-2">
+                    <button pButton label="Salir" icon="fa fa-mail-reply" type="button" class="ui-button"
+                        (click)="verSelector=false"></button>
+                </div>
+            </div>
+        </p-panel>
+
+
+        <p-panel header="Información General">
+
+            <div class="ui-g">
+
+                <div class="ui-g-4 ui-md-2 ui-lg-1">
+                    <label>Código</label>
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-2">
+                    <input pInputText type="text" disabled [(ngModel)]="syReporteArchivo.reportecodigo"
+                        style="width:100%" maxlength="10" />
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-1">
+                    <label>Aplicación</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                    <p-dropdown [style]="{'width':'100%'}" [options]="lstAplicacion" disabled [(ngModel)]="syReporteArchivo.aplicacioncodigo"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+  
+
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-1">
+                    <label>Periodo <span style="color:#ff0000">*</span></label>
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-2">
+                    <input pInputText type="text" [disabled]="accion==ACCIONES.EDITAR" [(ngModel)]="syReporteArchivo.periodo"
+                        style="width:100%" maxlength="6" />
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-1">
+                    <label>Compañia  <span style="color:#ff0000">*</span></label>
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-3">
+                    <p-dropdown [style]="{'width':'100%'}" [disabled]="accion==ACCIONES.EDITAR" [options]="lstCompania"
+                        [(ngModel)]="syReporteArchivo.companiasocio" [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+
+
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-1">
+                    <label>Version  <span style="color:#ff0000">*</span></label>
+                </div>
+
+                <div class="ui-g-4 ui-md-2 ui-lg-2">
+                    <input pInputText type="text" [disabled]="accion==ACCIONES.EDITAR" [(ngModel)]="syReporteArchivo.version"
+                        style="width:100%" maxlength="6" />
+                </div>
+            </div>
+        </p-panel>
+
+        <angular-editor [(ngModel)]="syReporteArchivo.auxString"></angular-editor>
+  
+     
+    </p-dialog>
+</div>    
+
+

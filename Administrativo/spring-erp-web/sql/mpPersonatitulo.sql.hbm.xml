@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="mpPersonatitulo.listartitulos">  
+	select
+		t1.ID_PERSONA,
+		t1.CARRERA,
+		ma1.DESCRIPCIONLOCAL AS 'Nombre CARRERA',
+		t1.NIVEL,
+		ma2.DESCRIPCIONLOCAL AS 'Nombre NIVEL',
+		t1.GRADO,
+		ma3.DESCRIPCIONLOCAL AS 'Nombre GRADO',
+		t1.CENTRO,
+		ma4.DESCRIPCIONLOCAL as 'Universidad'
+		from minedu.PERSONA_TITULO t1
+		left join MA_MISCELANEOSDETALLE ma1 on t1.CARRERA = ma1.CODIGOELEMENTO and ma1.CODIGOTABLA = 'CARRERAS' AND ma1.APLICACIONCODIGO = 'MP'
+		left join MA_MISCELANEOSDETALLE ma2 on t1.NIVEL = ma2.CODIGOELEMENTO and ma2.CODIGOTABLA = 'NIVELEST' AND ma2.APLICACIONCODIGO = 'MP'
+		left join MA_MISCELANEOSDETALLE ma3 on t1.GRADO = ma3.CODIGOELEMENTO and ma3.CODIGOTABLA  = 'GRADOINS' AND ma3.APLICACIONCODIGO = 'MP'
+		left join MA_MISCELANEOSDETALLE ma4 on t1.CENTRO = ma4.CODIGOELEMENTO and ma4.CODIGOTABLA  = 'CENTROES' AND ma3.APLICACIONCODIGO = 'MP'
+		WHERE t1.ID_PERSONA = ISNULL(:p_idpersona,t1.ID_PERSONA)
+		ORDER BY t1.NIVEL ASC, t1.GRADO, t1.CARRERA
+	</sql-query>
+
+
+</hibernate-mapping>

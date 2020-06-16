@@ -1,0 +1,132 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE EMPLEADOS" [responsive]="true" [(visible)]="verSelector" modal="modal"
+        showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'1000px', 'left':'15px', 'right':'15px', 'margin-top':'-5%'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-inputMask mask="99999" [(ngModel)]="filtro.codEmpleado" [autoClear]="false" [unmask]="true">
+                    </p-inputMask>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <label>Insitución</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <p-dropdown appendTo="body" [options]="lstInstituciones" [(ngModel)]="filtro.codInstitucion"
+                        [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Área de trabajo</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown appendTo="body" [options]="lstArea" [filter]="true" [(ngModel)]="filtro.area"
+                        [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+
+
+            </div>
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Edad</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <input pInputText type="number" [(ngModel)]="filtro.edad" />
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <label>Nombre</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <input pInputText type="text" [(ngModel)]="filtro.nomEmpleado" />
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-1 ">
+                    <label>Sexo</label>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown appendTo="body" [options]="lstSexo" [filter]="true" [(ngModel)]="filtro.sexo"
+                        [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+
+
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-search" type="button" (click)="buscar(dt)"
+                    class="ui-button"></button>
+            </div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Aceptar" icon="fa fa-check" type="button" (click)="aceptar()"
+                    class="ui-button"></button>
+            </div>
+            <div class="ui-g-3 ui-md-4 ui-lg-3">
+                <button pButton label="Seleccionar Todos" icon="fa fa-exchange" type="button" (click)="todos()"
+                    class="ui-button"></button>
+            </div>
+            <div class="ui-g ui-md-2 ui-lg-3"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" class="ui-button" type="button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable #dt [responsive]="true" [rows]="7" [paginator]="true" [lazy]="true" scrollWidth="100%"
+                    [scrollable]="true" scrollHeight="200px" emptyMessage="No se encontraron registros"
+                    [(selection)]="registroSeleccionado" selectionMode="single" (onRowDblclick)="onRowSelect($event)"
+                    [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargarListadoEvent($event)"
+                    [value]="filtro.paginacion.listaResultado">
+
+                    <p-column header="Código" field="idEmpleado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    </p-column>
+                    <p-column header="Nombre" field="nombre" [style]="{'width':'250px'}"></p-column>
+                    <p-column header="Documento" field="documento" [style]="{'width':'100px'}"
+                        styleClass="textoCentrado"></p-column>
+
+                </p-dataTable>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dataTable [responsive]="true" [rows]="7" scrollWidth="100%" [paginator]="true"
+                    emptyMessage="Agrege participantes" [(selection)]="registroSeleccionado" selectionMode="single"
+                    [scrollable]="true" scrollHeight="200px" (onRowDblclick)="onRowSelect($event)"
+                    [value]="seleccionados">
+
+                    <p-column header="Código" field="idEmpleado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                    </p-column>
+                    <p-column header="Nombre" field="nombre" [style]="{'width':'250px'}"></p-column>
+                    <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <i class="fa fa-times fa-lg seleccionable" title="Eliminar" (click)="eliminar(tx)"></i>
+                        </ng-template>
+                    </p-column>
+
+                </p-dataTable>
+            </div>
+        </div>
+
+
+
+
+
+
+    </p-dialog>
+</div>

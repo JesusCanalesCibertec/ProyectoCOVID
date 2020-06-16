@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrCts
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="prcts.listarPeriodoPagadoPorEmpleado">
+         SELECT 'CTS' + '-' + ( LEFT(Cast(fechainicio AS CHAR), 11) + ' - ' 
+                             + LEFT(Cast(fechafin AS CHAR), 11) ) AS "nombre", 
+             numerocts as "codigo"			 
+	      FROM   pr_cts              
+	      WHERE  empleado = :p_id_empleado
+	      and estadocts = 'P'
+	      ORDER  BY numerocts DESC 
+    </sql-query>
+    
+    <sql-query name="prcts.listarPorEmpleadoContar">
+         <![CDATA[
+	         	   SELECT count(c.empleado),ROW_NUMBER() OVER (ORDER BY c.empleado) AS Seq		            
+			      FROM   pr_cts  c
+			             left JOIN banco b
+			                     ON c.banco = b.banco  join MA_CTS m on m.NumeroCTS = c.NumeroCTS 
+			      WHERE  c.empleado = :p_id_empleado  and m.EstadoCTS = 'N'  
+				  AND c.NumeroCTS = isnull( :p_numero_cts ,c.NumeroCTS) and c.estadocts = 'P' 
+					group by empleado
+         ]]>
+	</sql-query>
+	<sql-query name="prcts.listarPorEmpleadoPaginacion">
+         <![CDATA[
+	         SELECT		 
+		             c.numerocts as "numeroCts",			  
+		             cast(tiempoACancelar as varchar) as "tiempoACancelar", 
+					 c.fechainicio as "fechaInicio", 
+		             c.fechafin as "fechaFin", 
+					 cast(indemnizacionanual as numeric(20,2)) as "indemnizacionAnual", 
+		             cast(tipocambio as numeric(20,2))  as "tipoCambio", 
+		             cast(montolocal as numeric(20,2))  as "montoLocal", 
+		             cast(montodolar as numeric(20,2))  as "montoDolar", 
+					 cast(remuneracion as numeric(20,2))  as "remuneracion", 
+					 b.descripcioncorta AS "bancoNombre", 
+					 monedacuentacts as "monedaId", 
+		             numerocuentacts as "numeroCuentaCts",
+					 (select COUNT(1) from PR_CTSDetalle deta where deta.NumeroCTS=c.NumeroCTS and empleado=c.Empleado) as "detalle"
+				,ROW_NUMBER() OVER (ORDER BY c.numerocts desc) AS Seq
+		        FROM   pr_cts  c
+			             left JOIN banco b
+			                     ON c.banco = b.banco  join MA_CTS m on m.NumeroCTS = c.NumeroCTS 
+			      WHERE  c.empleado = :p_id_empleado  and m.EstadoCTS = 'N'  
+				  AND c.NumeroCTS = isnull( :p_numero_cts ,c.NumeroCTS) and c.estadocts = 'P' 
+		]]>
+	</sql-query>
+
+  <sql-query name="prcts.traerCts">
+         <![CDATA[
+	          SELECT EmpleadoMast.Empleado as "empleado",   
+               PersonaMast.NombreCompleto,   
+               PR_CTS.fechaPago,   
+               EmpleadoMast.FechaInicioContrato,   
+               PR_CTS.FechaInicio as FechaInicio,   
+               PR_CTS.FechaFin as FechaFin,   
+               cast(PR_CTS.Remuneracion as numeric(20,2)) ,   
+               PR_CTS.IML,   
+               cast(PR_CTS.IndemnizacionAnual as numeric(20,2)),   
+	       substring(isnull(PR_CTS.TiempoaCancelar, '00'),3,2)+' Meses '+ substring(isnull(PR_CTS.TiempoaCancelar, '00'), 5,2) as "tiempoACancelar",
+               PR_CTS.TiempoValorizado as "Tiempovalorizado",   
+               cast(PR_CTS.TipoCambio as numeric(20,4)) as TipoCambio ,   
+               cast(PR_CTS.MontoLocal as numeric(20,2)),  
+               cast(PR_CTS.MontoDolar as numeric(20,2)) as MontoDolar,    
+               case when left (PR_CTSDetalle.Descripcion, 1) ='*' then Substring (PR_CTSDetalle.Descripcion, 2,30) else PR_CTSDetalle.Descripcion end as Descripcion,
+               cast(PR_CTSDetalle.MontoLocal as numeric(20,2)) as detallemontolocal,   
+               case PR_CTS.MonedaCuentaCTS when 'EX' then 'DOLARES' else 'SOLES' end,   
+               PR_CTS.Banco as "banco",   
+               PR_CTS.NumeroCTS,   
+               PR_CTS.EstadoCTS as estadoCts,   
+               PR_CTS.FechaPago as prFechaPago,   
+               MA_CTS.FechaPago  as maFechaPago, 
+               EmpleadoMast.FechaIngreso as FechaIngreso,  
+		           (select DescripcionLocal from ma_unidadnegocio where UnidadNegocio = EmpleadoMast.UnidadNegocioAsignada)
+,   
+		           EmpleadoMast.FechaCese as FechaCese,   
+		           EmpleadoMast.EstadoEmpleado  as EstadoEmpleado,   
+               PR_CTS.TipoCancelacion,   
+               PR_CTS.NumeroCuentaCTS as "numeroCuentaCts",   
+               EmpleadoMast.CentroCostos,   
+               HR_PuestoEmpresa.Descripcion, 
+               MA_UnidadNegocio.RegistroPatronalPlanilla,     
+		           secuencia,
+               Banco.Descripcioncorta as "bancoNombre",
+               ISNULL(PersonaMast.DocumenTO,PersonaMast.DocumentoIdentidad) as Documento,
+		          CompaniaMast.DescripcionLarga as Empleador,
+		          CompaniaMast.DocumentoFiscal as Ruc,
+		          CompaniaMast.DireccionComun as Direccion,
+		          EmpleadoMast.CodigoCargo as CodigoCargo,
+		          cast(isnull(PR_CTS.MontoInteres,0) as numeric(20,2)) as MontoInteres,
+ 		          cast(isnull(PR_CTS.retencionjudicial,0)  as numeric(20,2)) as retencionjudicial,
+              cast(PR_CTS.TiempoValorizado + isnull(PR_CTS.MontoInteres,0) - isnull(PR_CTS.retencionjudicial,0)as numeric(20,2)) as montoCancelar,
+              cast((case PR_CTS.MonedaCuentaCTS when 'EX' then PR_CTS.MontoDolar else PR_CTS.MontoLocal end) + isnull(PR_CTS.MontoInteres,0) as numeric(20,2)) as montoDepositar, (select DescripcionCorta from MonedaMast where MonedaCodigo = PR_CTS.MonedaCuentaCTS) as monedaNombre
+          FROM PR_CTS
+		      INNER JOIN PR_CTSDetalle
+			      ON (	PR_CTS.Empleado = PR_CTSDetalle.Empleado and
+					      PR_CTS.CompaniaSocio = PR_CTSDetalle.CompaniaSocio and
+					      PR_CTS.NumeroCTS = PR_CTSDetalle.NumeroCTS )
+		      INNER JOIN EmpleadoMast
+			      ON ( 	PR_CTS.Empleado = EmpleadoMast.Empleado and
+					      PR_CTS.CompaniaSocio = EmpleadoMast.CompaniaSocio )
+               INNER JOIN PersonaMast
+			      ON ( EmpleadoMast.Empleado = PersonaMast.Persona )
+               INNER JOIN CompaniaMast
+         	      ON ( substring(PR_CTS.CompaniaSocio,1,6) = CompaniaMast.companiacodigo )    
+		      LEFT JOIN Banco
+			      ON ( Banco.Banco = PR_CTS.Banco )
+               LEFT JOIN MA_UnidadNegocio
+			      ON ( EmpleadoMast.LocaciondePago = MA_UnidadNegocio.UnidadNegocio ) 
+               LEFT JOIN MA_CTS
+			       ON ( PR_CTS.NumeroCTS = MA_CTS.NumeroCTS)
+          LEFT JOIN HR_PuestoEmpresa 
+            ON (EmpleadoMast.CodigoCargo = HR_PuestoEmpresa.CodigoPuesto)
+         WHERE ( PR_CTS.NumeroCTS = :p_numero_cts) and 
+			      ( pr_ctsdetalle.montolocal <> 0  OR LEFT (PR_CTSDetalle.Descripcion,1) = '*') and
+			      EmpleadoMast.Empleado = :p_empleado
+		]]>
+	</sql-query>
+
+</hibernate-mapping>

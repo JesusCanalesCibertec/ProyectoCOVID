@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : rrhh.HrCapacitacion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrencuesta.listarPaginacion">
+    	<![CDATA[
+		SELECT secuencia, periodo, titulo, 
+		
+		isnull((
+		
+			SELECT COUNT(1) FROM(
+			SELECT XX.Secuencia, XX.Sujeto, XX.PERIODO, XX.COMPANYOWNER, COUNT(1) CANTIDAD_PREGUNTAS FROM HR_EncuestaSujeto XX
+			WHERE XX.COMPANYOWNER = a.companyowner AND XX.PERIODO = A.PERIODO AND XX.Secuencia = A.SECUENCIA
+			GROUP BY XX.Secuencia, XX.Sujeto, XX.PERIODO, XX.COMPANYOWNER) YY		
+		),0) as muestra,		
+		
+		B.DescripcionLocal, 
+		case when getdate()<FECHAHASTA then 1 else 0 end as registrar, 
+		fecha, fechadesde, fechahasta, a.CompanyOwner, 
+		cast((''+isnull((
+			SELECT COUNT(1) FROM(
+			SELECT XX.Secuencia, XX.Sujeto, XX.PERIODO, XX.COMPANYOWNER, COUNT(1) CANTIDAD_PREGUNTAS FROM HR_EncuestaSujeto XX
+			WHERE XX.COMPANYOWNER = a.companyowner AND XX.PERIODO = A.PERIODO AND XX.Secuencia = A.SECUENCIA
+			GROUP BY XX.Secuencia, XX.Sujeto, XX.PERIODO, XX.COMPANYOWNER) YY		
+		),0)) as varchar) as muestraS,
+		
+		(select x.descripcionlocal from MA_MiscelaneosDetalle x where x.codigotabla = 'TIPOENCUES' and x.codigoelemento = a.tipo) as tipom,
+		case when getdate()>= FECHAHASTA then 1 else 0 end as 'finzalida',
+		ROW_NUMBER() OVER (ORDER BY periodo desc) AS Seq 
+		FROM HR_Encuesta A JOIN MA_MiscelaneosDetalle B ON B.CodigoTabla = 'ENCUESEST'
+		AND B.CodigoElemento = A.ESTADO
+
+		where Secuencia = isnull(:p_secuencia, Secuencia) 
+		and isnull(a.TIPO, 'TIPO')=ISNULL(:p_tipo, isnull(a.TIPO, 'TIPO'))
+		and isnull(a.ID_PROGRAMA, 'TIPO')=ISNULL(:p_programa, isnull(a.ID_PROGRAMA, 'TIPO'))
+		
+		and
+		periodo = isnull(:p_periodo, Periodo) and
+		isnull(Titulo, 'sin') like '%'+isnull(null,'')+'%' and		
+		a.CompanyOwner = isnull(:p_compania,a.companyowner) and
+		
+		( (isnull(:p_estado, a.estado) <> 'X' and a.estado = isnull(:p_estado, a.estado) )
+			or
+			
+			(isnull(:p_estado, a.estado) = 'X' and a.estado = 'E' and getdate() between a.fechadesde and a.fechahasta )
+		)
+		and ((:p_encuesta = 'E' AND A.TIPO IN ('SATIS')) OR (:p_encuesta = 'G' AND A.TIPO IN ('GUIAIN', 'CLIMA')))
+		
+		
+		
+		]]>
+	</sql-query>
+
+  <sql-query name="hrencuesta.consultarEncuestaIN">
+    <![CDATA[
+        select 
+          s.Secuencia,
+          s.Sujeto, 
+          s.Pregunta, 
+          p.Descripcion, 
+          s.Valor, 
+          v.Descripcion as valorDescripcion, 
+          v.PESO,
+          ROW_NUMBER() OVER (ORDER BY SUJETO) AS Seq 
+         from HR_EncuestaSujeto s
+          left join HR_Encuestadetalle d
+          on s.Secuencia = d.Secuencia and s.Pregunta = d.Pregunta
+          left join HR_EncuestaPregunta p
+          on s.Pregunta = p.Pregunta
+          left join HR_EncuestaPreguntaValores v
+          on s.Pregunta=v.Pregunta and s.Valor = cast(v.Valor as varchar)
+         where 1=1
+          and s.Secuencia=:p_secuencia
+           and d.ID_INDICADOR = ISNULL(:p_indicador,d.ID_INDICADOR)
+          AND s.Pregunta IN(:p_pregunta)
+    	]]>
+  </sql-query>
+
+  <sql-query name="hrencuesta.contarEncuestaIN">
+    <![CDATA[
+        select 
+          COUNT(1)
+         from HR_EncuestaSujeto s
+          left join HR_Encuestadetalle d
+          on s.Secuencia = d.Secuencia and s.Pregunta = d.Pregunta
+          left join HR_EncuestaPregunta p
+          on s.Pregunta = p.Pregunta
+          left join HR_EncuestaPreguntaValores v
+          on s.Pregunta=v.Pregunta and s.Valor = cast(v.Valor as varchar)
+         where 1=1
+          and s.Secuencia=:p_secuencia
+          and d.ID_INDICADOR = ISNULL(:p_indicador,d.ID_INDICADOR)
+            AND s.Pregunta IN(:p_pregunta)
+    	]]>
+  </sql-query>
+
+  <sql-query name="hrencuesta.consultarEncuesta">
+    <![CDATA[
+        select 
+          s.Secuencia,
+          s.Sujeto, 
+          s.Pregunta, 
+          p.Descripcion, 
+          s.Valor, 
+          v.Descripcion as valorDescripcion, 
+          v.PESO,
+          ROW_NUMBER() OVER (ORDER BY SUJETO) AS Seq 
+         from HR_EncuestaSujeto s
+          left join HR_Encuestadetalle d
+          on s.Secuencia = d.Secuencia and s.Pregunta = d.Pregunta
+          left join HR_EncuestaPregunta p
+          on s.Pregunta = p.Pregunta
+          left join HR_EncuestaPreguntaValores v
+          on s.Pregunta=v.Pregunta and s.Valor = cast(v.Valor as varchar)
+         where 1=1
+          and s.Secuencia=:p_secuencia
+          and d.ID_INDICADOR = ISNULL(:p_indicador,d.ID_INDICADOR)
+    	]]>
+  </sql-query>
+
+  <sql-query name="hrencuesta.contarEncuesta">
+    <![CDATA[
+        select 
+          COUNT(1)
+         from HR_EncuestaSujeto s
+          left join HR_Encuestadetalle d
+          on s.Secuencia = d.Secuencia and s.Pregunta = d.Pregunta
+          left join HR_EncuestaPregunta p
+          on s.Pregunta = p.Pregunta
+          left join HR_EncuestaPreguntaValores v
+          on s.Pregunta=v.Pregunta and s.Valor = cast(v.Valor as varchar)
+         where 1=1
+          and s.Secuencia=:p_secuencia
+          and d.ID_INDICADOR = ISNULL(:p_indicador,d.ID_INDICADOR)
+    	]]>
+  </sql-query>
+
+
+  <sql-query name="hrencuesta.listarContar">
+    	<![CDATA[
+		SELECT count(1)
+		FROM HR_Encuesta A JOIN MA_MiscelaneosDetalle B ON B.CodigoTabla = 'ENCUESEST'
+		AND B.CodigoElemento = A.ESTADO
+
+		where 
+		
+		Secuencia = isnull(:p_secuencia, Secuencia) 
+		and isnull(a.TIPO, 'TIPO')=ISNULL(:p_tipo, isnull(a.TIPO, 'TIPO'))
+		and isnull(a.ID_PROGRAMA, 'TIPO')=ISNULL(:p_programa, isnull(a.ID_PROGRAMA, 'TIPO'))
+		and
+		periodo = isnull(:p_periodo, Periodo) and
+		isnull(Titulo, 'sin') like '%'+isnull(null,'')+'%' and		
+		a.CompanyOwner = isnull(:p_compania,a.companyowner) and
+		
+		( (isnull(:p_estado, a.estado) <> 'X' and a.estado = isnull(:p_estado, a.estado) )
+			or
+			
+			(isnull(:p_estado, a.estado) = 'X' and a.estado = 'E' and getdate() between a.fechadesde and a.fechahasta )
+		)
+		and ((:p_encuesta = 'E' AND A.TIPO IN ('SATIS')) OR (:p_encuesta = 'G' AND A.TIPO IN ('GUIAIN', 'CLIMA')))
+		
+		]]>
+	</sql-query>
+
+	<sql-query name="hrencuesta.contarSujetos">
+    	<![CDATA[
+		select count(*) cant from (
+		SELECT count(sujeto)cant from HR_EncuestaSujeto 
+		where companyowner = :p_compania and periodo = :p_periodo and Secuencia = :p_secuencia
+		and sujeto = isnull(:p_sujeto, sujeto)
+		and (cast(ultimafechamodif as date) = :p_dia or :p_dia = '2018-01-01')
+		and isnull(ID_INSTITUCION, 'sin') = isnull(:p_institucion, isnull(ID_INSTITUCION, 'sin'))
+		group by companyowner, periodo, Secuencia, Sujeto, edad, sexo,Cast(ultimafechamodif as smalldatetime), ID_INSTITUCION) as t
+		]]>
+	</sql-query>
+
+	<sql-query name="hrencuesta.listarSujetosPaginacion">
+    	<![CDATA[
+		SELECT 
+		sujeto as sujeto, 
+		case when sexo = 'M' then 'Masculino' when sexo = 'F' then 'Femenino' else '' end as sexo,
+		edad as edad,
+		Cast(ultimafechamodif as smalldatetime) asas,
+		(select x.NOMBRE from sgseguridadsys.PS_INSTITUCION x where x.ID_INSTITUCION = y.ID_INSTITUCION) as inst,
+		
+		case when TIPO_GUIAIN = 'C' then 'Por componente' when TIPO_GUIAIN='P' then 'Por proyecto' else  '' end as tipo,
+		(select top 1 NOMBRE from sgseguridadsys.PS_INSTITUCION_AREA x where x.ID_INSTITUCION = y.ID_INSTITUCION and x.ID_AREA = y.ID_INSTITUCION_AREA) as resi,
+		
+		ROW_NUMBER() OVER (ORDER BY SUJETO) AS Seq From HR_EncuestaSujeto  y
+		where companyowner = :p_compania and periodo = :p_periodo and Secuencia = :p_secuencia
+		and sujeto = isnull(:p_sujeto, sujeto)
+		and (cast(ultimafechamodif as date) = :p_dia or :p_dia = '2018-01-01')
+		and isnull(y.ID_INSTITUCION, 'sin') = isnull(:p_institucion, isnull(y.ID_INSTITUCION, 'sin'))
+		group by companyowner, periodo, Secuencia, Sujeto, edad, sexo,Cast(ultimafechamodif as smalldatetime), ID_INSTITUCION, TIPO_GUIAIN, ID_INSTITUCION_AREA
+		]]>
+	</sql-query>
+	<sql-query name="hrencuesta.analizarEncuesta">
+    	<![CDATA[
+				DECLARE @TIPO_ENCUESTA VARCHAR(100) = (SELECT TOP 1 TIPO FROM HR_Encuesta WHERE Secuencia = :p_secuencia AND Periodo = :p_periodo AND CompanyOwner = :p_compania)
+				
+				--desde
+				declare @max decimal(10,1) = 0
+
+				select @max = SUM(c.tot) from (
+				select (select MAX(PESO) from HR_EncuestaPreguntaValores x where x.Pregunta = a.Pregunta) tot from 
+				HR_EncuestaDetalle a 
+				where a.Secuencia = :p_secuencia and a.Periodo = :p_periodo and a.companyowner = :p_compania) c
+				
+				--hasta
+				
+				IF @TIPO_ENCUESTA = 'CLIMA'
+				BEGIN
+					SELECT
+					F.DESCRIPCIONLOCAL,
+					B.Descripcion,
+					E.Descripcion,
+					1 AS CANTIDAD,
+					PESO,
+					sum(PESO) PUNTAJE,
+					@max
+					FROM HR_ENCUESTASUJETO A
+					LEFT JOIN HR_ENCUESTADETALLE XX ON XX.COMPANYOWNER = A.COMPANYOWNER AND XX.PERIODO = A.PERIODO AND XX.SECUENCIA = A.SECUENCIA AND A.PREGUNTA = XX.PREGUNTA
+					JOIN HR_EncuestaPregunta B ON B.Pregunta = A.Pregunta
+					CROSS APPLY dbo.SplitString(CASE WHEN LEN(VALOR) = 1 THEN VALOR ELSE SUBSTRING(A.VALOR, 0, LEN(A.VALOR)) END, N',') AS C
+					JOIN HR_Encuesta D ON D.CompanyOwner = A.COMPANYOWNER AND D.Periodo = A.PERIODO AND D.Secuencia = A.Secuencia
+					JOIN HR_EncuestaPreguntaValores E ON B.Pregunta = E.Pregunta AND E.Valor = C.Item
+					LEFT JOIN MA_MiscelaneosDetalle F ON 
+						(B.TipoEncuesta='CLIMA' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'AREASCLIMA' AND AplicacionCodigo = 'HR')OR
+						(B.TipoEncuesta='GUIAIN' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'ARGOINF' AND AplicacionCodigo = 'PS')OR
+						(B.TipoEncuesta='SATIS' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'AREAENCSAT' AND AplicacionCodigo = 'PS')
+					WHERE  B.TIPO <> 'C' AND
+
+					A.COMPANYOWNER = :p_compania AND A.PERIODO = :p_periodo AND A.SECUENCIA = :p_secuencia
+					AND
+					(
+						((D.ID_MISCELANEO_HEADER1 IS NULL) OR (ISNULL(A.MISCELANEO1, 'X') = ISNULL(:p_m1, ISNULL(A.MISCELANEO1, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER2 IS NULL) OR (ISNULL(A.MISCELANEO2, 'X') = ISNULL(:p_m2, ISNULL(A.MISCELANEO2, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER3 IS NULL) OR (ISNULL(A.MISCELANEO3, 'X') = ISNULL(:p_m3, ISNULL(A.MISCELANEO3, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER4 IS NULL) OR (ISNULL(A.MISCELANEO4, 'X') = ISNULL(:p_m4, ISNULL(A.MISCELANEO4, 'X'))))
+					)AND
+					A.ID_INSTITUCION = ISNULL(:p_institucion, A.ID_INSTITUCION) AND
+					ISNULL(A.ID_INSTITUCION_AREA, 'X') = ISNULL(:p_iArea, ISNULL(A.ID_INSTITUCION_AREA, 'X')) AND
+					ISNULL(B.Area, 'X') = ISNULL(:p_area, ISNULL(B.Area, 'X')) AND
+					ISNULL(A.ID_PROGRAMA, 'X') = ISNULL(:p_programa, ISNULL(A.ID_PROGRAMA, 'X')) AND
+					ISNULL(A.ID_COMPONENTE, 'X') = ISNULL(:p_componente, ISNULL(A.ID_COMPONENTE, 'X')) AND
+					ISNULL(A.Sexo, 'X') = ISNULL(:p_sexo, ISNULL(A.Sexo, 'X')) AND
+					ISNULL(A.Edad, 'X') = ISNULL(:p_edad, ISNULL(A.Edad, 'X'))and
+					ISNULL(A.afe, 'X') = ISNULL(:p_afe, ISNULL(A.afe, 'X'))
+					GROUP BY 
+					B.Area,
+					F.DESCRIPCIONLOCAL,
+					A.Pregunta, 
+					B.Descripcion,
+					E.Descripcion,
+					C.ITEM ,
+					XX.ORDEN,
+					peso
+					ORDER BY XX.ORDEN
+				END
+				ELSE IF @TIPO_ENCUESTA = 'SATIS'
+				BEGIN
+					SELECT
+					F.DESCRIPCIONLOCAL,
+					cast(xx.orden as varchar(1000))+ '). '+B.Descripcion,
+					E.Descripcion,
+					COUNT(1),
+					0.0,
+					0.0,
+					0.0
+					FROM HR_ENCUESTASUJETO A
+					LEFT JOIN HR_ENCUESTADETALLE XX ON XX.COMPANYOWNER = A.COMPANYOWNER AND XX.PERIODO = A.PERIODO AND XX.SECUENCIA = A.SECUENCIA AND A.PREGUNTA = XX.PREGUNTA
+					JOIN HR_EncuestaPregunta B ON B.Pregunta = A.Pregunta
+					CROSS APPLY dbo.SplitString(CASE WHEN LEN(VALOR) = 1 THEN VALOR ELSE SUBSTRING(A.VALOR, 0, LEN(A.VALOR)) END, N',') AS C
+					JOIN HR_Encuesta D ON D.CompanyOwner = A.COMPANYOWNER AND D.Periodo = A.PERIODO AND D.Secuencia = A.Secuencia
+					JOIN HR_EncuestaPreguntaValores E ON B.Pregunta = E.Pregunta AND E.Valor = C.Item
+					LEFT JOIN MA_MiscelaneosDetalle F ON 
+						(B.TipoEncuesta='CLIMA' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'AREASCLIMA' AND AplicacionCodigo = 'HR')OR
+						(B.TipoEncuesta='GUIAIN' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'ARGOINF' AND AplicacionCodigo = 'PS')OR
+						(B.TipoEncuesta='SATIS' AND B.Area=F.CodigoElemento AND F.CodigoTabla = 'AREAENCSAT' AND AplicacionCodigo = 'PS')
+					WHERE  B.TIPO <> 'C' AND
+
+					A.COMPANYOWNER = :p_compania AND A.PERIODO = :p_periodo AND A.SECUENCIA = :p_secuencia
+					AND
+					(
+						((D.ID_MISCELANEO_HEADER1 IS NULL) OR (ISNULL(A.MISCELANEO1, 'X') = ISNULL(:p_m1, ISNULL(A.MISCELANEO1, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER2 IS NULL) OR (ISNULL(A.MISCELANEO2, 'X') = ISNULL(:p_m2, ISNULL(A.MISCELANEO2, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER3 IS NULL) OR (ISNULL(A.MISCELANEO3, 'X') = ISNULL(:p_m3, ISNULL(A.MISCELANEO3, 'X')))) AND
+						((D.ID_MISCELANEO_HEADER4 IS NULL) OR (ISNULL(A.MISCELANEO4, 'X') = ISNULL(:p_m4, ISNULL(A.MISCELANEO4, 'X'))))
+					)AND
+					A.ID_INSTITUCION = ISNULL(:p_institucion, A.ID_INSTITUCION) AND
+					ISNULL(A.ID_INSTITUCION_AREA, 'X') = ISNULL(:p_iArea, ISNULL(A.ID_INSTITUCION_AREA, 'X')) AND
+					ISNULL(B.Area, 'X') = ISNULL(:p_area, ISNULL(B.Area, 'X')) AND
+					ISNULL(A.ID_PROGRAMA, 'X') = ISNULL(:p_programa, ISNULL(A.ID_PROGRAMA, 'X')) AND
+					ISNULL(A.ID_COMPONENTE, 'X') = ISNULL(:p_componente, ISNULL(A.ID_COMPONENTE, 'X')) AND
+					ISNULL(A.Sexo, 'X') = ISNULL(:p_sexo, ISNULL(A.Sexo, 'X')) AND
+					ISNULL(A.Edad, 'X') = ISNULL(:p_edad, ISNULL(A.Edad, 'X'))and
+					ISNULL(A.afe, 'X') = ISNULL(:p_afe, ISNULL(A.afe, 'X'))
+					GROUP BY 
+					B.Area,
+					F.DESCRIPCIONLOCAL,
+					A.Pregunta, 
+					B.Descripcion,
+					E.Descripcion,
+					C.ITEM ,
+					XX.ORDEN
+					ORDER BY XX.ORDEN
+				END
+
+
+
+		]]>
+	</sql-query>
+
+
+
+</hibernate-mapping>

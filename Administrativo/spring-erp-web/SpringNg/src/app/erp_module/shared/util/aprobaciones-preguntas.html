@@ -1,0 +1,111 @@
+<!--OBJETOS COMUNES DE LAS APROBACIONES-->
+<p-dialog [header]="aux.procesoNombre + ' N° ' + aux.procesoNro" [(visible)]="verModalPregunta1" [modal]="true" [responsive]="true"
+    [resizable]="false" [closable]="false" [closeOnEscape]="false" [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <div class="ui-dialog-content ui-widget-content">
+        <i class="ng-tns-c5-12 fa fa-question-circle"></i>
+        <span class="ui-confirmdialog-message">¿Aprobar todos los niveles?</span>
+    </div>
+    <div class="ui-dialog-footer ui-widget-content ng-tns-c5-12">
+        <button type="button " pButton icon="fa-check" label="Si" (click)="onClickPrimeraPreguntaSi()"></button>
+        <button type="button " pButton icon="fa-times" label="No" (click)="onClickPrimeraPreguntaNo()"></button>
+    </div>
+</p-dialog>
+
+<p-dialog [header]="aux.procesoNombre + ' N° ' + aux.procesoNro" [(visible)]="verModalPregunta2" [modal]="true" [responsive]="true"
+    [resizable]="false " [closable]="false" [closeOnEscape]="false" [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <div class="ui-dialog-content ui-widget-content">
+        <i class="ng-tns-c5-12 fa fa-question-circle"></i>
+        <span class="ui-confirmdialog-message">No se tiene configurado un correo, desea continuar?</span>
+    </div>
+    <div class="ui-dialog-footer ui-widget-content ng-tns-c5-12">
+        <button type="button " pButton icon="fa fa-check" label="Si" (click)="onClickSegundaPreguntaSi()"></button>
+        <button type="button " pButton icon="fa fa-times" label="No" (click)="onClickSegundaPreguntaNo()"></button>
+    </div>
+</p-dialog>
+
+<p-dialog [header]="aux.procesoNombre + ' N° ' + aux.procesoNro" [(visible)]="verModalComentario" [modal]="true " [responsive]="true "
+    [resizable]="false " [closable]="false" [closeOnEscape]="false" [style]="{'max-width':'400px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Observaciones ">
+        <div class="ui-g ">
+            <div class="ui-g-12 ui-md-12 ui-lg-12 ">
+                <textarea pInputTextarea style="width:100%" [(ngModel)]="aux.observacionAccion"></textarea>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-8 ">
+            </div>
+            <div class="ui-g-5 ui-md-4 ui-lg-4 ">
+                <button type="button " pButton icon="fa fa-save" label="Aceptar" (click)="pasarSiguienteDto()"></button>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>
+
+
+<p-dialog [header]="aux.procesoNombre + ' N° ' + aux.procesoNro +' - OTORGAMIENTO'" [(visible)]="verModalOtorgaminento" [modal]="true "
+    [responsive]="true " [resizable]="false " [closable]="false" [closeOnEscape]="false" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    <p-panel header="Observaciones ">
+        <div class="ui-g ">
+
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <label>¿El Préstamo ya fue entregado?</label>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-2 ">
+                <p-radioButton name="groupname" value="S" label="Sí" [(ngModel)]="aux.prestamoOtorgadoFlag" (onClick)="evaluarOtorgado()"></p-radioButton>
+                <p-radioButton name="groupname" value="N" label="No" [(ngModel)]="aux.prestamoOtorgadoFlag" (onClick)="evaluarOtorgado()"></p-radioButton>
+            </div>
+            <div class="ui-g-5 ui-md-4 ui-lg-2 ">
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <label>Recibo</label>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <input pInputText type="text" [(ngModel)]="aux.prestamoNumeroRecibo" maxlength="6" [disabled]="aux.prestamoOtorgadoFlag != 'S'"
+                />
+            </div>
+
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <label>Moneda de Entrega</label>
+            </div>
+            <!-- [options]="lstMoneda" -->
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [(ngModel)]="aux.prestamoMonedaPago" 
+                    [disabled]="aux.prestamoOtorgadoFlag != 'S'" [options]="lstMoneda" ></p-dropdown>
+            </div>
+            <div class="ui-g-5 ui-md-4 ui-lg-1 ">
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <label>Número del Cheque </label>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <p-inputMask mask="9999999" [(ngModel)]="aux.prestamoNumeroCheque" [disabled]="aux.prestamoTipoPago != 'C' || aux.prestamoOtorgadoFlag != 'S'"></p-inputMask>
+            </div>
+
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <label>Tipo de Pago</label>
+            </div>
+            <!-- [options]="lstTipoPago" -->
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <p-dropdown appendTo="body" [style]="{'width':'100%'}" [autoWidth]="false" [disabled]="aux.prestamoOtorgadoFlag != 'S'" [(ngModel)]="aux.prestamoTipoPago"
+                     (onChange)="evaluarTipoPago()"  [options]="lstTipoPago"></p-dropdown>
+            </div>
+            <div class="ui-g-5 ui-md-4 ui-lg-1 ">
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <label>Cuenta Bancaria</label>
+            </div>
+            <div class="ui-g-7 ui-md-8 ui-lg-3 ">
+                <p-inputMask mask="999999999999999" [(ngModel)]="aux.prestamoCuentaBancaria" [disabled]="aux.prestamoTipoPago != 'C' || aux.prestamoOtorgadoFlag != 'S'"></p-inputMask>
+            </div>
+
+            <div class="ui-g-5 ui-md-4 ui-lg-3 ">
+                <button type="button " pButton icon="fa fa-save" label="Guardar" (click)="onClickOtorgamiento()"></button>
+            </div>
+        </div>
+
+    </p-panel>
+</p-dialog>

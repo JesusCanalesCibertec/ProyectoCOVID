@@ -1,0 +1,68 @@
+<div class="ui-fluid">
+    <p-dialog header="{{titulo}}" [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size"
+        [width]="800">
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-4 ui-lg-4"></div>
+
+            <div class="ui-g-6 ui-md-4 ui-lg-4">
+                <button pButton label="Agregar" [disabled]="deshabilitar" icon="fa fa-plus" type="button"
+                    (click)="adicionarFila()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-3 ui-md-4 ui-lg-4"></div>
+        </div>
+        <p-dataTable #dt [responsive]="true" scrollable="true" [rows]="registrosPorPagina" [paginator]="true"
+            scrollWidth="100%" [value]="contratacion.listadetalle" emptyMessage="No se encontraron registros">
+
+            <p-column header="Nro." field="idCodigo" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Días" field="dias" [style]="{'width':'80px'}" [editable]="false">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <p-spinner [(ngModel)]="tx.dias" [min]="1" [max]="tx.maximo" (input)="calcularango(tx)"
+                        (onChange)="calcularango(tx)" type="text"></p-spinner>
+                </ng-template>
+            </p-column>
+            <p-column header="Inicio de servicio" field="fechainicio" [style]="{'width':'150px'}"
+                styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Fecha límite de entrega" field="fechafin" [style]="{'width':'150px'}"
+                styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechafin | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Descripción" field="valor3" [style]="{'width':'250px'}">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <textarea [rows]="5" style="width: 100%; resize: none" [(ngModel)]="tx.descripcion"
+                        pInputTextarea></textarea>
+                </ng-template>
+            </p-column>
+            <p-column *ngIf="!deshabilitar" header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <div class="ui-g" [ngStyle]="obtenerEstilosEditar(tx.auxDeshabilitado)">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12 " style="cursor: pointer; " title="Eliminar ">
+                            <i class="fa fa-times fa-lg seleccionable" (click)="borrarFila(tx.idCodigo)"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                <button pButton label="Guardar" [disabled]="deshabilitar" icon="fa fa-save" type="button"
+                    class="ui-button" (click)="guardar()"></button>
+            </div>
+            <div class="ui-g-4 ui-md-6 ui-lg-4">
+            </div>
+            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" type="button" class="ui-button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+
+    </p-dialog>
+
+</div>

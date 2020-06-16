@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : salud.ssgediagnostico
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+   
+
+
+<sql-query name="ssgediagnostico.filtroContar">
+
+  select
+  count(1)
+  from [sgseguridadsys].SS_ge_diagnostico t1
+  where
+  ISNULL(t1.CodigoPadre, '123') = isnull(null, ISNULL(t1.CodigoPadre, '123'))
+  and t1.CodigoDiagnostic like '%' +  isnull(:p_id_diagnostico, '') + '%'
+  and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+  and ISNULL(t1.ESTADO, 123) = isnull(:p_id_estado, ISNULL(t1.ESTADO, 123))
+  AND ISNULL(t1.ID_CAPITULO,'XX')=ISNULL(:p_idCapitulo,ISNULL(t1.ID_CAPITULO,'XX'))
+  AND ISNULL(t1.ID_GRUPO,'XX')=ISNULL(:p_idGrupo,ISNULL(t1.ID_GRUPO,'XX'))
+</sql-query>
+
+<sql-query name="ssgediagnostico.filtroPaginacion">
+  select
+  T1.CodigoPadre,
+  T1.CodigoDiagnostic,
+  T1.Nombre,
+  case t1.ESTADO
+  when 2 then 'Activo'
+  when 1 then 'Inactivo'
+  end as Estado,
+  t1.CREACION_FECHA,
+  t1.IdDiagnostico,
+   t1.id_capitulo,
+  t1.id_grupo,
+  ROW_NUMBER() OVER (ORDER BY CodigoDiagnostic) AS Seq
+  from [sgseguridadsys].SS_ge_diagnostico t1
+  where
+  ISNULL(t1.CodigoPadre, '123') = isnull(null, ISNULL(t1.CodigoPadre, '123'))
+  and t1.CodigoDiagnostic like '%' +  isnull(:p_id_diagnostico, '') + '%'
+  and t1.NOMBRE like '%' + isnull(:p_nombre, '') + '%'
+  and ISNULL(t1.ESTADO, 123) = isnull(:p_id_estado, ISNULL(t1.ESTADO, 123))
+  AND ISNULL(t1.ID_CAPITULO,'XX')=ISNULL(:p_idCapitulo,ISNULL(t1.ID_CAPITULO,'XX'))
+  AND ISNULL(t1.ID_GRUPO,'XX')=ISNULL(:p_idGrupo,ISNULL(t1.ID_GRUPO,'XX'))
+  
+</sql-query>
+
+</hibernate-mapping>

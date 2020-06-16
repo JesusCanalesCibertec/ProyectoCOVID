@@ -1,0 +1,51 @@
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE ITEMS GENÉRICOS" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+    [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-1 ui-lg-1">
+                    <label>Código</label>
+                </div>
+                <div class="ui-g-8 ui-md-2 ui-lg-1">
+                    <input pInputText [(ngModel)]="filtro.codigo" />
+                </div>
+                <div class="ui-g-4 ui-md-2 ui-lg-2 ">
+                    <label>Descripción</label>
+                </div>
+                <div class="ui-g-8 ui-md-4 ui-lg-5">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombre" />
+                </div>
+                <div class="ui-g-4 ui-md-1 ui-lg-1">
+                    <label>Estado</label>
+                </div>
+                <div class="ui-g-8 ui-md-2 ui-lg-2">
+                    <p-dropdown [options]="lstEstados" [(ngModel)]="filtro.estado" [style]="{'width':'100%'}" [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-save" type="button" (click)="buscar(dt)" class="ui-button"></button>
+            </div>
+            <div class="ui-g-4 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+
+        <p-dataTable #dt [responsive]="true" scrollable= "true" [rows]="registrosPorPagina" [paginator]="true" [lazy]="true" scrollWidth="100%"
+            emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado" selectionMode="single" (onRowDblclick)="onRowSelect($event)"
+            [totalRecords]="filtro.paginacion.registroEncontrados" (onLazyLoad)="cargar($event)" [value]="filtro.paginacion.listaResultado">
+            <p-column header="Código" field="idItem" [style]="{'width':'100px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Descripción" field="nomItem"  [style]="{'width':'100%'}"></p-column>
+            <p-column header="Estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.estado=='A'?'Activo':'Inactivo'}}
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+
+    </p-dialog>
+</div>

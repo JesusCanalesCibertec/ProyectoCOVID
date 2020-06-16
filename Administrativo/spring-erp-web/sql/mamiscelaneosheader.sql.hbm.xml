@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : core.mamiscelaneosheader
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    
+
+
+<sql-query name="mamiscelaneosheader.filtrocontar">
+
+SELECT 
+count(1)
+from
+MA_MiscelaneosHeader a
+	INNER JOIN AplicacionesMast b
+		ON (a.AplicacionCodigo = b.AplicacionCodigo)
+WHERE
+ISNULL(a.CodigoTabla, '123') = isnull(:p_codigo, ISNULL(a.CodigoTabla, '123'))
+and a.DescripcionLocal like '%' + isnull(:p_descripcion, '') + '%'
+and ISNULL(a.AplicacionCodigo, '123') = isnull(:p_aplicacion, ISNULL(a.AplicacionCodigo, '123'))
+and ISNULL(a.Estado, '123') = isnull(:p_estado, ISNULL(a.Estado, '123'))
+
+
+     </sql-query>
+
+
+
+
+<sql-query name="mamiscelaneosheader.filtropaginacion">
+
+
+SELECT 
+a.AplicacionCodigo,   
+a.CodigoTabla,
+a.Compania,
+a.DescripcionLocal,   
+b.DescripcionCorta,
+case a.Estado
+when 'A' then 'Activo'
+when 'I' then 'Inactivo'
+end as Estado,
+ROW_NUMBER() OVER (ORDER BY a.AplicacionCodigo) AS Seq 
+FROM 
+MA_MiscelaneosHeader a
+	LEFT JOIN AplicacionesMast b
+		ON (a.AplicacionCodigo = b.AplicacionCodigo)
+WHERE
+ISNULL(a.CodigoTabla, '123') = isnull(:p_codigo, ISNULL(a.CodigoTabla, '123'))
+and a.DescripcionLocal like '%' + isnull(:p_descripcion, '') + '%'
+and ISNULL(a.AplicacionCodigo, '123') = isnull(:p_aplicacion, ISNULL(a.AplicacionCodigo, '123'))
+and ISNULL(a.Estado, '123') = isnull(:p_estado, ISNULL(a.Estado, '123'))
+
+
+ </sql-query>
+
+
+
+
+    
+  
+   
+</hibernate-mapping>

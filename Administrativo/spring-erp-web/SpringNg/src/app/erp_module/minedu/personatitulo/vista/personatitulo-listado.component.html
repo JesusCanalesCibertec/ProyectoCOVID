@@ -1,0 +1,178 @@
+<div class="ui-fluid">
+    <p-dialog header="{{titulo}} : Estudios" [(visible)]="verModal" [modal]="true" [responsive]="true" [modal]="true"
+        [style]="{'margin-top':'25px', 'max-width':'800px','left':'15px', 'right':'15px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Nuevo" [disabled]="auxEstadoPersona" icon="fa fa-plus" type="button"
+                    (click)="nuevo()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" class="ui-button" type="button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable #dt scrollable="true" [responsive]="true" [rows]="registrosPorPagina" [paginator]="true"
+            scrollWidth="100%" [value]="listado" emptyMessage="No se encontraron registros">
+
+            <p-column header="Centro de estudios" field="centro" [style]="{'width':'150px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <label pTooltip="{{tx.nomCentro}}"
+                        tooltipPosition="top">{{tx.idCentro==null?'No especifica':tx.idCentro}}</label>
+                </ng-template>
+            </p-column>
+            <p-column header="Nivel" field="nomNivel" [style]="{'width':'70px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Carrera" field="nomCarrera" [style]="{'width':'200px'}"></p-column>
+            <p-column header="Grado" field="nomGrado" [style]="{'width':'70px'}" styleClass="textoCentrado"></p-column>
+            <p-column *ngIf="!auxEstadoPersona" header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <div class="ui-g" *ngIf="tx.idGrado == '3'|| tx.idGrado == '2'||tx.idGrado == '1'">
+                        <div class="ui-g-6 ui-md-6 ui-lg-6" title="Eliminar">
+                            <i class="fa fa-times fa-lg seleccionable" (click)="eliminar(tx)"></i>
+                        </div>
+                        <div class="ui-g-6 ui-md-6 ui-lg-6" title="Editar">
+                            <i class="far fa-edit fa-lg seleccionable" (click)="editar(tx)"></i>
+                        </div>
+                    </div>
+                    <div class="ui-g" *ngIf="tx.idGrado == '4'">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12" title="Eliminar">
+                            <i class="fa fa-times fa-lg seleccionable" (click)="eliminar(tx)"></i>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+
+        </p-dataTable>
+
+    </p-dialog>
+
+    <div class="ui-fluid">
+        <p-dialog header="TÍTULO : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':''}}"
+            [(visible)]="verModalFolio" [modal]="true" [responsive]="true" [resizable]="true" [draggable]="true"
+            [closable]="true" [closeOnEscape]="true" [contentStyle]="{'overflow':'visible'}" [modal]="true"
+            [style]="{'margin-top':'25px', 'max-width':'550px','left':'15px', 'right':'15px'}">
+
+            <div class="ui-fluid" #frm>
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Carrera<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="carreras" [disabled]="deshabilitar" (onChange)='cargarMiscelaneo()'
+                            [(ngModel)]="Personatitulo.idCarrera" [autoWidth]="false" filter="true"
+                            resetFilterOnHide="true" emptyFilterMessage=" Carrera no encontrada">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Centro de estudios</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown #dd [options]="centros" [disabled]="deshabilitar" (onChange)='cargarMiscelaneo()'
+                            [(ngModel)]="Personatitulo.idCentro" [autoWidth]="false" filter="true"
+                            resetFilterOnHide="true" emptyFilterMessage=" Centro de estudios no encontrado">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Nivel de estudio<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-7 ui-lg-8">
+                        <p-dropdown [options]="niveles" [disabled]="deshabilitar || !desLimpiar" (onChange)='cargarGrados()'
+                            [(ngModel)]="Personatitulo.idNivel" [autoWidth]="false"></p-dropdown>
+                    </div>
+                    <div class="ui-g-12 ui-md-1 ui-lg-1">
+                        <button pButton icon="fas fa-eraser" (click)="limpiar()" [disabled]="deshabilitar || desLimpiar"
+                            class="ui-button" type="button" title="Limpiar">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ui-g ui-md ui-lg">
+                    <div class="ui-g-12 ui-md-4 ui-lg-3">
+                        <label>Grado instrucción<span style="color:#ff0000">*</span></label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-9">
+                        <p-dropdown [options]="grados" [(ngModel)]="Personatitulo.idGrado" [autoWidth]="false"
+                            [disabled]="desLimpiar">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Guardar" (click)="guardar()" icon="fa fa-save" type="button"
+                        class="ui-button"></button>
+                </div>
+
+                <div class="ui-g-4 ui-md-6 ui-lg-4">
+
+                </div>
+
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Salir" icon="fas fa-sign-out-alt" iconPos="right" type="button"
+                        class="ui-button" (click)="salirRegistro()"></button>
+                </div>
+            </div>
+        </p-dialog>
+
+    </div>
+
+    <div class="ui-fluid">
+        <p-dialog header="{{tag=='CARRERAS'?'Nueva Carrera':'Nuevo Centro de Estudios'}}" [(visible)]="verMiscelaneo"
+            [modal]="true" [responsive]="true" [closable]="false" [closeOnEscape]="false" [resizable]="true"
+            [draggable]="true" [contentStyle]="{'overflow':'visible'}" [modal]="true"
+            [style]="{'margin-top':'25px', 'max-width':'500px','left':'15px', 'right':'15px'}">
+
+            <div class="ui-g ui-md ui-lg" *ngIf="tag=='CENTROES'">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                    <span class="ui-float-label">
+                        <input pInputText [(ngModel)]="miscelaneo.codigoelemento" maxlength="10" [disabled]="" type="text">
+                        <label for="float-input">Siglas</label>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12"></div>
+            </div>
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                    <span class="ui-float-label">
+                        <input pInputText [(ngModel)]="miscelaneo.descripcionlocal" maxlength="30" [disabled]="" type="text">
+                        <label for="float-input">Nombre</label>
+                    </span>
+                </div>
+            </div>
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                </div>
+            </div>
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Agregar" (click)="agregar()" icon="fas fa-plus-circle" type="button"
+                        class="ui-button"></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-4">
+
+                </div>
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Cancelar" icon="far fa-times-circle" iconPos="right" type="button"
+                        class="ui-button" (click)="salirMiscelaneo()"></button>
+                </div>
+            </div>
+        </p-dialog>
+    </div>
+</div>

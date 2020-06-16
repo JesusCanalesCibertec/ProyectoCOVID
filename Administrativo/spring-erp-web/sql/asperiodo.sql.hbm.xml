@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : asistencia.AsAutorizacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="asperiodo.contarPeriodoActivo">
+    	<![CDATA[
+	    	SELECT	Count(1)
+        FROM		AS_Periodo 
+			  INNER JOIN EmpleadoMast
+				ON  AS_Periodo.TipoPlanilla = EmpleadoMast.TipoPlanilla
+				
+    WHERE	Empleado 					= :p_empleado
+			AND AS_Periodo.Estado 	= 'A'
+			AND :p_fechahasta 		<= fechahasta 
+			AND :p_fechadesde 	>= fechadesde
+    	]]>
+    </sql-query>
+
+  <sql-query name="asperiodo.obtenerPeriodo">
+    	<![CDATA[
+          SELECT substring(Max (PeriodoPlanilla),1,6)
+          FROM AS_Periodo
+          WHERE TipoPlanilla = (SELECT max(TipoPlanilla)
+	          FROM EmpleadoMast 
+	          WHERE Empleado = :p_empleado)
+	          AND Estado = 'A';
+      ]]>
+    </sql-query>
+  
+     <sql-query name="asperiodo.obtenerPorEmpleado">
+     select top 1  fechadesde,  fechahasta,AS_Periodo.Estado from AS_Periodo INNER JOIN EmpleadoMast ON  AS_Periodo.TipoPlanilla = EmpleadoMast.TipoPlanilla
+     WHERE	Empleado 					= :p_empleado order by fechadesde desc
+     </sql-query>
+     <sql-query name="asperiodo.obtenerPorEmpleadoRango">
+	 select fechadesde,  fechahasta,AS_Periodo.Estado from AS_Periodo INNER JOIN EmpleadoMast ON  AS_Periodo.TipoPlanilla = EmpleadoMast.TipoPlanilla
+     WHERE	Empleado = :p_empleado 
+	  and 
+	  ((:desde between fechadesde and fechahasta) or (:hasta between fechadesde and fechahasta))
+	  order by fechadesde desc
+     </sql-query>
+</hibernate-mapping>

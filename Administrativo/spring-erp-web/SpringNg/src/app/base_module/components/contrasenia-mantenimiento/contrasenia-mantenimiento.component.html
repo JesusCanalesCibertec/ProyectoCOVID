@@ -1,0 +1,52 @@
+
+<div class="ui-fluid">
+    <p-dialog header="CAMBIO DE CLAVE" [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size" width="450px">
+        <p-panel header="Información">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-5">
+                    <label>Usuario</label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-7">
+                    <input pInputText [(ngModel)]="usuario" disabled/>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-5" style="color: crimson; font-weight: bold;">
+                    <label>Clave Anterior</label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-7">
+                    <input [(ngModel)]="clave" pPassword class="ui-inputtext ui-widget" style="height: 23px; font-size: 15px !important;" type="password" />
+                </div>
+            </div>   
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-5" style="color: crimson; font-weight: bold;">
+                    <label>Clave Nueva</label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-7">
+                    <input [(ngModel)]="clave1" pPassword class="ui-inputtext ui-widget" style="height: 23px; font-size: 15px !important;" type="password" />
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-12 ui-lg-5" style="color: crimson; font-weight: bold;">
+                    <label>Repetir Clave</label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-7">
+                    <input [(ngModel)]="clave2" pPassword class="ui-inputtext ui-widget" style="height: 23px; font-size: 15px !important;" type="password" />
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-12 ui-lg-5">
+                <button pButton label="Guardar" icon="fa fa-save" type="button" (click)="guardar()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-2"></div>
+            <div class="ui-g-12 ui-md-12 ui-lg-5">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+
+
+    </p-dialog>
+</div>

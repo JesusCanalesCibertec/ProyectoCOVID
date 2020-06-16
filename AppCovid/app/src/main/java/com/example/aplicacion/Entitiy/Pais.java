@@ -1,27 +1,27 @@
 package com.example.aplicacion.Entitiy;
 
 public class Pais {
-    private int pais;
-    private String nacionalidad;
+    private int idPais;
+    private String descripcion;
 
     @Override
     public String toString(){
-        return nacionalidad;
+        return descripcion;
     }
 
-    public int getPais() {
-        return pais;
+    public int getIdPais() {
+        return idPais;
     }
 
-    public void setPais(int pais) {
-        this.pais = pais;
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

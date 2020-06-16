@@ -1,0 +1,16 @@
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_TODOS','PE','TODAS LAS INSTITUCIONES','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_CANEV','PE','PERFIL CANEVARO','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_CARID','PE','PERFIL MISIONERAS','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_DESAM','PE','PERFIL DESAMPARADOS','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_FRASI','PE','PERFIL SAN FRANCISCO','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INMAC','PE','PERFIL INMACULADA','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_PURIC','PE','PERFIL PUERICULTORIO','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_SVPAU','PE','PERFIL SAN VICENTE','A')
+
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_FUNDA_ADMIN','PE','PERFIL FUNDACION ADMINISTRADOR','A')
+
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INSTI_ASIS','PE','PERFIL INSTITUCION ASISTENTE','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INSTI_NUTRI','PE','PERFIL INSTITUCION NUTRICIONISTA','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INSTI_PSICO','PE','PERFIL INSTITUCION PSICOLOGO','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INSTI_MEDIC','PE','PERFIL INSTITUCION MEDICO','A')
+insert into Usuario(Usuario,UsuarioPerfil,Nombre,Estado) values('PERPS_INSTI_RRHH','PE','PERFIL INSTITUCION RRHH','A')

@@ -1,0 +1,58 @@
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<p-panel
+    header="PROYECTO : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}">
+    <div class="ui-g">
+
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Grabar" type="button" icon="fas fa-save" (click)="guardar()" style="width:100%"></button>
+        </div>
+        <div class="ui-g-6 ui-md-8 ui-lg-8">
+        </div>
+        <div class="ui-g-3 ui-md-2 ui-lg-2">
+            <button pButton label="Volver" type="button" icon="fa fa-mail-reply" (click)="salir()" style="width:100%"></button>
+        </div>
+    </div>
+</p-panel>
+
+<div class="ui-fluid" #frm>
+
+    <p-tabView (onChange)="cambiarTab($event)">
+        <p-tabPanel header="Datos generales" leftIcon="far fa-file-alt">
+            <app-proyecto-datosgenerales></app-proyecto-datosgenerales>
+        </p-tabPanel>
+        <p-tabPanel header="Recursos" leftIcon="fas fa-users" tooltip="{{comunicacionServicio.advertencia}}" [disabled]="comunicacionServicio.deshabilitarTab">
+            <app-proyecto-recursos></app-proyecto-recursos>
+        </p-tabPanel>
+        <p-tabPanel header="Seguimiento" leftIcon="fas fa-chart-line">
+            <app-proyecto-seguimiento></app-proyecto-seguimiento>
+        </p-tabPanel>
+        <p-tabPanel header="Riesgos" leftIcon="fas fa-exclamation-triangle" [disabled]="true">
+            <app-proyecto-riesgos></app-proyecto-riesgos>
+        </p-tabPanel>
+    </p-tabView>
+
+</div>
+
+<p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+    <p-footer>
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-confirmDialog>

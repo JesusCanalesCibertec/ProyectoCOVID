@@ -1,0 +1,101 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="Portafolio de Proyectos">
+        <div class="ui-g ui-md ui-lg">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Nuevo" icon="fa fa-plus" type="button" class="ui-button"
+                    (click)="nuevo()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-4 ui-lg-5">
+            </div>
+            <div class="ui-g-6 ui-md-3 ui-lg-2">
+                <label>Filtro por Estado de Atención</label>
+            </div>
+            <div class="ui-g-3 ui-md-3 ui-lg-3">
+                <p-multiSelect [options]="estados" [(ngModel)]="estadoatencion" [style]="{'width':'100%'}"
+                    defaultLabel="--Seleccione--" selectedItemsLabel="{0} Estados de atención seleccionados"
+                    filter="false" maxSelectedLabels="5" showHeader="false" (onChange)="cambioEstado()"
+                    pTooltip="Seleccione uno o más estados de atención" tooltipPosition="top">
+                </p-multiSelect>
+            </div>
+        </div>
+    </p-panel>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-accordion (onOpen)="cargarLista($event)">
+                <p-accordionTab *ngFor="let item of lista" header={{item.descripcionlocal}} [selected]="item.auxCampo">
+                    <p-dataTable #datatable scrollable="true" [responsive]="true" [rows]="5"
+                        emptyMessage="No se encontraron registros" [paginator]="true" [value]="listadetalle"
+                        scrollWidth="100%">
+                        <p-column header="Id" [style]="{'width':'50px'}" field="idproyecto" styleClass="textoCentrado">
+                        </p-column>
+                        <p-column header="Nombre" [style]="{'width':'400px'}" field="nombre"></p-column>
+                        <p-column header="Área" [style]="{'width':'200px'}" field="niveles"></p-column>
+                        <p-column header="Fecha Inicio" [style]="{'width':'120px'}" field="fechainicio"
+                            styleClass="textoCentrado">
+                            <ng-template let-tx="rowData" pTemplate="body">
+                                {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column header="Fecha Fin" [style]="{'width':'120px'}" field="fechafin"
+                            styleClass="textoCentrado">
+                            <ng-template let-tx="rowData" pTemplate="body">
+                                {{tx.fechafin | date: 'dd/MM/yyyy'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column header="Estado de atención" [style]="{'width':'150px'}" field="nomestado"
+                            styleClass="textoCentrado"></p-column>
+                        <p-column header="% Avance Planificado" [style]="{'width':'100px'}" field="planificado"
+                            styleClass="textoCentrado"></p-column>
+                        <p-column header="% Avance Real" [style]="{'width':'100px'}" field="real"
+                            styleClass="textoCentrado"></p-column>
+                        <p-column header="Desviación" [style]="{'width':'100px'}" field="desviacion"
+                            styleClass="textoCentrado"></p-column>
+                        <p-column header="Semáforo" [style]="{'width':'70px'}" styleClass="textoCentrado">
+                            <ng-template let-tx="rowData" pTemplate="body">
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(tx.desviacion)">
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-column>
+                        <p-column header="Acción" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                            <ng-template let-tx="rowData" pTemplate="body">
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-md-12 ui-lg-12" title="Editar">
+                                        <i class="far fa-edit fa-lg seleccionable" (click)="editar(tx)"></i>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-column>
+                    </p-dataTable>
+                    <h3>Registros encontrados : {{numFilas == null ? 0:numFilas}}</h3>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+    <p-footer>
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-confirmDialog>

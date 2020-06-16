@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaeprocesoefuncionalidad
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+     <sql-query name="bpmaeprocesofuncionalidad.filtro">
+      
+select 
+a.ID_PROCESO,
+b.NOMBRE,
+a.ID_FUNCIONALIDAD,
+a.NOMBRE,
+a.FLG_VISIBLE_DEFECTO,
+a.FLG_HABILITADO_DEFECTO
+from sgseguridadsys.BP_MAE_PROCESO_FUNCIONALIDAD a join sgseguridadsys.BP_MAE_PROCESO b
+	 on a.ID_PROCESO = b.ID_PROCESO
+where 
+ISNULL(a.ID_PROCESO, '123') = isnull(:p_IdProceso, ISNULL(a.ID_PROCESO, '123'))
+
+</sql-query>
+
+
+
+
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    	<![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+	</sql-query>
+   
+</hibernate-mapping>

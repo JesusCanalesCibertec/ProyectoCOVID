@@ -1,0 +1,59 @@
+
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid">
+    <p-dialog header="LISTADO DE CORREOS" [(visible)]="verModal" modal="modal" showEffect="fade" hideEffect="size" width="500">
+
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-12 ui-md-6 ui-lg-3 ui-g-nopad">
+                <button pButton label="Agregar" icon="fa fa-plus" type="button" class="ui-button" (click)="agregarCorreo()"></button>
+            </div>
+        </div>
+        <br>
+
+        <p-dataTable #dtCorreos emptyMessage="No se encontraron registros" [responsive]="true" scrollWidth="100%" [value]="lstCorreos"
+            [editable]="true">
+            <p-column header="N°" field="id" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Correo" field="nombre" [editable]="true"></p-column>
+            <p-column header="Quitar" styleClass="textoCentrado" [style]="{'width':'60px'}">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12" title="Quitar"> <i class="fa fa-times seleccionable" (click)="quitar(tx)"></i></div>
+                    </div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+
+        <div class="ui-g ">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <label style="font-weight: bold;color:red">NOTA: El correo debe contener el "@" y terminar con ";"</label>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-12 ui-md-6 ui-lg-3 ui-g-nopad">
+                <button pButton label="Aceptar" icon="fa fa-check" type="button" class="ui-button" (click)="aceptar()"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6 ui-g-nopad"></div>
+            <div class="ui-g-12 ui-md-6 ui-lg-3 ui-g-nopad">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+    </p-dialog>
+</div>
+
+<p-confirmDialog key="eliminarCorreo" #cd>
+    <p-footer>
+        <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+        <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+    </p-footer>
+</p-confirmDialog>

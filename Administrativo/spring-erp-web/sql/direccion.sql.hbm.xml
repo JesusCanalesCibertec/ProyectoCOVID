@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * * @author : desarrollo * @powerbuilder : core.Direccion -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="direccion.xxxxxx">
+		select sysdate from dual
+	</sql-query>
+
+	<sql-query name="direccion.obtenernombrevia">
+		SELECT DescripcionLocal FROM MA_MiscelaneosDetalle
+		WHERE CodigoTabla =
+		'TIPOVIAS'
+		AND Compania = '999999'
+		AND CodigoElemento = :codigoElemento
+	</sql-query>
+
+	<sql-query name="direccion.eliminaractivosporpersona">
+		delete from direccion where persona = :persona
+	</sql-query>
+
+	<sql-query name="direccion.eliminarporpersonapositivos">
+		delete from direccion where persona = :persona and secuencia > 0
+	</sql-query>
+
+
+	<sql-query name="direccion.obtenerUbigeoPr">
+		SELECT UBIGEO FROM UbicacionGeografica WHERE UBIGEORENIEC = :ubigeo
+	</sql-query>
+
+	<sql-query name="direccion.obtenerUbigeoHr">
+		SELECT
+			SUBSTRING(UbicacionGeografica.UBIGEORENIEC, 1, 2) as Departamento,  
+			SUBSTRING(UbicacionGeografica.UBIGEORENIEC, 3, 2) as Provincia, 
+			SUBSTRING(UbicacionGeografica.UBIGEORENIEC, 5, 2) as CodigoPostal
+			FROM UbicacionGeografica WHERE UBIGEO = :ubigeo
+
+	</sql-query>
+
+
+</hibernate-mapping>

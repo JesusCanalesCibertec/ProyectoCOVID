@@ -1,0 +1,114 @@
+<div class="ui-fluid">
+        <p-dialog header="GRADO DEPENDENCIA" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+            [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+    
+            <div class="bordeGenerico">
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Baño
+                    </div>
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" [options]="listaBanio" (onChange)="onChangeCambios()"
+                        [(ngModel)]="dtoKatz.katz1" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Vestido
+                    </div>
+    
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [options]="listaVestido" [(ngModel)]="dtoKatz.katz2" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Uso del WC
+                    </div>
+    
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [options]="listaUsoWC" [(ngModel)]="dtoKatz.katz3" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Movilidad
+                    </div>
+    
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [options]="listaMovilidad" [(ngModel)]="dtoKatz.katz4" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Continencia
+                    </div>
+    
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [options]="listaContinencia" [(ngModel)]="dtoKatz.katz5" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-12 ui-md-4 ui-lg-2" style="color: crimson; font-weight: bold;">
+                        Alimentación
+                    </div>
+    
+                    <div class="ui-g-12 ui-md-8 ui-lg-10">
+                        <p-dropdown [autoWidth]="false" (onChange)="onChangeCambios()" [options]="listaAlimentacion" [(ngModel)]="dtoKatz.katz6" appendTo="body"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="bordeGenerico">
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-4 ui-md-4 ui-lg-2" >
+                        Indice de Katz
+                    </div>
+    
+                    <div class="ui-g-4 ui-md-4 ui-lg-2">
+                        <input pInputText type="text"  disabled [(ngModel)]="dtoKatz.porcentajeGradoKatz" />
+                    </div>
+    
+                    <div class="ui-g-4 ui-md-4 ui-lg-2">
+                        <button pButton label="Calcular" icon="fa fa-plus" type="button" class="ui-button" (click)="calcular()"
+                            style="width:100%"></button>
+                    </div>
+    
+                </div>
+    
+                <div class="ui-g ui-g-no-pad">
+                    <div class="ui-g-4 ui-md-4 ui-lg-2" >
+                        Valoración
+                    </div>
+    
+                    <div class="ui-g-8 ui-md-8 ui-lg-10">
+                        <input pInputText type="text" disabled [(ngModel)]="dtoKatz.gradoDependenciaKatz" />
+                    </div>
+                </div>
+    
+    
+            </div>
+    
+    
+            <div class="ui-g ui-g-no-pad">
+                <div class="ui-g-4 ui-md-3 ui-lg-3">
+                    <button pButton label="Guardar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                        style="width:100%"></button>
+                </div>
+    
+                <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+    
+                <div class="ui-g-4 ui-md-3 ui-lg-3">
+                    <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                        style="width:100%"></button>
+                </div>
+    
+            </div>
+    
+        </p-dialog>
+    </div>

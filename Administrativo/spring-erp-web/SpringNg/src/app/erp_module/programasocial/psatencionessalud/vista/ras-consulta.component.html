@@ -1,0 +1,252 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g"
+        style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+
+<div class="ui-fluid" #frm>
+    <p-panel header="Consulta de Atenciones de Salud" [toggleable]="true">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion" [options]="listaInstitucion"
+                    (ngModelChange)="onChangeInstitucion($event,dtRas)" [(ngModel)]="filtro.idInstitucion"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sexo</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idSexo" [options]="sexos"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombres</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <input pInputText type="text" (keypress)="preBuscar($event, dtRas)"
+                    [(ngModel)]="filtro.nombreCompleto" />
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Residencia</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [options]="listaResidencia" [(ngModel)]="filtro.idArea"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Tipo RAS</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [options]="listaTipoRas" [(ngModel)]="filtro.idTipoAtencion">
+                </p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Programa</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [options]="listaPrograma" [disabled]="verListaProgramas"
+                    [(ngModel)]="filtro.idPrograma"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Diagnósticos</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <div class="ui-g-9 ui-md-9 ui-lg-9 ui-g-nopad">
+                    <input pInputText type="text" [(ngModel)]="filtro.nombreDiagnostico" />
+                </div>
+
+                <div class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad" style="margin-left: 3px">
+                    <button pButton icon="fa fa-search" type="button" class="ui-button"
+                        (click)="verDiagnosticos()"></button>
+                </div>
+                <div class="ui-g-1 ui-md-1 ui-lg-1 ui-g-nopad" style="margin-left: 10px">
+                    <button pButton icon="fa fa-trash" type="button" class="ui-button"
+                        (click)="limpiarDiagnosticos()"></button>
+                </div>
+            </div>
+
+
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Inicio</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                    dateFormat="dd/mm/yy" [(ngModel)]="filtro.fechaAtencionInicio"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Fin</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-calendar [monthNavigator]="true " [yearNavigator]="true " yearRange="1940:2200" [showIcon]="true"
+                    dateFormat="dd/mm/yy" [(ngModel)]="filtro.fechaAtencionFin"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Registros</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-1">
+                <input pInputText type="text" [(ngModel)]="filtro.cantidadRegistros" />
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Orden por</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.orden" [options]="listaOrden"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sentido</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.sentido" [options]="listaSentido"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-5 ui-md-3 ui-lg-3">
+                <button pButton label="Export Excel" [disabled]="!verBotonExcel" icon="fa fa-table" type="button"
+                    class="ui-button" (click)="export()"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-7 ui-lg-7"></div>
+
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-binoculars" (click)="buscar(dtRas)" type="button"
+                    class="ui-button"></button>
+            </div>
+
+        </div>
+    </p-panel>
+
+    <p-table #dtRas (onLazyLoad)="cargarListaEvent($event)" [rows]="filtro.cantidadRegistros" [paginator]="true"
+        [lazy]="true" [value]="filtro.paginacion.listaResultado" [totalRecords]="filtro.paginacion.registroEncontrados"
+        [scrollable]="true" [responsive]="true" [autoLayout]="true" scrollHeight="260px" [style]="{width:'100%'}">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:55px">Código</th>
+                <th style="width:240px">Nombre Completos</th>
+                <th style="width:90px">Fecha</th>
+                <th style="width:160px">Residencia</th>
+
+                <th style="width:260px">Diagnóstico 1</th>
+                <th style="width:180px">Tratamientos 1</th>
+                <th style="width:180px">Tratamientos 2</th>
+                <th style="width:180px">Tratamientos 3</th>
+
+                <th style="width:260px">Diagnóstico 2</th>
+                <th style="width:180px">Tratamientos 1</th>
+                <th style="width:180px">Tratamientos 2</th>
+                <th style="width:180px">Tratamientos 3</th>
+
+                <th style="width:260px">Diagnóstico 3</th>
+                <th style="width:180px">Tratamientos 1</th>
+                <th style="width:180px">Tratamientos 2</th>
+                <th style="width:180px">Tratamientos 3</th>
+
+                <th style="width:240px">Comentarios</th>
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+
+                <td style="width:55px">{{rowData.idBeneficiario}}</td>
+                <td style="width:240px">{{rowData.nombreCompleto}}</td>
+                <td style="width:90px">
+                    {{rowData.fechaAtencion | date: 'dd/MM/yyyy'}}
+                </td>
+                <td style="width:160px">{{rowData.residencia}}</td>
+
+                <!-- DIAGNOSTICO 1 -->
+                <td style="width:260px">
+                    {{rowData.nombreDiagnostico01}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento01_1_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento01_2_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento01_3_nombre}}
+                </td>
+
+                <!-- DIAGNOSTICO 2 -->
+                <td style="width:260px">
+                    {{rowData.nombreDiagnostico02}}
+                </td>
+
+                <td style="width:180px">
+                    {{rowData.idTratamiento02_1_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento02_2_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento02_3_nombre}}
+
+                    <!-- DIAGNOSTICO 3-->
+                <td style="width:260px">
+                    {{rowData.nombreDiagnostico03}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento03_1_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento03_2_nombre}}
+                </td>
+                <td style="width:180px">
+                    {{rowData.idTratamiento03_3_nombre}}
+                </td>
+
+                <td style="width:240px">
+                    {{rowData.comentario}}
+                </td>
+            </tr>
+
+        </ng-template>
+
+
+    </p-table>
+    <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+
+</div>
+

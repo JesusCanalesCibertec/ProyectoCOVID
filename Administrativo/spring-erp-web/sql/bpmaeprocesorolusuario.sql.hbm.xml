@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.bpmaeprocesorolusuario
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+     <sql-query name="bpmaeprocesorolusuario.filtroUSUARIO">
+      select 
+		a.ID_PROCESO,
+		A.ID_ROL,
+		a.ID_TIPO_SEGURIDAD,
+		a.ID_CONCEPTO,
+		B.Nombre
+		from sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO a left join Usuario b
+			 on a.ID_CONCEPTO = b.Usuario
+		where 
+		ISNULL(a.ID_PROCESO, '123') = isnull(:p_IdProceso, ISNULL(a.ID_PROCESO, '123'))
+		AND ISNULL(a.ID_ROL, '123') = isnull(:p_IdRol, ISNULL(a.ID_ROL, '123'))
+		AND ISNULL(a.ID_TIPO_SEGURIDAD, '123') = isnull(:p_IdTipoSeguridad, ISNULL(a.ID_TIPO_SEGURIDAD, '123'))
+
+</sql-query>
+
+<sql-query name="bpmaeprocesorolusuario.filtroPERSONA">
+      
+	select 
+		a.ID_PROCESO,
+		A.ID_ROL,
+		a.ID_TIPO_SEGURIDAD,
+		a.ID_CONCEPTO,
+		B.NombreCompleto
+		from sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO a left join PersonaMast b
+			 on a.ID_PERSONA = b.Persona
+		where
+		ISNULL(a.ID_PROCESO, '123') = isnull(:p_IdProceso, ISNULL(a.ID_PROCESO, '123'))
+		AND ISNULL(a.ID_ROL, '123') = isnull(:p_IdRol, ISNULL(a.ID_ROL, '123'))
+		AND ISNULL(a.ID_TIPO_SEGURIDAD, '123') = isnull(:p_IdTipoSeguridad, ISNULL(a.ID_TIPO_SEGURIDAD, '123'))
+
+
+</sql-query>
+<sql-query name="bpmaeprocesorolusuario.filtroRRHHPUESTO">
+	select 
+		a.ID_PROCESO,
+		A.ID_ROL,
+		a.ID_TIPO_SEGURIDAD,
+		a.ID_CONCEPTO,
+		B.Descripcion
+		from sgseguridadsys.BP_MAE_PROCESO_ROL_USUARIO a left join HR_PuestoEmpresa b
+			 on a.ID_CONCEPTO  = convert(varchar, b.CodigoPuesto)
+		where 
+		ISNULL(a.ID_PROCESO, '123') = isnull(:p_IdProceso, ISNULL(a.ID_PROCESO, '123'))
+		AND ISNULL(a.ID_ROL, '123') = isnull(:p_IdRol, ISNULL(a.ID_ROL, '123'))
+		AND ISNULL(a.ID_TIPO_SEGURIDAD, '123') = isnull(:p_IdTipoSeguridad, ISNULL(a.ID_TIPO_SEGURIDAD, '123'))
+
+
+</sql-query>
+
+
+
+
+  <sql-query name="hrencuestapreguntavalores.obtenerPreguntas">
+    	<![CDATA[
+		SELECT 
+		VALOR, Descripcion
+		FROM HR_ENCUESTAPREGUNTAVALORES WHERE PREGUNTA = :p_pregunta
+		]]>
+	</sql-query>
+   
+</hibernate-mapping>

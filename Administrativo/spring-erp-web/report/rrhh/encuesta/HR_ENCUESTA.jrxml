@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HR_ENCUESTA" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ff6ac22-641f-4216-b9e6-208487f4142f">
+	<property name="ireport.zoom" value="0.9090909090909095"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="companyowner" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="secuencia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Fabrica\\Desarrollo\\ANGULAR\\CANEVARO\\spring-erp-web\\report\\rrhh\\encuesta\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *,
+(select DescripcionLocal from MA_MiscelaneosHeader where CodigoTabla = a.ID_MISCELANEO_HEADER1) as titulo1,
+(select DescripcionLocal from MA_MiscelaneosHeader where CodigoTabla = a.ID_MISCELANEO_HEADER2) as titulo2,
+(select DescripcionLocal from MA_MiscelaneosHeader where CodigoTabla = a.ID_MISCELANEO_HEADER3) as titulo3,
+(select DescripcionLocal from MA_MiscelaneosHeader where CodigoTabla = a.ID_MISCELANEO_HEADER4) as titulo4
+from HR_ENCUESTA A
+
+WHERE A.COMPANYOWNER = $P{companyowner} and A.PERIODO = $P{periodo} and A.secuencia = $P{secuencia}]]>
+	</queryString>
+	<field name="CompanyOwner" class="java.lang.String"/>
+	<field name="Periodo" class="java.lang.String"/>
+	<field name="Secuencia" class="java.lang.Integer"/>
+	<field name="Responsable" class="java.lang.Integer"/>
+	<field name="Observaciones" class="java.lang.String"/>
+	<field name="UnidadNegocio" class="java.lang.String"/>
+	<field name="Departamento" class="java.lang.String"/>
+	<field name="Muestra" class="java.lang.Integer"/>
+	<field name="Fecha" class="java.sql.Timestamp"/>
+	<field name="CentroCostos" class="java.lang.String"/>
+	<field name="Titulo" class="java.lang.String"/>
+	<field name="FlagDocente" class="java.lang.String"/>
+	<field name="Foco" class="java.lang.Integer"/>
+	<field name="FechaFin" class="java.sql.Timestamp"/>
+	<field name="FechaInicio" class="java.sql.Timestamp"/>
+	<field name="Capacitacion" class="java.lang.String"/>
+	<field name="UltimoUsuario" class="java.lang.String"/>
+	<field name="UltimaFechaModif" class="java.sql.Timestamp"/>
+	<field name="INSTRUCCIONES" class="java.lang.String"/>
+	<field name="NIVELAPROBACION" class="java.lang.Integer"/>
+	<field name="ESTADO" class="java.lang.String"/>
+	<field name="FECHAHASTA" class="java.sql.Timestamp"/>
+	<field name="FECHADESDE" class="java.sql.Timestamp"/>
+	<field name="ID_INSTITUCION" class="java.lang.String"/>
+	<field name="ID_INSTITUCION_AREA" class="java.lang.String"/>
+	<field name="ID_PROGRAMA" class="java.lang.String"/>
+	<field name="ID_COMPONENTE" class="java.lang.String"/>
+	<field name="ID_MISCELANEO_HEADER1" class="java.lang.String"/>
+	<field name="ID_MISCELANEO_HEADER2" class="java.lang.String"/>
+	<field name="ID_MISCELANEO_HEADER3" class="java.lang.String"/>
+	<field name="ID_MISCELANEO_HEADER4" class="java.lang.String"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="titulo1" class="java.lang.String"/>
+	<field name="titulo2" class="java.lang.String"/>
+	<field name="titulo3" class="java.lang.String"/>
+	<field name="titulo4" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="319" splitType="Stretch">
+			<textField>
+				<reportElement x="48" y="63" width="447" height="20" uuid="243d2d7b-187c-4714-be44-8a12a25ac046"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Titulo}.trim()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="100" width="100" height="20" uuid="490287eb-830d-417a-b4ab-13678d2fa77b"/>
+				<text><![CDATA[Insititución]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="148" y="100" width="107" height="20" uuid="5f961cd4-e4bc-4799-8889-5c8113262f72"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="48" y="130" width="100" height="20" uuid="95e74e29-fcd7-4a37-b765-43f25b4b4318"/>
+				<text><![CDATA[Programa]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="148" y="130" width="107" height="20" uuid="08eb305e-f67e-4231-ad14-8a5429a0cd21"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="288" y="130" width="100" height="20" uuid="712a84d9-6e98-415a-b222-b0d397fdd99b">
+					<printWhenExpression><![CDATA[!$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="130" width="107" height="20" uuid="5ebf59d6-8212-498a-a8a0-da8a9b689bea">
+					<printWhenExpression><![CDATA[!$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="100" width="107" height="20" uuid="5c88ef2b-a79d-4e86-836f-e306188cbbe5">
+					<printWhenExpression><![CDATA[!$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="288" y="100" width="100" height="20" uuid="2f7d688e-4f06-40cd-a7a1-23678f443dc3">
+					<printWhenExpression><![CDATA[!$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="161" width="107" height="20" uuid="eb035af6-f180-436b-ae02-3ebf0d77141d">
+					<printWhenExpression><![CDATA[$F{titulo1}!=null]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" x="288" y="161" width="100" height="20" uuid="2ae98c77-693e-42ab-8040-d0ccf0271640">
+					<printWhenExpression><![CDATA[$F{titulo1}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{titulo1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="288" y="196" width="100" height="20" uuid="57398b50-1439-4ac5-8f2c-d381b952749b">
+					<printWhenExpression><![CDATA[$F{titulo2}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{titulo2}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="196" width="107" height="20" uuid="9bac3fdc-6afc-438f-9289-2dbc56a5fa74">
+					<printWhenExpression><![CDATA[$F{titulo2}!=null]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" x="288" y="226" width="100" height="20" uuid="acc9efa5-b1d8-4411-ac64-dad1cb0711a9">
+					<printWhenExpression><![CDATA[$F{titulo3}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{titulo3}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="258" width="107" height="20" uuid="5bfd253d-f62b-429d-bff8-4fba9b75077f">
+					<printWhenExpression><![CDATA[$F{titulo4}!=null]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="226" width="107" height="20" uuid="25712c0e-e651-4562-8c66-cdd84a1be70e">
+					<printWhenExpression><![CDATA[$F{titulo3}!=null]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement positionType="Float" x="288" y="258" width="100" height="20" uuid="ff367141-75df-466a-87a1-b58264bc3584">
+					<printWhenExpression><![CDATA[$F{titulo4}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{titulo4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="288" y="292" width="100" height="20" uuid="717f9869-a971-408e-aabd-7f10ef0ffe15">
+					<printWhenExpression><![CDATA[$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="388" y="292" width="107" height="20" uuid="b84ef334-3e7f-46a5-ac5a-f98998df0170">
+					<printWhenExpression><![CDATA[$F{TIPO}.equals( "CLIMA" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="48" y="161" width="207" height="151" isPrintWhenDetailOverflows="true" uuid="491c1c09-395c-4adb-955e-b2914fbdfc34"/>
+				<box topPadding="8" leftPadding="8" bottomPadding="8" rightPadding="8">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INSTRUCCIONES}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="48" y="15" width="76" height="48" uuid="910a5a0f-f9e2-4b70-81ee-792034e59f9f"/>
+				<imageExpression><![CDATA[$P{p_logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<summary>
+		<band height="85">
+			<subreport>
+				<reportElement x="0" y="10" width="555" height="74" uuid="fd1effc9-be13-4c5f-b42a-0446630c58d9">
+					<printWhenExpression><![CDATA[$F{TIPO}.equals( "GUIAIN" )]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="compania">
+					<subreportParameterExpression><![CDATA[$F{CompanyOwner}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="secuencia">
+					<subreportParameterExpression><![CDATA[$F{Secuencia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="periodo">
+					<subreportParameterExpression><![CDATA[$F{Periodo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["HR_ENCUESTA_DETALLE.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="11" width="555" height="74" uuid="fc03cffa-d3c3-4d4c-82fc-7c157a87c7f3">
+					<printWhenExpression><![CDATA[!$F{TIPO}.equals( "GUIAIN" )]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="compania">
+					<subreportParameterExpression><![CDATA[$F{CompanyOwner}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="secuencia">
+					<subreportParameterExpression><![CDATA[$F{Secuencia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="periodo">
+					<subreportParameterExpression><![CDATA[$F{Periodo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["HR_ENCUESTA_DETALLE_2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

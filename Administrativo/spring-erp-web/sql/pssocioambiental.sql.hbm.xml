@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.pscomponente
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+ <sql-query name="pssocioambiental.listarPaginacion">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ListarSocioAmbiental
+        :p_nombreCompleto,
+        :p_periodo,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma
+       ]]>
+  </sql-query>
+  
+   <sql-query name="pssocioambiental.listarPaginacionConsulta">
+    <![CDATA[
+        sgseguridadsys.SNp_AS_ConsultarSocioAmbiental
+        :p_nombreCompleto,
+        :p_periodo,
+        :p_area,
+        :p_sexo,
+        :p_numpagina,
+        :p_numregistros,
+        :p_institucion,
+        :p_idPrograma,
+		:p_orden,
+		:p_sentido
+       ]]>
+  </sql-query>
+
+
+</hibernate-mapping>

@@ -1,0 +1,68 @@
+.textoCentrado {
+    text-align: center;
+}
+
+.rojo {
+    color: silver !important;
+    background-color: red !important;
+}
+
+.textoDerecha {
+    text-align: right;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.textoRojo {
+    color: #de2727;
+}
+
+.textoVerde {
+    color: #34bd4b;
+}
+
+.seleccionable {
+    cursor: pointer;
+}
+
+.fa-lg {
+    line-height: .75em;
+    vertical-align: -15%;
+	font-size: 14px !important;
+}
+
+body .ui-panel .ui-panel-titlebar {
+    background: linear-gradient(30deg,#26c6da,#00acc1);
+}
+
+.ui-datatable tr.ui-state-highlight {
+    background: #71758d !important;
+    cursor: pointer !important;
+    color: white;
+}
+
+.ui-fluid .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+    width: calc(100% - 3em) !important;
+}
+
+.ui-datatable .fa-lg:hover{
+   
+   font-size: 22px !important;
+}
+
+.ui-table .fa-lg:hover{
+   
+   font-size: 22px !important;
+
+}
+
+body .ui-picklist .ui-picklist-listwrapper .ui-picklist-source-wrapper{
+	width: 40% !important;
+}
+body .ui-picklist .ui-picklist-listwrapper .ui-picklist-target-wrapper{
+	width: 40% !important;
+}
+
+

@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+	<sql-query name="prvacacionperiodo.listarHistorialContar">
+    	<![CDATA[
+        select count(1) from PR_VacacionPeriodo
+where CompaniaSocio = :p_id_compania and Empleado = :p_id_empleado
+
+		]]>
+    </sql-query>
+    
+    <sql-query name="prvacacionperiodo.listarHistorialPaginacion">
+    	<![CDATA[
+        select ano, NumeroPeriodo, mes, Derecho, PendientePeriodoAnterior, DiasGozados, Pendientes, ROW_NUMBER() OVER (ORDER BY Numeroperiodo desc) AS Seq from PR_VacacionPeriodo
+        where CompaniaSocio = :p_id_compania and Empleado = :p_id_empleado
+
+		]]>
+    </sql-query>
+    
+</hibernate-mapping>

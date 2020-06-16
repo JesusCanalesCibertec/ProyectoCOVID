@@ -1,0 +1,29 @@
+<div class="ui-fluid">
+    <p-dialog header="COMENTARIO" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <textarea [rows]="3" [cols]="30" pInputTextarea placeholder="Ingrese el Comentario"
+                    autoResize="autoResize" [(ngModel)]="comentario" style="width:100%"></textarea>
+            </div>
+        </div>
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-4 ui-md-3 ui-lg-3" *ngIf="verBotonAplicar">
+                <button pButton label="Aplicar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                    style="width:100%"></button>
+            </div>
+            
+            <div class="ui-g-12 ui-md-12 ui-lg-3" *ngIf="!verBotonAplicar"></div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                    style="width:100%"></button>
+            </div>
+
+        </div>
+
+    </p-dialog>
+</div>

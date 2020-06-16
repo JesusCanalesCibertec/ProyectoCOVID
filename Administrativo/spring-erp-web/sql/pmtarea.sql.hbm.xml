@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proyecto.PmTarea
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="pmtarea.listarRegistrosValidos">
+         <![CDATA[
+         	SELECT ID_REGISTRO  AS "idRegistro" 
+         	FROM sgseguridadsys.HS_REGISTRO R 
+				INNER JOIN sgseguridadsys.BP_TRANSACCION T ON R.ID_TRANSACCION=T.ID_TRANSACCION
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO E ON T.ACTUAL_ID_PROCESO=E.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=E.ID_ELEMENTO
+			WHERE R.ID_TIPO_EXTERNO = :p_id_tipo_externo AND R.ID_EXTERNO = :p_id_externo
+			AND E.ID_ELEMENTO NOT IN ('FINRECHAZA','FINANULADO')
+         ]]>
+    </sql-query>
+	<sql-query name="pmtarea.listarTareasFinalizadasExitosamente">
+         <![CDATA[
+         	SELECT	TASK.ID_TAREA AS "idTarea",
+				TASK.NOMBRE AS "nombreTarea", 
+				EST.NOMBRE AS "estadodescripcion",
+				ELE.NOMBRE AS "elementoNombre",
+				TASK.ID_TRANSACCION AS "idTransaccion"
+			FROM sgseguridadsys.PM_TAREA TASK
+				INNER JOIN sgseguridadsys.BP_TRANSACCION T
+					ON TASK.ID_TRANSACCION=T.ID_TRANSACCION
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE
+					ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO EST
+					ON T.ID_PROCESO=EST.ID_PROCESO AND T.ID_ESTADO=EST.ID_ESTADO
+			WHERE TASK.ID_PROYECTO = :p_id_proyecto
+			AND ISNULL(ELE.FLG_FINAL_EXITOSO,'N') = 'S'
+         ]]>
+    </sql-query>
+	<sql-query name="pmtarea.listarTareasNoFinalizadas">
+         <![CDATA[
+         	SELECT	TASK.ID_TAREA AS "idTarea",
+				TASK.NOMBRE AS "nombreTarea", 
+				EST.NOMBRE AS "estadodescripcion",
+				ELE.NOMBRE AS "elementoNombre",
+				TASK.ID_TRANSACCION AS "idTransaccion"
+			FROM sgseguridadsys.PM_TAREA TASK
+				INNER JOIN sgseguridadsys.BP_TRANSACCION T
+					ON TASK.ID_TRANSACCION=T.ID_TRANSACCION
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ELEMENTO ELE
+					ON T.ACTUAL_ID_PROCESO=ELE.ID_PROCESO AND T.ACTUAL_ID_ELEMENTO=ELE.ID_ELEMENTO
+				INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO EST
+					ON T.ID_PROCESO=EST.ID_PROCESO AND T.ID_ESTADO=EST.ID_ESTADO
+			WHERE TASK.ID_PROYECTO = :p_id_proyecto
+			AND ELE.ID_TIPO_ELEMENTO NOT IN ('FIN')
+         ]]>
+    </sql-query>
+    
+    <sql-query name="pmtarea.listarTareas">
+         <![CDATA[
+         	SELECT PM_TAREA.id_proyecto AS "idProyecto",
+                   PM_PROYECTO.nombre AS "nombreProyecto",
+                   PM_TAREA.fecha_registro AS "fechaRegistro",
+                   PM_TAREA.id_tarea AS "idTarea",
+                   PM_TAREA.nombre AS "nombreTarea",
+                   PM_TAREA.descripcion AS "descripcionTarea",
+                   PM_TAREA.fecha_ultima_actualizacion AS "fechaUltimaActualizacion",
+                   cast(PERSONAMAST.NOMBRECOMPLETO as varchar) AS "responsableNombre",
+                   B.NOMBRE AS "estadodescripcion",
+                   PM_TAREA.estado AS "estado",
+                   PM_TAREA.ID_TIPO1 AS "idTipo1",
+                   PM_TAREA.ID_TIPO2 AS "idTipo2",
+                   PM_TAREA.ID_TIPO3 AS "idTipo3",
+                   PM_TAREA.ESTADO2 AS "estado2"
+                   
+            FROM   sgseguridadsys.PM_TAREA INNER JOIN sgseguridadsys.PM_PROYECTO
+                   ON PM_TAREA.ID_PROYECTO = PM_PROYECTO.ID_PROYECTO LEFT JOIN PERSONAMAST
+                   ON PM_TAREA.ID_RESPONSABLE = PERSONAMAST.PERSONA INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO B
+                   ON B.ID_ESTADO=PM_TAREA.ESTADO
+                   
+            WHERE  PM_TAREA.ID_PROYECTO = ISNULL(:id_proyecto,PM_TAREA.ID_PROYECTO) AND
+                   ISNULL(UPPER(PM_TAREA.NOMBRE),'A') LIKE '%' + UPPER(ISNULL(:nombretarea,PM_TAREA.NOMBRE)) + '%' AND
+                   ISNULL(UPPER(PM_TAREA.DESCRIPCION),'A') LIKE '%' + UPPER(ISNULL(:descripciontarea,PM_TAREA.DESCRIPCION)) + '%' AND
+                   ISNULL(PM_TAREA.ID_RESPONSABLE,'0') = ISNULL(:id_responsable,ISNULL(PM_TAREA.ID_RESPONSABLE,'0')) AND
+				   B.ID_PROCESO = :id_proceso AND
+				   (
+				   :id_asig IS NULL OR
+				   PM_TAREA.id_tarea IN 
+					(SELECT PM_TAREA_RECURSO.ID_TAREA FROM 
+						sgseguridadsys.PM_TAREA_RECURSO WHERE 
+							PM_TAREA_RECURSO.ID_RECURSO = :id_asig) 
+
+							)
+            ORDER BY PM_TAREA.fecha_ultima_actualizacion DESC
+         ]]>
+    </sql-query>
+    
+    <sql-query name="pmtarea.listarTareas_MYSQL">
+         <![CDATA[
+         	SELECT PM_TAREA.id_proyecto AS "idProyecto",
+                   PM_PROYECTO.nombre AS "nombreProyecto",
+                   PM_TAREA.fecha_registro AS "fechaRegistro",
+                   PM_TAREA.id_tarea AS "idTarea",
+                   PM_TAREA.nombre AS "nombreTarea",
+                   PM_TAREA.descripcion AS "descripcionTarea",
+                   PM_TAREA.fecha_ultima_actualizacion AS "fechaUltimaActualizacion",
+                   cast(PERSONAMAST.NOMBRECOMPLETO as varchar) AS "responsableNombre",
+                   A.NOMBRE AS "estado2descripcion",
+                   B.NOMBRE AS "estadodescripcion",
+                   C.DESCRIPCIONLOCAL AS "idTipo1descripcion",
+                   D.DESCRIPCIONLOCAL AS "idTipo2descripcion",
+                   E.DESCRIPCIONLOCAL AS "idTipo3descripcion",
+                   PM_TAREA.estado AS "estado",
+                   PM_TAREA.ID_TIPO1 AS "idTipo1",
+                   PM_TAREA.ID_TIPO2 AS "idTipo2",
+                   PM_TAREA.ID_TIPO3 AS "idTipo3",
+                   PM_TAREA.ESTADO2 AS "estado2"
+                   
+            FROM   sgseguridadsys.PM_TAREA INNER JOIN sgseguridadsys.PM_PROYECTO
+                   ON PM_TAREA.ID_PROYECTO = PM_PROYECTO.ID_PROYECTO LEFT JOIN PERSONAMAST
+                   ON PM_TAREA.ID_RESPONSABLE = PERSONAMAST.PERSONA LEFT JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO A
+                   ON A.ID_ESTADO=PM_TAREA.ESTADO2 INNER JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO B
+                   ON B.ID_ESTADO=PM_TAREA.ESTADO INNER JOIN MA_MISCELANEOSDETALLE C
+                   ON C.CODIGOELEMENTO=PM_TAREA.ID_TIPO1 INNER JOIN MA_MISCELANEOSDETALLE D
+                   ON D.CODIGOELEMENTO=PM_TAREA.ID_TIPO2 INNER JOIN MA_MISCELANEOSDETALLE E
+                   ON E.CODIGOELEMENTO=PM_TAREA.ID_TIPO3
+                   
+            WHERE  
+            IFNULL(PM_TAREA.NOMBRE,'') LIKE CONCAT('%',IFNULL(:nombretarea, IFNULL(PM_TAREA.NOMBRE,'') ),'%')
+            AND PM_TAREA.ID_PROYECTO = IFNULL(:id_proyecto,PM_TAREA.ID_PROYECTO)
+            AND IFNULL(PM_TAREA.DESCRIPCION,'') LIKE CONCAT('%',IFNULL(:descripciontarea, IFNULL(PM_TAREA.DESCRIPCION,'') ),'%')
+            AND IFNULL(PM_TAREA.ID_RESPONSABLE,'') = ifnull(:id_responsable,IFNULL(PM_TAREA.ID_RESPONSABLE,''))            
+            AND IFNULL(PM_TAREA.ID_TIPO1,'') LIKE CONCAT('%',IFNULL(:id_categoria, IFNULL(PM_TAREA.ID_TIPO1,'') ),'%')
+            AND IFNULL(PM_TAREA.ID_TIPO2,'') LIKE CONCAT('%',IFNULL(:id_severidad, IFNULL(PM_TAREA.ID_TIPO2,'') ),'%')
+            AND IFNULL(PM_TAREA.ID_TIPO3,'') LIKE CONCAT('%',IFNULL(:id_prioridad, IFNULL(PM_TAREA.ID_TIPO3,'') ),'%')
+            AND IFNULL(PM_TAREA.ESTADO2,'') LIKE CONCAT('%',IFNULL(:estado2, IFNULL(PM_TAREA.ESTADO2,'') ),'%')
+            ORDER BY PM_TAREA.fecha_ultima_actualizacion DESC
+         ]]>
+    </sql-query>
+    
+    <sql-query name="pmtarea.listarTareasGanttPorProyecto">
+    	SELECT 
+			ID_TAREA AS 'codigo',
+			NOMBRE AS 'nombre',
+			ISNULL(ID_TAREA_PADRE, 0) AS 'codigopadre',
+			PROGRAMACION_FECHA_INICIO AS 'comienzo',
+			PROGRAMACION_FECHA_FIN AS 'fin',
+			DATEDIFF(DAY, PROGRAMACION_FECHA_INICIO, PROGRAMACION_FECHA_FIN) + 1 AS 'duracionvalor'
+		FROM
+			sgseguridadsys.PM_TAREA
+		WHERE
+			ID_PROYECTO = :id_proyecto
+    </sql-query>
+        
+    <sql-query name="pmtarea.listarTareaSegunGrupoProyecto">
+         <![CDATA[
+         	SELECT PM_TAREA.id_proyecto AS "idProyecto",
+                   PM_PROYECTO.nombre AS "nombreProyecto",
+                   PM_TAREA.fecha_registro AS "fechaRegistro",
+                   PM_TAREA.id_tarea AS "idTarea",
+                   PM_TAREA.nombre AS "nombreTarea",
+                   PM_TAREA.descripcion AS "descripcionTarea",
+                   PM_TAREA.fecha_ultima_actualizacion AS "fechaUltimaActualizacion",
+                   cast(PERSONAMAST.NOMBRECOMPLETO as varchar) AS "responsableNombre",
+                   B.NOMBRE AS "estadodescripcion",
+                   PM_TAREA.estado AS "estado",
+                   PM_TAREA.ID_TIPO1 AS "idTipo1",
+                   PM_TAREA.ID_TIPO2 AS "idTipo2",
+                   PM_TAREA.ID_TIPO3 AS "idTipo3",
+                   PM_TAREA.ESTADO2 AS "estado2",
+                   T.ID_ESTADO AS "estadoTransaccion",
+				   isnull(sgseguridadsys.PM_TAREA.FLAG_COMISION_SERVICIO, 'N'),
+				   sgseguridadsys.PM_TAREA.PERMISO,
+				   (case
+					when
+					sgseguridadsys.PM_TAREA.REAL_FECHA_FIN between sgseguridadsys.PM_TAREA.PROGRAMACION_FECHA_INICIO and sgseguridadsys.PM_TAREA.PROGRAMACION_FECHA_FIN
+					then '#4caf50'
+					when
+					isnull(sgseguridadsys.PM_TAREA.REAL_FECHA_FIN, getdate()) > sgseguridadsys.PM_TAREA.PROGRAMACION_FECHA_FIN
+					then '#f44336'
+					when
+					DATEADD(DAY, 4, cast(getdate() as date)) >= cast(sgseguridadsys.PM_TAREA.PROGRAMACION_FECHA_FIN as Date)
+					then '#ffc107'
+					else ''
+					end
+				   ) AS COLOR,
+				   (
+				   SELECT DescripcionLocal FROM MA_MiscelaneosDetalle 
+					WHERE CodigoTabla = 'ASAUTOREST'  and AplicacionCodigo = 'AS' and CodigoElemento = y.estado
+				   ) AS ESATDOPERMISO,PROGRAMACION_FECHA_INICIO,PROGRAMACION_FECHA_FIN
+				   
+				   
+                   
+          FROM   sgseguridadsys.PM_TAREA 
+				   INNER JOIN sgseguridadsys.PM_PROYECTO
+						ON PM_TAREA.ID_PROYECTO = PM_PROYECTO.ID_PROYECTO 
+				   LEFT JOIN PERSONAMAST
+						ON PM_TAREA.ID_RESPONSABLE = PERSONAMAST.PERSONA 				   
+				   LEFT JOIN sgseguridadsys.BP_TRANSACCION T
+						ON PM_TAREA.ID_TRANSACCION = T.ID_TRANSACCION
+				   LEFT JOIN sgseguridadsys.BP_MAE_PROCESO_ESTADO B
+						ON B.ID_PROCESO=T.ID_PROCESO AND B.ID_ESTADO = T.ID_ESTADO
+					LEFT JOIN as_autorizacion Y ON y.numeroproceso = sgseguridadsys.PM_TAREA.PERMISO
+                   
+            WHERE  PM_TAREA.ID_PROYECTO = ISNULL(:id_proyecto,PM_TAREA.ID_PROYECTO) 
+                   AND ISNULL(UPPER(PM_TAREA.NOMBRE),'A') LIKE '%' + UPPER(ISNULL(:nombretarea,PM_TAREA.NOMBRE)) + '%'
+                   AND UPPER(ISNULL(PM_TAREA.DESCRIPCION,'ZAXZ')) LIKE '%' + UPPER(ISNULL(:descripciontarea,ISNULL(PM_TAREA.DESCRIPCION,'ZAXZ'))) + '%'
+                   AND ISNULL(PM_TAREA.ID_RESPONSABLE,'0') = ISNULL(:id_responsable,ISNULL(PM_TAREA.ID_RESPONSABLE,'0')) 
+                   AND ISNULL(PM_TAREA.ID_TIPO1, '0') = ISNULL(:id_tipo_1, ISNULL(PM_TAREA.ID_TIPO1, '0'))
+				   AND B.ID_PROCESO = ISNULL(:id_proceso,B.ID_PROCESO)
+				   AND B.ID_ESTADO = ISNULL(:id_estado, B.ID_ESTADO)
+				   AND PM_PROYECTO.ID_TIPO_PROYECTO = ISNULL(:id_tipo_proyecto,PM_PROYECTO.ID_TIPO_PROYECTO)
+				   AND ISNULL(PM_TAREA.EXTERNO_ID_GRUPO,'')=ISNULL(:p_id_clave_compuesta,ISNULL(PM_TAREA.EXTERNO_ID_GRUPO,''))
+                   
+            ORDER BY PM_TAREA.fecha_ultima_actualizacion DESC
+         ]]>
+    </sql-query>
+    
+    <sql-query name="pmtarea.listarRelacionados">
+         <![CDATA[
+         	SELECT
+				CAST(S.NumeroSolicitud AS varchar) AS "codigo",
+				S.Descripcion AS "descripcion",
+				S.FechaPreparacion AS "fecha",
+				'S' AS "tipo"
+			FROM 
+				ME_SOLICITUD S
+			WHERE 
+				S.ID_TIPO_EXTERNO = :id_tipo_externo AND
+				S.ID_EXTERNO = :id_externo
+			
+			UNION
+			
+			SELECT 
+				CAST(P.ID_PRETAREA AS varchar) AS "codigo",
+				P.NOMBRE AS "descripcion",
+				P.CREACION_FECHA AS "fecha",
+				'P' AS "tipo"
+			FROM
+				sgseguridadsys.PM_PRETAREA P
+			WHERE
+				P.ID_TIPO_EXTERNO = :id_tipo_externo AND
+				P.ID_EXTERNO = :id_externo AND
+				P.ID_CLIENTE = :id_cliente
+			
+			UNION
+			
+			SELECT
+				CAST(M.MovimientoNumero AS varchar) AS "codigo",
+				M.Comentario AS "descripcion",
+				M.FechaPreparacion AS "fecha",
+				'M' AS "tipo"
+			FROM
+				FA_MOVIMIENTOS M
+			WHERE
+				M.ID_TIPO_EXTERNO = :id_tipo_externo AND
+				M.ID_EXTERNO = :id_externo
+			
+			UNION
+			
+			SELECT
+				CAST(R.ID_REGISTRO AS varchar) AS "codigo",
+				R.ID_TIPO_REGISTRO AS "descripcion",
+				R.CREACION_FECHA AS "fecha",
+				'R' AS "tipo"
+			FROM
+				sgseguridadsys.HS_REGISTRO R
+			WHERE
+				R.ID_TIPO_EXTERNO = :id_tipo_externo AND
+				R.ID_EXTERNO = :id_externo AND
+				R.ID_CLIENTE = :id_cliente
+				
+			UNION
+			
+			SELECT
+				CAST(Q.RequisicionNumero AS varchar) AS "codigo",
+				Q.Comentarios AS "descripcion",
+				Q.FechaPreparacion AS "fecha",
+				'Q' AS "tipo"
+			FROM
+				WH_Requisiciones Q
+			WHERE
+				Q.ID_TIPO_EXTERNO = :id_tipo_externo AND
+				Q.ID_EXTERNO = :id_externo
+				
+         ]]>
+    </sql-query>
+    
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : proceso.BpAuditoria
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="hrpostulanteespecialidad.listarPorPostulante">
+		select a.*, b.Descripcion from HR_PostulanteEspecialidad a join HR_Especialidad b on a.Especialidad = b.Especialidad
+where a.Postulante = :p_postulante
+	</sql-query>
+</hibernate-mapping>

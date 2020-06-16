@@ -1,0 +1,84 @@
+<div class="ui-fluid" #frm>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+      <h3>Actividades Pendientes Por Responsables</h3>
+
+      <ngx-charts-bar-horizontal-2d
+      *ngIf="done"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="UserList"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      (select)="onSelect($event)">
+    </ngx-charts-bar-horizontal-2d>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+      <h3>Evaluación de Calidad de los Proyectos Entregados</h3>
+      <div class="ui-g">
+          <div class="ui-g-12 ui-md-6 ui-lg-1">
+            <label>Año</label>
+          </div>
+          <div class="ui-g-7 ui-md-8 ui-lg-4">
+            <p-dropdown appendTo="body" [style]="{'width':'100%'}" 
+            [autoWidth]="false" 
+            ></p-dropdown>
+          </div>
+        </div>
+
+      <p-table [value]="listadoEvaluacion">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Proyecto</th>
+            <th>Monto Gastado</th>
+            <th>El Tiempo se Cumplió?</th>
+            <th>Fecha de Termino</th>
+            <th>Cumplió con el Objetivo</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-tx>
+          <tr>
+            <td>{{tx.nombreProyecto}}</td>
+            <td>{{tx.montoGastado}}</td>
+            <td>SI</td>
+            <td>{{tx.fechaFinEstimado | date: 'dd/MM/yyyy'}}</td>
+            <td>SI</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+
+
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-12 ui-lg-12">
+        <h3>Evaluación de Calidad de los Proyectos Entregados</h3>
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-6 ui-lg-2">
+            <label>Proyecto</label>
+          </div>
+          <div class="ui-g-7 ui-md-8 ui-lg-4">
+            <p-dropdown appendTo="body" [style]="{'width':'100%'}" 
+            [autoWidth]="false" 
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <ngx-charts-pie-chart *ngIf="mostrarBarras" [view]="view" [scheme]="colorScheme" [results]="listadoEvaluacionBar"
+          [legend]="showLegend" [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient"
+          (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+
+  </div>
+</div>

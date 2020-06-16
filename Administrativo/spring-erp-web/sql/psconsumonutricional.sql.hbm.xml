@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psconsumonutricional
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+  
+
+
+
+
+<sql-query name="psconsumonutricional.filtro">
+
+	
+select
+		
+		a.ID_ITEM,
+		b.NOMBRE as Nom_Item,
+		c.DescripcionCorta as Nom_Unidad,
+		a.CANTIDAD_SOLICITADA,
+		a.CANTIDAD_FUNDACION,
+		a.CANTIDAD_OTROS,
+		a.COMENTARIOS,
+		d.DescripcionLocal,
+		ROW_NUMBER() OVER (ORDER BY a.ID_CONSUMO ) AS Seq
+		from sgseguridadsys.PS_CONSUMO_NUTRICIONAL a 
+			 left join sgseguridadsys.PS_ITEM b on a.ID_ITEM = b.ID_ITEM
+			 left join UnidadesMast c on b.ID_UNIDAD_MEDIDA = c.UnidadCodigo
+			 left join MA_MiscelaneosDetalle d on d.CodigoTabla = 'ITEMGRUPO' and d.CodigoElemento = b.ID_GRUPO
+		where 
+		ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, '123'))
+		and ISNULL(a.ID_CONSUMO, '123') = isnull(:p_IdConsumo, ISNULL(a.ID_CONSUMO, '123'))
+ </sql-query>
+ 
+<sql-query name="psconsumonutricional.eliminardetalle">
+      
+DELETE FROM sgseguridadsys.PS_CONSUMO_NUTRICIONAL
+WHERE ID_INSTITUCION= :p_IdInstitucion 
+AND ID_CONSUMO=:p_IdConsumo 
+
+
+</sql-query>
+
+
+
+
+</hibernate-mapping>

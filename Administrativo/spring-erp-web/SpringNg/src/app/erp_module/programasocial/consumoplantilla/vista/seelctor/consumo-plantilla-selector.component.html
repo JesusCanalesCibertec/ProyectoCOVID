@@ -1,0 +1,38 @@
+<div class="ui-fluid">
+    <p-dialog header="SELECTOR DE PLANTILLAS DE CONSUMO" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-2">
+                    <label>Plantilla</label>
+                </div>
+                <div class="ui-g-12 ui-md-8 ui-lg-10">
+                    <p-dropdown [options]="listaPlantilla" [(ngModel)]="filtro.codigoNumerico" [style]="{'width':'100%'}"
+                        [autoWidth]="false" (onChange)="buscar(dtCostCenter)"></p-dropdown>
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton label="Aceptar" icon="fa fa-check" type="button" (click)="aceptar()" class="ui-button"></button>
+            </div>
+            <div class="ui-g-4 ui-md-6 ui-lg-8"></div>
+            <div class="ui-g-4 ui-md-3 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable #dtCostCenter [responsive]="true" [rows]="registrosPorPagina" [paginator]="true" [lazy]="true"
+            scrollWidth="100%" emptyMessage="No se encontraron registros" [totalRecords]="filtro.paginacion.registroEncontrados"
+            (onLazyLoad)="cargarCostCenter($event)" [value]="filtro.paginacion.listaResultado">
+            <p-column header="Código" field="codItem" [style]="{'width':'100px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Nombre" field="nomItem"></p-column>
+            <p-column header="Unidad de medida" field="nomUnidad" styleClass="textoCentrado">
+    
+            </p-column>
+
+        </p-dataTable>
+
+    </p-dialog>
+</div>

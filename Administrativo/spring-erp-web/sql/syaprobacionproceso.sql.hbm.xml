@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : sistema.SyAprobacionproceso
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="syaprobacionproceso.eliminarSolicitudes">
+    	<![CDATA[
+         delete from temp_rrhh_aprobaciones where uuid = :p_uuid
+        ]]>
+    </sql-query>
+    <sql-query name="syaprobacionproceso.listarSolicitudesContar">
+    	<![CDATA[
+         select count(1) from temp_rrhh_aprobaciones where uuid = :p_uuid
+        ]]>
+    </sql-query>
+    <sql-query name="syaprobacionproceso.listarSolicitudesPaginacion">
+    	<![CDATA[
+         	select
+				[secuencia] as "secuencia", 
+				[aplicacionCodigo] as "aplicacionCodigo",
+				[aplicacionNombre] as "aplicacionNombre",
+				[procesoCodigo] as "procesoCodigo",
+				[procesoNombre] as "procesoNombre",
+				[procesoNro] as "procesoNro",
+				[nivelActual] as "nivelActual",
+				[nivelAprobar] as "nivelAprobar",
+				[documentoReferencia] as "documentoReferencia",
+				[fechaSolicitud] as "documentoFecha",
+				[companiaCodigo] as "companiaCodigo",
+				[companiaNombre] as "companiaNombre",
+				[unidadReplicacionCodigo] as "unidadReplicacionCodigo",
+				[unidadReplicacionNombre] as "unidadReplicacionNombre",
+				[solicitanteId] as "solicitanteId",
+				[solicitanteNombre] as "solicitanteNombre",
+				[estadoCodigo] as "estadoCodigo",
+				[estadoNombre] as "estadoNombre",
+				[observaciones] as "observaciones",
+				[fechaSolicitud] as "fechaSolicitud",
+				[uuid] as "uuid",
+				[procesoAprobar] as "procesoAprobar",
+				[procesoInternoAprobar] as "procesoInternoAprobar",
+				[llave] as "llave",
+				[capacitaciones] as "capacitaciones", [idTransaccion] as "idTransaccion" ,ROW_NUMBER() OVER (ORDER BY fechaSolicitud desc) AS Seq		
+         	from temp_rrhh_aprobaciones where uuid = :p_uuid
+        ]]>
+    </sql-query>
+    <sql-query name="syaprobacionproceso.prepararSolicitudes">
+    	<![CDATA[
+		  DELETE FROM dbo.[temp_rrhh_aprobaciones] 
+    		  WHERE  [uuid] = :p_uuid;
+        
+      exec SNp_RRHH_LISTADO_APROBACIONES 
+			      :p_tipo,
+			      :p_compania_socio,
+			      :p_aplicacion,
+			      :p_proceso, 
+			      :p_proceso_interno, 
+			      :p_numero_proceso,
+			      :p_documento, 
+			      :p_fecha, 
+			      :p_fecha_desde, 
+			      :p_fecha_hasta, 
+			      :p_unidad_replicacion, 
+			      :p_id_persona_solicitante, 
+			      :p_nivel, 
+			      :p_id_persona_actual, 
+			      :p_plan, 
+			      :p_estado,
+			      :p_uuid;
+      ]]>
+    </sql-query>
+	<sql-query name="syaprobacionproceso.listarCodigoProcesoPorCodigoProcesoBase">
+    	<![CDATA[
+         	SELECT  CodigoProceso, p.ProcesoInterno
+			FROM SY_AprobacionProceso P
+				inner JOIN MA_MiscelaneosDetalle md 
+					ON md.CodigoTabla='PROINTAPRO' and md.CodigoElemento = cast(p.ProcesoInterno as varchar)
+			WHERE md.ValorCodigo2 = :p_codigo_proceso_base
+        ]]>
+    </sql-query>
+<sql-query name="syaprobacionproceso.SincronizarHorarios">
+    	<![CDATA[
+         SNP_AS_EJECUTAR_CAMBIO_HORARIO_APROBADOS :p_compania
+        ]]>
+    </sql-query>
+</hibernate-mapping>

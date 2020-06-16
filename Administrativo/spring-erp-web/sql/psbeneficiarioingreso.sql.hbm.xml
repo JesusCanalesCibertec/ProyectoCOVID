@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : programasocial.psbeneficiarioingreso
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  
+ 
+
+
+
+
+<sql-query name="psbeneficiarioingreso.filtro">
+
+select 
+
+		a.ID_INGRESO,
+		a.FECHA_INGRESO,
+		case(b.ID_PROGRAMA)
+		when 'NNA' then ma1.DescripcionLocal 
+		when 'AAM' then ma2.DescripcionLocal
+		end as Nom_SituacionLegal,
+		a.COMENTARIOS,
+		a.FECHA_EGRESO,
+	    case(b.ID_PROGRAMA)
+		when 'NNA' then ma3.DescripcionLocal 
+		when 'AAM' then ma4.DescripcionLocal
+		end as Nom_Motivo,
+		a.COMENTARIOS_EGRESO,
+		ROW_NUMBER() OVER (ORDER BY a.ID_INGRESO desc ) AS Seq
+		from sgseguridadsys.PS_BENEFICIARIO_INGRESO a 
+			 left join sgseguridadsys.PS_BENEFICIARIO b 
+				on a.ID_BENEFICIARIO = b.ID_BENEFICIARIO AND a.ID_INSTITUCION = b.ID_INSTITUCION
+			 left join MA_MiscelaneosDetalle ma1 
+				on a.ID_SITUACION_LEGAL = ma1.CodigoElemento and ma1.CodigoTabla = 'SITLEGNIN' and ma1.AplicacionCodigo = 'PS'
+			 left join MA_MiscelaneosDetalle ma2 
+				on a.ID_SITUACION_LEGAL = ma2.CodigoElemento and ma2.CodigoTabla = 'SITLEGADU' and ma2.AplicacionCodigo = 'PS'
+			 left join MA_MiscelaneosDetalle ma3 
+				on a.ID_MOTIVO_EGRESO = ma3.CodigoElemento and ma3.CodigoTabla ='NNAEGRES' and ma3.AplicacionCodigo = 'PS'
+			 left join MA_MiscelaneosDetalle ma4 
+				on a.ID_MOTIVO_EGRESO = ma4.CodigoElemento and ma4.CodigoTabla ='AAMEGRES' and ma4.AplicacionCodigo = 'PS'
+		
+		WHERE
+		ISNULL(a.ID_BENEFICIARIO, '123') = isnull(:p_IdBeneficiario, ISNULL(a.ID_BENEFICIARIO, '123'))
+		and ISNULL(a.ID_INSTITUCION, '123') = isnull(:p_IdInstitucion, ISNULL(a.ID_INSTITUCION, '123'))
+
+
+
+ </sql-query>
+
+
+
+
+</hibernate-mapping>

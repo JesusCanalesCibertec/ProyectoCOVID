@@ -1,0 +1,15 @@
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','CANEV','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','CARID','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','DESAM','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','FRASI','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','INMAC','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','PURIC','PERPS_TODOS','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','SVPAU','PERPS_TODOS','A');
+
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','CANEV','PERPS_CANEV','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','CARID','PERPS_CARID','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','DESAM','PERPS_DESAM','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','FRASI','PERPS_FRASI','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','INMAC','PERPS_INMAC','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','PURIC','PERPS_PURIC','A');
+INSERT INTO [dbo].[SY_SeguridadAutorizaciones](AplicacionCodigo,Grupo,Concepto,Usuario,Estado) VALUES('SY','INSTITUCION','SVPAU','PERPS_SVPAU','A');

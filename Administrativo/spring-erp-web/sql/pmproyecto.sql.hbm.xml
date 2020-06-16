@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <sql-query name="pmproyecto.paginacionContar">
+    select count(1) from
+    sgseguridadsys.PM_PROYECTO a
+    left join personamast b on b.persona = a.ID_RESPONSABLE
+    left join sgseguridadsys.PM_TIPO_PROYECTO c on c.ID_TIPO_PROYECTO = a.ID_TIPO_PROYECTO
+    left join sgseguridadsys.BP_TRANSACCION d ON a.ID_TRANSACCION = d.ID_TRANSACCION and c.ID_PROCESO = d.ID_PROCESO
+    where a.ID_TIPO_PROYECTO = :p_tipo
+    and a.ID_PROYECTO = isnull(:p_codigo, a.ID_PROYECTO)
+    and a.NOMBRE like '%'+isnull(:p_nombre, '')+'%'
+    and a.ESTADO = isnull(:p_estado, a.ESTADO)
+
+
+  </sql-query>
+
+  <sql-query name="pmproyecto.paginacionListar">
+    select a.ID_PORTAFOLIO, a.ID_PROGRAMA, a.ID_PROYECTO, a.NOMBRE,
+    b.nombrecompleto,
+    (select top 1 e.NOMBRE from sgseguridadsys.BP_MAE_PROCESO_ESTADO e where d.ID_PROCESO = e.ID_PROCESO and e.ID_ESTADO = d.ID_ESTADO) nombreEstado,
+    a.PLAN_FECHA_INICIO,
+    a.PLAN_FECHA_FIN,
+    a.ID_RESPONSABLE,
+    a.id_Transaccion,
+    ROW_NUMBER() OVER (ORDER BY a.ID_PROYECTO DESC) AS Seq
+    from
+    sgseguridadsys.PM_PROYECTO a
+    left join personamast b on b.persona = a.ID_RESPONSABLE
+    left join sgseguridadsys.PM_TIPO_PROYECTO c on c.ID_TIPO_PROYECTO = a.ID_TIPO_PROYECTO
+    left join sgseguridadsys.BP_TRANSACCION d ON a.ID_TRANSACCION = d.ID_TRANSACCION and c.ID_PROCESO = d.ID_PROCESO
+    where a.ID_TIPO_PROYECTO = :p_tipo
+    and a.ID_PROYECTO = isnull(:p_codigo, a.ID_PROYECTO)
+    and a.NOMBRE like '%'+isnull(:p_nombre, '')+'%'
+    and a.ESTADO = isnull(:p_estado, a.ESTADO)
+  </sql-query>
+
+  <sql-query name="psantencion.listarReporteActivdadesPendientes">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteActivdadesPendientes
+        :p_periodo
+     ]]>
+  </sql-query>
+
+  <sql-query name="psantencion.listarReporteCalidadProyectos">
+    <![CDATA[
+        sgseguridadsys.SNp_PS_ListarReporteCalidadProyectos
+        :p_periodo
+     ]]>
+  </sql-query>
+
+
+</hibernate-mapping>

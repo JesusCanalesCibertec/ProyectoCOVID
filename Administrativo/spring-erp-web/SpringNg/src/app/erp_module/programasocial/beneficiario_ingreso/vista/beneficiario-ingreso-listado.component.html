@@ -1,0 +1,49 @@
+<div class="ui-fluid">
+    <p-dialog header="HISTORIAL: {{titulo}}" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+    [style]="{'max-width':'900px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-close" class="ui-button" type="button" (click)="salir()"></button>
+            </div>
+        </div>
+
+        <p-dataTable [responsive]="true" scrollable="true" [rows]="registrosPorPagina" [paginator]="true" scrollWidth="100%" [value]="listado"
+            emptyMessage="No se encontraron registros">
+            <p-column header="Código" field="idIngreso" [style]="{'width':'100px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Fecha de ingreso" field="fechaingreso" styleClass="textoCentrado" [style]="{'width':'100px'}">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechaingreso | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Situación Legal" field="situacionlegal" [style]="{'width':'150px'}"></p-column>
+            <p-column header="Fecha de egreso" field="fechaegreso" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechaegreso | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Motivo de egreso" field="motivoegreso" [style]="{'width':'150px'}"></p-column>
+            <p-column header="Comentarios de egreso" field="comentariosegreso"></p-column>
+
+            <p-column header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado" *ngIf="false">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <div class="ui-g">
+                        <div class="ui-g-3 ui-md-3 ui-lg-12" title="Anular">
+                            <i class="fa fa-trash fa-lg seleccionable" (click)="anular(tx)"></i>
+                        </div>
+
+                    </div>
+                </ng-template>
+            </p-column>
+
+        </p-dataTable>
+
+    </p-dialog>
+
+
+
+</div>

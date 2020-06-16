@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : asistencia.AsAutorizacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="asaccesosdiarios.listarMarcaciones">
+    	<![CDATA[
+	    	   SNp_AS_ListarMarcas
+           :p_fechadesde,
+           :p_fechahasta,
+           :p_compania,
+			     :p_empleado,
+           :p_jefe,
+           :p_usuario,
+           :p_unidadoperativa,
+           :p_numpagina,
+           :p_numregistros
+    	]]>
+    </sql-query>
+    
+ <sql-query name="asaccesosdiarios.listarMarcacionesConsolidado">
+    	<![CDATA[
+	    	   SNp_AS_ListarMarcasSemanal
+           :p_fechadesde,
+           :p_fechahasta,
+           :p_compania,
+			     :p_empleado,
+           :p_jefe,
+           :p_usuario,
+           :p_unidadoperativa,
+           :p_numpagina,
+           :p_numregistros
+    	]]>
+    </sql-query>
+    
+   <sql-query name="asaccesosdiarios.listarMarcas">
+    	<![CDATA[
+	    	   Snp_AS_TRER_Horas_Debe_Favor_Historial
+           :p_desde, :p_hasta,  :p_compania,  :p_empleado, :p_jefe, :p_usuario
+    	]]>
+     </sql-query>
+
+ <sql-query name="asaccesosdiarios.contarmarca">
+    <![CDATA[
+	    	select count(*)
+        from AS_AccesosDiarios c
+        inner join empleadomast e
+        on c.empleado = e.empleado
+        where c.Empleado = :p_empleado and 
+        c.Fecha = :p_fecha and
+        e.estado = 'A' and
+        e.estadoempleado = '0'
+    	]]>
+  </sql-query>
+  
+    <sql-query name="asaccesosdiarios.contaraccesos">
+    	<![CDATA[
+	    	   select count(2)
+from As_AccesosDiarios where Empleado = :p_empleado and fecha between :p_desde and :p_hasta
+    	]]>
+     </sql-query>
+<sql-query name="asaccesosdiarios.listaraccesos">
+    	<![CDATA[
+	    	   
+select empleado, secuencia, fecha, hora, Observacion,ROW_NUMBER() OVER (ORDER BY cast(fecha as date), secuencia desc) AS Seq
+from As_AccesosDiarios where Empleado = :p_empleado and fecha between :p_desde and :p_hasta
+    	]]>
+     </sql-query>
+
+
+ <sql-query name="asaccesosdiarios.validarSolicitudOmision">
+    	<![CDATA[
+	    	   select count ( 1 ) from as_periodo , 
+empleadomast where as_periodo.tipoplanilla =empleadomast.tipoplanilla and empleado = :p_empleado and as_periodo.estado ='A' 
+and :p_fecha <= fechahasta and :p_fecha >= fechadesde 
+    	]]>
+     </sql-query>
+
+<sql-query name="asaccesosdiarios.contarMarcasPorDia">
+    	<![CDATA[
+	    	select count(*) from as_autorizacion where estado not in ('R','N') and empleado = :p_empleado and fecha = :p_fecha
+ 
+    	]]>
+     </sql-query>
+
+<sql-query name="asaccesosdiarios.contarMarcasPorDiaHorasLibres">
+    	<![CDATA[
+	    	select count(*) from as_autorizacion where estado not in ('R','N') and empleado = :p_empleado and fecha = :p_fecha and conceptoacceso = :p_concepto
+ 
+    	]]>
+     </sql-query>
+<sql-query name="asaccesosdiarios.contarMarcasPorRango">
+    	<![CDATA[
+	    	select count(*) from as_autorizacion where estado not in ('R','N') and empleado = :p_empleado  and conceptoacceso = :p_concepto
+		and fecha between :p_fechainicio and :p_fechafin
+    	]]>
+     </sql-query>
+<sql-query name="asaccesosdiarios.listarCruces">
+    	<![CDATA[
+	    	select count(*) from as_autorizacion where estado not in ('R','N') and empleado = :p_empleado  
+		and 
+		  ((:p_fechafin <= datetimefromparts(year(fechafin), month(fechafin), day(fechafin), DATEPART(HOUR, hasta), DATEPART(minute, hasta), 0,0) and :p_fechafin > datetimefromparts(year(fecha), month(fecha), day(fecha), DATEPART(HOUR, desde), DATEPART(minute, desde), 0,0))
+		  or
+		  (:p_fechainicio <= datetimefromparts(year(fechafin), month(fechafin), day(fechafin), DATEPART(HOUR, hasta), DATEPART(minute, hasta), 0,0) and :p_fechainicio >= datetimefromparts(year(fecha), month(fecha), day(fecha), DATEPART(HOUR, desde), DATEPART(minute, desde), 0,0)))
+
+    	]]>
+     </sql-query>
+
+  
+  <sql-query name="asaccesosdiarios.listarCrucesConceptos">
+    <![CDATA[
+	    	select count(*) from as_autorizacion where estado not in ('R','N') and empleado = :p_empleado and CONCEPTOACCESO=:p_concepto 
+		and 
+		  ((:p_fechafin <= datetimefromparts(year(fechafin), month(fechafin), day(fechafin), DATEPART(HOUR, hasta), DATEPART(minute, hasta), 0,0) and :p_fechafin > datetimefromparts(year(fecha), month(fecha), day(fecha), DATEPART(HOUR, desde), DATEPART(minute, desde), 0,0))
+		  or
+		  (:p_fechainicio <= datetimefromparts(year(fechafin), month(fechafin), day(fechafin), DATEPART(HOUR, hasta), DATEPART(minute, hasta), 0,0) and :p_fechainicio >= datetimefromparts(year(fecha), month(fecha), day(fecha), DATEPART(HOUR, desde), DATEPART(minute, desde), 0,0)))
+
+    	]]>
+  </sql-query>
+
+  
+
+</hibernate-mapping>

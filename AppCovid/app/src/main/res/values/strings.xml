@@ -27,7 +27,11 @@
 
     <string-array name="carga_spin_doc">
         <item>DNI</item>
-        <item>Pasaporte</item>
+        <item>Carne EXT.</item>
+    </string-array>
+
+    <string-array name="base">
+        <item>-</item>
     </string-array>
 
 

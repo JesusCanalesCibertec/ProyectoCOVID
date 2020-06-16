@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : planilla.PrPlanillaempleadoconcepto
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="prplanillaempleadoconcepto.listarPorPlanillaEmpleado">
+    	<![CDATA[
+         	SELECT
+             con.tipoconcepto as "conceptoIdTipo"
+             ,pec.concepto as "conceptoId"
+             ,con.descripcion as "conceptoNombre"
+             ,cast(pec.monto as numeric(24,4)) as "monto"
+             ,cast(pec.cantidad as numeric(24,4)) as "cantidad"
+             ,cast(pec.saldo as numeric(24,4)) as "saldo" 
+			 ,cast(pec.MontoExtranjera as numeric(24,4)) as "montoExtranjera"
+			 ,cast(pec.CantidadExtranjera as numeric(24,4)) as "cantidadExtranjera"
+			 ,cast(pec.SaldoExtranjera as numeric(24,4)) as "saldoExtranjera"
+	      FROM   pr_planillaempleadoconcepto AS pec 
+	             left JOIN pr_concepto AS con 
+	                     ON pec.concepto = con.concepto 
+	             left JOIN pr_planillaempleado AS pem 
+	                     ON pec.tipoproceso = pem.tipoproceso 
+	                        AND pec.periodo = pem.periodo 
+	                        AND pec.empleado = pem.empleado 
+	                        AND pec.tipoplanilla = pem.tipoplanilla 
+	      WHERE      pec.periodo = :p_id_periodo
+	             AND pec.tipoproceso = :p_id_tipo_proceso
+	             AND pec.empleado = :p_id_empleado 
+	             AND pem.companiasocio = :p_id_companiasocio
+			order by con.tipoconcepto, con.Concepto
+		]]>
+    </sql-query>
+    
+</hibernate-mapping>

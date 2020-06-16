@@ -1,0 +1,194 @@
+<div class="ui-fluid">
+    <p-dialog header="{{titulo}}" [(visible)]="verSelector" modal="modal" showEffect="fade" hideEffect="size"
+        [width]="1200" [style]="{'margin-top':'-100px'}">
+        <p-panel header="Filtros de Búsqueda">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-3 ui-lg-1">
+                    <label>Nombre</label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-4">
+                    <input pInputText type="text" style="width:100%" [(ngModel)]="filtro.nombre"
+                        (keypress)="defaultBuscar($event)" [disabled]="" />
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                    <label>Periodo disponible</label>
+                </div>
+                <div class="ui-g-8 ui-md-1 ui-lg-1">
+                    <p-checkbox [(ngModel)]="filtrofecha" binary="true"></p-checkbox>
+                </div>
+
+                <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                    <label>Desde</label>
+                </div>
+
+                <div class="ui-g-8 ui-md-3 ui-lg-3">
+                    <p-calendar [monthNavigator]="true " [yearNavigator]="true" [locale]="es" yearRange="1940:2200"
+                        [disabledDays]="[0,6]" [(ngModel)]="!filtrofecha?null:filtro.fechainicio2"
+                        (keypress)="defaultBuscar($event)" appendTo="body" [showIcon]="true" dateFormat="dd/mm/yy"
+                        [disabled]="!filtrofecha" [minDate]="proyecto.fechainicio" [maxDate]="proyecto.fechafin">
+                    </p-calendar>
+                </div>
+
+                <div class="ui-g-4 ui-md-1 ui-lg-1 controlEtiquetaDiv">
+                    <label>Hasta</label>
+                </div>
+
+                <div class="ui-g-8 ui-md-3 ui-lg-3">
+                    <p-calendar [monthNavigator]="true " [yearNavigator]="true" [locale]="es" yearRange="1940:2200"
+                        [disabledDays]="[0,6]" [(ngModel)]="!filtrofecha?null:filtro.fechafin2"
+                        (keypress)="defaultBuscar($event)" appendTo="body" [showIcon]="true" dateFormat="dd/mm/yy"
+                        [disabled]="!filtrofecha" [minDate]="proyecto.fechainicio" [maxDate]="proyecto.fechafin">
+                    </p-calendar>
+                </div>
+
+                <div class="ui-g-12 ui-md-3 ui-lg-1">
+                    <label>Horas</label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-1">
+                    <p-spinner [(ngModel)]="filtro.secuencia" [min]="0" [max]="8" (input)="buscarChange()"
+                        (onChange)="buscarChange()">
+                    </p-spinner>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-3 ui-lg-1">
+                    <label>Cargo</label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-4">
+                    <p-dropdown [(ngModel)]="filtro.valor2" [options]="cargos" (onChange)="buscarChange()"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-3 ui-lg-1">
+                    <label>Conocimiento</label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-3">
+                    <p-dropdown [(ngModel)]="filtro.valorNumerico" [options]="conocimientosGrupo" (onChange)="buscarChange()"
+                        [group]="true" placeholder="--Seleccione--" [autoWidth]="false">
+                    </p-dropdown>
+                </div>
+
+                <div class="ui-g-12 ui-md-3 ui-lg-1">
+                    <label>Nivel </label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-2">
+                    <p-dropdown [(ngModel)]="filtro.valor1" [options]="niveles" (onChange)="buscarChange()" [disabled]="flagnivel"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+        </p-panel>
+
+        <div class="ui-g">
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fas fa-search" type="button" (click)="buscar(dt)"
+                    class="ui-button"></button>
+            </div>
+            <div class="ui-g-6 ui-md-8 ui-lg-8"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Aceptar" icon="far fa-check-square" class="ui-button" type="button"
+                    (click)="aceptar()"></button>
+            </div>
+        </div>
+
+        <div class="ui-g">
+
+            <div class="ui-g-12 ui-md-6 ui-lg-5" style="width: 47%">
+                <p-dataTable #dt [responsive]="true" [rows]="7" scrollWidth="100%" scrollable="true"
+                    scrollHeight="280px" emptyMessage="No se encontraron registros" [(selection)]="registroSeleccionado"
+                    selectionMode="single" [totalRecords]="filtro.paginacion.registroEncontrados" [paginator]="true"
+                    [lazy]="true" (onLazyLoad)="listar($event)" [value]="filtro.paginacion.listaResultado">
+                    <p-header>{{titulo1}}</p-header>
+                    <p-column header="Código" field="idPersona" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                    </p-column>
+                    <p-column header="Nombre" field="persona" [style]="{'width':'200px'}"></p-column>
+                    <p-column header="Rango de fechas" [style]="{'width':'150px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <p-calendar [(ngModel)]="tx.rango" yearRange="1940:2200" [locale]="es" appendTo="body"
+                                dateFormat="dd/mm/yy" [disabled]="" [numberOfMonths]="2" selectionMode="range"
+                                [disabledDays]="[0,6]" [disabledDates]="tx.diasocupados"
+                                [minDate]="proyecto.fechainicio" [maxDate]="proyecto.fechafin">
+                                <ng-template pTemplate="date" let-date>
+                                    <span [ngStyle]="{backgroundColor: (tx.diasocupados) ? '#5AE53E' : 'inherit'}"
+                                        style="border-radius:50%;padding: .25em;width: 1.75em; height:1.75em; display:block;">{{date.day}}</span>
+                                </ng-template>
+                            </p-calendar>
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Horas" field="horas" [style]="{'width':'70px'}">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <p-spinner [(ngModel)]="tx.horas" [min]="1" [max]="filtro.secuencia"></p-spinner>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-1" style="width: 6%">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12 ui-lg-12" style="height: 130px;"></div>
+                </div>
+
+                <div class="ui-g">
+                    <button pButton type="button" class="ui-button" icon="fas fa-chevron-right"
+                        style="width: 100%; height: 50px" (click)="seleccionar()"
+                        [disabled]="deshabilitarBoton"></button>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-6" style="width: 47%">
+                <p-dataTable [value]="seleccionados" [responsive]="true" [rows]="7" scrollWidth="100%"
+                    [paginator]="true" emptyMessage="Sin seleccionados" [scrollable]="true" scrollHeight="250px">
+                    <p-header>{{titulo2}}</p-header>
+                    <p-column header="Código" field="idPersona" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                    </p-column>
+                    <p-column header="Nombre" field="persona" [style]="{'width':'200px'}"></p-column>
+                    <p-column header="Periodos" [style]="{'width':'70px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <i [ngStyle]="obtenerEstilosEditar(tx.listaPeriodos.length)" class="far fa-calendar-alt"
+                                styleClass="Listar" (click)="listarPeriodos($event,tx,op)"></i>
+                            {{' ('+tx.listaPeriodos.length+')'}}
+                        </ng-template>
+                    </p-column>
+                    <p-column header="Acción" [style]="{'width':'70px'}" styleClass="textoCentrado">
+                        <ng-template let-tx="rowData" pTemplate="body">
+                            <i class="fa fa-times fa-lg seleccionable" title="Eliminar"
+                                (click)="eliminarSeleccion(tx)"></i>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-9 ui-md-4 ui-lg-10"></div>
+            <div class="ui-g-3 ui-md-2 ui-lg-2">
+                <button pButton label="Salir" icon="fa fa-mail-reply" class="ui-button" type="button"
+                    (click)="salir()"></button>
+            </div>
+        </div>
+    </p-dialog>
+
+    <p-overlayPanel #op [showCloseIcon]="true">
+        <p-dataTable #dp [value]="seleccionado.listaPeriodos" [responsive]="true" [rows]="5" [paginator]="true"
+            emptyMessage="No se encontraron registros" [style]="{'width':'500px'}">
+
+            <p-column header="N°" field="idPeriodo" [style]="{'width':'50px'}" styleClass="textoCentrado">
+            </p-column>
+            <p-column header="Inicio" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechainicio | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Fin" [style]="{'width':'100px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    {{tx.fechafin | date: 'dd/MM/yyyy'}}
+                </ng-template>
+            </p-column>
+            <p-column header="Horas" field="horas" [style]="{'width':'50px'}" styleClass="textoCentrado"></p-column>
+            <p-column header="Acción" [style]="{'width':'50px'}" styleClass="textoCentrado">
+                <ng-template let-tx="rowData" pTemplate="body">
+                    <i class="fa fa-times fa-lg seleccionable" title="Eliminar" (click)="eliminarPeriodo(tx)"></i>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </p-overlayPanel>
+
+</div>

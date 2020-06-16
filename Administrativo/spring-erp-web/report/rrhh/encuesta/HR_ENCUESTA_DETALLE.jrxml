@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HR_ENCUESTA_DETALLE" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4561d665-0e2b-462b-803d-300906ee23c0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="compania" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="secuencia" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="periodo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Fabrica\\Desarrollo\\ANGULAR\\CANEVARO\\spring-erp-web\\report\\rrhh\\encuesta\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *, (
+
+case
+	when b.tipoencuesta = 'CLIMA'
+	then (select DescripcionLocal from MA_MiscelaneosDetalle where CodigoTabla = 'AREASCLIMA' and AplicacionCodigo = 'HR' and CodigoElemento = b.Area)
+	when b.tipoencuesta = 'SATIS'
+	then (select DescripcionLocal  from MA_MiscelaneosDetalle where CodigoTabla = 'AREAENCSAT' and AplicacionCodigo = 'PS' and CodigoElemento = b.Area)
+	when b.tipoencuesta = 'GUIAIN'
+	then (select DescripcionLocal  from MA_MiscelaneosDetalle where CodigoTabla = 'ARGOINF' and AplicacionCodigo = 'PS' and CodigoElemento = b.Area)
+	else 'Otros'
+end
+
+) AS AREAS from HR_EncuestaDetalle a
+join HR_EncuestaPregunta b on a.Pregunta = b.pregunta
+WHERE A.COMPANYOWNER = $P{compania} and A.PERIODO = $P{periodo} and A.secuencia = $P{secuencia}
+order by a.orden]]>
+	</queryString>
+	<field name="CompanyOwner" class="java.lang.String"/>
+	<field name="Periodo" class="java.lang.String"/>
+	<field name="Secuencia" class="java.lang.Integer"/>
+	<field name="Pregunta" class="java.lang.Integer"/>
+	<field name="Orden" class="java.lang.Integer"/>
+	<field name="Ultimousuario" class="java.lang.String"/>
+	<field name="Ultimafechamodif" class="java.sql.Timestamp"/>
+	<field name="ID_INDICADOR" class="java.lang.String"/>
+	<field name="GRUPO" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Area" class="java.lang.String"/>
+	<field name="ValorMinimo" class="java.lang.Integer"/>
+	<field name="ValorMaximo" class="java.lang.Integer"/>
+	<field name="Leyenda" class="java.lang.String"/>
+	<field name="Tipo" class="java.lang.String"/>
+	<field name="flagpersonacargo" class="java.lang.String"/>
+	<field name="Estado" class="java.lang.String"/>
+	<field name="flagcapacitacion" class="java.lang.String"/>
+	<field name="RequiereFlag" class="java.lang.String"/>
+	<field name="RequierePregunta" class="java.lang.Integer"/>
+	<field name="RequiereValor" class="java.lang.String"/>
+	<field name="TipoEncuesta" class="java.lang.String"/>
+	<field name="AREAS" class="java.lang.String"/>
+	<group name="grupo" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{AREAS}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement mode="Opaque" x="48" y="0" width="458" height="20" forecolor="#FFFFFF" backcolor="#000000" uuid="3fa70484-f3b6-4014-a989-5b90b2b3e3c8"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GRUPO}.equals( "F" )?"Funcional":"Estructural"]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="27">
+				<textField>
+					<reportElement mode="Opaque" x="48" y="7" width="458" height="20" forecolor="#000000" backcolor="#CCCCCC" uuid="454b8bfe-6334-4dc2-931b-9adb62d79167"/>
+					<box leftPadding="8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AREAS}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement x="88" y="8" width="380" height="20" uuid="4c571cb1-3c3b-4ca6-a3db-7ad61ae303a9"/>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="88" y="35" width="380" height="46" uuid="d3bb8dfa-e8eb-4879-bce3-eb5848f4c98d">
+					<printWhenExpression><![CDATA[$F{Tipo}.equals( "C" )]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<subreport>
+				<reportElement x="88" y="35" width="380" height="48" uuid="f6f0542d-3f9a-42e5-a5fc-a79f43f17482">
+					<printWhenExpression><![CDATA[!$F{Tipo}.equals( "C" )]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="pregunta">
+					<subreportParameterExpression><![CDATA[$F{Pregunta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tipo">
+					<subreportParameterExpression><![CDATA[$F{Tipo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["HR_ENCUESTA_DETALLE_VALORES.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

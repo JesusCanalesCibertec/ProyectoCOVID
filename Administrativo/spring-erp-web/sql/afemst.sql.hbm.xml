@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : asistencia.AsAutorizacion
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    
+    <sql-query name="afemst.paginacionContar">
+    	<![CDATA[
+	    	select count(1)
+			from afemst
+			where status = 'A'
+			and afe = isnull(:p_codigo, afe)
+			and localname like '%'+isnull(:p_descripcion, localname)+'%'
+    	]]>
+    </sql-query>
+
+  <sql-query name="afemst.paginacionListar">
+    	<![CDATA[
+			select afe, companyowner, localname,ROW_NUMBER() OVER (ORDER BY localname) AS Seq
+			from afemst
+			where status = 'A'
+			and afe = isnull(:p_codigo, afe)
+			and localname like '%'+isnull(:p_descripcion, localname)+'%'
+      ]]>
+    </sql-query>
+    
+</hibernate-mapping>

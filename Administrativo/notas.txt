@@ -1,0 +1,13 @@
+java -jar spring-reporter-server-0.0.1.jar
+
+
+recordar verificar el url en appesettings que tenga el mismo puerto que lanza el jar.
+
+"Reporter": {
+		"Url": "http://localhost:8080/spring/reporter/pdf"
+	},
+
+o hacer todos los cambios entrando al jar descomprimido
+- bot-inf
+- classes
+- aplicattion-properties

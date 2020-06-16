@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : sistema.SySeguridadautorizaciones
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="syseguridadautorizaciones.listarEmpresasPorUsuario">
+         Select	 s.Concepto as 'codigo'
+				,c.Description as 'nombre' 
+			From SY_SeguridadAutorizaciones s  
+			Inner Join CompanyOwner c on c.CompanyOwner = s.Concepto  
+			Where S.AplicacionCodigo = 'SY' And S.Grupo = 'COMPANIASOCIO' And   
+				S.Usuario = :p_id_usuario  
+			Order By 2
+    </sql-query>
+</hibernate-mapping>

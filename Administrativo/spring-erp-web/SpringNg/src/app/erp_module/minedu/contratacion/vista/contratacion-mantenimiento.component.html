@@ -1,0 +1,84 @@
+<div class="ui-fluid">
+    <p-dialog
+        header="{{titulomoda}} : {{accion == ACCIONES.NUEVO?'Nuevo':accion == ACCIONES.EDITAR?'Edición':accion == ACCIONES.VER?'Vista Previa':''}}"
+        [(visible)]="verModal" [resizable]="false" [contentStyle]="{'overflow':'visible'}" modal="modal" [transitionOptions]="'300ms'"
+        showEffect="fade" hideEffect="size"
+        [style]="{'max-width':'550px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-fluid" #frm>
+
+            <div class="ui-g ui-md ui-lg" *ngIf="verCampo">
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <label>Número de orden<span style="color:#ff0000">*</span></label>
+                </div>
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <input pInputText [(ngModel)]="contratacion.numeroorden" [disabled]="deshabilitar" maxlength="7"
+                        type="text">
+                </div>
+
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <label>N° entregables</label>
+                </div>
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <p-spinner [(ngModel)]="contratacion.numeroplazo" [min]="1" [max]="5"
+                        [disabled]="deshabilitar || accion == ACCIONES.EDITAR"></p-spinner>
+                </div>
+
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <label>Nombre<span style="color:#ff0000">*</span></label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-9">
+                    <p-dropdown [(ngModel)]="contratacion.idPersona" filter="true" [options]="personas"
+                        [disabled]="deshabilitar" [autoWidth]="false" resetFilterOnHide="true"
+                        emptyFilterMessage=" Personal no encontrado" autofocus="true"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-12 ui-md-3 ui-lg-3">
+                    <label>Cargo<span style="color:#ff0000">*</span></label>
+                </div>
+                <div class="ui-g-12 ui-md-9 ui-lg-9">
+                    <p-dropdown [(ngModel)]="contratacion.cargo" [options]="cargos" [disabled]="deshabilitar"
+                        [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-3">
+                    <label>Desde</label>
+                </div>
+                <div class="ui-g-8 ui-md-4 ui-lg-4">
+                    <p-calendar [monthNavigator]="true" [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                        appendTo="body" [(ngModel)]="contratacion.fechainicio" [showIcon]="true" dateFormat="dd/mm/yy"
+                        [disabled]="deshabilitar || accion == ACCIONES.EDITAR"></p-calendar>
+                </div>
+
+                <div class="ui-g-4 ui-md-1 ui-lg-1">
+                    <label>Hasta</label>
+                </div>
+                <div class="ui-g-8 ui-md-4 ui-lg-4">
+                    <p-calendar [monthNavigator]="true" [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                        [(ngModel)]="contratacion.fechafin" [showIcon]="true" dateFormat="dd/mm/yy" appendTo="body">
+                    </p-calendar>
+                </div>
+            </div>
+
+            <div class="ui-g ui-md ui-lg">
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button *ngIf="!deshabilitar" pButton label="Guardar" icon="fa fa-save" type="button"
+                        class="ui-button" (click)="guardar()"></button>
+                </div>
+                <div class="ui-g-4 ui-md-6 ui-lg-4">
+                </div>
+                <div class="ui-g-4 ui-md-3 ui-lg-4">
+                    <button pButton label="Salir" icon="fa fa-reply" type="button" class="ui-button"
+                        (click)="salir()"></button>
+                </div>
+            </div>
+            
+        </div>
+    </p-dialog>
+</div>

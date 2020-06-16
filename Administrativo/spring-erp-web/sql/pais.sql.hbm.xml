@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * @author : desarrollo
+ * @powerbuilder : core.Pais
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="pais.obtenerUbigeo">
+	SELECT 
+		U.UBIGEO,
+		U.DES
+		
+		
+		FROM (
+		select 
+		RTRIM(A.Pais) AS PAIS, 
+		RTRIM(C.Departamento) AS DEP, 
+		RTRIM(C.Provincia) AS PROV, 
+		RTRIM(D.CodigoPostal) AS DIS, 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+RTRIM(D.CodigoPostal) AS UBIGEO, 
+		RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta+', '+D.DescripcionCorta AS DES from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento JOIN
+		ZonaPostal D ON D.Provincia = C.Provincia AND D.Departamento = C.Departamento
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(C.Departamento), 
+		RTRIM(C.Provincia), 
+		'00', 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+'00' AS UBIGEO, 
+		RTRIM(A.DescripcionCorta)+', '+ RTRIM(B.DescripcionCorta)+', '+ C.DescripcionCorta from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento
+		
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(B.Departamento), 
+		'00', 
+		'00', 
+		RTRIM(B.Departamento)+'00'+'00' AS UBIGEO, 
+		RTRIM(A.DescripcionCorta)+', '+ RTRIM(B.DescripcionCorta) from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS
+		
+		) AS U
+		WHERE  
+		U.Ubigeo LIKE '%' + ISNULL(:ubigeo, '') + '%'
+    </sql-query>
+  
+    <sql-query name="pais.contarubicaciongeografica">
+		SELECT 
+		count(1)
+		FROM (
+		select 
+		RTRIM(A.Pais) AS PAIS, 
+		RTRIM(C.Departamento) AS DEP, 
+		RTRIM(C.Provincia) AS PROV, 
+		RTRIM(D.CodigoPostal) AS DIS, 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+RTRIM(D.CodigoPostal) AS UBIGEO, 
+		CASE WHEN :p_des2 ='CO' THEN replace(RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta+', '+D.DescripcionCorta, 'PERU', '')
+		ELSE			
+		RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta+', '+D.DescripcionCorta END AS DES from 
+		
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento JOIN
+		ZonaPostal D ON D.Provincia = C.Provincia AND D.Departamento = C.Departamento
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(C.Departamento), 
+		RTRIM(C.Provincia), 
+		'00', 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+'00' AS UBIGEO, 
+		RTRIM(A.DescripcionCorta)+', '+ RTRIM(B.DescripcionCorta)+', '+ C.DescripcionCorta from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(B.Departamento), 
+		'00', 
+		'00', 
+		RTRIM(B.Departamento)+'00'+'00' AS UBIGEO, 
+		RTRIM(A.DescripcionCorta)+', '+ RTRIM(B.DescripcionCorta) from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS) AS U
+		WHERE  
+		U.Ubigeo LIKE '%' + ISNULL(:p_codigo, '') + '%' AND
+		U.DES LIKE '%' + ISNULL(:p_descripcion, '') + '%' 
+		AND U.PAIS = ISNULL(:p_pais, U.PAIS)
+		AND U.DEP = ISNULL(:p_dep, U.DEP)
+		AND U.PROV = ISNULL(:p_prov, U.PROV)
+    </sql-query>
+  
+    <sql-query name="pais.listarubicaciongeografica">
+		SELECT 
+		'' as uno,
+		'' as dos,
+		'' as tres,
+		U.DEP,
+		U.PROV,
+		U.DIS,
+		U.DES,
+		U.UBIGEO,
+		U.PAIS ,
+		ROW_NUMBER() OVER(ORDER BY U.DEP,U.PROV,U.DIS) AS seq
+		FROM (
+		select 
+		RTRIM(A.Pais) AS PAIS, 
+		RTRIM(C.Departamento) AS DEP, 
+		RTRIM(C.Provincia) AS PROV, 
+		RTRIM(D.CodigoPostal) AS DIS, 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+RTRIM(D.CodigoPostal) AS UBIGEO, 
+		CASE WHEN :p_des2 ='CO' THEN replace(RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta+', '+D.DescripcionCorta, 'PERU, ', '')
+		ELSE			
+		RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta+', '+D.DescripcionCorta END AS DES from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento JOIN
+		ZonaPostal D ON D.Provincia = C.Provincia AND D.Departamento = C.Departamento
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(C.Departamento), 
+		RTRIM(C.Provincia), 
+		'00', 
+		RTRIM(C.Departamento)+RTRIM(C.Provincia)+'00' AS UBIGEO, 
+		CASE WHEN :p_des2 ='CO' THEN replace(RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta, 'PERU, ', '')
+		ELSE			
+		RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta)+', '+C.DescripcionCorta END AS DES from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS JOIN
+		Provincia C ON C.Departamento = B.Departamento
+		
+		
+		
+		UNION ALL
+		select 
+		RTRIM(A.Pais), 
+		RTRIM(B.Departamento), 
+		'00', 
+		'00', 
+		RTRIM(B.Departamento)+'00'+'00' AS UBIGEO, 
+		CASE WHEN :p_des2 ='CO' THEN replace(RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta), 'PERU, ', '')
+		ELSE			
+		RTRIM(A.DescripcionCorta)+', '+RTRIM(B.DescripcionCorta) END AS DES from 
+		Pais A JOIN 
+		Departamento B ON A.PAIS = B.PAIS
+		
+		
+		
+		) AS U
+		WHERE  
+		U.Ubigeo LIKE '%' + ISNULL(:p_codigo, '') + '%' AND
+		U.DES LIKE '%' + ISNULL(:p_descripcion, '') + '%'
+		AND U.PAIS = ISNULL(:p_pais, U.PAIS)
+		AND U.DEP = ISNULL(:p_dep, U.DEP)
+		AND U.PROV = ISNULL(:p_prov, U.PROV)
+    </sql-query>
+</hibernate-mapping>

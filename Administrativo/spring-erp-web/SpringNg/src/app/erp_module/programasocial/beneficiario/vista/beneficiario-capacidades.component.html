@@ -1,0 +1,179 @@
+<div class="ui-fluid">
+    <p-dialog header="Ficha de Registro de Capacidades" [(visible)]="verSelector" modal="modal" showEffect="fade"
+        hideEffect="size" [style]="{'max-width':'800px', 'left':'15px', 'right':'15px', 'margin-top':'25px'}">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-8 ui-lg-4">
+                <input pInputText type="text" [ngModel]="dtoCapacidad.institucionNombre" disabled />
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-lg-2 controlEtiquetaDivTop">
+                <label>Beneficiario</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-8 ui-lg-4">
+                <input pInputText type="text" [ngModel]="dtoCapacidad.nombreCompleto" disabled />
+            </div>
+        </div>
+
+        <p-fieldset legend="Datos de Capacidades">
+
+            <div class="ui-g" *ngIf="dtoCapacidad.validarNinos">
+                <div class="ui-g-12 ui-md-4 ui-lg-4 controlEtiquetaDivTop">
+                    <label>Grado de dependencia Barthel</label>
+                </div>
+
+                <div class="ui-g-10 ui-md-7 ui-lg-4">
+                    <input pInputText type="text" [(ngModel)]="dtoCapacidad.gradoDependenciaBarthel" disabled="{{editarMantenimiento}}" />
+                </div>
+
+                <div class="ui-g-1 ui-md-1 ui-lg-1">
+                    <button pButton icon="fa fa-search" (click)="mostrarDependenciaBerthel()" title="Selecccione Dependencia Barthel"
+                        [disabled]="editarMantenimiento"></button>
+                </div>
+            </div>
+
+
+            <div class="ui-g" *ngIf="!dtoCapacidad.validarNinos">
+                <div class="ui-g-12 ui-md-4 ui-lg-4 controlEtiquetaDivTop" style="color: crimson; font-weight: bold;">
+                    <label>Grado de dependencia Katz</label>
+                </div>
+
+                <div class="ui-g-10 ui-md-7 ui-lg-4">
+                    <input pInputText type="text" [(ngModel)]="dtoCapacidad.gradoDependenciaKatz" disabled="{{editarMantenimiento}}" />
+                </div>
+
+                <div class="ui-g-1 ui-md-1 ui-lg-1">
+                    <button pButton icon="fa fa-search" (click)="mostrarDependenciaKatz()" title="Selecccione Dependencia Barthel"
+                        [disabled]="editarMantenimiento"></button>
+                </div>
+
+
+                <div class="ui-g-12 ui-md-4 ui-lg-4 controlEtiquetaDivTop" style="color: crimson; font-weight: bold;">
+                    <label>Riesgo Caida</label>
+                </div>
+                <div class="ui-g-12 ui-md-4 ui-lg-4">
+                    <p-dropdown [(ngModel)]="dtoCapacidad.idRiesgoCaida" appendTo="body" [options]="listaRiesgoCaida"
+                        [autoWidth]="false" [style]="{'width':'100%'}" [disabled]="editarMantenimiento">
+                    </p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-4 ui-lg-4" *ngIf="dtoCapacidad.idRiesgoCaida=='SI'">
+                    <p-dropdown [(ngModel)]="dtoCapacidad.idRiesgoCaidaDetalle" appendTo="body" [options]="listaRiesgoCaidaDetalle"
+                        [autoWidth]="false" [style]="{'width':'100%'}" [disabled]="editarMantenimiento">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="ui-g" *ngIf="!dtoCapacidad.validarNinos">
+                <div class="ui-g-12 ui-md-4 ui-lg-4 controlEtiquetaDivTop" *ngIf="!dtoCapacidad.validarNinos">
+                    <label>Ocupación Anterior</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-8" *ngIf="!dtoCapacidad.validarNinos">
+                    <input pInputText type="text" [(ngModel)]="dtoCapacidad.ocupacionAnterior" disabled="{{editarMantenimiento}}" />
+                </div>
+            </div>
+
+        </p-fieldset>
+
+        <p-fieldset legend="Escolaridad" *ngIf="dtoCapacidad.validarNinos">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-3 controlEtiquetaDivTop" style="color: crimson; font-weight: bold;">
+                    <label>Tipo Institución</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-4">
+                    <p-dropdown [(ngModel)]="dtoCapacidad.idTipoInstitucion" [options]="listaTipoInstitucion"
+                        (ngModelChange)="onChangeTipoInstitucion($event)" [autoWidth]="false" [style]="{'width':'100%'}"
+                        appendTo="body" [disabled]="editarMantenimiento">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-3 controlEtiquetaDivTop">
+                    <label>Nivel</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-4">
+                    <p-dropdown [(ngModel)]="dtoCapacidad.idNivel" [disabled]="verNivel||editarMantenimiento" [options]="listaNivel"
+                        (ngModelChange)="onChangeNivel($event)" [autoWidth]="false" [style]="{'width':'100%'}" appendTo="body">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-3 controlEtiquetaDivTop">
+                    <label>Grado Académico Actual</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-4 ui-lg-4">
+                    <p-dropdown [(ngModel)]="dtoCapacidad.idGradoEducativo" [options]="listaGradoAcademico" [disabled]="verGrado||editarMantenimiento"
+                        [autoWidth]="false" [style]="{'width':'100%'}" appendTo="body">
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-3 controlEtiquetaDivTop">
+                    <label>Iletrado</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <div class="ui-g-4">
+                        <p-radioButton name="group1" value="SI" label="Si" [(ngModel)]="dtoCapacidad.idIletrado"
+                            [disabled]="editarMantenimiento"></p-radioButton>
+                    </div>
+                    <div class="ui-g-4">
+                        <p-radioButton name="group1" value="NO" label="No" [(ngModel)]="dtoCapacidad.idIletrado"
+                            [disabled]="editarMantenimiento"></p-radioButton>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4 ui-lg-3 controlEtiquetaDivTop">
+                    <label>SAANEE</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                    <div class="ui-g-4">
+                        <p-radioButton name="group2" value="SI" label="Si" [(ngModel)]="dtoCapacidad.idSaanee"
+                            [disabled]="editarMantenimiento"></p-radioButton>
+                    </div>
+                    <div class="ui-g-4">
+                        <p-radioButton name="group2" value="NO" label="No" [(ngModel)]="dtoCapacidad.idSaanee"
+                            [disabled]="editarMantenimiento"></p-radioButton>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </p-fieldset>
+
+
+        <div class="ui-g ui-g-no-pad">
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Guardar" icon="fa fa-plus" type="button" class="ui-button" (click)="aceptar()"
+                    style="width:100%" *ngIf="!editarMantenimiento"></button>
+            </div>
+
+            <div class="ui-g-4 ui-md-6 ui-lg-6"></div>
+
+            <div class="ui-g-4 ui-md-3 ui-lg-3">
+                <button pButton label="Salir" icon="fa fa-history" type="button" class="ui-button" (click)="verSelector=false"
+                    style="width:100%"></button>
+            </div>
+
+        </div>
+
+    </p-dialog>
+</div>
+
+<app-lista-barthel (insertaBarthel)="obtenerBarthel($event)"></app-lista-barthel>
+<app-lista-katz (insertaKatz)="obtenerKatz($event)"></app-lista-katz>

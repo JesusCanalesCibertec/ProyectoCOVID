@@ -1,0 +1,512 @@
+<p-blockUI [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid" #frm>
+    <p-panel header="Ficha de Registro de Capacidades" [toggleable]="true">
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Institución</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [disabled]="!cambiarInstitucion" (ngModelChange)="onChangeInstitucion($event,dtCapacidad)"
+                    [options]="listaInstitucion" [(ngModel)]="filtro.idInstitucion"></p-dropdown>
+            </div>
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Programa</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [options]="listaPrograma" (onChange)="onchangePrograma(dtCapacidad)"
+                    [disabled]="verListaProgramas" [(ngModel)]="filtro.idPrograma"></p-dropdown>
+            </div>
+
+
+            <div class="ui-g-12 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Nombres</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-10 ui-lg-4">
+                <input pInputText type="text" (keypress)="preBuscar($event, dtCapacidad)" [(ngModel)]="filtro.nombreCompleto" />
+            </div>
+
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Residencia</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-3">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idArea" [options]="listaResidencia"></p-dropdown>
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Sexo</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-2">
+                <p-dropdown [autoWidth]="false" [(ngModel)]="filtro.idSexo" [options]="sexos"></p-dropdown>
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Registros</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-1">
+                <input pInputText type="text" [(ngModel)]="filtro.cantidadRegistros" />
+            </div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-1 controlEtiquetaDivTop">
+                <label>Periodo</label>
+            </div>
+
+            <div class="ui-g-8 ui-md-4 ui-lg-2">
+                <input pInputText type="text" [(ngModel)]="filtro.periodo" disabled />
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-8 ui-md-10 ui-lg-10"></div>
+
+            <div class="ui-g-4 ui-md-2 ui-lg-2">
+                <button pButton label="Buscar" icon="fa fa-binoculars" (click)="buscar(dtCapacidad)" type="button"
+                    class="ui-button"></button>
+            </div>
+        </div>
+
+
+    </p-panel>
+
+    <div class="ui-g ui-md ui-lg">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <p-table #dtCapacidad (onLazyLoad)="cargarListaEvent($event)" [rows]="filtro.cantidadRegistros" [paginator]="true"
+                [lazy]="true" [value]="filtro.paginacion.listaResultado" [totalRecords]="filtro.paginacion.registroEncontrados"
+                [scrollable]="true" [responsive]="true" [autoLayout]="true" scrollHeight="290px">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:100px" rowspan="2">Código</th>
+                        <th style="width:300px" rowspan="2">Nombre Completo</th>
+                        <th style="width:100px" rowspan="2">Edad</th>
+                        <th style="width:100px" rowspan="2">Sexo</th>
+
+                        <th style="width:160px" rowspan="2">{{tituloColumna}}<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" rowspan="2" *ngIf="mostrarAdultos">Riesgo Caida?<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" rowspan="2" *ngIf="mostrarAdultos">Riesgo Caida detalle<span style="color:#ff0000">*</span></th>
+
+                        <th style="width:600px" colspan="5" *ngIf="mostrarNinos">Escolaridad</th>
+                        <th style="width:840px" colspan="7" *ngIf="mostrarNinos">Nivel de Rendimiento Educativo
+                            Alcanzado</th>
+
+                        <th style="width:240px" colspan="2">Taller Formativo</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarNinos">Taller Artístico</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarNinos">Taller Deportivo</th>
+
+                        <th style="width:240px" colspan="2" *ngIf="mostrarAdultos">Taller Físico</th>
+                        <th style="width:240px" colspan="2" *ngIf="mostrarAdultos">Taller Cognitivo</th>
+                        <th style="width:80px" rowspan="2">No Evaluado</th>
+                        <th style="width:100px" rowspan="2">Comentarios Adicionales de Taller</th>
+
+                        <th style="width:180px" rowspan="2" *ngIf="mostrarAdultos">Habilidades Ocupacionales?<span
+                                style="color:#ff0000">*</span></th>
+                        <th style="width:180px" rowspan="2" *ngIf="mostrarAdultos">Evaluado en Hab. Ocupacional?<span
+                                style="color:#ff0000">*</span></th>
+                        <th style="width:100px" rowspan="2" *ngIf="mostrarAdultos">Comentarios Adicionales de
+                            Capacitación</th>
+
+                        <th style="width:90px" rowspan="2">Acción</th>
+                    </tr>
+
+                    <tr>
+                        <th style="width:120px" *ngIf="mostrarNinos">Tipo Institución<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Nivel<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Grado Académico Actual</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Años de Retraso Educativo</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comentario SI retraso Educativo</th>
+
+                        <th style="width:120px" *ngIf="mostrarNinos">Lógico Matemático<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comunicación<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comprensión Lectora<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Personal Social<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Ciencia y Ambiente<span style="color:#ff0000">*</span></th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Tipo de Comunicación</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Comentario de Rendimiento Educativo</th>
+
+
+                        <th style="width:120px">Rendimiento</th>
+                        <th style="width:120px">C. Asistida</th>
+
+                        <th style="width:120px" *ngIf="mostrarNinos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">C. Asistida</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarNinos">C. Asistida</th>
+
+                        <th style="width:120px" *ngIf="mostrarAdultos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">C. Asistida</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">Rendimiento</th>
+                        <th style="width:120px" *ngIf="mostrarAdultos">C. Asistida</th>
+
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [class.row-hover]="rowData.hover">
+
+                        <td style="width:100px; text-align: center">{{rowData.secuencia}}</td>
+                        <td style="width:300px">{{rowData.nombreCompleto}}</td>
+                        <td style="width:100px; text-align: center">{{rowData.edad}}</td>
+                        <td style="width:100px; text-align: center">
+                            {{rowData.sexo=='F'?'Femenino':rowData.sexo == 'M'?'Masculino':''}}
+                        </td>
+
+                        <td style="width:160px" *ngIf="verBotonDependencia">
+                            <div class="ui-g-10 ui-md-9 ui-lg-9">
+                                {{rowData.gradoDependenciaBarthel}}
+                            </div>
+
+                            <div class="ui-g-2 ui-md-2 ui-lg-2">
+                                <button pButton icon="fa fa-search" (click)="mostrarDependenciaBerthel(rowData)" title="Selecccione Dependencia Barthel"></button>
+                            </div>
+                        </td>
+
+                        <td style="width:160px" *ngIf="!verBotonDependencia">
+                            <div class="ui-g-4 ui-md-2 ui-lg-8">
+                                {{rowData.gradoDependenciaKatz}}
+                            </div>
+
+                            <div class="ui-g-4 ui-md-2 ui-lg-1">
+                                <button pButton icon="fa fa-search" (click)="mostrarDependenciaKatz(rowData)" title="Selecccione Dependencia Katz"></button>
+                            </div>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarAdultos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idRiesgoCaida" appendTo="body" [options]="listaRiesgoCaida"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" (onChange)="onMouseEnter(rowData)">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idRiesgoCaida | labelFromItem:listaRiesgoCaida}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarAdultos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idRiesgoCaidaDetalle" appendTo="body" [options]="listaRiesgoCaidaDetalle"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" (onChange)="onMouseEnter(rowData)"
+                                        *ngIf="rowData.idRiesgoCaida=='SI'">
+                                    </p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <label *ngIf="rowData.idRiesgoCaida=='SI'">{{rowData.idRiesgoCaidaDetalle |
+                                        labelFromItem:listaRiesgoCaidaDetalle}}</label>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <!-- ESCOLARIDAD -->
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idTipoInstitucion" [options]="listaTipoInstitucion"
+                                        (ngModelChange)="onChangeTipoInstitucion($event)" [autoWidth]="false" [style]="{'width':'100%'}"
+                                        appendTo="body" (onChange)="onMouseEnter(rowData)">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idTipoInstitucion | labelFromItem:listaTipoInstitucion}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idNivel" [options]="listaNivel" (ngModelChange)="onChangeNivel($event)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [disabled]="verNivel" appendTo="body"
+                                        (onChange)="onMouseEnter(rowData)">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idNivel | labelFromItem:listaNivel}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idGradoEducativo" [options]="listaGradoAcademico"
+                                        [disabled]="verGrado" [autoWidth]="false" [style]="{'width':'100%'}" appendTo="body"
+                                        (onChange)="onMouseEnter(rowData)" (ngModelChange)="onChangeGrado(rowData)">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output" let-tx="rowData">
+                                    {{rowData.idGradoEducativo}}
+                                    <!-- <div *ngIf="tx.entregaIdEstado == 'PARC'">
+                                            PARCIAL
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'PEND'">
+                                            PENDIENTE
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'RECH'">
+                                            RECHAZADO
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'NOEN'">
+                                            NO ENTREGADO
+                                        </div>
+                                        <div *ngIf="tx.entregaIdEstado == 'ENTR'">
+                                            ENTREGADO
+                                        </div> -->
+
+                                    <!-- {{rowData.idGradoEducativo | labelFromItem:listaGradoAcademico}} -->
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text" pInputText [(ngModel)]="rowData.anioRetraso" [class]="'form-control'"
+                                        disabled>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.anioRetraso}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            <div class="ui-g">
+                                <div class="ui-g-10 ui-md-6 ui-lg-6">
+                                    <button pButton icon="fa fa-pencil" (click)="mostrarComentario(rowData,'Retraso')"
+                                        title="Agregar Comentario Retraso Educativo"></button>
+                                </div>
+
+                                <div class="ui-g-2 ui-md-6 ui-lg-6" *ngIf="rowData.comentarioRetraso">
+                                    <i class="fa fa-commenting-o fa-lg "></i>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <!-- NIVEL DE RENDIMIENTO -->
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.notaLogicoMatematico" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaCapacodadPromedio">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.notaLogicoMatematico | labelFromItem:listaCapacodadPromedio}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.notaComunicacion" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaCapacodadPromedio">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.notaComunicacion | labelFromItem:listaCapacodadPromedio}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.notaComprensionLectora" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaCapacodadPromedio">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.notaComprensionLectora | labelFromItem:listaCapacodadPromedio}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.notaPersonalSocial" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaCapacodadPromedio">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.notaPersonalSocial | labelFromItem:listaCapacodadPromedio}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.notaCienciaAmbiente" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaCapacodadPromedio">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.notaCienciaAmbiente | labelFromItem:listaCapacodadPromedio}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" pEditableColumn *ngIf="mostrarNinos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idTipoComunicacion" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaTipoComunicacion">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idTipoComunicacion | labelFromItem:listaTipoComunicacion}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:120px" *ngIf="mostrarNinos">
+                            <div class="ui-g-10 ui-md-6 ui-lg-6">
+                                <button pButton icon="fa fa-pencil" (click)="mostrarComentario(rowData,'Rendimiento')"
+                                    title="Agregar Comentario Rendimiento Educativo"></button>
+
+                            </div>
+                            <div class="ui-g-2 ui-md-6 ui-lg-6" *ngIf="rowData.comentarioRendimiento">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+
+                        <!-- TALLERES -->
+                        <td style="width:120px">{{rowData.idNotaTallerFormativo}}</td>
+                        <td style="width:120px">{{rowData.cantidadTallerFormativo}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.idNotaTallerArtistico}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.cantidadTallerArtistico}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.idNotaTallerDeportivo}}</td>
+                        <td style="width:120px" *ngIf="mostrarNinos">{{rowData.cantidadTallerDeportivo}}</td>
+
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.idNotaTallerFisico}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.cantidadTallerFisico}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.idNotaTallerCognitivo}}</td>
+                        <td style="width:120px" *ngIf="mostrarAdultos">{{rowData.cantidadTallerCognitivo}}</td>
+
+                        <td style="width:80px; text-align: center" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-checkbox (onChange)="onMouseEnter(rowData)" [(ngModel)]="rowData.evaluadoBoolean"
+                                        binary="true"></p-checkbox>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.evaluado}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:100px">
+                            <div class="ui-g-3 ui-md-3 ui-lg-6">
+                                <button pButton icon="fa fa-pencil" (click)="mostrarComentario(rowData,'Taller')" title="Agregar Comentario Adicionales Taller"></button>
+                            </div>
+                            <div class="ui-g-3 ui-md-3 ui-lg-6" *ngIf="rowData.comentarioTalleres">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+
+                        <td style="width:180px" pEditableColumn *ngIf="mostrarAdultos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idHabilidadOcupacional" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaHabilidadesOcupacionales">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idHabilidadOcupacional | labelFromItem:listaHabilidadesOcupacionales}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:180px" pEditableColumn *ngIf="mostrarAdultos">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown [(ngModel)]="rowData.idEvaluarOcupacional" appendTo="body" (onChange)="onMouseEnter(rowData)"
+                                        [autoWidth]="false" [style]="{'width':'100%'}" [options]="listaRiesgoCaida">
+                                    </p-dropdown>
+                                </ng-template>
+
+                                <ng-template pTemplate="output">
+                                    {{rowData.idEvaluarOcupacional | labelFromItem:listaRiesgoCaida}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="width:100px" *ngIf="mostrarAdultos">
+                            <div class="ui-g-10 ui-md-6 ui-lg-6">
+                                <button pButton icon="fa fa-pencil" (click)="mostrarComentario(rowData,'Capacitacion')"
+                                    title="Agregar Comentario Adicionales Capacitación"></button>
+                            </div>
+                            <div class="ui-g-2 ui-md-6 ui-lg-6" *ngIf="rowData.comentarioCapacidad">
+                                <i class="fa fa-commenting-o fa-lg "></i>
+                            </div>
+                        </td>
+
+
+                        <td style="width:90px">
+                            <button pButton icon="fa fa-save" (click)="guardar(rowData, dtCapacidad)" title="Guardar"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+            </p-table>
+            <h3>Registros encontrados : {{filtro.paginacion.registroEncontrados}}</h3>
+
+        </div>
+    </div>
+
+</div>
+
+<p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="300" #cd>
+    <p-footer>
+        <div class="ui-g ui-g-nopad">
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-check" label="Si" (click)="cd.accept()"></button>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-5">
+                <button type="button" pButton icon="fa fa-close" label="No" (click)="cd.reject()"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-confirmDialog>
+
+<app-lista-barthel (insertaBarthel)="obtenerBarthel($event)"></app-lista-barthel>
+<app-lista-katz (insertaKatz)="obtenerKatz($event)"></app-lista-katz>
+<app-capacidadcomentario></app-capacidadcomentario>

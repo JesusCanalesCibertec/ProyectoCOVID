@@ -1,0 +1,49 @@
+
+<div class="ui-fluid" #frm>
+    <div class="ui-panel-content ui-widget-content ng-tns-c1-15 ui-panel ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-panel-content ui-widget-content">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Código</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <input pInputText type="text" [(ngModel)]="recurso.codigoelemento" disabled/>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Descripción</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <input pInputText type="text" [(ngModel)]="recurso.descripcionlocal" />
+                </div>
+            </div>
+
+            <div class="ui-g">
+
+                <div class="ui-g-12 ui-md-6 ui-lg-1">
+                    <label>Estado</label>
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                    <p-dropdown [style]="{'width':'100%'}" [options]="estados" [(ngModel)]="recurso.estado" [autoWidth]="false"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton label="Grabar" icon="fa fa-save" class="ui-button" type="button" (click)='guardar()'></button>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-10"></div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <button pButton label="Salir" icon="fa fa-history" class="ui-button" type="button" (click)='salir()'></button>
+            </div>
+        </div>
+    </div>

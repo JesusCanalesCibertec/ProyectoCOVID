@@ -1,0 +1,76 @@
+
+<p-blockUI #pnl [blocked]="blocked">
+    <div class="ui-g" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <i class="fa fa-spinner fa-spin fa-5x" style="color:white; margin: 0 auto;"></i>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12" style="color:white; margin: 0 auto;">
+            <strong>Procesando</strong>
+        </div>
+    </div>
+</p-blockUI>
+<div class="ui-fluid" #frm>
+    <p-panel header="COMPAÑIA RECURSOS : Filtros de Búsqueda">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Código</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <input pInputText type="text" (keypress)="preBuscar($event)" [(ngModel)]="filtro.codigoelemento"
+                />
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Descripción</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <input pInputText type="text" [(ngModel)]="filtro.descripcionlocal" (keypress)="preBuscar($event)"
+                />
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-1">
+                <label>Estado</label>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p-dropdown [options]="estados" [(ngModel)]="filtro.estado" [style]="{'width':'100%'}"
+                    [autoWidth]="false"></p-dropdown>
+            </div>
+        </div>
+
+    </p-panel>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-11"></div>
+        <div class="ui-g-12 ui-md-6 ui-lg-1">
+            <button pButton label="Buscar" icon="fa fa-binoculars" class="ui-button" type="button"
+                (click)='buscar()'></button>
+        </div>
+    </div>
+
+    <p-dataTable #dt [responsive]="true" scrollWidth="100%" [rows]="20" scrollWidth="100%"
+        [value]="listaRecursos" [paginator]="true" emptyMessage="No se encontraron registros">
+
+        <p-column header="Código" field="codigoelemento" styleClass="textoCentrado" [style]="{'width':'110px'}"></p-column>
+        <p-column header="Descripción" field="descripcionlocal"></p-column>
+        <p-column header="Estado" field="estado" [style]="{'width':'100px'}" styleClass="textoCentrado">
+            <ng-template let-tx="rowData" pTemplate="body">
+                {{tx.estado == 'A'?'Activo':'Inactivo'}}
+            </ng-template>
+        </p-column>
+        <p-column header="{{'Acción'}}" styleClass="textoCentrado" [style]="{'width':'100px'}">
+            <ng-template let-tx="rowData" pTemplate="body">
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-6 ui-lg-6" title="Editar">
+                        <i class="fa fa-pencil fa-lg seleccionable" (click)="editar(tx)"></i>
+                    </div>
+                    <div *ngIf="tx.estado=='A'" class="ui-g-6 ui-md-6 ui-lg-6" title="Eliminar">
+                        <i class="fa fa-times fa-lg seleccionable" (click)="eliminar(tx)"></i>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+    <p-confirmDialog header="Mensaje de Confirmación" width="425"></p-confirmDialog>
