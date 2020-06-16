@@ -18,6 +18,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { ProgramaSocialModule } from './erp_module/programasocial/programasocial.module';
 import { MineduModule } from './erp_module/minedu/minedu.module';
 import localeES from '@angular/common/locales/es';
+import { CovidModule } from './erp_module/covid/covid.module';
 
 registerLocaleData(localeES,'es')
 
@@ -37,7 +38,8 @@ registerLocaleData(localeES,'es')
         SistemasModule,
         BaseModule,
         ProgramaSocialModule,
-        MineduModule
+        MineduModule,
+        CovidModule
         /* MODULOS */
     ],
     declarations: [

@@ -153,12 +153,12 @@ namespace Angular {
             /** COVID - INICIO **/
 
             /*Dao inicio*/
-            services.AddTransient<ConocimientoDao, ConocimientoDaoImpl>();
+            services.AddTransient<CiudadanoDao, CiudadanoDaoImpl>();
 
             /*Dao fin*/
 
             /*servicio inicio*/
-            services.AddTransient<ConocimientoServicio, ConocimientoServicioImpl>();
+            services.AddTransient<CiudadanoServicio, CiudadanoServicioImpl>();
 
             /*servicio fin*/
 

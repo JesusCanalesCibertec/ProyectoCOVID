@@ -21,6 +21,16 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
 
+        this.model = [
+            { label: 'Cargando...', icon: 'fa fa-fw fa-spinner' }];
+
+        this.model = [];
+        this.model.push(
+            { label: 'Inicio', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] },
+            { label: 'Ciudadanos', icon: 'fas fa-users', routerLink: ['/spring/ciudadano-listado'] },
+            // { label: 'Triajes', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] }
+        );
+
         /*this.model = [
             { label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/spring/'] },
             {
@@ -101,58 +111,56 @@ export class AppMenuComponent implements OnInit {
 
         ];
         */
-        this.model = [
-            { label: 'Cargando...', icon: 'fa fa-fw fa-spinner' }];
-        
 
-        this.usuarioServicio.obtenerMenu().then(
-            menu => {
-                this.model = [];
-                this.model.push(
-                    { label: 'Inicio', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] }
-                );
-                if (menu.items) {
-                    menu.items.forEach(element => {
 
-                        let grupo: any = { label: element.label, icon: element.icon, routerLink: ['/spring/'] };
+        // this.usuarioServicio.obtenerMenu().then(
+        //     menu => {
+        //         this.model = [];
+        //         this.model.push(
+        //             { label: 'Inicio', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] }
+        //         );
+        //         if (menu.items) {
+        //             menu.items.forEach(element => {
 
-                        if (element.items) {
+        //                 let grupo: any = { label: element.label, icon: element.icon, routerLink: ['/spring/'] };
 
-                            grupo = { label: element.label, icon: element.icon, items: [] };
+        //                 if (element.items) {
 
-                            element.items.forEach(element2 => {
+        //                     grupo = { label: element.label, icon: element.icon, items: [] };
 
-                                if (element2.routerLink) {
+        //                     element.items.forEach(element2 => {
 
-                                    element2.routerLink = element2.routerLink == null ? null : element2.routerLink.trim();
+        //                         if (element2.routerLink) {
 
-                                    grupo.items.push({
-                                        label: element2.label, icon: element2.icon,
-                                        command: event => this.app.lightMenu = true, routerLink: [element2.routerLink]
-                                    });
-                                } else if (element2.action) {
-                                    grupo.items.push({
-                                        label: element2.label, icon: element2.icon,
-                                        command: event => { this.app.lightMenu = true, this.ejecutarAccion(element2.action); }
-                                    });
-                                } else {
-                                    grupo.items.push({
-                                        label: element2.label, icon: element2.icon,
-                                        command: event => this.app.lightMenu = true
-                                    });
-                                }
-                            });
-                        }
-                        this.model.push(grupo);
-                    });
-                }
+        //                             element2.routerLink = element2.routerLink == null ? null : element2.routerLink.trim();
 
-                // this.model.push(
-                //     { label: 'Reportes', icon: 'fa fa-fw fa-book', routerLink: ['/spring/reportes'] },
+        //                             grupo.items.push({
+        //                                 label: element2.label, icon: element2.icon,
+        //                                 command: event => this.app.lightMenu = true, routerLink: [element2.routerLink]
+        //                             });
+        //                         } else if (element2.action) {
+        //                             grupo.items.push({
+        //                                 label: element2.label, icon: element2.icon,
+        //                                 command: event => { this.app.lightMenu = true, this.ejecutarAccion(element2.action); }
+        //                             });
+        //                         } else {
+        //                             grupo.items.push({
+        //                                 label: element2.label, icon: element2.icon,
+        //                                 command: event => this.app.lightMenu = true
+        //                             });
+        //                         }
+        //                     });
+        //                 }
+        //                 this.model.push(grupo);
+        //             });
+        //         }
 
-                // );
-            }
-        );
+        //         this.model.push(
+        //             { label: 'Reportes', icon: 'fa fa-fw fa-book', routerLink: ['/spring/reportes'] },
+
+        //         );
+        //     }
+        // );
     }
 
 

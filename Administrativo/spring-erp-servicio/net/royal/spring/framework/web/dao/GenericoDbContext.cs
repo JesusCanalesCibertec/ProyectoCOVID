@@ -25,7 +25,7 @@ namespace net.royal.spring.framework.web.dao {
 
         /** COVID - INICIO **/
 
-        public DbSet<Conocimiento> Conocimiento { get; set; }
+        public DbSet<Ciudadano> Ciudadano { get; set; }
 
         /** COVID - FIN **/
 
@@ -273,7 +273,7 @@ namespace net.royal.spring.framework.web.dao {
 
 
             /** COVID - INICIO **/
-            modelBuilder.Entity<Conocimiento>().HasKey(c => new { c.IdConocimiento });
+            modelBuilder.Entity<Ciudadano>().HasKey(c => new { c.IdCiudadano });
 
             /** COVID - FIN **/
 
@@ -387,7 +387,7 @@ namespace net.royal.spring.framework.web.dao {
             .HasKey(c => new { c.Ocupacion });
 
             modelBuilder.Entity<Pais>()
-            .HasKey(c => new { c.Pais });
+            .HasKey(c => new { c.IdPais });
 
             modelBuilder.Entity<Personamast>()
             .HasKey(c => new { c.Persona });

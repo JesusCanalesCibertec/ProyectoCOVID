@@ -15,6 +15,14 @@ export class DepartamentoServicio {
         this.rutaServicio = this.baseUrl + 'api/spring/core/Departamento/';
     }
 
+    
+    listarTodos(): Promise<Departamento[]> {
+        return this.http.get(this.rutaServicio + 'listarTodos')
+            .toPromise()
+            .then(response => response as Departamento[])
+            .catch(error => new Array());
+    }
+
     listarActivosPorPais(idPais: string): Promise<Departamento[]> {
 
         const params = new HttpParams()

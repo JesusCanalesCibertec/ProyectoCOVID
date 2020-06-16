@@ -15,5 +15,6 @@ namespace net.royal.spring.core.dao
     {
             List<Zonapostal> listar(FiltroZonaPostal filtro);
         Zonapostal obtenerPorId(ZonapostalPk pk);
+        List<Zonapostal> listar(string idDepartamento, string idProvincia);
     }
 }

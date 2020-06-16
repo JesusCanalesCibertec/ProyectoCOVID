@@ -12,16 +12,12 @@ namespace net.royal.spring.core.dominio
  * 
  * @tabla dbo.ZonaPostal
 */
-[Table("ZONAPOSTAL")]
+[Table("DISTRITO")]
 public class Zonapostal: ZonapostalPk {
 
-	[Display(Name = "DescripcionCorta")]
-	[MaxLength(20)]
-	[Column("DESCRIPCIONCORTA")]
-	public String Descripcioncorta  { get; set; }
-        
-	[Display(Name = "Estado")]
-	[MaxLength(1)]
+	[Column("DESCRIPCION")]
+	public String Descripcion  { get; set; }
+
 	[Column("ESTADO")]
 	public String Estado  { get; set; }
         

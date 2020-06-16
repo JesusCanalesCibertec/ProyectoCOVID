@@ -14,6 +14,7 @@ using net.royal.spring.framework.core;
 using static net.royal.spring.framework.core.dominio.MensajeUsuario;
 using net.royal.spring.framework.core.dominio.dto;
 using net.royal.spring.core.servicio;
+using net.royal.spring.covid.servicio;
 
 namespace net.royal.spring.sistema
 {
@@ -43,8 +44,7 @@ namespace net.royal.spring.sistema
             {
                 paisesItem.Add(new SelectItemSpring()
                 {
-                    label = pais.Descripcioncorta,
-                    value = pais.Pais
+       
                 });
             }
 

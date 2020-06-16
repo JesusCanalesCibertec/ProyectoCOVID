@@ -23,26 +23,20 @@ namespace net.royal.spring.core.dominio
         }
 
         [Key]
-	    [Display(Name = "Departamento")]
-	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("DEPARTAMENTO")]
+	    [Column("ID_DEPARTAMENTO")]
 	    public String Departamento  { get; set; }
 
 	    [Key]
-	    [Display(Name = "Provincia")]
-	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("PROVINCIA")]
+	    [Column("ID_PROVINCIA")]
 	    public String Provincia  { get; set; }
 
         private String _CodigoPostal;
 
 	    [Key]
-	    [Display(Name = "CodigoPostal")]
-	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("CODIGOPOSTAL")]
+	    [Column("ID_DISTRITO")]
 	    public String Codigopostal
         {
             get { return (_CodigoPostal == null) ? "" : _CodigoPostal.Trim(); }
@@ -54,5 +48,7 @@ namespace net.royal.spring.core.dominio
             object[] myObjArray = { Departamento, Provincia, Codigopostal };
             return myObjArray;
         }
+
+        
     }
 }

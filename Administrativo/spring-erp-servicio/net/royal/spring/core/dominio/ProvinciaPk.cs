@@ -24,7 +24,7 @@ namespace net.royal.spring.core.dominio
 	    [Display(Name = "Departamento")]
 	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("DEPARTAMENTO")]
+	    [Column("ID_DEPARTAMENTO")]
 	    public String Departamento  { get; set; }
 
         private String _Provincia;
@@ -33,7 +33,7 @@ namespace net.royal.spring.core.dominio
 	    [Display(Name = "Provincia")]
 	    [MaxLength(3)]
 	    [Required(ErrorMessage = " El campo {0} no puede estar vacio " )]
-	    [Column("PROVINCIA")]
+	    [Column("ID_PROVINCIA")]
 	    public String Provincia
         {
             get { return (_Provincia == null) ? "" : _Provincia.Trim(); }
@@ -46,4 +46,5 @@ namespace net.royal.spring.core.dominio
             return myObjArray;
         }
     }
+    
 }

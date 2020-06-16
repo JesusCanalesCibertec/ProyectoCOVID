@@ -36,7 +36,7 @@ public class ZonapostalDaoImpl : GenericoDaoImpl<Zonapostal>, ZonapostalDao
             if (!UString.estaVacio(filtro.Codigo))
                 query = query.Where(p => p.Codigopostal == filtro.Codigo);
             if (!UString.estaVacio(filtro.Nombre))
-                query = query.Where(p => p.Descripcioncorta.Contains(filtro.Nombre));
+                query = query.Where(p => p.Descripcion.Contains(filtro.Nombre));
             if (!UString.estaVacio(filtro.Estado))
                 query = query.Where(p => p.Estado == filtro.Estado);
 
@@ -46,6 +46,17 @@ public class ZonapostalDaoImpl : GenericoDaoImpl<Zonapostal>, ZonapostalDao
             else
                 query = query.OrderBy(p => filtro.AtributoOrdenar);
             */
+            return query.ToList();
+        }
+
+        public List<Zonapostal> listar(string idDepartamento, string idProvincia)
+        {
+            IQueryable<Zonapostal> query = this.getCriteria();
+            if (!UString.estaVacio(idDepartamento))
+                query = query.Where(p => p.Departamento == idDepartamento);
+            if (!UString.estaVacio(idProvincia))
+                query = query.Where(p => p.Provincia == idProvincia);
+            query = query.OrderBy(p => p.Descripcion);
             return query.ToList();
         }
 

@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="net\royal\spring\covid\dominio\dto\" />
     <Folder Include="net\royal\spring\minedu\constante\" />
     <Folder Include="net\royal\spring\rrhh\factory\" />
   </ItemGroup>

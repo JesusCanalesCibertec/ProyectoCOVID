@@ -1,0 +1,11 @@
+LISTAR PAISES:
+http://arbchum1-001-site1.etempurl.com/api/spring/covid/Pais/listarTodos
+
+LISTAR DEPARTAMENTOS:
+http://arbchum1-001-site1.etempurl.com/api/spring/core/Departamento/listarTodos
+
+LISTAR PROVINCIAS:
+http://arbchum1-001-site1.etempurl.com/api/spring/core/Provincia/listarActivosPorDepartamento?idDepartamento=15
+
+LISTAR DISTRITOS:
+http://arbchum1-001-site1.etempurl.com/api/spring/core/Zonapostal/listarActivosPorProvincia?idDepartamento=15&idProvincia=01

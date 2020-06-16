@@ -22,11 +22,12 @@ export class AppTopBarComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.empleadomastServicio.obtenerInformacionPorIdPersonaUsuarioActual().then(
-      res => {
-        this.nombre = 'BIENVENIDO:  '+ res.personaNombre;
-      }
-    );
+    //  this.empleadomastServicio.obtenerInformacionPorIdPersonaUsuarioActual().then(
+    //   res => {
+    //     this.nombre = 'BIENVENIDO:  '+ res.personaNombre;
+    //   }
+    // );
+    this.nombre = "BIENVENIDO: Sede Norte"
   }
 
 

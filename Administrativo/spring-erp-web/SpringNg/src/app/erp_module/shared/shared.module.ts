@@ -30,7 +30,6 @@ import { MaUnidadNegocioService } from './unidadnegocio/servicio/maunidadnegocio
 import { AcCostCenterSelectorComponent } from './selectores/centroCosto/vista/accostcenter-selector/accostcentermstselector.component';
 import { DepartmentMstService } from './selectores/departamentmst/servicio/departmentmst.service';
 import { BancoServicio } from './banco/servicio/BancoServicio';
-import { PaisServicio } from './pais/servicio/PaisServicio';
 import { DepartamentoServicio } from './departamento/servicio/DepartamentoServicio';
 import { ProvinciaServicio } from './provincia/servicio/ProvinciaServicio';
 import { ZonapostalServicio } from './zonapostal/servicio/ZonapostalServicio';
@@ -54,6 +53,7 @@ import { PsEmpleadoMultipleSelectorComponent } from '../programasocial/psemplead
 import { PsEmpleadoServicio } from '../programasocial/psempleado/servicio/PsEmpleadoServicio';
 import { AreamineduServicio } from './area/servicio/areaminedu.service';
 import { AreamineduSelectorComponent } from './area/vista/areaminedu-selector.component';
+import { PaisServicio } from '../covid/pais/servicio/PaisServicio';
 
 @NgModule({
     declarations: [
@@ -122,8 +122,8 @@ import { AreamineduSelectorComponent } from './area/vista/areaminedu-selector.co
         UsuarioServicio,
         AfemstService,
         PsEmpleadoServicio,
-
-        AreamineduServicio
+        AreamineduServicio,
+        PaisServicio
 
     ],
 })

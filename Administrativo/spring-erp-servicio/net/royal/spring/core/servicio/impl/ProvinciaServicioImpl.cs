@@ -31,10 +31,10 @@ public class ProvinciaServicioImpl : GenericoServicioImpl, ProvinciaServicio {
 
         public List<Provincia> listarActivosPorDepartamento(string idDepartamento)
         {
-            FiltroProvincia filtro = new FiltroProvincia();
-            filtro.IdDepartamento = idDepartamento;
-            filtro.Estado = "A";
-            return listar(filtro);
+            //FiltroProvincia filtro = new FiltroProvincia();
+            //filtro.IdDepartamento = idDepartamento;
+            //filtro.Estado = "A";
+            return provinciaDao.listar(idDepartamento);
         }
 
         public List<Provincia> listarTodos()
@@ -48,7 +48,7 @@ public class ProvinciaServicioImpl : GenericoServicioImpl, ProvinciaServicio {
             Provincia p = provinciaDao.obtenerPorId(new ProvinciaPk(departamento, provincia));
             if (p==null)
                 return "";
-            return p.Descripcioncorta;
+            return p.Descripcion;
         }
     }
 }

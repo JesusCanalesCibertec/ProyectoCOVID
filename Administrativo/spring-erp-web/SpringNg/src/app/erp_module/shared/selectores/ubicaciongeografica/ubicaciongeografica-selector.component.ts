@@ -2,10 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LazyLoadEvent, SelectItem } from 'primeng/primeng';
 import { DtoTabla } from '../../dominio/dto/DtoTabla';
 import { DtoUbigeo } from './dominio/dto/DtoUbigeo';
-import { PaisServicio } from '../../pais/servicio/PaisServicio';
-import { Pais } from '../../pais/dominio/Pais';
 import { DepartamentoServicio } from '../../departamento/servicio/DepartamentoServicio';
 import { ProvinciaServicio } from '../../provincia/servicio/ProvinciaServicio';
+import { PaisServicio } from 'src/app/erp_module/covid/pais/servicio/PaisServicio';
 
 @Component({
     selector: 'app-selector-ubicaciongeografica',
@@ -37,7 +36,7 @@ export class UbicacionGeograficaSelectorComponent implements OnInit {
         this.paises.push({ label: '-Seleccione-', value: null });
         this.paisServicio.listarTodos().then(respuesta => {
             respuesta.forEach(dep => {
-                this.paises.push({ label: dep.descripcioncorta, value: dep.pais.trim() });
+               // this.paises.push({ label: dep.descripcioncorta, value: dep.pais.trim() });
 
             });
             this.filtro.valor1 = "001";
@@ -54,7 +53,7 @@ export class UbicacionGeograficaSelectorComponent implements OnInit {
         this.deps.push({ label: '-- Seleccione --', value: null });
         this.departamentoServicio.listarActivosPorPais(this.filtro.valor1).then(respuesta => {
             respuesta.forEach(dep => {
-                this.deps.push({ label: dep.descripcioncorta, value: dep.departamento.trim() });
+                this.deps.push({ label: dep.descripcion, value: dep.departamento.trim() });
             });
             if (this.prim) {
                 this.filtro.valor2 = "15";
@@ -68,7 +67,7 @@ export class UbicacionGeograficaSelectorComponent implements OnInit {
         this.provs = [];
         this.provs.push({ label: '-- Seleccione --', value: null });
         this.provinciaServicio.listarActivosPorDepartamento(this.filtro.valor2).then(respuesta => {
-            respuesta.forEach(prov => this.provs.push({ label: prov.descripcioncorta, value: prov.provincia.trim() }));
+            respuesta.forEach(prov => this.provs.push({ label: prov.descripcion, value: prov.provincia.trim() }));
             this.filtro.valor3 = null;
         });
     }

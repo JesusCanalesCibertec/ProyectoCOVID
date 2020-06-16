@@ -15,13 +15,9 @@ namespace net.royal.spring.core.dominio
 [Table("PROVINCIA")]
 public class Provincia: ProvinciaPk {
 
-	[Display(Name = "DescripcionCorta")]
-	[MaxLength(20)]
-	[Column("DESCRIPCIONCORTA")]
-	public String Descripcioncorta  { get; set; }
-        
-	[Display(Name = "Estado")]
-	[MaxLength(1)]
+	[Column("DESCRIPCION")]
+	public String Descripcion  { get; set; }
+
 	[Column("ESTADO")]
 	public String Estado  { get; set; }
         

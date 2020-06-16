@@ -34,12 +34,12 @@ public class DepartamentoDaoImpl : GenericoDaoImpl<Departamento>, DepartamentoDa
             if (!UString.estaVacio(filtro.Codigo))
                 query = query.Where(p => p.Departamento == filtro.Codigo);
             if (!UString.estaVacio(filtro.Nombre))
-                query = query.Where(p => p.Descripcioncorta.Contains(filtro.Nombre));
+                query = query.Where(p => p.Descripcion.Contains(filtro.Nombre));
             if (!UString.estaVacio(filtro.Estado))
                 query = query.Where(p => p.Estado == filtro.Estado);
 
             if (!UString.estaVacio(filtro.AtributoOrdenar))
-                query = query.OrderBy(p => p.Descripcioncorta);     /** order **/
+                query = query.OrderBy(p => p.Descripcion);     /** order **/
             else
                 query = query.OrderBy(p => filtro.AtributoOrdenar);
 
