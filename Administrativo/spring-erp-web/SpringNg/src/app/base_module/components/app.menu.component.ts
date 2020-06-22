@@ -28,6 +28,7 @@ export class AppMenuComponent implements OnInit {
         this.model.push(
             { label: 'Inicio', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] },
             { label: 'Ciudadanos', icon: 'fas fa-users', routerLink: ['/spring/ciudadano-listado'] },
+            { label: 'Triajes', icon: 'fas fa-notes-medical', routerLink: ['/spring/triaje-listado'] },
             // { label: 'Triajes', icon: 'fas fa-home', routerLink: ['/spring/dashboard'] }
         );
 

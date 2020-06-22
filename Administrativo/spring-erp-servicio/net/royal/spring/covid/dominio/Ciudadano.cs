@@ -21,7 +21,7 @@ namespace net.royal.spring.covid.dominio
         public String IdPais { get; set; }
 
         [Column("TIPO_DOCUMENTO")]
-        public String TipoDocumento { get; set; }
+        public Nullable<Int32> TipoDocumento { get; set; }
 
         [Column("NRO_DOC")]
         public String NroDocumento { get; set; }

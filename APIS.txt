@@ -9,3 +9,9 @@ http://arbchum1-001-site1.etempurl.com/api/spring/core/Provincia/listarActivosPo
 
 LISTAR DISTRITOS:
 http://arbchum1-001-site1.etempurl.com/api/spring/core/Zonapostal/listarActivosPorProvincia?idDepartamento=15&idProvincia=01
+
+REGISTRAR CIUDADANO:
+http://arbchum1-001-site1.etempurl.com/api/spring/covid/Ciudadano/registrar
+
+REGISTRAR TRIAJE:
+http://arbchum1-001-site1.etempurl.com/api/spring/covid/Triaje/registrar

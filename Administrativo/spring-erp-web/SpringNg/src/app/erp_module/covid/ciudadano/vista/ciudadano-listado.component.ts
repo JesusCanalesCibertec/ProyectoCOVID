@@ -11,6 +11,8 @@ import { PaisServicio } from '../../pais/servicio/PaisServicio';
 import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
 import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/ProvinciaServicio';
 import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
+import { dtoCiudadano } from '../dominio/dtoCiudadano';
+import { Router } from '@angular/router';
 
 
 
@@ -36,6 +38,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     private provinciaServicio: ProvinciaServicio,
     private distritoServicio: ZonapostalServicio,
     private confirmationService: ConfirmationService,
+    private router: Router,
   ) {
     super(noAuthorizationInterceptor, messageService);
   }
@@ -78,7 +81,8 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
       { field: 'nomprovincia', header: 'Provincia', width: 150 },
       { field: 'nomdistrito', header: 'Distrito', width: 200 },
       { field: 'nomestado', header: 'Estado', width: 100 },
-      { header: 'Acción', width: 100 }
+      { header:'Triajes', width: 100 },
+      //{ header: 'Acción', width: 100 }
     ];
   }
 
@@ -166,6 +170,10 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   ver(bean: Ciudadano) {
 
     // this.CiudadanoMantenimientoComponent.iniciarComponente(this.ACCIONES.VER, bean.idCiudadano);
+  }
+
+  obtener(dto: dtoCiudadano) {
+    this.router.navigate(['spring/triaje-listado', dto.codigo], { skipLocationChange: true });
   }
 
 

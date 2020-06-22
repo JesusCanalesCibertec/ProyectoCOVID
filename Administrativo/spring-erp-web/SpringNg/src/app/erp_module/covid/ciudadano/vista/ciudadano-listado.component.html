@@ -73,7 +73,11 @@
                         <td class="textoCentrado">{{row.nomestado}}</td>
                         <td class="textoCentrado">
                             <div class="ui-g">
-                                <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
+                                <div class="ui-g-4 ui-md-4 ui-lg-12" title="Obtener triajes">
+                                    <i class="fas fa-notes-medical fa-lg seleccionable"
+                                        (click)="obtener(row)"></i>
+                                </div>
+                                <!-- <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
                                     <i class="far fa-edit fa-lg seleccionable" (click)="editar(row)"></i>
                                 </div>
                                 <div class="ui-g-4 ui-md-4 ui-lg-4" title="Ver">
@@ -82,7 +86,7 @@
                                 <div class="ui-g-4 ui-md-4 ui-lg-4" title="Eliminar">
                                     <i class="fas fa-trash fa-lg seleccionable"
                                         (click)="cambiarestado(row,dt)"></i>
-                                </div>
+                                </div> -->
                                 <!-- <div class="ui-g-4 ui-md-4 ui-lg-4" title="Inactivar" *ngIf="row.estado == 'A'">
                                     <i class="far fa-thumbs-down fa-lg seleccionable"
                                         (click)="cambiarestado(row,dt)"></i>

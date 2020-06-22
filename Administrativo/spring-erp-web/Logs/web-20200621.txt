@@ -1,0 +1,858 @@
+2020-06-21T18:37:56.9582617-05:00  [INF] User profile is available. Using '"C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2020-06-21T18:38:00.4554728-05:00  [INF] Starting @angular/cli on port 49302... (dc3fd6cf)
+2020-06-21T18:38:05.6387926-05:00 0HM0M7GICJF1A:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:62469/  0 (ca22a1cb)
+2020-06-21T18:38:05.6387926-05:00 0HM0M7GICJF19:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T18:38:05.7235007-05:00 0HM0M7GICJF19:00000001 [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2020-06-21T18:38:05.9137228-05:00 0HM0M7GICJF1A:00000001 [INF] Request finished in 268.8658ms 200  (791a596a)
+2020-06-21T18:38:48.0496951-05:00  [INF] > california@1.0.0 start D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg
+> ng serve "--port" "49302"
+
+** Angular Live Development Server is listening on localhost:49302, open your browser on http://localhost:49302/ **
+ (592bcd89)
+2020-06-21T18:39:19.5364388-05:00  [INF] i ´¢ówds´¢ú: Project is running at http://localhost:49302/
+ (45c88915)
+2020-06-21T18:39:19.5400430-05:00  [INF] i ´¢ówds´¢ú: webpack output is served from /
+ (c22c6cd4)
+2020-06-21T18:39:20.7059659-05:00  [INF] i ´¢ówds´¢ú: Content not from webpack is served from D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg
+i ´¢ówds´¢ú: 404s will fallback to //index.html
+i ´¢ówdm´¢ú: wait until bundle finished: /
+ (850ae9e8)
+2020-06-21T18:39:31.0178038-05:00  [INF] i ´¢ówdm´¢ú: wait until bundle finished: /
+ (4e5d1689)
+2020-06-21T18:39:45.8535466-05:00  [INF] i ´¢ówdm´¢ú: wait until bundle finished: /
+ (4e5d1689)
+2020-06-21T18:39:51.6971733-05:00  [INF] Date: 2020-06-21T23:39:51.695Z
+Hash: f9e0bc8bdd4720fc15aa
+Time: 61249ms
+chunk {main} main.js, main.js.map (main) 3.19 MB [entry] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 821 kB [entry] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 5.22 kB [entry] [rendered]
+chunk {scripts} scripts.js, scripts.js.map (scripts) 1.6 MB  [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 611 kB [entry] [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 9.75 MB [initial] [rendered]
+
+ (ea877421)
+2020-06-21T18:39:51.9178462-05:00  [INF] WARNING in ./src/app/erp_module/covid/ciudadano/dominio/Ciudadano.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\Ciudadano.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\vista\ciudadano-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\ciudadano.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\servicio\Ciudadano.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/dominio/Triaje.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\Triaje.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\triaje.ts
+    Used by 4 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\triaje.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/servicio/Triaje.service.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\Triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\covid.module.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+i ´¢ówdm´¢ú: Compiled with warnings.
+ (c4ccd6ed)
+2020-06-21T18:39:55.3445001-05:00 0HM0M7GICJF19:00000001 [INF] Request finished in 109708.3675ms 200 text/html; charset=UTF-8 (791a596a)
+2020-06-21T18:39:55.4017151-05:00 0HM0M7GICJF1B:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T18:39:55.4032715-05:00 0HM0M7GICJF1C:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T18:39:55.4101671-05:00 0HM0M7GICJF19:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T18:39:55.4131637-05:00 0HM0M7GICJF1D:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T18:39:55.4185876-05:00 0HM0M7GICJF1E:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T18:39:55.6889980-05:00 0HM0M7GICJF1F:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js   (ca22a1cb)
+2020-06-21T18:39:58.4441433-05:00 0HM0M7GICJF1E:00000001 [INF] Request finished in 3025.5736ms 200 text/css; charset=UTF-8 (791a596a)
+2020-06-21T18:39:58.4593605-05:00 0HM0M7GICJF1F:00000001 [INF] Request finished in 2770.3751ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:39:58.4845547-05:00 0HM0M7GICJF1E:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js   (ca22a1cb)
+2020-06-21T18:39:58.4846869-05:00 0HM0M7GICJF1D:00000001 [INF] Request finished in 3071.5627ms 200 text/css; charset=UTF-8 (791a596a)
+2020-06-21T18:39:58.5046827-05:00 0HM0M7GICJF1F:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js   (ca22a1cb)
+2020-06-21T18:39:58.5240360-05:00 0HM0M7GICJF1D:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js   (ca22a1cb)
+2020-06-21T18:39:58.6583438-05:00 0HM0M7GICJF1B:00000001 [INF] Request finished in 3256.8928ms 200 text/css; charset=UTF-8 (791a596a)
+2020-06-21T18:39:58.6622100-05:00 0HM0M7GICJF1B:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js   (ca22a1cb)
+2020-06-21T18:39:59.3574019-05:00 0HM0M7GICJF1E:00000002 [INF] Request finished in 872.8475ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:39:59.4834803-05:00 0HM0M7GICJF1F:00000002 [INF] Request finished in 978.7939ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:39:59.6056319-05:00 0HM0M7GICJF1D:00000002 [INF] Request finished in 1081.6014ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:39:59.6058402-05:00 0HM0M7GICJF1E:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js   (ca22a1cb)
+2020-06-21T18:39:59.9461037-05:00 0HM0M7GICJF19:00000002 [INF] Request finished in 4536.085ms 200 text/css; charset=UTF-8 (791a596a)
+2020-06-21T18:39:59.9501049-05:00 0HM0M7GICJF1C:00000001 [INF] Request finished in 4546.8376ms 200 text/css; charset=UTF-8 (791a596a)
+2020-06-21T18:40:00.1892582-05:00 0HM0M7GICJF1F:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-06-21T18:40:00.3091709-05:00 0HM0M7GICJF1E:00000003 [INF] Request finished in 703.3083ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:40:00.3863634-05:00 0HM0M7GICJF1F:00000003 [INF] Request finished in 197.1283ms 200 image/png; charset=UTF-8 (791a596a)
+2020-06-21T18:40:01.0101929-05:00 0HM0M7GICJF1B:00000002 [INF] Request finished in 2347.9877ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T18:40:14.1172162-05:00 0HM0M7GICJF1D:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/image-access.png   (ca22a1cb)
+2020-06-21T18:40:14.1530536-05:00 0HM0M7GICJF1E:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-06-21T18:40:14.1530536-05:00 0HM0M7GICJF19:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/logo.png   (ca22a1cb)
+2020-06-21T18:40:14.1530536-05:00 0HM0M7GICJF1C:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-06-21T18:40:14.1557272-05:00 0HM0M7GICJF1F:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/logo.png   (ca22a1cb)
+2020-06-21T18:40:14.1947545-05:00 0HM0M7GICJF1B:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/roboto-v15-latin-regular.woff2   (ca22a1cb)
+2020-06-21T18:40:14.3002365-05:00 0HM0M7GICJF1C:00000002 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:40:14.3695397-05:00 0HM0M7GICJF1B:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:40:14.4155928-05:00 0HM0M7GICJF19:00000003 [INF] Sending file. Request path: '"/logo.png"'. Physical path: '"D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\wwwroot\logo.png"' (27b0a520)
+2020-06-21T18:40:14.4558800-05:00 0HM0M7GICJF19:00000003 [INF] Request finished in 302.8342ms 200 image/png (791a596a)
+2020-06-21T18:40:14.4668886-05:00 0HM0M7GICJF19:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-06-21T18:40:14.5612527-05:00 0HM0M7GICJF19:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:40:14.6184146-05:00 0HM0M7GICJF1D:00000003 [INF] Sending file. Request path: '"/image-access.png"'. Physical path: '"D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\wwwroot\image-access.png"' (27b0a520)
+2020-06-21T18:40:14.6284496-05:00 0HM0M7GICJF1D:00000003 [INF] Request finished in 511.2298ms 200 image/png (791a596a)
+2020-06-21T18:40:14.6754400-05:00 0HM0M7GICJF1D:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-700.woff2   (ca22a1cb)
+2020-06-21T18:40:14.6892389-05:00 0HM0M7GICJF1D:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:40:15.4766943-05:00 0HM0M7GICJF1C:00000002 [INF] Request finished in 1323.6348ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.5036024-05:00 0HM0M7GICJF1C:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-06-21T18:40:15.5092502-05:00 0HM0M7GICJF1C:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:40:15.5143342-05:00 0HM0M7GICJF1E:00000004 [INF] Request finished in 1361.2832ms 200 image/png; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.5664999-05:00 0HM0M7GICJF1E:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592782814189   (ca22a1cb)
+2020-06-21T18:40:15.6270260-05:00 0HM0M7GICJF1C:00000003 [INF] Request finished in 123.4305ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.7365903-05:00 0HM0M7GICJF1F:00000004 [INF] Request finished in 1580.8654ms 200 image/png; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.7469878-05:00 0HM0M7GICJF1B:00000003 [INF] Request finished in 1552.2611ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.8366774-05:00 0HM0M7GICJF19:00000004 [INF] Request finished in 1369.8201ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.8367302-05:00 0HM0M7GICJF1D:00000004 [INF] Request finished in 1161.3578ms 200 font/woff2; charset=UTF-8 (791a596a)
+2020-06-21T18:40:15.8955254-05:00 0HM0M7GICJF1E:00000005 [INF] Request finished in 329.0046ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T18:40:16.0415608-05:00 0HM0M7GICJF1C:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/068/pons1nnt/websocket   (ca22a1cb)
+2020-06-21T18:40:16.0438854-05:00 0HM0M7GICJF1C:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:41:50.7798671-05:00 0HM0M7GICJF1G:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Pais/listarTodos   (ca22a1cb)
+2020-06-21T18:41:50.7899191-05:00 0HM0M7GICJF1H:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/core/Departamento/listarTodos   (ca22a1cb)
+2020-06-21T18:41:50.7966259-05:00 0HM0M7GICJF1I:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Ciudadano/listarPaginacion application/json 86 (ca22a1cb)
+2020-06-21T18:41:50.8064943-05:00 0HM0M7GICJF1I:00000001 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:41:50.9490200-05:00 0HM0M7GICJF1J:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/primeicons.ttf   (ca22a1cb)
+2020-06-21T18:41:50.9524926-05:00 0HM0M7GICJF1J:00000001 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:41:51.0025492-05:00 0HM0M7GICJF1G:00000001 [INF] Route matched with "{action = \"listarTodos\", controller = \"Pais\", page = \"\"}". Executing action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T18:41:51.0024886-05:00 0HM0M7GICJF1H:00000001 [INF] Route matched with "{action = \"listarTodos\", controller = \"Departamento\", page = \"\"}". Executing action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T18:41:51.0248817-05:00 0HM0M7GICJF1I:00000001 [INF] Route matched with "{action = \"ListarPaginacion\", controller = \"Ciudadano\", page = \"\"}". Executing action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" (a44c0341)
+2020-06-21T18:41:52.0610960-05:00 0HM0M7GICJF1J:00000001 [INF] Request finished in 1112.0624ms 200 font/ttf; charset=UTF-8 (791a596a)
+2020-06-21T18:41:52.3390482-05:00 0HM0M7GICJF1H:00000001 [INF] Executing action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T18:41:52.3390482-05:00 0HM0M7GICJF1G:00000001 [INF] Executing action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T18:41:52.8786677-05:00 0HM0M7GICJF1I:00000001 [INF] Executing action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.filtro.FiltroCiudadano"]) - Validation state: Valid (4e3479ed)
+2020-06-21T18:41:55.5239318-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Secuencia"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5263736-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Ano"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5299413-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Dia"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5323030-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5351218-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleadosupervisor"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5373435-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Mes"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5393466-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Area"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5415291-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Areapadre"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5446871-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleadoresponsable"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5492785-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidad"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5514627-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadautorizada"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5544717-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadhoras"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5578951-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadplanilla"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5636817-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadreal"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5699502-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"AsAutorizacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5723835-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"CantidadHorasMaximo"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5744576-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"CantidadTopeDiaSolicitud"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5784757-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"CantidadTopeMesesSolicitud"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5811327-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Secuencia"' on entity type '"AsPeriodo"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5844998-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"DerechoVacacional"' on entity type '"AsTipohorario"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.5870920-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Final"' on entity type '"RtIndicadorMeta"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6144441-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Inicial"' on entity type '"RtIndicadorMeta"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6171280-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Avanceplan"' on entity type '"MpProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6192323-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Avancereal"' on entity type '"MpProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6224568-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"PorcentajeGradoBarthel"' on entity type '"PsCapacidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6247240-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"PorcentajeGradoKatz"' on entity type '"PsCapacidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6298665-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadfundacion"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6322606-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadotros"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6343797-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Cantidadsolicitada"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6367067-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"IngresoMensual"' on entity type '"PsEntidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6390868-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Coeficiente"' on entity type '"PsItem"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6413994-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Peso"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6449070-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Talla"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6475939-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"VariacionPeso"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6499430-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Hemoglobina"' on entity type '"PsSalud"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6527530-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"PlanCosto"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6548935-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCompletado"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6575004-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCosto"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6609098-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCompletado"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6650508-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCosto"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6831358-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCostoHorasExtra"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6857415-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealCrtr"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6882763-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealDuracion"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6902405-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealTrabajo"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6926526-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"RealTrabajoHorasExtra"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6960283-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.6995239-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7019689-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Evaluacion"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7043256-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Calificacion"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7065612-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Evaluacion"' on entity type '"HrCapacitacioneval"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7088589-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Secuenciaempleado"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7139330-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Factor"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7163677-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7183884-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Respuesta"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7206185-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7230135-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Beneftotextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7252838-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Beneftotlocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7297389-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costoimpuestos"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7328394-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costoimpuestosext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7351193-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costosubtotal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7370289-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costosubtotalext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7391637-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costototal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7411297-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costototalestimadoextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7432747-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costototalestimadolocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7459778-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costototalext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7480260-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costounitarioextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7639920-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costounitariolocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7661904-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Montoasumido"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7686008-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Montomaxasumido"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7713175-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Numeroparticipantes"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7743332-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Numerovacantes"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7778604-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Totaldias"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7807359-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Totalhoras"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7863493-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacionplandet"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7904630-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costoestimado"' on entity type '"HrCursodescripcion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7942061-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Costoindividual"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.7979749-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Importegastoemp"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.8030470-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Nota"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.8082074-05:00 0HM0M7GICJF1G:00000001 [WRN] No type was specified for the decimal column '"Peso"' on entity type '"HrEncuestapreguntavalores"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T18:41:55.9967112-05:00 0HM0M7GICJF1H:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:41:55.9967112-05:00 0HM0M7GICJF1I:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:41:55.9967112-05:00 0HM0M7GICJF1G:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:41:58.1314175-05:00 0HM0M7GICJF1I:00000001 [INF] Executed action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 5222.0149ms. (50a9e262)
+2020-06-21T18:41:58.1418012-05:00 0HM0M7GICJF1I:00000001 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico"'. (8a1b66c8)
+2020-06-21T18:41:58.2382868-05:00 0HM0M7GICJF1I:00000001 [INF] Executed action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" in 7180.567ms (afa2e885)
+2020-06-21T18:41:58.2454065-05:00 0HM0M7GICJF1I:00000001 [INF] Request finished in 7448.8152ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:41:58.6474376-05:00 0HM0M7GICJF1G:00000001 [INF] Executed DbCommand ("329"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[ID_PAIS], [p].[DESCRIPCION], [p].[NACIONALIDAD]
+FROM [PAIS] AS [p]
+ORDER BY [p].[DESCRIPCION]" (0723d8ff)
+2020-06-21T18:41:58.7236496-05:00 0HM0M7GICJF1G:00000001 [INF] Executed action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 6359.146ms. (50a9e262)
+2020-06-21T18:41:58.7269066-05:00 0HM0M7GICJF1G:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.covid.dominio.Pais, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T18:41:58.7573927-05:00 0HM0M7GICJF1G:00000001 [INF] Executed action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" in 7706.0866ms (afa2e885)
+2020-06-21T18:41:58.7608943-05:00 0HM0M7GICJF1G:00000001 [INF] Request finished in 7980.833ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:41:58.8313483-05:00 0HM0M7GICJF1H:00000001 [INF] Executed DbCommand ("314"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[ID_DEPARTAMENTO], [d].[DESCRIPCION], [d].[ESTADO], [d].[ID_PAIS]
+FROM [DEPARTAMENTO] AS [d]" (0723d8ff)
+2020-06-21T18:41:58.8403398-05:00 0HM0M7GICJF1H:00000001 [INF] Executed action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 6475.2821ms. (50a9e262)
+2020-06-21T18:41:58.8426056-05:00 0HM0M7GICJF1H:00000001 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.Departamento, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T18:41:58.8492012-05:00 0HM0M7GICJF1H:00000001 [INF] Executed action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" in 7812.7766ms (afa2e885)
+2020-06-21T18:41:58.8520266-05:00 0HM0M7GICJF1H:00000001 [INF] Request finished in 8062.0613ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:55:26.3341810-05:00  [INF] i ´¢ówdm´¢ú: Compiling...
+ (b41a76a5)
+2020-06-21T18:55:30.4778742-05:00  [INF] Date: 2020-06-21T23:55:30.477Z - Hash: bdf6e4ddd63ca9104962 - Time: 3671ms
+6 unchanged chunks
+
+ (94851652)
+2020-06-21T18:55:30.5752569-05:00  [INF] WARNING in ./src/app/erp_module/covid/ciudadano/dominio/Ciudadano.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\Ciudadano.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\vista\ciudadano-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\ciudadano.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\servicio\Ciudadano.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/dominio/Triaje.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\Triaje.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\triaje.ts
+    Used by 4 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\Triaje.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/servicio/Triaje.service.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\Triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\covid.module.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+i ´¢ówdm´¢ú: Compiled with warnings.
+ (5d050d13)
+2020-06-21T18:55:31.3260304-05:00 0HM0M7GICJF1K:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T18:55:31.3580078-05:00 0HM0M7GICJF1L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T18:55:31.3861816-05:00 0HM0M7GICJF1M:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T18:55:32.4210450-05:00 0HM0M7GICJF1K:00000001 [INF] Request finished in 1095.0541ms 304  (791a596a)
+2020-06-21T18:55:32.5616804-05:00 0HM0M7GICJF1L:00000001 [INF] Request finished in 1203.698ms 200 text/html; charset=UTF-8 (791a596a)
+2020-06-21T18:55:32.5652306-05:00 0HM0M7GICJF1M:00000001 [INF] Request finished in 1179.0574ms 200 text/html; charset=UTF-8 (791a596a)
+2020-06-21T18:55:32.8384263-05:00 0HM0M7GICJF1K:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T18:55:32.8407256-05:00 0HM0M7GICJF1M:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T18:55:33.0757447-05:00 0HM0M7GICJF1K:00000002 [INF] Request finished in 237.3805ms 304  (791a596a)
+2020-06-21T18:55:33.0958175-05:00 0HM0M7GICJF1M:00000002 [INF] Request finished in 255.1067ms 304  (791a596a)
+2020-06-21T18:55:33.1007580-05:00 0HM0M7GICJF1N:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T18:55:33.1904436-05:00 0HM0M7GICJF1N:00000001 [INF] Request finished in 89.6939ms 304  (791a596a)
+2020-06-21T18:55:33.2565179-05:00 0HM0M7GICJF1C:00000004 [INF] Request finished in 917214.9402ms 101  (791a596a)
+2020-06-21T18:55:33.3409396-05:00 0HM0M7GICJF1K:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T18:55:33.3932349-05:00 0HM0M7GICJF1K:00000003 [INF] Request finished in 52.2925ms 304  (791a596a)
+2020-06-21T18:55:33.4123218-05:00 0HM0M7GICJF1M:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T18:55:33.4738263-05:00 0HM0M7GICJF1M:00000003 [INF] Request finished in 61.5195ms 304  (791a596a)
+2020-06-21T18:55:33.5332853-05:00 0HM0M7GICJF1N:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js   (ca22a1cb)
+2020-06-21T18:55:33.5357822-05:00 0HM0M7GICJF1K:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js   (ca22a1cb)
+2020-06-21T18:55:33.5630883-05:00 0HM0M7GICJF1M:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js   (ca22a1cb)
+2020-06-21T18:55:33.5935557-05:00 0HM0M7GICJF1N:00000002 [INF] Request finished in 60.2758ms 304  (791a596a)
+2020-06-21T18:55:33.6350456-05:00 0HM0M7GICJF1N:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js   (ca22a1cb)
+2020-06-21T18:55:33.6352451-05:00 0HM0M7GICJF1K:00000004 [INF] Request finished in 99.412ms 304  (791a596a)
+2020-06-21T18:55:33.6588922-05:00 0HM0M7GICJF1M:00000004 [INF] Request finished in 95.8202ms 304  (791a596a)
+2020-06-21T18:55:33.6924700-05:00 0HM0M7GICJF1K:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js   (ca22a1cb)
+2020-06-21T18:55:33.7179953-05:00 0HM0M7GICJF1N:00000003 [INF] Request finished in 82.9624ms 304  (791a596a)
+2020-06-21T18:55:33.7983492-05:00 0HM0M7GICJF1K:00000005 [INF] Request finished in 106.0008ms 304  (791a596a)
+2020-06-21T18:55:34.2285170-05:00 0HM0M7GICJF1M:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js   (ca22a1cb)
+2020-06-21T18:55:34.3571347-05:00 0HM0M7GICJF1M:00000005 [INF] Request finished in 128.6388ms 304  (791a596a)
+2020-06-21T18:55:34.5370015-05:00 0HM0M7GICJF1N:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-06-21T18:55:34.6029632-05:00 0HM0M7GICJF1N:00000004 [INF] Request finished in 65.9786ms 304  (791a596a)
+2020-06-21T18:56:05.5456226-05:00 0HM0M7GICJF1K:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Pais/listarTodos   (ca22a1cb)
+2020-06-21T18:56:05.5512161-05:00 0HM0M7GICJF1K:00000006 [INF] Route matched with "{action = \"listarTodos\", controller = \"Pais\", page = \"\"}". Executing action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T18:56:05.5641058-05:00 0HM0M7GICJF1M:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/core/Departamento/listarTodos   (ca22a1cb)
+2020-06-21T18:56:05.5830110-05:00 0HM0M7GICJF1M:00000006 [INF] Route matched with "{action = \"listarTodos\", controller = \"Departamento\", page = \"\"}". Executing action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T18:56:05.6361241-05:00 0HM0M7GICJF1M:00000006 [INF] Executing action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T18:56:05.6613741-05:00 0HM0M7GICJF1K:00000006 [INF] Executing action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T18:56:05.6654894-05:00 0HM0M7GICJF1M:00000006 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:56:05.6654897-05:00 0HM0M7GICJF1K:00000006 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:56:06.0879163-05:00 0HM0M7GICJF1O:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/roboto-v15-latin-regular.woff2   (ca22a1cb)
+2020-06-21T18:56:06.0913798-05:00 0HM0M7GICJF1O:00000001 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:06.1191689-05:00 0HM0M7GICJF1P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-06-21T18:56:06.1233626-05:00 0HM0M7GICJF1P:00000001 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:06.1582058-05:00 0HM0M7GICJF1Q:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-700.woff2   (ca22a1cb)
+2020-06-21T18:56:06.1610034-05:00 0HM0M7GICJF1Q:00000001 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:06.1892482-05:00 0HM0M7GICJF1N:00000005 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Ciudadano/listarPaginacion application/json 86 (ca22a1cb)
+2020-06-21T18:56:06.1922354-05:00 0HM0M7GICJF1N:00000005 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:06.2137173-05:00 0HM0M7GICJF1N:00000005 [INF] Route matched with "{action = \"ListarPaginacion\", controller = \"Ciudadano\", page = \"\"}". Executing action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" (a44c0341)
+2020-06-21T18:56:06.2511647-05:00 0HM0M7GICJF1N:00000005 [INF] Executing action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.filtro.FiltroCiudadano"]) - Validation state: Valid (4e3479ed)
+2020-06-21T18:56:06.2676605-05:00 0HM0M7GICJF1N:00000005 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T18:56:06.9365121-05:00 0HM0M7GICJF1M:00000006 [INF] Executed DbCommand ("255"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[ID_DEPARTAMENTO], [d].[DESCRIPCION], [d].[ESTADO], [d].[ID_PAIS]
+FROM [DEPARTAMENTO] AS [d]" (0723d8ff)
+2020-06-21T18:56:06.9393127-05:00 0HM0M7GICJF1M:00000006 [INF] Executed action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1277.1156ms. (50a9e262)
+2020-06-21T18:56:06.9598727-05:00 0HM0M7GICJF1M:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.Departamento, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T18:56:06.9638331-05:00 0HM0M7GICJF1M:00000006 [INF] Executed action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" in 1377.5592ms (afa2e885)
+2020-06-21T18:56:06.9665303-05:00 0HM0M7GICJF1M:00000006 [INF] Request finished in 1402.4211ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:56:07.4703147-05:00 0HM0M7GICJF1N:00000005 [INF] Executed action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1217.2654ms. (50a9e262)
+2020-06-21T18:56:07.5027623-05:00 0HM0M7GICJF1N:00000005 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico"'. (8a1b66c8)
+2020-06-21T18:56:07.5082019-05:00 0HM0M7GICJF1N:00000005 [INF] Executed action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" in 1292.3735ms (afa2e885)
+2020-06-21T18:56:07.5114290-05:00 0HM0M7GICJF1N:00000005 [INF] Request finished in 1322.1976ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:56:07.5521594-05:00 0HM0M7GICJF1M:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592783766169   (ca22a1cb)
+2020-06-21T18:56:07.6830263-05:00 0HM0M7GICJF1K:00000006 [INF] Executed DbCommand ("211"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[ID_PAIS], [p].[DESCRIPCION], [p].[NACIONALIDAD]
+FROM [PAIS] AS [p]
+ORDER BY [p].[DESCRIPCION]" (0723d8ff)
+2020-06-21T18:56:07.6852646-05:00 0HM0M7GICJF1K:00000006 [INF] Executed action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2020.4356ms. (50a9e262)
+2020-06-21T18:56:07.6871950-05:00 0HM0M7GICJF1K:00000006 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.covid.dominio.Pais, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T18:56:07.6897741-05:00 0HM0M7GICJF1K:00000006 [INF] Executed action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" in 2133.7409ms (afa2e885)
+2020-06-21T18:56:07.6923176-05:00 0HM0M7GICJF1K:00000006 [INF] Request finished in 2146.7239ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T18:56:07.9815424-05:00 0HM0M7GICJF1O:00000001 [INF] Request finished in 1893.6218ms 304  (791a596a)
+2020-06-21T18:56:08.0353174-05:00 0HM0M7GICJF1P:00000001 [INF] Request finished in 1916.1524ms 304  (791a596a)
+2020-06-21T18:56:08.0353174-05:00 0HM0M7GICJF1Q:00000001 [INF] Request finished in 1877.1124ms 304  (791a596a)
+2020-06-21T18:56:08.0353886-05:00 0HM0M7GICJF1N:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-06-21T18:56:08.0520644-05:00 0HM0M7GICJF1K:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-06-21T18:56:08.0546546-05:00 0HM0M7GICJF1N:00000006 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:08.0565720-05:00 0HM0M7GICJF1K:00000007 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:08.1313934-05:00 0HM0M7GICJF1O:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/primeicons.ttf   (ca22a1cb)
+2020-06-21T18:56:08.1331221-05:00 0HM0M7GICJF1K:00000007 [INF] Request finished in 81.0716ms 304  (791a596a)
+2020-06-21T18:56:08.1332760-05:00 0HM0M7GICJF1N:00000006 [INF] Request finished in 97.8961ms 304  (791a596a)
+2020-06-21T18:56:08.1386500-05:00 0HM0M7GICJF1O:00000002 [INF] Policy execution successful. (0204925d)
+2020-06-21T18:56:08.1915632-05:00 0HM0M7GICJF1O:00000002 [INF] Request finished in 74.6302ms 304  (791a596a)
+2020-06-21T18:56:08.2274988-05:00 0HM0M7GICJF1P:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/logo.png   (ca22a1cb)
+2020-06-21T18:56:08.2274988-05:00 0HM0M7GICJF1Q:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-06-21T18:56:08.2854383-05:00 0HM0M7GICJF1P:00000002 [INF] Request finished in 46.232ms 304  (791a596a)
+2020-06-21T18:56:08.2876238-05:00 0HM0M7GICJF1Q:00000002 [INF] Request finished in 60.1379ms 304  (791a596a)
+2020-06-21T18:56:08.6249570-05:00 0HM0M7GICJF1M:00000007 [INF] Request finished in 1072.8193ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T18:56:08.6411316-05:00 0HM0M7GICJF1K:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/788/gutu2nsw/websocket   (ca22a1cb)
+2020-06-21T18:56:08.6436860-05:00 0HM0M7GICJF1K:00000008 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:11:31.7247712-05:00 0HM0M7GICJF1K:00000008 [INF] Request finished in 923083.6356ms 101  (791a596a)
+2020-06-21T19:11:59.0325977-05:00 0HM0M7GICJF1R:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T19:12:00.7068063-05:00 0HM0M7GICJF1R:00000001 [INF] Request finished in 1674.2611ms 304  (791a596a)
+2020-06-21T19:12:00.8040477-05:00 0HM0M7GICJF1R:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T19:12:00.8260615-05:00 0HM0M7GICJF1S:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T19:12:00.8680690-05:00 0HM0M7GICJF1T:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T19:12:00.8681366-05:00 0HM0M7GICJF1R:00000002 [INF] Request finished in 64.1342ms 304  (791a596a)
+2020-06-21T19:12:00.8781156-05:00 0HM0M7GICJF1R:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js   (ca22a1cb)
+2020-06-21T19:12:00.8803559-05:00 0HM0M7GICJF1U:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T19:12:00.9109976-05:00 0HM0M7GICJF1V:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T19:12:00.9683741-05:00 0HM0M7GICJF1S:00000001 [INF] Request finished in 141.2819ms 304  (791a596a)
+2020-06-21T19:12:01.0225924-05:00 0HM0M7GICJF1T:00000001 [INF] Request finished in 154.5107ms 304  (791a596a)
+2020-06-21T19:12:01.0243680-05:00 0HM0M7GICJF20:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js   (ca22a1cb)
+2020-06-21T19:12:01.0243680-05:00 0HM0M7GICJF1S:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js   (ca22a1cb)
+2020-06-21T19:12:01.0295956-05:00 0HM0M7GICJF1T:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js   (ca22a1cb)
+2020-06-21T19:12:01.3653698-05:00 0HM0M7GICJF1T:00000002 [INF] Request finished in 335.7458ms 304  (791a596a)
+2020-06-21T19:12:01.3752427-05:00 0HM0M7GICJF1V:00000001 [INF] Request finished in 464.2536ms 304  (791a596a)
+2020-06-21T19:12:01.3974189-05:00 0HM0M7GICJF1T:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js   (ca22a1cb)
+2020-06-21T19:12:01.3977854-05:00 0HM0M7GICJF1S:00000002 [INF] Request finished in 373.4291ms 304  (791a596a)
+2020-06-21T19:12:01.4069865-05:00 0HM0M7GICJF1V:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js   (ca22a1cb)
+2020-06-21T19:12:01.5616082-05:00 0HM0M7GICJF1T:00000003 [INF] Request finished in 164.5047ms 304  (791a596a)
+2020-06-21T19:12:02.0169129-05:00 0HM0M7GICJF1R:00000003 [INF] Request finished in 1139.2344ms 304  (791a596a)
+2020-06-21T19:12:02.0409787-05:00 0HM0M7GICJF1U:00000001 [INF] Request finished in 1161.0436ms 304  (791a596a)
+2020-06-21T19:12:02.0801724-05:00 0HM0M7GICJF1S:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-06-21T19:12:02.1340578-05:00 0HM0M7GICJF1S:00000003 [INF] Request finished in 53.7158ms 304  (791a596a)
+2020-06-21T19:12:02.2179983-05:00 0HM0M7GICJF1T:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:12:02.2205440-05:00 0HM0M7GICJF1T:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:02.2561919-05:00 0HM0M7GICJF1T:00000004 [INF] Request finished in 38.2382ms 304  (791a596a)
+2020-06-21T19:12:02.3877715-05:00 0HM0M7GICJF20:00000001 [INF] Request finished in 1363.3935ms 304  (791a596a)
+2020-06-21T19:12:02.5896695-05:00 0HM0M7GICJF1V:00000002 [INF] Request finished in 1182.6972ms 304  (791a596a)
+2020-06-21T19:12:15.5791908-05:00 0HM0M7GICJF1R:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Pais/listarTodos   (ca22a1cb)
+2020-06-21T19:12:15.5835327-05:00 0HM0M7GICJF1U:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/core/Departamento/listarTodos   (ca22a1cb)
+2020-06-21T19:12:15.5836444-05:00 0HM0M7GICJF1S:00000004 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Ciudadano/listarPaginacion application/json 86 (ca22a1cb)
+2020-06-21T19:12:15.5878668-05:00 0HM0M7GICJF1R:00000004 [INF] Route matched with "{action = \"listarTodos\", controller = \"Pais\", page = \"\"}". Executing action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T19:12:15.5878777-05:00 0HM0M7GICJF1U:00000002 [INF] Route matched with "{action = \"listarTodos\", controller = \"Departamento\", page = \"\"}". Executing action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T19:12:15.5900245-05:00 0HM0M7GICJF1S:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:15.6131585-05:00 0HM0M7GICJF1S:00000004 [INF] Route matched with "{action = \"ListarPaginacion\", controller = \"Ciudadano\", page = \"\"}". Executing action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" (a44c0341)
+2020-06-21T19:12:15.6713458-05:00 0HM0M7GICJF1R:00000004 [INF] Executing action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T19:12:15.6715351-05:00 0HM0M7GICJF1U:00000002 [INF] Executing action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T19:12:15.6757928-05:00 0HM0M7GICJF1R:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:12:15.6761442-05:00 0HM0M7GICJF1U:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:12:15.8199709-05:00 0HM0M7GICJF1S:00000004 [INF] Executing action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.filtro.FiltroCiudadano"]) - Validation state: Valid (4e3479ed)
+2020-06-21T19:12:15.8441182-05:00 0HM0M7GICJF1S:00000004 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:12:16.5875290-05:00 0HM0M7GICJF1T:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/logo.png   (ca22a1cb)
+2020-06-21T19:12:16.6071674-05:00 0HM0M7GICJF20:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-06-21T19:12:16.6283255-05:00 0HM0M7GICJF1V:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/roboto-v15-latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:12:16.6303232-05:00 0HM0M7GICJF1V:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:17.2057531-05:00 0HM0M7GICJF1R:00000004 [INF] Executed DbCommand ("239"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[ID_PAIS], [p].[DESCRIPCION], [p].[NACIONALIDAD]
+FROM [PAIS] AS [p]
+ORDER BY [p].[DESCRIPCION]" (0723d8ff)
+2020-06-21T19:12:17.2084176-05:00 0HM0M7GICJF1R:00000004 [INF] Executed action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1533.6686ms. (50a9e262)
+2020-06-21T19:12:17.2470558-05:00 0HM0M7GICJF1R:00000004 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.covid.dominio.Pais, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T19:12:17.2507780-05:00 0HM0M7GICJF1R:00000004 [INF] Executed action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" in 1660.0498ms (afa2e885)
+2020-06-21T19:12:17.2548797-05:00 0HM0M7GICJF1R:00000004 [INF] Request finished in 1675.701ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:12:17.2601025-05:00 0HM0M7GICJF1R:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-06-21T19:12:17.2627885-05:00 0HM0M7GICJF1R:00000005 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:17.6906941-05:00 0HM0M7GICJF20:00000002 [INF] Request finished in 1083.5088ms 304  (791a596a)
+2020-06-21T19:12:17.6924145-05:00 0HM0M7GICJF1T:00000005 [INF] Request finished in 1104.3571ms 304  (791a596a)
+2020-06-21T19:12:17.7020830-05:00 0HM0M7GICJF20:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-700.woff2   (ca22a1cb)
+2020-06-21T19:12:17.7064935-05:00 0HM0M7GICJF20:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:17.7283784-05:00 0HM0M7GICJF1S:00000004 [INF] Executed action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1906.3395ms. (50a9e262)
+2020-06-21T19:12:17.7305522-05:00 0HM0M7GICJF1V:00000003 [INF] Request finished in 1102.2184ms 304  (791a596a)
+2020-06-21T19:12:17.8179191-05:00 0HM0M7GICJF1T:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-06-21T19:12:17.8413949-05:00 0HM0M7GICJF1S:00000004 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico"'. (8a1b66c8)
+2020-06-21T19:12:17.8737772-05:00 0HM0M7GICJF1T:00000006 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:17.8739408-05:00 0HM0M7GICJF20:00000003 [INF] Request finished in 171.9048ms 304  (791a596a)
+2020-06-21T19:12:17.9099564-05:00 0HM0M7GICJF1S:00000004 [INF] Executed action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" in 2291.4824ms (afa2e885)
+2020-06-21T19:12:17.9173293-05:00 0HM0M7GICJF1V:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/primeicons.ttf   (ca22a1cb)
+2020-06-21T19:12:17.9179116-05:00 0HM0M7GICJF20:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592784736115   (ca22a1cb)
+2020-06-21T19:12:17.9210797-05:00 0HM0M7GICJF1S:00000004 [INF] Request finished in 2337.4147ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:12:17.9362615-05:00 0HM0M7GICJF1V:00000004 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:18.0501017-05:00 0HM0M7GICJF1T:00000006 [INF] Request finished in 318.3471ms 304  (791a596a)
+2020-06-21T19:12:18.1591733-05:00 0HM0M7GICJF20:00000004 [INF] Request finished in 241.2612ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:12:18.2691517-05:00 0HM0M7GICJF1U:00000002 [INF] Executed DbCommand ("279"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[ID_DEPARTAMENTO], [d].[DESCRIPCION], [d].[ESTADO], [d].[ID_PAIS]
+FROM [DEPARTAMENTO] AS [d]" (0723d8ff)
+2020-06-21T19:12:18.2831620-05:00 0HM0M7GICJF1S:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/021/syjjcjw0/websocket   (ca22a1cb)
+2020-06-21T19:12:18.3011115-05:00 0HM0M7GICJF1V:00000004 [INF] Request finished in 383.8008ms 304  (791a596a)
+2020-06-21T19:12:18.3014116-05:00 0HM0M7GICJF1U:00000002 [INF] Executed action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2626.0217ms. (50a9e262)
+2020-06-21T19:12:18.3256597-05:00 0HM0M7GICJF1S:00000005 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:12:18.3275569-05:00 0HM0M7GICJF1U:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.Departamento, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T19:12:18.3461787-05:00 0HM0M7GICJF1R:00000005 [INF] Request finished in 1086.1039ms 304  (791a596a)
+2020-06-21T19:12:18.3518229-05:00 0HM0M7GICJF1U:00000002 [INF] Executed action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" in 2758.5259ms (afa2e885)
+2020-06-21T19:12:18.3566333-05:00 0HM0M7GICJF1U:00000002 [INF] Request finished in 2773.126ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:25:27.8404575-05:00 0HM0M7GICJF21:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Triaje/registrar application/json 432 (ca22a1cb)
+2020-06-21T19:25:28.9549778-05:00 0HM0M7GICJF21:00000001 [INF] Request finished in 1114.5416ms 404 text/html; charset=utf-8 (791a596a)
+2020-06-21T19:25:28.9974163-05:00  [INF] Connection id ""0HM0M7GICJF21"", Request id ""0HM0M7GICJF21:00000001"": the application completed without reading the entire request body. (54ac9468)
+2020-06-21T19:27:59.8055818-05:00 0HM0M7GICJF22:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T19:27:59.8319031-05:00 0HM0M7GICJF23:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T19:28:00.0037687-05:00 0HM0M7GICJF24:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T19:28:00.0173193-05:00 0HM0M7GICJF25:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T19:28:00.0979647-05:00 0HM0M7GICJF26:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T19:28:00.4479547-05:00 0HM0M7GICJF27:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js.map   (ca22a1cb)
+2020-06-21T19:28:01.5087678-05:00 0HM0M7GICJF22:00000001 [INF] Request finished in 1703.1903ms 304  (791a596a)
+2020-06-21T19:28:01.5998202-05:00 0HM0M7GICJF26:00000001 [INF] Request finished in 1501.8893ms 304  (791a596a)
+2020-06-21T19:28:01.6243644-05:00 0HM0M7GICJF23:00000001 [INF] Request finished in 1792.4616ms 304  (791a596a)
+2020-06-21T19:28:01.6388387-05:00 0HM0M7GICJF25:00000001 [INF] Request finished in 1621.9284ms 304  (791a596a)
+2020-06-21T19:28:01.6481559-05:00 0HM0M7GICJF26:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js.map   (ca22a1cb)
+2020-06-21T19:28:01.6496544-05:00 0HM0M7GICJF23:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js.map   (ca22a1cb)
+2020-06-21T19:28:01.6823815-05:00 0HM0M7GICJF25:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js.map   (ca22a1cb)
+2020-06-21T19:28:01.7707947-05:00 0HM0M7GICJF24:00000001 [INF] Request finished in 1767.1521ms 304  (791a596a)
+2020-06-21T19:28:01.7808041-05:00 0HM0M7GICJF27:00000001 [INF] Request finished in 1332.8648ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:01.9220836-05:00 0HM0M7GICJF22:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js.map   (ca22a1cb)
+2020-06-21T19:28:02.2784553-05:00 0HM0M7GICJF24:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js.map   (ca22a1cb)
+2020-06-21T19:28:02.5121587-05:00 0HM0M7GICJF26:00000002 [INF] Request finished in 864.0232ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:02.7207380-05:00 0HM0M7GICJF22:00000002 [INF] Request finished in 798.6818ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:02.9545738-05:00 0HM0M7GICJF23:00000002 [INF] Request finished in 1304.8974ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:03.4968549-05:00 0HM0M7GICJF24:00000002 [INF] Request finished in 1218.4209ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:05.2242707-05:00 0HM0M7GICJF25:00000002 [INF] Request finished in 3541.8892ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:28:14.3234571-05:00 0HM0M7GICJF27:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Pais/listarTodos   (ca22a1cb)
+2020-06-21T19:28:14.3303258-05:00 0HM0M7GICJF27:00000002 [INF] Route matched with "{action = \"listarTodos\", controller = \"Pais\", page = \"\"}". Executing action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T19:28:14.3329880-05:00 0HM0M7GICJF26:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/core/Departamento/listarTodos   (ca22a1cb)
+2020-06-21T19:28:14.3402504-05:00 0HM0M7GICJF26:00000003 [INF] Route matched with "{action = \"listarTodos\", controller = \"Departamento\", page = \"\"}". Executing action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" (a44c0341)
+2020-06-21T19:28:14.3441716-05:00 0HM0M7GICJF22:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Ciudadano/listarPaginacion application/json 86 (ca22a1cb)
+2020-06-21T19:28:14.3517559-05:00 0HM0M7GICJF22:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:28:14.3598240-05:00 0HM0M7GICJF22:00000003 [INF] Route matched with "{action = \"ListarPaginacion\", controller = \"Ciudadano\", page = \"\"}". Executing action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" (a44c0341)
+2020-06-21T19:28:14.4192278-05:00 0HM0M7GICJF27:00000002 [INF] Executing action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T19:28:14.4774124-05:00 0HM0M7GICJF26:00000003 [INF] Executing action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" - Validation state: Valid (dad538d7)
+2020-06-21T19:28:14.5881974-05:00 0HM0M7GICJF27:00000002 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:28:14.6298083-05:00 0HM0M7GICJF22:00000003 [INF] Executing action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.filtro.FiltroCiudadano"]) - Validation state: Valid (4e3479ed)
+2020-06-21T19:28:14.6305774-05:00 0HM0M7GICJF26:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:28:14.6573485-05:00 0HM0M7GICJF22:00000003 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:28:15.7974973-05:00 0HM0M7GICJF27:00000002 [INF] Executed DbCommand ("248"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[ID_PAIS], [p].[DESCRIPCION], [p].[NACIONALIDAD]
+FROM [PAIS] AS [p]
+ORDER BY [p].[DESCRIPCION]" (0723d8ff)
+2020-06-21T19:28:15.7998763-05:00 0HM0M7GICJF27:00000002 [INF] Executed action method "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1212.3348ms. (50a9e262)
+2020-06-21T19:28:15.8287719-05:00 0HM0M7GICJF27:00000002 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.covid.dominio.Pais, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T19:28:15.8312339-05:00 0HM0M7GICJF27:00000002 [INF] Executed action "net.royal.spring.covid.PaisController.listarTodos (spring-erp-web)" in 1493.6503ms (afa2e885)
+2020-06-21T19:28:15.8349220-05:00 0HM0M7GICJF27:00000002 [INF] Request finished in 1511.4695ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:28:16.5828152-05:00 0HM0M7GICJF22:00000003 [INF] Executed action method "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1926.7637ms. (50a9e262)
+2020-06-21T19:28:16.5858730-05:00 0HM0M7GICJF22:00000003 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.framework.core.dominio.ParametroPaginacionGenerico"'. (8a1b66c8)
+2020-06-21T19:28:16.5888201-05:00 0HM0M7GICJF22:00000003 [INF] Executed action "net.royal.spring.covid.CiudadanoController.ListarPaginacion (spring-erp-web)" in 2098.5837ms (afa2e885)
+2020-06-21T19:28:16.5979831-05:00 0HM0M7GICJF22:00000003 [INF] Request finished in 2253.8389ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:28:17.0616297-05:00 0HM0M7GICJF26:00000003 [INF] Executed DbCommand ("250"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [d].[ID_DEPARTAMENTO], [d].[DESCRIPCION], [d].[ESTADO], [d].[ID_PAIS]
+FROM [DEPARTAMENTO] AS [d]" (0723d8ff)
+2020-06-21T19:28:17.0642694-05:00 0HM0M7GICJF26:00000003 [INF] Executed action method "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2435.508ms. (50a9e262)
+2020-06-21T19:28:17.0663608-05:00 0HM0M7GICJF26:00000003 [INF] Executing ObjectResult, writing value of type '"System.Collections.Generic.List`1[[net.royal.spring.core.dominio.Departamento, spring-erp-servicio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"'. (8a1b66c8)
+2020-06-21T19:28:17.0684529-05:00 0HM0M7GICJF26:00000003 [INF] Executed action "net.royal.spring.core.DepartamentoController.listarTodos (spring-erp-web)" in 2717.8519ms (afa2e885)
+2020-06-21T19:28:17.0721323-05:00 0HM0M7GICJF26:00000003 [INF] Request finished in 2739.15ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:31:21.9184852-05:00 0HM0M7GICJF28:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/api/spring/covid/Triaje/registrar application/json 432 (ca22a1cb)
+2020-06-21T19:31:22.9893588-05:00 0HM0M7GICJF28:00000001 [INF] Request finished in 1070.8931ms 404 text/html; charset=utf-8 (791a596a)
+2020-06-21T19:31:23.0326315-05:00  [INF] Connection id ""0HM0M7GICJF28"", Request id ""0HM0M7GICJF28:00000001"": the application completed without reading the entire request body. (54ac9468)
+2020-06-21T19:33:06.5462752-05:00  [INF] User profile is available. Using '"C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2020-06-21T19:33:06.9746907-05:00  [INF] Starting @angular/cli on port 52080... (228c34db)
+2020-06-21T19:33:07.1791223-05:00 0HM0M8FALI6KS:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592785967610   (ca22a1cb)
+2020-06-21T19:33:07.2093926-05:00 0HM0M8FALI6KS:00000001 [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2020-06-21T19:33:54.0081263-05:00  [INF] User profile is available. Using '"C:\Users\Admin\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest. (7ac5e29c)
+2020-06-21T19:33:54.6164207-05:00  [INF] Starting @angular/cli on port 52114... (634b5e0b)
+2020-06-21T19:33:55.3894583-05:00 0HM0M8FOUQ9L9:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:62469/  0 (ca22a1cb)
+2020-06-21T19:33:55.3895307-05:00 0HM0M8FOUQ9L8:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T19:33:55.4265886-05:00 0HM0M8FOUQ9L8:00000001 [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2020-06-21T19:33:55.4404483-05:00 0HM0M8FOUQ9L9:00000001 [INF] Request finished in 41.3401ms 200  (791a596a)
+2020-06-21T19:34:10.3138967-05:00  [INF] > california@1.0.0 start D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg
+> ng serve "--port" "52114"
+
+** Angular Live Development Server is listening on localhost:52114, open your browser on http://localhost:52114/ **
+ (d8666847)
+2020-06-21T19:34:38.8093016-05:00  [INF] i ´¢ówds´¢ú: Project is running at http://localhost:52114/
+ (0968dd9e)
+2020-06-21T19:34:38.8117602-05:00  [INF] i ´¢ówds´¢ú: webpack output is served from /
+ (c22c6cd4)
+2020-06-21T19:34:39.4051967-05:00  [INF] i ´¢ówds´¢ú: Content not from webpack is served from D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg
+i ´¢ówds´¢ú: 404s will fallback to //index.html
+i ´¢ówdm´¢ú: wait until bundle finished: /
+ (850ae9e8)
+2020-06-21T19:34:49.4349197-05:00  [INF] i ´¢ówdm´¢ú: wait until bundle finished: /
+ (4e5d1689)
+2020-06-21T19:34:59.9136403-05:00  [INF] i ´¢ówdm´¢ú: wait until bundle finished: /
+ (4e5d1689)
+2020-06-21T19:35:11.4861898-05:00  [INF] Date: 2020-06-22T00:35:11.484Z
+Hash: 94f3f74a8aead5a5cdcf
+Time: 59593ms
+chunk {main} main.js, main.js.map (main) 3.19 MB [entry] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 821 kB [entry] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 5.22 kB [entry] [rendered]
+chunk {scripts} scripts.js, scripts.js.map (scripts) 1.6 MB  [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 611 kB [entry] [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 9.75 MB [initial] [rendered]
+
+ (80151dce)
+2020-06-21T19:35:11.7875461-05:00  [INF] WARNING in ./src/app/erp_module/covid/ciudadano/dominio/Ciudadano.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\Ciudadano.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\vista\ciudadano-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\dominio\ciudadano.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\ciudadano\servicio\Ciudadano.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/dominio/Triaje.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\Triaje.ts
+    Used by 3 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\dominio\triaje.ts
+    Used by 4 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\triaje.service.ts
+
+WARNING in ./src/app/erp_module/covid/triaje/servicio/Triaje.service.ts
+There are multiple modules with names that only differ in casing.
+This can lead to unexpected behavior when compiling on a filesystem with other case-semantic.
+Use equal casing. Compare these module identifiers:
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\Triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\covid.module.ts
+* D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\servicio\triaje.service.ts
+    Used by 2 module(s), i. e.
+    D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\node_modules\@ngtools\webpack\src\index.js!D:\CIBERTEC\6_Sexto Ciclo\Proyecto Integrador\02. PROYECTO\ProyectoCOVID\Administrativo\spring-erp-web\SpringNg\src\app\erp_module\covid\triaje\vista\triaje-listado.component.ts
+i ´¢ówdm´¢ú: Compiled with warnings.
+ (c4ccd6ed)
+2020-06-21T19:35:13.2943413-05:00 0HM0M8FOUQ9L8:00000001 [INF] Request finished in 77909.2054ms 304  (791a596a)
+2020-06-21T19:35:13.9298352-05:00 0HM0M8FOUQ9L8:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T19:35:13.9361450-05:00 0HM0M8FOUQ9LA:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T19:35:14.0975732-05:00 0HM0M8FOUQ9LB:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T19:35:15.7742962-05:00 0HM0M8FOUQ9L8:00000002 [INF] Request finished in 1844.4273ms 304  (791a596a)
+2020-06-21T19:35:15.8760185-05:00 0HM0M8FOUQ9L8:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T19:35:16.3343476-05:00 0HM0M8FOUQ9LB:00000001 [INF] Request finished in 2236.7804ms 304  (791a596a)
+2020-06-21T19:35:16.3971050-05:00 0HM0M8FOUQ9LB:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T19:35:18.4519660-05:00 0HM0M8FOUQ9LA:00000001 [INF] Request finished in 4515.8295ms 304  (791a596a)
+2020-06-21T19:35:18.4519664-05:00 0HM0M8FOUQ9L8:00000003 [INF] Request finished in 2575.9572ms 304  (791a596a)
+2020-06-21T19:35:18.5377038-05:00 0HM0M8FOUQ9LA:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js   (ca22a1cb)
+2020-06-21T19:35:18.5491435-05:00 0HM0M8FOUQ9L8:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js   (ca22a1cb)
+2020-06-21T19:35:20.3614662-05:00 0HM0M8FOUQ9LB:00000002 [INF] Request finished in 3964.3822ms 304  (791a596a)
+2020-06-21T19:35:20.5473368-05:00 0HM0M8FOUQ9LB:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js   (ca22a1cb)
+2020-06-21T19:35:21.0860242-05:00 0HM0M8FOUQ9LA:00000002 [INF] Request finished in 2548.3423ms 304  (791a596a)
+2020-06-21T19:35:21.4506119-05:00 0HM0M8FOUQ9L8:00000004 [INF] Request finished in 2901.4744ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T19:35:21.4866843-05:00 0HM0M8FOUQ9LB:00000003 [INF] Request finished in 941.026ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T19:35:21.8833257-05:00 0HM0M8FOUQ9LA:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js   (ca22a1cb)
+2020-06-21T19:35:21.9158844-05:00 0HM0M8FOUQ9LB:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js   (ca22a1cb)
+2020-06-21T19:35:21.9158844-05:00 0HM0M8FOUQ9L8:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js   (ca22a1cb)
+2020-06-21T19:35:22.0376118-05:00 0HM0M8FOUQ9LA:00000003 [INF] Request finished in 154.3148ms 304  (791a596a)
+2020-06-21T19:35:22.0980292-05:00 0HM0M8FOUQ9L8:00000005 [INF] Request finished in 182.1617ms 304  (791a596a)
+2020-06-21T19:35:22.5242059-05:00 0HM0M8FOUQ9LA:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-06-21T19:35:22.5761474-05:00 0HM0M8FOUQ9LB:00000004 [INF] Request finished in 660.2666ms 200 application/javascript; charset=UTF-8 (791a596a)
+2020-06-21T19:35:22.5815796-05:00 0HM0M8FOUQ9LA:00000004 [INF] Request finished in 60.0093ms 304  (791a596a)
+2020-06-21T19:35:49.0663927-05:00 0HM0M8FOUQ9L8:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/roboto-v15-latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:35:49.0986106-05:00 0HM0M8FOUQ9LB:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-06-21T19:35:49.1127722-05:00 0HM0M8FOUQ9LA:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-700.woff2   (ca22a1cb)
+2020-06-21T19:35:49.1156317-05:00 0HM0M8FOUQ9L8:00000006 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:49.1156317-05:00 0HM0M8FOUQ9LA:00000005 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:49.1170238-05:00 0HM0M8FOUQ9LB:00000005 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:49.1898185-05:00 0HM0M8FOUQ9LC:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592786149172   (ca22a1cb)
+2020-06-21T19:35:50.2604632-05:00 0HM0M8FOUQ9LA:00000005 [INF] Request finished in 1147.685ms 304  (791a596a)
+2020-06-21T19:35:50.2863324-05:00 0HM0M8FOUQ9LA:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:35:50.2872259-05:00 0HM0M8FOUQ9LB:00000005 [INF] Request finished in 1188.598ms 304  (791a596a)
+2020-06-21T19:35:50.3122447-05:00 0HM0M8FOUQ9LA:00000006 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:50.3263162-05:00 0HM0M8FOUQ9L8:00000006 [INF] Request finished in 1259.9944ms 304  (791a596a)
+2020-06-21T19:35:50.3651856-05:00 0HM0M8FOUQ9LB:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/logo.png   (ca22a1cb)
+2020-06-21T19:35:50.3652035-05:00 0HM0M8FOUQ9L8:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-06-21T19:35:50.3666255-05:00 0HM0M8FOUQ9LA:00000006 [INF] Request finished in 80.2849ms 304  (791a596a)
+2020-06-21T19:35:50.3698961-05:00 0HM0M8FOUQ9L8:00000007 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:50.3976031-05:00 0HM0M8FOUQ9LC:00000001 [INF] Request finished in 1205.792ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:35:50.4502258-05:00 0HM0M8FOUQ9LA:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/292/4vcosn2i/websocket   (ca22a1cb)
+2020-06-21T19:35:50.4502521-05:00 0HM0M8FOUQ9LB:00000006 [INF] Request finished in 85.1138ms 304  (791a596a)
+2020-06-21T19:35:50.4511807-05:00 0HM0M8FOUQ9L8:00000007 [INF] Request finished in 85.9907ms 304  (791a596a)
+2020-06-21T19:35:50.4604007-05:00 0HM0M8FOUQ9LA:00000007 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:35:50.5212477-05:00 0HM0M8FOUQ9LC:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-06-21T19:35:50.5650211-05:00 0HM0M8FOUQ9LC:00000002 [INF] Request finished in 43.8045ms 304  (791a596a)
+2020-06-21T19:36:26.4885724-05:00 0HM0M8FOUQ9LB:00000007 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Triaje/registrar application/json 432 (ca22a1cb)
+2020-06-21T19:36:26.5696851-05:00 0HM0M8FOUQ9LB:00000007 [INF] Route matched with "{action = \"Registrar\", controller = \"Triaje\", page = \"\"}". Executing action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" (a44c0341)
+2020-06-21T19:36:27.4116535-05:00 0HM0M8FOUQ9LB:00000007 [INF] Executing action method "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.Triaje"]) - Validation state: Invalid (4e3479ed)
+2020-06-21T19:36:29.7506536-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Secuencia"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7528524-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Ano"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7553829-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Dia"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7582992-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7604825-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleadosupervisor"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7624373-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Mes"' on entity type '"AsAccesosdiarios"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7646778-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Area"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7667869-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Areapadre"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7688664-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleadoresponsable"' on entity type '"AsArea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7709484-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidad"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7739679-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadautorizada"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7765608-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadhoras"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7788040-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadplanilla"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7816001-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadreal"' on entity type '"AsAsistenciadiaria"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7839129-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"AsAutorizacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7859786-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"CantidadHorasMaximo"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7888493-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"CantidadTopeDiaSolicitud"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7916252-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"CantidadTopeMesesSolicitud"' on entity type '"AsConceptoacceso"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7938164-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Secuencia"' on entity type '"AsPeriodo"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7958323-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"DerechoVacacional"' on entity type '"AsTipohorario"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.7981028-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Final"' on entity type '"RtIndicadorMeta"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8001986-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Inicial"' on entity type '"RtIndicadorMeta"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8026105-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Avanceplan"' on entity type '"MpProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8055123-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Avancereal"' on entity type '"MpProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8094142-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"PorcentajeGradoBarthel"' on entity type '"PsCapacidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8117180-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"PorcentajeGradoKatz"' on entity type '"PsCapacidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8139653-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadfundacion"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8162024-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadotros"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8181030-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Cantidadsolicitada"' on entity type '"PsConsumoNutricional"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8202531-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"IngresoMensual"' on entity type '"PsEntidad"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8229487-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Coeficiente"' on entity type '"PsItem"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8268044-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Peso"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8289210-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Talla"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8311886-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"VariacionPeso"' on entity type '"PsNutricion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8332382-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Hemoglobina"' on entity type '"PsSalud"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8355423-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"PlanCosto"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8374039-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCompletado"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8407880-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCosto"' on entity type '"PmProyecto"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8438510-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCompletado"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8467076-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCosto"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8488348-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCostoHorasExtra"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8507015-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealCrtr"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8527520-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealDuracion"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8551886-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealTrabajo"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8583165-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"RealTrabajoHorasExtra"' on entity type '"PmTarea"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8612614-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8636371-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8656871-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Evaluacion"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8688479-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Calificacion"' on entity type '"HrCapacitacionempcal"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8724370-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Evaluacion"' on entity type '"HrCapacitacioneval"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8756147-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Secuenciaempleado"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8785874-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Factor"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8807586-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Empleado"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8838346-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Respuesta"' on entity type '"HrCapacitacionevaluacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8870947-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8911714-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Beneftotextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8935769-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Beneftotlocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8958849-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costoimpuestos"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8977368-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costoimpuestosext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.8996361-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costosubtotal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9043279-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costosubtotalext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9091097-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costototal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9116704-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costototalestimadoextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9145830-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costototalestimadolocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9169454-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costototalext"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9195722-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costounitarioextranjero"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9221897-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costounitariolocal"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9256520-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Montoasumido"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9278580-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Montomaxasumido"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9300504-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Numeroparticipantes"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9320258-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Numerovacantes"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9338203-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Totaldias"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9354214-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Totalhoras"' on entity type '"HrCapacitacionplan"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9371803-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Anioplan"' on entity type '"HrCapacitacionplandet"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9392133-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costoestimado"' on entity type '"HrCursodescripcion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9416437-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Costoindividual"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9442294-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Importegastoemp"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9462811-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Nota"' on entity type '"HrEmpleadocapacitacion"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:29.9484608-05:00 0HM0M8FOUQ9LB:00000007 [WRN] No type was specified for the decimal column '"Peso"' on entity type '"HrEncuestapreguntavalores"'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'ForHasColumnType()'. (b5b4253a)
+2020-06-21T19:36:30.0181167-05:00 0HM0M8FOUQ9LB:00000007 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:36:30.2572460-05:00 0HM0M8FOUQ9LB:00000007 [WRN] The LINQ expression '"DefaultIfEmpty(__p_0)"' could not be translated and will be evaluated locally. (011792c6)
+2020-06-21T19:36:30.2608687-05:00 0HM0M8FOUQ9LB:00000007 [WRN] The LINQ expression '"Max()"' could not be translated and will be evaluated locally. (011792c6)
+2020-06-21T19:36:32.2945672-05:00 0HM0M8FOUQ9LB:00000007 [INF] Executed DbCommand ("187"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[COD_Triaje]
+FROM [TRIAJE] AS [p]" (0723d8ff)
+2020-06-21T19:36:32.8861423-05:00 0HM0M8FOUQ9LB:00000007 [ERR] Failed executing DbCommand ("222"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Int32), @p13='?' (Size = 4000), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [TRIAJE] ([COD_Triaje], [ASMA], [CANCER], [CARDIO], [DIABETES], [DIFI], [DIS_GUS], [DOLOR], [ESTADO], [FECHA_INICIO], [FIEBRE], [HIPERTENSION], [COD_CIUDADANO], [NASAL], [OBESIDAD], [PULMONAR], [RENAL], [SITUACION1], [SITUACION2], [SITUACION3], [TOS])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20);" (627a98df)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CANCER'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+ClientConnectionId:ff37cbd6-7677-4876-822f-67df13c0ef41
+Error Number:207,State:1,Class:16
+2020-06-21T19:36:33.5431165-05:00 0HM0M8FOUQ9LB:00000007 [ERR] An exception occurred in the database while saving changes for context type '"net.royal.spring.framework.web.dao.GenericoDbContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Invalid column name 'CANCER'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(DbContext _, ValueTuple`2 parameters)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details. ---> System.Data.SqlClient.SqlException: Invalid column name 'CANCER'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(DbContext _, ValueTuple`2 parameters)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IReadOnlyList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IReadOnlyList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2020-06-21T19:37:40.1174162-05:00 0HM0M8FOUQ9LB:00000007 [INF] Executed action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" in 73535.8203ms (afa2e885)
+2020-06-21T19:37:40.2133467-05:00 0HM0M8FOUQ9LA:00000007 [INF] Request finished in 109763.1241ms 101  (791a596a)
+2020-06-21T19:37:40.2986736-05:00 0HM0M8FOUQ9LB:00000007 [INF] Request finished in 73810.1434ms 500 application/json (791a596a)
+2020-06-21T19:37:44.1301520-05:00 0HM0M8FOUQ9LB:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592786264125   (ca22a1cb)
+2020-06-21T19:37:45.2152783-05:00 0HM0M8FOUQ9LB:00000008 [INF] Request finished in 1085.122ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:37:45.2254187-05:00 0HM0M8FOUQ9LB:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/321/1cgc2xyy/websocket   (ca22a1cb)
+2020-06-21T19:37:45.2274674-05:00 0HM0M8FOUQ9LB:00000009 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:37:47.1397174-05:00 0HM0M8FOUQ9LD:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/   (ca22a1cb)
+2020-06-21T19:37:47.1726477-05:00 0HM0M8FOUQ9LD:00000001 [INF] Request finished in 33.0033ms 304  (791a596a)
+2020-06-21T19:37:47.1975029-05:00 0HM0M8FOUQ9LD:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/themes/omega/theme.css   (ca22a1cb)
+2020-06-21T19:37:47.2007966-05:00 0HM0M8FOUQ9LE:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/node_modules/primeng/resources/primeng.min.css   (ca22a1cb)
+2020-06-21T19:37:47.2408894-05:00 0HM0M8FOUQ9LF:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/css/layout-blue.css   (ca22a1cb)
+2020-06-21T19:37:47.2799269-05:00 0HM0M8FOUQ9LE:00000001 [INF] Request finished in 79.0959ms 304  (791a596a)
+2020-06-21T19:37:47.2965536-05:00 0HM0M8FOUQ9LF:00000001 [INF] Request finished in 55.689ms 304  (791a596a)
+2020-06-21T19:37:47.3110581-05:00 0HM0M8FOUQ9LE:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/estandarNTAngular.css   (ca22a1cb)
+2020-06-21T19:37:47.3301086-05:00 0HM0M8FOUQ9LF:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/css/all.css   (ca22a1cb)
+2020-06-21T19:37:47.3540892-05:00 0HM0M8FOUQ9LE:00000002 [INF] Request finished in 42.8678ms 304  (791a596a)
+2020-06-21T19:37:47.3742222-05:00 0HM0M8FOUQ9LB:00000009 [INF] Request finished in 2148.6576ms 101  (791a596a)
+2020-06-21T19:37:47.3877546-05:00 0HM0M8FOUQ9LF:00000002 [INF] Request finished in 57.5947ms 304  (791a596a)
+2020-06-21T19:37:47.3975807-05:00 0HM0M8FOUQ9LE:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/runtime.js   (ca22a1cb)
+2020-06-21T19:37:47.4169861-05:00 0HM0M8FOUQ9LF:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/polyfills.js   (ca22a1cb)
+2020-06-21T19:37:47.4550541-05:00 0HM0M8FOUQ9LE:00000003 [INF] Request finished in 57.4495ms 304  (791a596a)
+2020-06-21T19:37:47.4801052-05:00 0HM0M8FOUQ9LE:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/styles.js   (ca22a1cb)
+2020-06-21T19:37:47.4820810-05:00 0HM0M8FOUQ9LF:00000003 [INF] Request finished in 64.4952ms 304  (791a596a)
+2020-06-21T19:37:47.5007667-05:00 0HM0M8FOUQ9LF:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/scripts.js   (ca22a1cb)
+2020-06-21T19:37:47.5265293-05:00 0HM0M8FOUQ9LE:00000004 [INF] Request finished in 33.4676ms 304  (791a596a)
+2020-06-21T19:37:47.5469296-05:00 0HM0M8FOUQ9LE:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/vendor.js   (ca22a1cb)
+2020-06-21T19:37:47.5480188-05:00 0HM0M8FOUQ9LF:00000004 [INF] Request finished in 47.2807ms 304  (791a596a)
+2020-06-21T19:37:47.5675836-05:00 0HM0M8FOUQ9LF:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:62469/main.js   (ca22a1cb)
+2020-06-21T19:37:47.6063530-05:00 0HM0M8FOUQ9LE:00000005 [INF] Request finished in 59.4475ms 304  (791a596a)
+2020-06-21T19:37:48.3180857-05:00 0HM0M8FOUQ9LD:00000002 [INF] Request finished in 1120.6072ms 304  (791a596a)
+2020-06-21T19:37:48.4000213-05:00 0HM0M8FOUQ9LE:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/mosaico.png   (ca22a1cb)
+2020-06-21T19:37:48.4408525-05:00 0HM0M8FOUQ9LE:00000006 [INF] Request finished in 40.8459ms 304  (791a596a)
+2020-06-21T19:37:48.6258100-05:00 0HM0M8FOUQ9LF:00000005 [INF] Request finished in 1058.2307ms 304  (791a596a)
+2020-06-21T19:38:11.7633916-05:00 0HM0M8FOUQ9LD:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-06-21T19:38:11.7633868-05:00 0HM0M8FOUQ9LE:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/fonts/source-sans-pro-v11-latin-ext_latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:38:11.7672720-05:00 0HM0M8FOUQ9LD:00000003 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:38:11.7673113-05:00 0HM0M8FOUQ9LE:00000007 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:38:11.8375611-05:00 0HM0M8FOUQ9LF:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:62469/fontawesome-webfont.woff2?v=4.7.0   (ca22a1cb)
+2020-06-21T19:38:11.8397786-05:00 0HM0M8FOUQ9LF:00000006 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:38:12.1382259-05:00 0HM0M8FOUQ9LG:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/info?t=1592786292134   (ca22a1cb)
+2020-06-21T19:38:12.9166689-05:00 0HM0M8FOUQ9LE:00000007 [INF] Request finished in 1153.322ms 304  (791a596a)
+2020-06-21T19:38:12.9403293-05:00 0HM0M8FOUQ9LE:00000008 [INF] Request starting HTTP/1.1 GET http://localhost:62469/roboto-v15-latin-regular.woff2   (ca22a1cb)
+2020-06-21T19:38:12.9966689-05:00 0HM0M8FOUQ9LE:00000008 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:38:12.9987382-05:00 0HM0M8FOUQ9LD:00000003 [INF] Request finished in 1235.3683ms 304  (791a596a)
+2020-06-21T19:38:12.9988342-05:00 0HM0M8FOUQ9LF:00000006 [INF] Request finished in 1161.3047ms 304  (791a596a)
+2020-06-21T19:38:13.0307722-05:00 0HM0M8FOUQ9LD:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/logo.png   (ca22a1cb)
+2020-06-21T19:38:13.0329170-05:00 0HM0M8FOUQ9LF:00000007 [INF] Request starting HTTP/1.1 GET http://localhost:62469/assets/layout/images/image-mega.png   (ca22a1cb)
+2020-06-21T19:38:13.1522564-05:00 0HM0M8FOUQ9LE:00000008 [INF] Request finished in 211.9466ms 304  (791a596a)
+2020-06-21T19:38:13.2096737-05:00 0HM0M8FOUQ9LF:00000007 [INF] Request finished in 176.7762ms 304  (791a596a)
+2020-06-21T19:38:13.2097189-05:00 0HM0M8FOUQ9LD:00000004 [INF] Request finished in 178.9828ms 304  (791a596a)
+2020-06-21T19:38:13.2363306-05:00 0HM0M8FOUQ9LG:00000001 [INF] Request finished in 1098.1119ms 200 application/json; charset=UTF-8 (791a596a)
+2020-06-21T19:38:13.2491594-05:00 0HM0M8FOUQ9LE:00000009 [INF] Request starting HTTP/1.1 GET http://localhost:62469/sockjs-node/028/p42wqif3/websocket   (ca22a1cb)
+2020-06-21T19:38:13.2516872-05:00 0HM0M8FOUQ9LE:00000009 [INF] Policy execution successful. (0204925d)
+2020-06-21T19:38:40.4109686-05:00 0HM0M8FOUQ9LF:00000008 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Triaje/registrar application/json 432 (ca22a1cb)
+2020-06-21T19:38:40.4146999-05:00 0HM0M8FOUQ9LF:00000008 [INF] Route matched with "{action = \"Registrar\", controller = \"Triaje\", page = \"\"}". Executing action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" (a44c0341)
+2020-06-21T19:38:40.5488280-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executing action method "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.Triaje"]) - Validation state: Invalid (4e3479ed)
+2020-06-21T19:38:40.5893296-05:00 0HM0M8FOUQ9LF:00000008 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:38:41.3653342-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executed DbCommand ("755"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[COD_Triaje]
+FROM [TRIAJE] AS [p]" (0723d8ff)
+2020-06-21T19:38:41.8431709-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executed DbCommand ("258"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Int32), @p13='?' (Size = 4000), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [TRIAJE] ([COD_Triaje], [ASMA], [CANCER], [CARDIO], [DIABETES], [DIFI], [DIS_GUS], [DOLOR], [ESTADO], [FECHA_INICIO], [FIEBRE], [HIPERTENSION], [COD_CIUDADANO], [NASAL], [OBESIDAD], [PULMONAR], [RENAL], [SITUACION1], [SITUACION2], [SITUACION3], [TOS])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20);" (0723d8ff)
+2020-06-21T19:38:42.0990601-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executed action method "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 1530.2355ms. (50a9e262)
+2020-06-21T19:38:42.1161995-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.covid.dominio.Triaje"'. (8a1b66c8)
+2020-06-21T19:38:42.1373825-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executed action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" in 1719.5375ms (afa2e885)
+2020-06-21T19:38:42.1619127-05:00 0HM0M8FOUQ9LF:00000008 [INF] Request finished in 1750.9027ms 200 application/json; charset=utf-8 (791a596a)

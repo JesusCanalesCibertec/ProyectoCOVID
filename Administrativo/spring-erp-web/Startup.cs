@@ -154,12 +154,13 @@ namespace Angular {
 
             /*Dao inicio*/
             services.AddTransient<CiudadanoDao, CiudadanoDaoImpl>();
+            services.AddTransient<TriajeDao, TriajeDaoImpl>();
 
             /*Dao fin*/
 
             /*servicio inicio*/
             services.AddTransient<CiudadanoServicio, CiudadanoServicioImpl>();
-
+            services.AddTransient<TriajeServicio, TriajeServicioImpl>();
             /*servicio fin*/
 
             /** COVID - FIN **/

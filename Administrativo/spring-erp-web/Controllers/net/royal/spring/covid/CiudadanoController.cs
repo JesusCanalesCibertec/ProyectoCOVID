@@ -41,9 +41,9 @@ namespace net.royal.spring.covid
         }
 
         [HttpGet("[action]")]
-        public Ciudadano ObtenerPorId(int pIdConocimiento)
+        public Ciudadano ObtenerPorId(int pIdCiudadano)
         {
-            return ciudadanoServicio.obtenerPorId(pIdConocimiento);
+            return ciudadanoServicio.obtenerPorId(pIdCiudadano);
         }
 
 

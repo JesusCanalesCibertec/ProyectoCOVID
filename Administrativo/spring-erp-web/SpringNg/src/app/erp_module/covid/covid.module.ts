@@ -12,10 +12,13 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CiudadanoListadoComponent } from "./ciudadano/vista/ciudadano-listado.component";
 import { CiudadanoService } from "./ciudadano/servicio/Ciudadano.service";
 import { PaisServicio } from "./pais/servicio/PaisServicio";
+import { TriajeListadoComponent } from "./triaje/vista/triaje-listado.component";
+import { TriajeService } from "./triaje/servicio/Triaje.service";
 
 @NgModule({
     declarations:[
         CiudadanoListadoComponent,
+        TriajeListadoComponent,
     ],
     imports:[
         SharedModule,
@@ -51,13 +54,15 @@ import { PaisServicio } from "./pais/servicio/PaisServicio";
         OverlayPanelModule,
         ScheduleModule,
         InputSwitchModule,
-        SliderModule                                    
+        SliderModule,
+        RadioButtonModule                                 
     ],
     exports:[
     ],
     providers:[
         CiudadanoService,
-        PaisServicio
+        PaisServicio,
+        TriajeService
     ]
 })
 

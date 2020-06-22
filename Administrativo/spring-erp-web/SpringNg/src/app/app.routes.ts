@@ -43,6 +43,7 @@ import { ResumenlistadoComponent } from './erp_module/minedu/proyecto/vista/resu
 import { OcupacionlistadoComponent } from './erp_module/minedu/persona/vista/ocupacion-listado.componente';
 import { UsuarioListadoComponent } from './erp_module/minedu/usuario/vista/usuario-listado.component';
 import { CiudadanoListadoComponent } from './erp_module/covid/ciudadano/vista/ciudadano-listado.component';
+import { TriajeListadoComponent } from './erp_module/covid/triaje/vista/triaje-listado.component';
 export const routes: Routes = [
     //{ path: '', component: LoginComponent },
     //{ path: 'spring/institucion-login', component: LoginInstitucionComponent },
@@ -55,6 +56,8 @@ export const routes: Routes = [
 
             //minedu inicio
             { path: 'ciudadano-listado', component: CiudadanoListadoComponent },
+            { path: 'triaje-listado', component: TriajeListadoComponent },
+            { path: 'triaje-listado/:codigo', component: TriajeListadoComponent },
 
             //minedu final
             
