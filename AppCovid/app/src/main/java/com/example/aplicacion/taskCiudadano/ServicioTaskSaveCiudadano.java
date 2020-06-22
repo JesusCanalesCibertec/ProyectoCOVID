@@ -1,8 +1,9 @@
-package com.example.aplicacion.taskPais;
+package com.example.aplicacion.taskCiudadano;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.aplicacion.Entitiy.Ciudadano;
 import com.example.aplicacion.Entitiy.Pais;
 
 import org.json.JSONObject;
@@ -11,15 +12,15 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ServicioTaskSaveTest extends AsyncTask<Void,Void,Void> {
+public class ServicioTaskSaveCiudadano extends AsyncTask<Void,Void,Void> {
     private Context context;
     private String linkURL;
-    private Pais pais;
+    private Ciudadano ciudadano;
 
-    public ServicioTaskSaveTest(Context context, String linkURL, Pais pais) {
+    public ServicioTaskSaveCiudadano(Context context, String linkURL, Ciudadano ciudadano) {
         this.context = context;
         this.linkURL = linkURL;
-        this.pais = pais;
+        this.ciudadano = ciudadano;
     }
 
 
@@ -31,8 +32,17 @@ public class ServicioTaskSaveTest extends AsyncTask<Void,Void,Void> {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             JSONObject paramPost = new JSONObject();
-            paramPost.put("id",pais.getId());
-            paramPost.put("title",pais.getTitle());
+            paramPost.put("nombre", ciudadano.getNombre());
+            paramPost.put("apellido", ciudadano.getApellido());
+            paramPost.put("idPais", ciudadano.getIdPais());
+            paramPost.put("tipoDocumento", ciudadano.getTipoDocumento());
+            paramPost.put("nroDocumento", ciudadano.getNroDocumento());
+            paramPost.put("fechaNacimiento", ciudadano.getFechaNacimiento());
+            paramPost.put("direccion", ciudadano.getDireccion());
+            paramPost.put("idDepartamento", ciudadano.getIdDepartamento());
+            paramPost.put("idProvincia", ciudadano.getIdProvincia());
+            paramPost.put("idDistrito", ciudadano.getIdDistrito());
+
 
             //Parametros de conexion
             urlConnection.setReadTimeout(15000);

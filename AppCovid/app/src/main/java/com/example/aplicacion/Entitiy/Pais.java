@@ -1,28 +1,27 @@
 package com.example.aplicacion.Entitiy;
 
 public class Pais {
-    private int id;
-    private String title;
+    private int idPais;
+    private String descripcion;
 
     @Override
     public String toString(){
-        return title;
+        return descripcion;
     }
 
-
-    public int getId() {
-        return id;
+    public int getIdPais() {
+        return idPais;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

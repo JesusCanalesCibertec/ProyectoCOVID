@@ -17,8 +17,8 @@ public class PaisDAO {
             for(int i=0;i<jsonArray.length();i++){
                 fila=(JSONObject)jsonArray.get(i);
                 Pais pais=new Pais();
-                pais.setId(fila.getInt("id"));
-                pais.setTitle(fila.getString("title"));
+                pais.setIdPais(fila.getInt("idPais"));
+                pais.setDescripcion(fila.getString("descripcion"));
                 data.add(pais);
             }
         }
