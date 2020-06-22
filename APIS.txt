@@ -13,5 +13,48 @@ http://arbchum1-001-site1.etempurl.com/api/spring/core/Zonapostal/listarActivosP
 REGISTRAR CIUDADANO:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Ciudadano/registrar
 
+Json de campos con datos de ejemplo:
+
+{
+   {
+    "nombre": "Romy",
+    "apellido": "Quispe Marelo",
+    "idPais": "001",
+    "tipoDocumento": 1,
+    "nroDocumento": "09734680",
+    "fechaNacimiento": "1978/09/25",
+    "direccion": "xxxxxx",
+    "idDepartamento": "15",
+    "idProvincia": "01",
+    "idDistrito": "35"
+}
+}
+
 REGISTRAR TRIAJE:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Triaje/registrar
+
+Json de campos con datos de ejemplo:
+
+{
+    "idTriaje": null,
+    "idCiudadano": 15,
+    "disgus": "NO",
+    "tos": "SI",
+    "dolor": "NO",
+    "difi": "NO",
+    "nasal": "NO",
+    "fiebre": "NO",
+    "fechainicio": "2020/05/30",
+    "situacion1": "NO",
+    "situacion2": "NO",
+    "situacion3": "NO",
+    "obesidad": "NO",
+    "pulmonar": "NO",
+    "asma": "SI",
+    "diabetes": "NO",
+    "hipertension": "NO",
+    "cardio": "NO",
+    "renal": "NO",
+    "cancer": "NO",
+    "estado": null
+}

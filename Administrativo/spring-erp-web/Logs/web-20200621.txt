@@ -856,3 +856,18 @@ VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13
 2020-06-21T19:38:42.1161995-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.covid.dominio.Triaje"'. (8a1b66c8)
 2020-06-21T19:38:42.1373825-05:00 0HM0M8FOUQ9LF:00000008 [INF] Executed action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" in 1719.5375ms (afa2e885)
 2020-06-21T19:38:42.1619127-05:00 0HM0M8FOUQ9LF:00000008 [INF] Request finished in 1750.9027ms 200 application/json; charset=utf-8 (791a596a)
+2020-06-21T19:46:16.0078927-05:00 0HM0M8FOUQ9LH:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:62469/api/spring/covid/Triaje/registrar application/json 476 (ca22a1cb)
+2020-06-21T19:46:16.0139127-05:00 0HM0M8FOUQ9LH:00000001 [INF] Route matched with "{action = \"Registrar\", controller = \"Triaje\", page = \"\"}". Executing action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" (a44c0341)
+2020-06-21T19:46:16.0979930-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executing action method "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" with arguments (["net.royal.spring.covid.dominio.Triaje"]) - Validation state: Invalid (4e3479ed)
+2020-06-21T19:46:16.1126362-05:00 0HM0M8FOUQ9LH:00000001 [INF] Entity Framework Core "2.1.8-servicing-32085" initialized '"GenericoDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-21T19:46:17.5742067-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executed DbCommand ("250"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [p].[COD_Triaje]
+FROM [TRIAJE] AS [p]" (0723d8ff)
+2020-06-21T19:46:18.0728622-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executed DbCommand ("252"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Int32), @p13='?' (Size = 4000), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [TRIAJE] ([COD_Triaje], [ASMA], [CANCER], [CARDIO], [DIABETES], [DIFI], [DIS_GUS], [DOLOR], [ESTADO], [FECHA_INICIO], [FIEBRE], [HIPERTENSION], [COD_CIUDADANO], [NASAL], [OBESIDAD], [PULMONAR], [RENAL], [SITUACION1], [SITUACION2], [SITUACION3], [TOS])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20);" (0723d8ff)
+2020-06-21T19:46:18.3126537-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executed action method "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)", returned result "Microsoft.AspNetCore.Mvc.ObjectResult" in 2200.3938ms. (50a9e262)
+2020-06-21T19:46:18.3148642-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executing ObjectResult, writing value of type '"net.royal.spring.covid.dominio.Triaje"'. (8a1b66c8)
+2020-06-21T19:46:18.3172209-05:00 0HM0M8FOUQ9LH:00000001 [INF] Executed action "net.royal.spring.covid.TriajeController.Registrar (spring-erp-web)" in 2278.1278ms (afa2e885)
+2020-06-21T19:46:18.3270509-05:00 0HM0M8FOUQ9LH:00000001 [INF] Request finished in 2319.1715ms 200 application/json; charset=utf-8 (791a596a)
