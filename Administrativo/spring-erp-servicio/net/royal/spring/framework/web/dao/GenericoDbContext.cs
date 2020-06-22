@@ -27,6 +27,7 @@ namespace net.royal.spring.framework.web.dao {
 
         public DbSet<Ciudadano> Ciudadano { get; set; }
         public DbSet<Triaje> Triaje { get; set; }
+        public DbSet<Resultado> Resultado { get; set; }
 
         /** COVID - FIN **/
 
@@ -276,6 +277,7 @@ namespace net.royal.spring.framework.web.dao {
             /** COVID - INICIO **/
             modelBuilder.Entity<Ciudadano>().HasKey(c => new { c.IdCiudadano });
             modelBuilder.Entity<Triaje>().HasKey(c => new { c.IdTriaje });
+            modelBuilder.Entity<Resultado>().HasKey(c => new { c.IdResultado });
 
             /** COVID - FIN **/
 

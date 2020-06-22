@@ -58,3 +58,6 @@ Json de campos con datos de ejemplo:
     "cancer": "NO",
     "estado": null
 }
+
+OBTENER RESULTADO:
+http://arbchum1-001-site1.etempurl.com/api/spring/covid/Resultado/ObtenerPorId?pIdResultado=2

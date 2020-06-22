@@ -7,13 +7,13 @@ using net.royal.spring.covid.dominio.filtro;
 
 namespace net.royal.spring.covid.servicio
 {
-    public interface TriajeServicio : GenericoServicio
+    public interface CiudadanoServicio : GenericoServicio
     {
-        //ParametroPaginacionGenerico listarPaginacion(ParametroPaginacionGenerico paginacion, FiltroTriaje filtro);
-        Triaje registrar(UsuarioActual usuarioActual, Triaje bean);
-        Triaje obtenerPorId(int pIdTriaje);
-        Triaje actualizar(UsuarioActual usuarioActual, Triaje bean);
-        TriajePk cambiarestado(TriajePk pk);
-        List<Triaje> listado(DtoTabla filtro);
+        ParametroPaginacionGenerico listarPaginacion(ParametroPaginacionGenerico paginacion, FiltroCiudadano filtro);
+        Ciudadano registrar(UsuarioActual usuarioActual, Ciudadano bean);
+        Ciudadano obtenerPorId(int pIdCiudadano);
+        Ciudadano actualizar(UsuarioActual usuarioActual, Ciudadano bean);
+        CiudadanoPk cambiarestado(CiudadanoPk pk);
+        List<Ciudadano> listado(DtoTabla filtro);
     }
 }

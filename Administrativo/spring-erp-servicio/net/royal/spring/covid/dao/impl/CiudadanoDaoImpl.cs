@@ -109,7 +109,7 @@ namespace net.royal.spring.covid.dao.impl
         public Ciudadano registrar(UsuarioActual usuarioActual, Ciudadano bean)
         {
             bean.IdCiudadano = this.generarCodigo();
-            bean.Estado = 1;
+            bean.Estado = 6;
             this.registrar(bean);
             return bean;
         }

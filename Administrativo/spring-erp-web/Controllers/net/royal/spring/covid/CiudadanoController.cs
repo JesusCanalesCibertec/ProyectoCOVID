@@ -27,7 +27,6 @@ namespace net.royal.spring.covid
             ciudadanoServicio = servicioProveedor.GetService<CiudadanoServicio>();
         }
 
-
         [HttpPost("[action]")]
         public ParametroPaginacionGenerico ListarPaginacion([FromBody] FiltroCiudadano filtro)
         {
@@ -45,7 +44,6 @@ namespace net.royal.spring.covid
         {
             return ciudadanoServicio.obtenerPorId(pIdCiudadano);
         }
-
 
         [HttpPost("[action]")]
         public Ciudadano Actualizar([FromBody]Ciudadano bean)
@@ -65,7 +63,5 @@ namespace net.royal.spring.covid
             return ciudadanoServicio.listado(filtro);
 
         }
-
-
     }
 }

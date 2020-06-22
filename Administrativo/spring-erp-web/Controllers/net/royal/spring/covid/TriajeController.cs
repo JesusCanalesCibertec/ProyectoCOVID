@@ -27,7 +27,6 @@ namespace net.royal.spring.covid
             triajeServicio = servicioProveedor.GetService<TriajeServicio>();
         }
 
-
         //[HttpPost("[action]")]
         //public ParametroPaginacionGenerico ListarPaginacion([FromBody] FiltroTriaje filtro)
         //{

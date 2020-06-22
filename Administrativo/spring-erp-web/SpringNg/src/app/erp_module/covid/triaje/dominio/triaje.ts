@@ -1,6 +1,5 @@
 export class TriajePk {
     idTriaje: number;
-
 }
 
 export class Triaje extends TriajePk {
