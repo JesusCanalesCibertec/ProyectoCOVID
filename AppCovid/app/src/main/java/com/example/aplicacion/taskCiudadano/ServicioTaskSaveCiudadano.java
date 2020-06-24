@@ -8,11 +8,14 @@ import com.example.aplicacion.Entitiy.Pais;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ServicioTaskSaveCiudadano extends AsyncTask<Void,Void,Void> {
+public class ServicioTaskSaveCiudadano extends AsyncTask<Void,Void,String> {
     private Context context;
     private String linkURL;
     private Ciudadano ciudadano;
@@ -25,8 +28,9 @@ public class ServicioTaskSaveCiudadano extends AsyncTask<Void,Void,Void> {
 
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected String doInBackground(Void... voids) {
         URL url = null;
+        String datos="";
         try{
             url = new URL(linkURL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -57,12 +61,17 @@ public class ServicioTaskSaveCiudadano extends AsyncTask<Void,Void,Void> {
             urlConnection.connect();
             int responseCode = urlConnection.getResponseCode();
             if(responseCode == HttpURLConnection.HTTP_OK){
-                //server_reponse = readStream(urlConnection.getInputStream());
+                InputStream is = urlConnection.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String data="";
+                while((data=br.readLine())!=null){
+                    datos+=data;
+                }
             }
 
         }catch(Exception e){
             e.printStackTrace();
         }
-        return null;
+        return datos;
     }
 }

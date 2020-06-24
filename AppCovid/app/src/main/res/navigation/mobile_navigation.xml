@@ -11,11 +11,6 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/navigation_noticias"
-        android:name="com.example.aplicacion.ui.noticias.NoticiasFragment"
-        android:label="@string/title_noticias"
-        tools:layout="@layout/fragment_noticias" />
 
     <fragment
         android:id="@+id/navigation_triaje"
@@ -23,9 +18,5 @@
         android:label="@string/title_triaje"
         tools:layout="@layout/fragment_triaje" />
 
-    <fragment
-        android:id="@+id/navigation_mapa"
-        android:name="com.example.aplicacion.ui.mapa.MapaFragment"
-        android:label="@string/title_mapa"
-        tools:layout="@layout/fragment_mapa" />
+
 </navigation>

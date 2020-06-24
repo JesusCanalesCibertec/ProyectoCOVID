@@ -13,10 +13,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.registrar.registroPersona">
-
-        </activity>
-
         <activity android:name=".ui.registrar.RegistrarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,17 +29,11 @@
             android:name=".TriajeActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ui.test.Test1Activity"
+            android:name=".ui.test.TestActivity"
             android:parentActivityName=".TriajeActivity"/>
         <activity
-            android:name=".ui.test.Test2Activity"
-            android:parentActivityName=".ui.test.Test1Activity" />
-        <activity
-            android:name=".ui.test.Test3Activity"
-            android:parentActivityName=".ui.test.Test2Activity" />
-        <activity
-            android:name=".ui.test.Test4Activity"
-            android:parentActivityName=".MainActivity"/>
+            android:name=".ui.test.ResultadoActivity"
+            android:parentActivityName=".ui.test.TestActivity" />
 
     </application>
 

@@ -15,18 +15,23 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 import com.example.aplicacion.Entitiy.Ciudadano;
 import com.example.aplicacion.Entitiy.Departamento;
 import com.example.aplicacion.Entitiy.Distrito;
 import com.example.aplicacion.Entitiy.Pais;
 import com.example.aplicacion.Entitiy.Provincia;
+import com.example.aplicacion.Entitiy.Triaje;
 import com.example.aplicacion.MainActivity;
 import com.example.aplicacion.R;
+import com.example.aplicacion.Session;
+import com.example.aplicacion.controlador.CiudadanoDAO;
 import com.example.aplicacion.controlador.DepartamentoDAO;
 import com.example.aplicacion.controlador.DistritoDAO;
 import com.example.aplicacion.controlador.PaisDAO;
 import com.example.aplicacion.controlador.ProvinciaDAO;
+import com.example.aplicacion.controlador.TriajeDAO;
 import com.example.aplicacion.taskCiudadano.ServicioTaskSaveCiudadano;
 import com.example.aplicacion.taskPais.ServicioTaskListPais;
 import com.example.aplicacion.taskUbigeo.ServicioTaskListDepartamento;
@@ -52,9 +57,6 @@ public class RegistrarActivity extends AppCompatActivity{
     EditText txtDoc;
     EditText txtViv;
     EditText txtFecha;
-    boolean valueDep = false;
-    boolean valueProv = false;
-    boolean valueDis = false;
     ArrayList<Pais> dataPais;
     ArrayList<Departamento> dataDep;
     ArrayList<Provincia> dataProv;
@@ -63,7 +65,10 @@ public class RegistrarActivity extends AppCompatActivity{
     int posDep;
     int posProv;
     int posDis;
-    Date fecval;
+    String fecval;
+    String edad;
+    public  int idCiu;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,21 +88,18 @@ public class RegistrarActivity extends AppCompatActivity{
         txtApellido = (EditText) findViewById(R.id.txtApellido);
         txtDoc = (EditText) findViewById(R.id.txtNumDoc);
         txtViv = (EditText) findViewById(R.id.txtVivienda);
-
+        session = new Session(RegistrarActivity.this);
         cargarPais();
 
         //Cargar Spinner Departamento
         spnNac.setOnItemSelectedListener(new OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    posPais = dataPais.get(position).getIdPais();
-                    if(posPais == 1){
-                        valueDep = true;
                        try{
-
+                           posPais = dataPais.get(position).getIdPais();
                            ServicioTaskListDepartamento servicio=new ServicioTaskListDepartamento(RegistrarActivity.this,"http://arbchum1-001-site1.etempurl.com/api/spring/core/Departamento/listarTodos");
                            servicio.execute();
-                           String c=servicio.get();
+                           String c = servicio.get();
                            dataDep= DepartamentoDAO.listaDepartamento(c);
                            ArrayAdapter<Departamento> adapter=new ArrayAdapter<Departamento>(RegistrarActivity.this,android.R.layout.simple_spinner_item,dataDep);
                            spnDep.setAdapter(adapter);
@@ -106,16 +108,6 @@ public class RegistrarActivity extends AppCompatActivity{
                        catch (Exception e){
                            e.printStackTrace();
                        }
-                   }
-                   else{
-                       valueDep = false;
-                       ArrayList<String> lista = new ArrayList<String>();
-                       lista.add("-");
-                       ArrayAdapter<String> adapter=new ArrayAdapter<String>(RegistrarActivity.this,android.R.layout.simple_spinner_item,lista);
-                       spnDep.setAdapter(adapter);
-                       spnProv.setAdapter(adapter);
-                       spnDis.setAdapter(adapter);
-                   }
                 }
 
                 @Override
@@ -128,10 +120,8 @@ public class RegistrarActivity extends AppCompatActivity{
         spnDep.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(valueDep){
-                    posDep=dataDep.get(position).getDepartamento();
-                    valueProv=true;
                     try{
+                        posDep=dataDep.get(position).getDepartamento();
                         ServicioTaskListProvincia servicio;
                         if(posDep<10){
                             servicio=new ServicioTaskListProvincia(RegistrarActivity.this,"http://arbchum1-001-site1.etempurl.com/api/spring/core/Provincia/listarActivosPorDepartamento?idDepartamento=0"+ posDep);
@@ -148,15 +138,6 @@ public class RegistrarActivity extends AppCompatActivity{
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                }else{
-                    valueProv=false;
-                    ArrayList<String> lista = new ArrayList<String>();
-                    lista.add("-");
-                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(RegistrarActivity.this,android.R.layout.simple_spinner_item,lista);
-                    spnProv.setAdapter(adapter);
-                    spnDis.setAdapter(adapter);
-                }
-
             }
 
             @Override
@@ -169,10 +150,9 @@ public class RegistrarActivity extends AppCompatActivity{
         spnProv.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(valueProv){
-                    valueDis=true;
-                    posProv=dataProv.get(position).getProvincia();
+
                     try{
+                        posProv=dataProv.get(position).getProvincia();
                         ServicioTaskListDistrito servicio;
                         if(posDep<10 && posProv<10){
                                 servicio=new ServicioTaskListDistrito(RegistrarActivity.this,"http://arbchum1-001-site1.etempurl.com/api/spring/core/Zonapostal/listarActivosPorProvincia?idDepartamento=0"+posDep+"&idProvincia=0"+posProv);
@@ -195,13 +175,6 @@ public class RegistrarActivity extends AppCompatActivity{
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                }else{
-                    valueDis=false;
-                    ArrayList<String> lista = new ArrayList<String>();
-                    lista.add("-");
-                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(RegistrarActivity.this,android.R.layout.simple_spinner_item,lista);
-                    spnDis.setAdapter(adapter);
-                }
             }
 
             @Override
@@ -214,10 +187,7 @@ public class RegistrarActivity extends AppCompatActivity{
         spnDis.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(valueDis){
-                    posDis=dataDis.get(position).getCodigopostal();
-                }
-
+               posDis=dataDis.get(position).getCodigopostal();
             }
 
             @Override
@@ -238,9 +208,8 @@ public class RegistrarActivity extends AppCompatActivity{
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registrar();
-                Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
-                startActivity(intent);
+                //validar();
+                resultadoExitoso();
             }
         });
 
@@ -260,9 +229,11 @@ public class RegistrarActivity extends AppCompatActivity{
                 calendario.set(Calendar.MONTH,month);
                 calendario.set(Calendar.DAY_OF_MONTH,day);
                 SimpleDateFormat oSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat oSdf = new SimpleDateFormat("yyyy/MM/dd");
 
                 fecha.setText(oSimpleDateFormat.format(calendario.getTime()));
-                fecval = calendario.getTime();
+                fecval = oSdf.format(calendario.getTime());
+                edad = getAge(calendario);
             }
         };
         new DatePickerDialog(RegistrarActivity.this,dateSetListener,
@@ -293,20 +264,15 @@ public class RegistrarActivity extends AppCompatActivity{
 
     }
 
-
-
-
     public void registrar(){
         try{
             Ciudadano c = new Ciudadano();
-
             c.setNombre(txtNombre.getText().toString());
             c.setApellido(txtApellido.getText().toString());
             c.setIdPais("00"+posPais);
             int tipodoc = spnTipoDoc.getSelectedItemPosition() + 1;
             c.setTipoDocumento(tipodoc);
             c.setNroDocumento(txtDoc.getText().toString());
-            SimpleDateFormat oSimpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
             c.setFechaNacimiento(fecval);
             c.setDireccion(txtViv.getText().toString());
             if(posDep<10){
@@ -330,11 +296,80 @@ public class RegistrarActivity extends AppCompatActivity{
 
             ServicioTaskSaveCiudadano servicio= new ServicioTaskSaveCiudadano(this,"http://arbchum1-001-site1.etempurl.com/api/spring/covid/Ciudadano/registrar",c);
             servicio.execute();
+            String s = servicio.get();
+            Ciudadano ciudadano = CiudadanoDAO.responseCiudadano(s);
+            idCiu=ciudadano.getIdCiudadano();
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void validar(){
+        String nom = txtNombre.getText().toString();//
+        String ape = txtApellido.getText().toString();//
+        String doc = txtDoc.getText().toString();//
+        String tipDoc = spnTipoDoc.getSelectedItem().toString();//
+        String fecNac = txtFecha.getText().toString();
+        String viv = txtViv.getText().toString();//
+
+
+
+        if(nom.equals("")||ape.equals("")||doc.equals("")||fecNac.equals("")||viv.equals("")){
+            Toast.makeText(getApplicationContext(), "Ingrese los datos faltantes", Toast.LENGTH_SHORT).show();
+        }else{
+            int edadInt = Integer.parseInt(edad);
+            if(edadInt < 14){
+                Toast.makeText(getApplicationContext(), "Debes tener de 14 años a más para usar la aplicación", Toast.LENGTH_SHORT).show();
+            }
+            else if(tipDoc.equals("DNI")) {
+                if (doc.length() < 8 || doc.length() > 8) {
+                    Toast.makeText(getApplicationContext(), "DNI debe ser de 8 digitos", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "exito", Toast.LENGTH_SHORT).show();
+                    resultadoExitoso();
+                }
+            }
+            else if (tipDoc.equals("Carne EXT.")) {
+                if (doc.length() < 12) {
+                    Toast.makeText(getApplicationContext(), "Carnet de extranjeria debe ser de 12 digitos", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "exitoso", Toast.LENGTH_SHORT).show();
+                    resultadoExitoso();
+                }
+            }
+        }
+
+
+    }
+
+    private void resultadoExitoso() {
+        //registrar();
+        session.setIdCiudadano(idCiu);
+        Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private String getAge(Calendar date){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DAY_OF_MONTH);
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        String ageS = ageInt.toString();
+
+        return ageS;
     }
 
 

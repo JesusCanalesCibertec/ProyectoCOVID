@@ -9,7 +9,7 @@
     tools:context=".ui.registrar.RegistrarActivity">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
@@ -38,7 +38,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:layout_marginTop="5dp"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:digits="@string/SoloLetras"
+                    android:maxLength="80"/>
             </TableRow>
 
             <TableRow
@@ -62,7 +64,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:layout_marginTop="5dp"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:digits="@string/SoloLetras"
+                    android:maxLength="80"/>
             </TableRow>
 
             <TableRow
@@ -126,7 +130,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:ems="10"
-                    android:inputType="textPersonName"/>
+                    android:inputType="number"
+                    android:digits="@string/SoloNumeros"
+                    android:maxLength="12"
+                    />
             </TableRow>
 
             <TableRow
@@ -176,7 +183,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:ems="10"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                    android:digits="@string/SoloNumerosyLetras"
+                    android:maxLength="120"/>
             </TableRow>
 
             <TableRow
