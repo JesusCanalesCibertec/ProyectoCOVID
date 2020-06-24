@@ -4,6 +4,10 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
@@ -24,92 +28,8 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_dashboard_black_24dp.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registro_persona.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_registro_persona.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_mapa.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_mapa.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_triaje.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-mdpi\\ic_triaje.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_telefono.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_telefono.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_triaje.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxhdpi\\ic_triaje.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_news.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_news.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_news.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-mdpi\\ic_news.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_mapa.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_mapa.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_mapa.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_mapa.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_triaje.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_triaje.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_triaje.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_triaje.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_triaje.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_triaje.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_mapa.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\fragment_mapa.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_telefono.png.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_telefono.png"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_noticias.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\fragment_noticias.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test3.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_test3.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_main.xml"
-    },
-    {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test1.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_test1.xml"
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_resultado.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_resultado.xml"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_registrar.xml.flat",
@@ -120,12 +40,20 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_dashboard_black_24dp.xml"
+    },
+    {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_mapa.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_mapa.png"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_telefono.png.flat",
@@ -140,28 +68,56 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_triaje.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-mdpi\\ic_triaje.png"
     },
     {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test2.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_test2.xml"
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_telefono.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_telefono.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\navigation\\mobile_navigation.xml"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_news.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_news.png"
     },
     {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test4.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_test4.xml"
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_triaje.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxhdpi\\ic_triaje.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_news.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_news.png"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_news.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-mdpi\\ic_news.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_mapa.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_mapa.png"
+    },
+    {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_telefono.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxhdpi\\ic_telefono.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_mapa.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_mapa.png"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
@@ -184,8 +140,28 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_news.png"
     },
     {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_triaje.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxxhdpi\\ic_triaje.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_triaje.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_triaje.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_triaje.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xhdpi\\ic_triaje.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_test.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_test.xml"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_triaje.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\activity_triaje.xml"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_mapa.png.flat",
@@ -198,6 +174,10 @@
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_home_black_24dp.xml.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_telefono.png.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-hdpi\\ic_telefono.png"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",

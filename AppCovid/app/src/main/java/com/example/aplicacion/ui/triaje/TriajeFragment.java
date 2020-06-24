@@ -16,16 +16,20 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.aplicacion.R;
 import com.example.aplicacion.TriajeActivity;
-import com.example.aplicacion.ui.mapa.MapaViewModel;
 
 public class TriajeFragment extends Fragment {
 
+
     Button btnComenzar;
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_triaje, container, false);
 
         btnComenzar = (Button) root.findViewById(R.id.btnComenzarTriaje);
+
+
 
         btnComenzar.setOnClickListener(new View.OnClickListener() {
             @Override

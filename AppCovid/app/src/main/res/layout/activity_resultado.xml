@@ -2,52 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_triaje"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.triaje.TriajeFragment">
+    tools:context=".ui.test.ResultadoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/imageTriaje"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="25dp"
-                android:src="@drawable/ic_triaje"/>
+            <TextView
+                android:id="@+id/lbResultadoNom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resultado"
+                android:textSize="28sp"
+                android:textStyle="bold"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/lbResultadoDes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:text="@string/content_triaje"
-                android:textSize="20sp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/lbResultadoRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <Button
-                android:id="@+id/btnComenzarTriaje"
+                android:id="@+id/btnFinalizar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="125dp"
-                android:text="Comencemos"/>
+                android:text="Salir"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="125dp"/>
         </TableRow>
     </LinearLayout>
-
 </LinearLayout>

@@ -13,23 +13,29 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.aplicacion.R;
+import com.example.aplicacion.Session;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    TextView txtNombre;
+    TextView txtApellido;
+    TextView txtNacionalidad;
+    TextView txtNumDoc;
+    TextView txtEstado;
+    private Session session;
+    int idCiu;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        txtNombre = (TextView) root.findViewById(R.id.lbNombreMostrado);
+        txtApellido = (TextView) root.findViewById(R.id.lbApellidoMostrado);
+        txtNacionalidad = (TextView) root.findViewById(R.id.lbNacionalidadMostrado);
+        txtNumDoc = (TextView) root.findViewById(R.id.lbNumDocMostrado);
+        txtEstado = (TextView) root.findViewById(R.id.lbEstadoMostrado);
+        idCiu = session.getIdCiudadano();
+
         return root;
     }
 }

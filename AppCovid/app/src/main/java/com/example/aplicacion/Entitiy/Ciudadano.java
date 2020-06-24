@@ -9,7 +9,7 @@ public class Ciudadano {
     private String     idPais;
     private int     tipoDocumento;
     private String  nroDocumento;
-    private Date    fechaNacimiento;
+    private String    fechaNacimiento;
     private String  direccion;
     private String idDepartamento;
     private String idProvincia;
@@ -58,11 +58,11 @@ public class Ciudadano {
         this.nroDocumento = nroDocumento;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

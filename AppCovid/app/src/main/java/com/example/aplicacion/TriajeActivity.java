@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.aplicacion.ui.test.Test1Activity;
+import com.example.aplicacion.ui.test.TestActivity;
 
 public class TriajeActivity extends AppCompatActivity {
 
@@ -23,7 +23,15 @@ public class TriajeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
         btnIniciar = (Button) findViewById(R.id.btnIniciarTest);
+        btnIniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TriajeActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

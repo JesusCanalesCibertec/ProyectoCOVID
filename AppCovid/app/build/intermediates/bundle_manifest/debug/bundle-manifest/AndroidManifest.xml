@@ -21,8 +21,6 @@
         android:testOnly="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name="com.example.aplicacion.ui.registrar.registroPersona" >
-        </activity>
         <activity android:name="com.example.aplicacion.ui.registrar.RegistrarActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,17 +36,11 @@
             android:name="com.example.aplicacion.TriajeActivity"
             android:parentActivityName="com.example.aplicacion.MainActivity" />
         <activity
-            android:name="com.example.aplicacion.ui.test.Test1Activity"
+            android:name="com.example.aplicacion.ui.test.TestActivity"
             android:parentActivityName="com.example.aplicacion.TriajeActivity" />
         <activity
-            android:name="com.example.aplicacion.ui.test.Test2Activity"
-            android:parentActivityName="com.example.aplicacion.ui.test.Test1Activity" />
-        <activity
-            android:name="com.example.aplicacion.ui.test.Test3Activity"
-            android:parentActivityName="com.example.aplicacion.ui.test.Test2Activity" />
-        <activity
-            android:name="com.example.aplicacion.ui.test.Test4Activity"
-            android:parentActivityName="com.example.aplicacion.MainActivity" />
+            android:name="com.example.aplicacion.ui.test.ResultadoActivity"
+            android:parentActivityName="com.example.aplicacion.ui.test.TestActivity" />
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"

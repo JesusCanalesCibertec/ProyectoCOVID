@@ -3,184 +3,193 @@ package com.example.aplicacion.Entitiy;
 import java.util.Date;
 
 public class Triaje {
-    private int Cod_triaje;
-    private int Cod_ciudadano;
-    private String Dis_gus;
-    private String Tos;
-    private String Dolor;
-    private String Difi;
-    private String Nasal;
-    private String Fiebre;
-    private Date Fecha_inicio;
-    private String Sutacion1;
-    private String Situacion2;
-    private String Situacion3;
-    private String Obesidad;
-    private String Pulmonar;
-    private String Asma;
-    private String Diabetes;
-    private String Hipertension;
-    private String Cardio;
-    private String Renal;
-    private String Cancer;
+    private int idTriaje;
+    private int idCiudadano;
+    private String disgus;
+    private String tos;
+    private String dolor;
+    private String difi;
+    private String nasal;
+    private String fiebre;
+    private String fechainicio;
+    private String situacion1;
+    private String situacion2;
+    private String situacion3;
+    private String obesidad;
+    private String pulmonar;
+    private String asma;
+    private String diabetes;
+    private String hipertension;
+    private String cardio;
+    private String renal;
+    private String cancer;
+    private int estado;
 
-    public int getCod_triaje() {
-        return Cod_triaje;
+    public int getEstado() {
+        return estado;
     }
 
-    public void setCod_triaje(int cod_triaje) {
-        Cod_triaje = cod_triaje;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
-    public int getCod_ciudadano() {
-        return Cod_ciudadano;
+    public int getIdTriaje() {
+        return idTriaje;
     }
 
-    public void setCod_ciudadano(int cod_ciudadano) {
-        Cod_ciudadano = cod_ciudadano;
+    public void setIdTriaje(int idTriaje) {
+        this.idTriaje = idTriaje;
     }
 
-    public String getDis_gus() {
-        return Dis_gus;
+    public int getIdCiudadano() {
+        return idCiudadano;
     }
 
-    public void setDis_gus(String dis_gus) {
-        Dis_gus = dis_gus;
+    public void setIdCiudadano(int idCiudadano) {
+        this.idCiudadano = idCiudadano;
+    }
+
+    public String getDisgus() {
+        return disgus;
+    }
+
+    public void setDisgus(String disgus) {
+        this.disgus = disgus;
     }
 
     public String getTos() {
-        return Tos;
+        return tos;
     }
 
     public void setTos(String tos) {
-        Tos = tos;
+        this.tos = tos;
     }
 
     public String getDolor() {
-        return Dolor;
+        return dolor;
     }
 
     public void setDolor(String dolor) {
-        Dolor = dolor;
+        this.dolor = dolor;
     }
 
     public String getDifi() {
-        return Difi;
+        return difi;
     }
 
     public void setDifi(String difi) {
-        Difi = difi;
+        this.difi = difi;
     }
 
     public String getNasal() {
-        return Nasal;
+        return nasal;
     }
 
     public void setNasal(String nasal) {
-        Nasal = nasal;
+        this.nasal = nasal;
     }
 
     public String getFiebre() {
-        return Fiebre;
+        return fiebre;
     }
 
     public void setFiebre(String fiebre) {
-        Fiebre = fiebre;
+        this.fiebre = fiebre;
     }
 
-    public Date getFecha_inicio() {
-        return Fecha_inicio;
+    public String getFechainicio() {
+        return fechainicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
-        Fecha_inicio = fecha_inicio;
+    public void setFechainicio(String fechainicio) {
+        this.fechainicio = fechainicio;
     }
 
-    public String getSutacion1() {
-        return Sutacion1;
+    public String getSituacion1() {
+        return situacion1;
     }
 
-    public void setSutacion1(String sutacion1) {
-        Sutacion1 = sutacion1;
+    public void setSituacion1(String situacion1) {
+        this.situacion1 = situacion1;
     }
 
     public String getSituacion2() {
-        return Situacion2;
+        return situacion2;
     }
 
     public void setSituacion2(String situacion2) {
-        Situacion2 = situacion2;
+        this.situacion2 = situacion2;
     }
 
     public String getSituacion3() {
-        return Situacion3;
+        return situacion3;
     }
 
     public void setSituacion3(String situacion3) {
-        Situacion3 = situacion3;
+        this.situacion3 = situacion3;
     }
 
     public String getObesidad() {
-        return Obesidad;
+        return obesidad;
     }
 
     public void setObesidad(String obesidad) {
-        Obesidad = obesidad;
+        this.obesidad = obesidad;
     }
 
     public String getPulmonar() {
-        return Pulmonar;
+        return pulmonar;
     }
 
     public void setPulmonar(String pulmonar) {
-        Pulmonar = pulmonar;
+        this.pulmonar = pulmonar;
     }
 
     public String getAsma() {
-        return Asma;
+        return asma;
     }
 
     public void setAsma(String asma) {
-        Asma = asma;
+        this.asma = asma;
     }
 
     public String getDiabetes() {
-        return Diabetes;
+        return diabetes;
     }
 
     public void setDiabetes(String diabetes) {
-        Diabetes = diabetes;
+        this.diabetes = diabetes;
     }
 
     public String getHipertension() {
-        return Hipertension;
+        return hipertension;
     }
 
     public void setHipertension(String hipertension) {
-        Hipertension = hipertension;
+        this.hipertension = hipertension;
     }
 
     public String getCardio() {
-        return Cardio;
+        return cardio;
     }
 
     public void setCardio(String cardio) {
-        Cardio = cardio;
+        this.cardio = cardio;
     }
 
     public String getRenal() {
-        return Renal;
+        return renal;
     }
 
     public void setRenal(String renal) {
-        Renal = renal;
+        this.renal = renal;
     }
 
     public String getCancer() {
-        return Cancer;
+        return cancer;
     }
 
     public void setCancer(String cancer) {
-        Cancer = cancer;
+        this.cancer = cancer;
     }
 }
