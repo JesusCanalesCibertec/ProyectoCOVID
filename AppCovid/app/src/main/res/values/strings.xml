@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">Aplicacion</string>
+    <string name="app_name">PeruContraElCovid</string>
     <string name="title_home">Home</string>
-    <string name="title_noticias">Noticias</string>
     <string name="title_triaje">Triaje</string>
-    <string name="title_mapa">Mapa</string>
     <string name="content_triaje">A continuación te ayudaremos a identificar si te encuentras en riesgo de contagio. Recuerda responder las siguientes preguntas con total sinceridad.</string>
     <string name="tit_pretriaje">Antes de iniciar, recuerda que si cuentas con algunos de estos síntomas debes contactar con los números de emergencia inmediatamente:</string>
     <string name="pretriaje_item1">. Sensación de falta de aire o dificultad para respirar en reposo</string>

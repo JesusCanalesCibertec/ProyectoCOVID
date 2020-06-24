@@ -22,27 +22,23 @@ import com.example.aplicacion.Entitiy.Departamento;
 import com.example.aplicacion.Entitiy.Distrito;
 import com.example.aplicacion.Entitiy.Pais;
 import com.example.aplicacion.Entitiy.Provincia;
-import com.example.aplicacion.Entitiy.Triaje;
 import com.example.aplicacion.MainActivity;
 import com.example.aplicacion.R;
-import com.example.aplicacion.Session;
+import com.example.aplicacion.SessionManagement;
 import com.example.aplicacion.controlador.CiudadanoDAO;
 import com.example.aplicacion.controlador.DepartamentoDAO;
 import com.example.aplicacion.controlador.DistritoDAO;
 import com.example.aplicacion.controlador.PaisDAO;
 import com.example.aplicacion.controlador.ProvinciaDAO;
-import com.example.aplicacion.controlador.TriajeDAO;
 import com.example.aplicacion.taskCiudadano.ServicioTaskSaveCiudadano;
 import com.example.aplicacion.taskPais.ServicioTaskListPais;
 import com.example.aplicacion.taskUbigeo.ServicioTaskListDepartamento;
 import com.example.aplicacion.taskUbigeo.ServicioTaskListDistrito;
 import com.example.aplicacion.taskUbigeo.ServicioTaskListProvincia;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class RegistrarActivity extends AppCompatActivity{
 
@@ -67,8 +63,6 @@ public class RegistrarActivity extends AppCompatActivity{
     int posDis;
     String fecval;
     String edad;
-    public  int idCiu;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +82,6 @@ public class RegistrarActivity extends AppCompatActivity{
         txtApellido = (EditText) findViewById(R.id.txtApellido);
         txtDoc = (EditText) findViewById(R.id.txtNumDoc);
         txtViv = (EditText) findViewById(R.id.txtVivienda);
-        session = new Session(RegistrarActivity.this);
         cargarPais();
 
         //Cargar Spinner Departamento
@@ -187,7 +180,12 @@ public class RegistrarActivity extends AppCompatActivity{
         spnDis.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               posDis=dataDis.get(position).getCodigopostal();
+               try{
+                   posDis=dataDis.get(position).getCodigopostal();
+               }catch (Exception e){
+                   e.printStackTrace();
+               }
+
             }
 
             @Override
@@ -208,14 +206,24 @@ public class RegistrarActivity extends AppCompatActivity{
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //validar();
-                resultadoExitoso();
+                validar();
             }
         });
 
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
 
+        SessionManagement sessionManagement = new SessionManagement(RegistrarActivity.this);
+        int userID = sessionManagement.getSession();
+        if(userID != -1){
+            movetoMain();
+        }else{
+            //Nada
+        }
+    }
 
 
 
@@ -239,15 +247,6 @@ public class RegistrarActivity extends AppCompatActivity{
         new DatePickerDialog(RegistrarActivity.this,dateSetListener,
                 calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH)).show();
     }
-
-    private void hideKeyboard(){
-        View oView = this.getCurrentFocus();
-        if(oView != null){
-            InputMethodManager oInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            oInputMethodManager.hideSoftInputFromWindow(oView.getWindowToken(),0);
-        }
-    }
-
 
     public void cargarPais(){
         try{
@@ -298,7 +297,11 @@ public class RegistrarActivity extends AppCompatActivity{
             servicio.execute();
             String s = servicio.get();
             Ciudadano ciudadano = CiudadanoDAO.responseCiudadano(s);
+            int idCiu;
             idCiu=ciudadano.getIdCiudadano();
+
+            SessionManagement sessionManagement = new SessionManagement(RegistrarActivity.this);
+            sessionManagement.saveSession(idCiu);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -344,10 +347,8 @@ public class RegistrarActivity extends AppCompatActivity{
     }
 
     private void resultadoExitoso() {
-        //registrar();
-        session.setIdCiudadano(idCiu);
-        Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
-        startActivity(intent);
+        registrar();
+        movetoMain();
     }
 
     private String getAge(Calendar date){
@@ -370,6 +371,12 @@ public class RegistrarActivity extends AppCompatActivity{
         String ageS = ageInt.toString();
 
         return ageS;
+    }
+
+    private void movetoMain(){
+        Intent intent = new Intent(RegistrarActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 

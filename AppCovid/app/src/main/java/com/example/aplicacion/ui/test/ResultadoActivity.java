@@ -33,7 +33,6 @@ public class ResultadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultado);
 
         getSupportActionBar().setTitle("Resultado");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lbResultadoNom = (TextView) findViewById(R.id.lbResultadoNom);
         lbResultadoDes = (TextView) findViewById(R.id.lbResultadoDes);
@@ -51,8 +50,8 @@ public class ResultadoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultadoActivity.this, MainActivity.class);
-
                 startActivity(intent);
+                finish();
                     }
                     });
     }

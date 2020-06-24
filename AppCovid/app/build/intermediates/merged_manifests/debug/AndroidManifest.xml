@@ -38,9 +38,7 @@
         <activity
             android:name="com.example.aplicacion.ui.test.TestActivity"
             android:parentActivityName="com.example.aplicacion.TriajeActivity" />
-        <activity
-            android:name="com.example.aplicacion.ui.test.ResultadoActivity"
-            android:parentActivityName="com.example.aplicacion.ui.test.TestActivity" />
+        <activity android:name="com.example.aplicacion.ui.test.ResultadoActivity" />
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"

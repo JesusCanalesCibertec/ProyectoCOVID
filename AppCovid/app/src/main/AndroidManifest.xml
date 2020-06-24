@@ -33,7 +33,7 @@
             android:parentActivityName=".TriajeActivity"/>
         <activity
             android:name=".ui.test.ResultadoActivity"
-            android:parentActivityName=".ui.test.TestActivity" />
+           />
 
     </application>
 

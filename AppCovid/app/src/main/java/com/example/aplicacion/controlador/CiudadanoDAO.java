@@ -12,11 +12,11 @@ public class CiudadanoDAO {
         try {
             JSONObject jsonObject=new JSONObject(json);
                 c.setIdCiudadano(jsonObject.getInt("idCiudadano"));
-                c.setNombre(jsonObject.getString(""));
-                c.setApellido(jsonObject.getString(""));
-                c.setIdPais(jsonObject.getString(""));
-                c.setNroDocumento(jsonObject.getString(""));
-                c.setEstado(jsonObject.getInt(""));
+                c.setNombre(jsonObject.getString("nombre"));
+                c.setApellido(jsonObject.getString("apellido"));
+                c.setIdPais(jsonObject.getString("idPais"));
+                c.setNroDocumento(jsonObject.getString("nroDocumento"));
+                c.setEstado(jsonObject.getInt("estado"));
             }
         catch (Exception e){
             e.printStackTrace();

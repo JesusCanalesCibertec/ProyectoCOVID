@@ -126,9 +126,7 @@ ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManife
 	android:name
 		ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:32:13-49
 activity#com.example.aplicacion.ui.test.ResultadoActivity
-ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:34:9-36:66
-	android:parentActivityName
-		ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:36:13-63
+ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:34:9-36:14
 	android:name
 		ADDED from C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:35:13-54
 uses-sdk

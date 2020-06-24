@@ -67,23 +67,20 @@
 39-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:32:13-49
 40            android:parentActivityName="com.example.aplicacion.TriajeActivity" />
 40-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:33:13-57
-41        <activity
-41-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:34:9-36:66
-42            android:name="com.example.aplicacion.ui.test.ResultadoActivity"
-42-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:35:13-54
-43            android:parentActivityName="com.example.aplicacion.ui.test.TestActivity" />
-43-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:36:13-63
-44
-45        <provider
-45-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
-46            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-46-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
-47            android:authorities="com.example.aplicacion.lifecycle-process"
-47-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
-48            android:exported="false"
-48-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
-49            android:multiprocess="true" />
-49-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
-50    </application>
-51
-52</manifest>
+41        <activity android:name="com.example.aplicacion.ui.test.ResultadoActivity" />
+41-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:34:9-36:14
+41-->C:\Users\USUARIO\Desktop\Proyecto\AppCovid\app\src\main\AndroidManifest.xml:35:13-54
+42
+43        <provider
+43-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+44            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+44-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+45            android:authorities="com.example.aplicacion.lifecycle-process"
+45-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+46            android:exported="false"
+46-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+47            android:multiprocess="true" />
+47-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\USUARIO\.gradle\caches\transforms-2\files-2.1\5d99fee1d2407eb49b678fc4ddbf6f02\jetified-lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+48    </application>
+49
+50</manifest>
