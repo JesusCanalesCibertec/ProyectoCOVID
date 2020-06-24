@@ -18,7 +18,7 @@ namespace net.royal.spring.covid.dao.impl
 
         private IServiceProvider servicioProveedor;
 
-        public TriajeDaoImpl(GenericoDbContext context, IServiceProvider _servicioProveedor):base(context, "triaje")
+        public TriajeDaoImpl(GenericoDbContext context, IServiceProvider _servicioProveedor):base(context, "covidtriaje")
         {
             servicioProveedor = _servicioProveedor;
         }
@@ -109,6 +109,7 @@ namespace net.royal.spring.covid.dao.impl
         public Triaje registrar(UsuarioActual usuarioActual, Triaje bean)
         {
             bean.IdTriaje = this.generarCodigo();
+            bean.Fecharegistro = DateTime.Now;
             this.registrar(bean);
             return bean;
         }
@@ -147,6 +148,40 @@ namespace net.royal.spring.covid.dao.impl
             //if (lst.Count > 0)
             //    return lst;
             return null;
+        }
+
+        public List<DtoTabla> listado(int pIdCiudadano)
+        {
+            List<DtoTabla> lst = new List<DtoTabla>();
+
+            List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
+
+            parametros.Add(new ParametroPersistenciaGenerico("pIdCiudadano", ConstanteUtil.TipoDato.Integer, pIdCiudadano));
+
+
+            _reader = this.listarPorQuery("covidtriaje.listarporciudadano", parametros);
+
+            while (_reader.Read())
+            {
+                DtoTabla bean = new DtoTabla();
+
+                if (!_reader.IsDBNull(0))
+                    bean.Secuencia = _reader.GetInt32(0);
+                if (!_reader.IsDBNull(1))
+                    bean.num1 = _reader.GetInt32(1);
+                if (!_reader.IsDBNull(2))
+                    bean.num2 = _reader.GetInt32(2);
+                if (!_reader.IsDBNull(3))
+                    bean.num3 = _reader.GetInt32(3);
+                if (!_reader.IsDBNull(4))
+                    bean.CodigoNumerico = _reader.GetInt32(4);
+
+                lst.Add(bean);
+            }
+            this.dispose();
+
+
+            return lst;
         }
     }
     

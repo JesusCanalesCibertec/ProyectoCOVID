@@ -1,3 +1,4 @@
+/*UBIGEO INICIO*/
 LISTAR PAISES:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Pais/listarTodos
 
@@ -9,13 +10,13 @@ http://arbchum1-001-site1.etempurl.com/api/spring/core/Provincia/listarActivosPo
 
 LISTAR DISTRITOS:
 http://arbchum1-001-site1.etempurl.com/api/spring/core/Zonapostal/listarActivosPorProvincia?idDepartamento=15&idProvincia=01
+/*UBIGEO FIN*/
 
+/*CIUDADANO INICIO*/
 REGISTRAR CIUDADANO:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Ciudadano/registrar
 
 Json de campos con datos de ejemplo:
-
-{
    {
     "nombre": "Romy",
     "apellido": "Quispe Marelo",
@@ -27,14 +28,17 @@ Json de campos con datos de ejemplo:
     "idDepartamento": "15",
     "idProvincia": "01",
     "idDistrito": "35"
-}
-}
+   }
 
+OBTENER CIUDADANO:
+http://arbchum1-001-site1.etempurl.com/api/spring/covid/Ciudadano/ObtenerPorId?pIdCiudadano=2
+/*CIUDADANO FIN*/
+
+/*TRIAJE INICIO*/
 REGISTRAR TRIAJE:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Triaje/registrar
 
 Json de campos con datos de ejemplo:
-
 {
     "idTriaje": null,
     "idCiudadano": 15,
@@ -58,6 +62,9 @@ Json de campos con datos de ejemplo:
     "cancer": "NO",
     "estado": null
 }
+/*TRIAJE FIN*/
 
+/*RESULTADO INICIO*/
 OBTENER RESULTADO:
 http://arbchum1-001-site1.etempurl.com/api/spring/covid/Resultado/ObtenerPorId?pIdResultado=2
+/*RESULTADO FIN*/*/

@@ -58,10 +58,10 @@ namespace net.royal.spring.covid
             return triajeServicio.cambiarestado(pk);
         }
 
-        [HttpPost("[action]")]
-        public List<Triaje> listado([FromBody]DtoTabla filtro)
+        [HttpGet("[action]")]
+        public List<DtoTabla> listado(int pIdCiudadano)
         {
-            return triajeServicio.listado(filtro);
+            return triajeServicio.listado(pIdCiudadano);
 
         }
 

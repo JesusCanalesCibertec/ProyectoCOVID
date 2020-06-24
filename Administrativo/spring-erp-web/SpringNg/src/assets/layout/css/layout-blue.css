@@ -86,15 +86,16 @@
 .card {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  border-radius: 2px;
+  border-radius: 5px;
   background: #ffffff;
-  padding: 16px;
+  padding: 10px;
   box-sizing: border-box;
   margin-bottom: 16px;
+  height: 100%;
 }
 
 .card.card-w-title {
-  padding-bottom: 32px;
+  padding-bottom: 20px;
 }
 
 .card h1 {
@@ -107,7 +108,7 @@
   margin-top: 16px;
 }
 
-.card h2 {
+/* .card h2 {
   font-size: 22px;
   font-weight: 400;
 }
@@ -120,7 +121,7 @@
 .card h4 {
   font-size: 18px;
   font-weight: 400;
-}
+} */
 
 .nopad {
   padding: 0;

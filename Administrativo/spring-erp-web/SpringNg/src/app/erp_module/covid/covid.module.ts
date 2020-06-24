@@ -55,7 +55,7 @@ import { TriajeService } from "./triaje/servicio/Triaje.service";
         ScheduleModule,
         InputSwitchModule,
         SliderModule,
-        RadioButtonModule                                 
+        RadioButtonModule                              
     ],
     exports:[
     ],

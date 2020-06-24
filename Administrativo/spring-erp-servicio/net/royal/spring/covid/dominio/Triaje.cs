@@ -70,6 +70,9 @@ namespace net.royal.spring.covid.dominio
 
         [Column("ESTADO")]
         public  Nullable<Int32> Estado { get; set; }
+
+        [Column("FECHA_REGISTRO")]
+        public Nullable<DateTime> Fecharegistro { get; set; }
     }
 
     

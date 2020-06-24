@@ -60,5 +60,10 @@ namespace net.royal.spring.covid.servicio.impl
         {
             return ciudadanoDao.listado(filtro);
         }
+
+        public List<Ciudadano> listado()
+        {
+            return ciudadanoDao.listarTodos();
+        }
     }
 }

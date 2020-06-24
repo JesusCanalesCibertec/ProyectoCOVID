@@ -12,6 +12,9 @@ import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/
 import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CiudadanoService } from '../../ciudadano/servicio/Ciudadano.service';
+import { DtoTabla } from 'src/app/erp_module/shared/dominio/dto/DtoTabla';
+import { dtoTriaje } from '../dominio/dtoTriaje';
+import { Resultado } from '../../resultado/dominio/resultado';
 
 
 
@@ -31,13 +34,11 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
 
     //servicios
     private cdref: ChangeDetectorRef,
-    private TriajeServicio: TriajeService,
+    private triajeServicio: TriajeService,
     private ciudadanoServicio: CiudadanoService,
     private paisServicio: PaisServicio,
     private departamentoServicio: DepartamentoServicio,
-    private provinciaServicio: ProvinciaServicio,
-    private distritoServicio: ZonapostalServicio,
-    private confirmationService: ConfirmationService,
+
     private route: ActivatedRoute,
   ) {
     super(noAuthorizationInterceptor, messageService);
@@ -49,16 +50,16 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
   cols: any[] = [];
   idCiudadano: number;
   nombre;
- 
+
   //Declaraciones
   //filtro: FiltroTriaje = new FiltroTriaje();
   estados: SelectItem[] = [];
   paises: SelectItem[] = [];
-  departamentos: SelectItem[] = [];
-  provincias: SelectItem[] = [];
-  distritos: SelectItem[] = [];
+  listadoTriajes: DtoTabla[] = [];
   Triaje: Triaje = new Triaje();
   Triajepk: TriajePk = new TriajePk();
+  dtoTriaje: dtoTriaje = new dtoTriaje();
+  resultados: Resultado[] = [];
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
@@ -68,81 +69,52 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     super.ngOnInit();
     this.bloquearPagina();
     this.idCiudadano = this.route.snapshot.params['codigo'] as number;
-    this.ciudadanoServicio.obtenerPorId(this.idCiudadano).then(res=>{
-      this.nombre = res.nombre+' '+res.apellido;
-      this.desbloquearPagina();
+    this.ciudadanoServicio.obtenerPorId(this.idCiudadano).then(res => {
+      this.nombre = res.nombre + ' ' + res.apellido;
+      this.cargarColumnas();
+      this.cargarResultados();
+      this.listarTriajes();
+
     })
-    this.cargarColumnas();
-    this.cargarPaises();
-    this.cargarDepartamentos();
+
   }
 
   cargarColumnas() {
     this.cols = [
-      { field: 'codigo', header: 'Nro.', width: 50 },
-      { field: 'documento', header: 'Nro. de síntomas', width: 150 },
-      { field: 'nombrecompleto', header: 'Nro. de situaciones', width: 150 },
-      { field: 'nompais', header: 'Nro. de condiciones', width: 150 },
-      //{ header: 'Acción', width: 100 }
+      { field: 'secuencia', header: 'Nro.', width: 50 },
+      { field: 'num1', header: 'Nro. de síntomas', width: 130 },
+      { field: 'num2', header: 'Nro. de situaciones', width: 130 },
+      { field: 'num3', header: 'Nro. de condiciones', width: 130 },
+      { header: 'Resultado', width: 100 },
+      { field: 'fecharegistro', header: 'Fecha de evaluación', width: 150 },
+      { header: 'Acción', width: 50 }
     ];
   }
 
-
-  cargarPaises() {
-    this.paises = [];
-    this.paises.push({ value: null, label: '--Todos--' });
-    this.paisServicio.listarTodos().then(res => {
-      res.forEach(obj => this.paises.push({ value: obj.idPais, label: obj.descripcion }))
+  listarTriajes() {
+    this.listadoTriajes = [];
+    this.triajeServicio.listarporciudadano(this.idCiudadano).then(res => {
+      if (res != null) {
+        this.listadoTriajes = res;
+        var dto = new DtoTabla();
+        dto.codigoNumerico = this.listadoTriajes[0].codigoNumerico;
+        dto.secuencia = this.listadoTriajes[0].secuencia;
+        this.obtener(dto);
+      }
+      this.desbloquearPagina();
     });
   }
 
-  cargarDepartamentos() {
-    this.departamentos = [];
-    this.departamentos.push({ value: null, label: '--Todos--' });
-    this.departamentoServicio.listarTodos().then(res => {
-      res.forEach(obj => this.departamentos.push({ value: obj.departamento, label: obj.descripcion }))
-    })
+  cargarResultados(){
+    this.resultados.push({idResultado:null, nombre:'Sin evaluación',descripcion:'', recomendacion:'',color:'#f5f5dc'});
+    this.resultados.push({idResultado:null, nombre:'Sano',descripcion:'',recomendacion:'',color:'green'});
+    this.resultados.push({idResultado:null, nombre:'Sospechoso',descripcion:'',recomendacion:'',color:'#8f9a9f'});
+    this.resultados.push({idResultado:null, nombre:'Positivo leve',descripcion:'',recomendacion:'',color:'yellow'});
+    this.resultados.push({idResultado:null, nombre:'Positivo moderado',descripcion:'',recomendacion:'',color:'orange'});
+    this.resultados.push({idResultado:null, nombre:'Positivo crítico',descripcion:'',recomendacion:'',color:'red'});
   }
 
-  cargarProvincias() {
-    this.provincias = [];
-    // if (this.estaVacio(this.filtro.departamento)) {
-    //   this.provincias = [];
-    //   this.distritos = [];
-    //   this.filtro.provincia = null;
-    //   this.filtro.distrito = null;
-    //   return;
-    // }
-    // this.provincias.push({ value: null, label: '--Todos--' });
-    // this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
-    //   res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
-    // })
-  }
 
-  cargarDistritos() {
-    this.distritos = [];
-    // if (this.estaVacio(this.filtro.provincia)) {
-    //   this.distritos = [];
-    //   this.filtro.distrito = null;
-    //   return;
-    // }
-    // this.distritos.push({ value: null, label: '--Todos--' });
-    // this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
-    //   res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));
-    // })
-  }
-
-  cargarPaginacion(event: LazyLoadEvent) {
-    // this.bloquearPagina();
-    // this.filtro.paginacion.listaResultado = [];
-    // this.filtro.paginacion.registroInicio = event.first;
-    // this.filtro.paginacion.cantidadRegistrosDevolver = event.rows;
-    // this.TriajeServicio.listarPaginacion(this.filtro)
-    //   .then(res => {
-    //     this.filtro.paginacion = res;
-    //     this.desbloquearPagina();
-    //   })
-  }
 
   buscar(dt: any) {
     // if (!this.estaVacio(this.filtro.documento)) {
@@ -173,6 +145,58 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     // this.TriajeMantenimientoComponent.iniciarComponente(this.ACCIONES.VER, bean.idTriaje);
   }
 
-  obtener(bean: Triaje) {
+  obtener(dto: DtoTabla) {
+    this.bloquearPagina();
+    this.dtoTriaje.secuencia = dto.secuencia;
+    this.triajeServicio.obtenerPorId(dto.codigoNumerico).then(res => {
+      if (res != null) {
+        this.Triaje = res;
+        this.suministraDatos(this.Triaje);
+      }
+      this.desbloquearPagina();
+    });
   }
+
+  suministraDatos(bean: Triaje) {
+
+    this.dtoTriaje.disgus = this.dato_a_boleano(bean.disgus);
+    this.dtoTriaje.tos = this.dato_a_boleano(bean.tos);
+    this.dtoTriaje.dolor = this.dato_a_boleano(bean.dolor);
+    this.dtoTriaje.difi = this.dato_a_boleano(bean.difi);
+    this.dtoTriaje.nasal = this.dato_a_boleano(bean.nasal);
+    this.dtoTriaje.fiebre = this.dato_a_boleano(bean.fiebre);
+
+    this.dtoTriaje.situacion1 = bean.situacion1;
+    this.dtoTriaje.situacion2 = bean.situacion2;
+    this.dtoTriaje.situacion3 = bean.situacion3;
+
+    this.dtoTriaje.obesidad = this.dato_a_boleano(bean.obesidad);
+    this.dtoTriaje.pulmonar = this.dato_a_boleano(bean.pulmonar);
+    this.dtoTriaje.asma = this.dato_a_boleano(bean.asma);
+    this.dtoTriaje.diabetes = this.dato_a_boleano(bean.diabetes);
+    this.dtoTriaje.hipertension = this.dato_a_boleano(bean.hipertension);
+    this.dtoTriaje.cardio = this.dato_a_boleano(bean.cardio);
+    this.dtoTriaje.renal = this.dato_a_boleano(bean.renal);
+    this.dtoTriaje.cancer = this.dato_a_boleano(bean.cancer);
+
+   this.dtoTriaje.fechainicio = bean.fechainicio;
+  }
+
+  dato_a_boleano(dato: string): Boolean {
+    if (dato == "SI") {
+      return true;
+    } else { return false; }
+  }
+
+  obtenerEstilos(color: string) {
+      return { 'background-color': color, 
+               'border-radius': '50%', 
+               'width': '20px', 
+               'height': '20px', 
+               'margin': 'auto', 
+               'border': '1px solid black',
+               'display': 'inline',
+               'margin-right': '20%'};
+  }
+  //  </label>
 }

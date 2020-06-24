@@ -15,6 +15,6 @@ namespace net.royal.spring.covid.dao
         Triaje registrar(UsuarioActual usuarioActual, Triaje bean);
         Triaje actualizar(UsuarioActual usuarioActual, Triaje bean);
         List<Triaje> listado(DtoTabla filtro);
-
+        List<DtoTabla> listado(int pIdCiudadano);
     }
 }

@@ -15,5 +15,6 @@ namespace net.royal.spring.covid.servicio
         Triaje actualizar(UsuarioActual usuarioActual, Triaje bean);
         TriajePk cambiarestado(TriajePk pk);
         List<Triaje> listado(DtoTabla filtro);
+        List<DtoTabla> listado(int pIdCiudadano);
     }
 }

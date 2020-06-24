@@ -67,5 +67,16 @@ export class TriajeService {
       .catch(error => new Array());
   }
 
+  
+  public listarporciudadano(idciudadano: number): Promise<DtoTabla[]> {    
+    const params = new HttpParams().set('pIdCiudadano', JSON.stringify(idciudadano * 1));
+    return this.http.get(this.rutaServicio + 'listado', { params })
+        .toPromise()
+        .then(response => {
+            return response as DtoTabla[];
+        })
+        .catch(error => new Array());
+}
+
 
 }

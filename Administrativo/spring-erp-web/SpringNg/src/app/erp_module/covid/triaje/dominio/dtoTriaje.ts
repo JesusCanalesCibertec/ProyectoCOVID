@@ -1,17 +1,25 @@
 export class dtoTriaje {
-    codigo: number;
-    documento: string;
-    nombrecompleto: string;
-    pais: string;
-    nompais: string;
-    direccion: string;
-    departamento: string;
-    nomdepartamento: string;
-    provincia: string;
-    nomprovincia: string;
-    distrito: string;
-    nomdistrito: string;
-    estado: string;
-    nomestado: string
+    secuencia: number;
+    idCiudadano: number;
+    disgus: Boolean;
+    tos: Boolean;
+    dolor: Boolean;
+    difi: Boolean;
+    nasal: Boolean;
+    fiebre: Boolean;
+    fechainicio: Date;
+    situacion1: string;
+    situacion2: string;
+    situacion3: string;
+    obesidad: Boolean;
+    pulmonar: Boolean;
+    asma: Boolean;
+    diabetes: Boolean;
+    hipertension: Boolean;
+    cardio: Boolean;
+    renal: Boolean;
+    cancer: Boolean;
+    estado: number;
+    fecharegistro: Date;
 }
 

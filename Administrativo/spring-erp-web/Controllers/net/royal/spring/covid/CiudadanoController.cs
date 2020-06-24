@@ -57,10 +57,10 @@ namespace net.royal.spring.covid
             return ciudadanoServicio.cambiarestado(pk);
         }
 
-        [HttpPost("[action]")]
-        public List<Ciudadano> listado([FromBody]DtoTabla filtro)
+        [HttpGet("[action]")]
+        public List<Ciudadano> listado()
         {
-            return ciudadanoServicio.listado(filtro);
+            return ciudadanoServicio.listado();
 
         }
     }

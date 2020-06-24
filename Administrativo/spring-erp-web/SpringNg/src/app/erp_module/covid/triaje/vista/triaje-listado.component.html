@@ -12,13 +12,26 @@
 
 <div class="ui-fluid" #frm>
     <div class="ui-g ui-md ui-lg">
-        <div class="ui-g-12 ui-md-12 ui-lg-4">
+        <div class="ui-g-12 ui-md-12 ui-lg-2">
+            <div class="card">
+                <div class="ui-g ui-md ui-lg card-w-title">
+                    <label>
+                        <h3>Estados según color:</h3>
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-12" style="height: 40px;" *ngFor="let item of resultados">
+                    <label>
+                        <h3 style="display: inline;">{{item.nombre}}</h3>
+                        <div class="ui-g-12 ui-md-12 ui-lg-6" [ngStyle]="obtenerEstilos(item.color)">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-6">
             <p-panel header="{{nombre}} : Triajes">
-                <!-- <p-table #dt [columns]="cols" [scrollable]="true" selectionMode="single" [responsive]="true"
-                [paginator]="true" [value]="filtro.paginacion.listaResultado" [lazy]="true"
-                (onLazyLoad)="cargarPaginacion($event)" [rows]="15"
-                [totalRecords]="filtro.paginacion.registroEncontrados"> -->
-                <p-table #dt [columns]="cols" [scrollable]="true" selectionMode="single" [responsive]="true">
+                <p-table #dt [value]="listadoTriajes" [columns]="cols" [scrollable]="true" [responsive]="true"
+                    scrollHeight="315px">
                     <ng-template pTemplate="colgroup" let-columns>
                         <colgroup>
                             <col *ngFor="let col of columns" [style.width.px]="col.width">
@@ -33,9 +46,24 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-row let-columns="columns">
                         <tr [pSelectableRow]="row">
-                            <td class="textoCentrado">{{row.codigo}}</td>
-                            <td class="textoCentrado">{{row.documento}}</td>
-                            <td class="textoCentrado">{{row.nomestado}}</td>
+                            <td class="textoCentrado">{{row.secuencia}}</td>
+                            <td class="textoCentrado">{{row.num1}}</td>
+                            <td class="textoCentrado">{{row.num2}}</td>
+                            <td class="textoCentrado">{{row.num3}}</td>
+                            <td class="textoCentrado">
+                                <div class="ui-g">
+                                    <!-- <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(tx.desviacion)">
+                                    </div> -->
+                                </div>
+                            </td>
+                            <td class="textoCentrado">{{row.fecharegistro}}</td>
+                            <td class="textoCentrado">
+                                <div class="ui-g">
+                                    <div class="ui-g-4 ui-md-4 ui-lg-12" title="Ver triaje">
+                                        <i class="fa fa-eye fa-lg seleccionable" (click)="obtener(row)"></i>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage" let-columns>
@@ -45,162 +73,189 @@
                             </td>
                         </tr>
                     </ng-template>
-                    <!-- <ng-template pTemplate="summary">
-                Registros encontrados : {{filtro.paginacion.registroEncontrados}}
-            </ng-template> -->
+                    <ng-template pTemplate="summary">
+                        Registros encontrados : {{listadoTriajes.length}}
+                    </ng-template>
                 </p-table>
             </p-panel>
         </div>
-        <div class="ui-g-12 ui-md-12 ui-lg-8">
-            <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <p-fieldset legend="SÍNTOMATOLOGÍA">
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-3 ui-lg-3">
-                            <label>
-                                <h3>Síntomas seleccionados:</h3>
-                            </label>
-                        </div>
-                        <div class="ui-g-12 ui-md-3 ui-lg-4">
+        <p-panel header="Triaje número: {{dtoTriaje.secuencia}}">
+            <div class="ui-g ui-md ui-lg">
 
+                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                    <p-fieldset legend="SÍNTOMATOLOGÍA" [style]="{'height':'470px'}">
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                                <label>
+                                    <h3>Síntomas seleccionados:</h3>
+                                </label>
+                            </div>
                         </div>
-                        <div class="ui-g-4 ui-md-3 ui-lg-2">
-                            <label>Fecha de inicio</label>
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                                <label>Fecha de inicio</label>
+                            </div>
+                            <div class="ui-g-8 ui-md-4 ui-lg-4">
+                                <p-calendar [(ngModel)]="dtoTriaje.fechainicio" [monthNavigator]="true"
+                                    [disabled]="true" [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
+                                    appendTo="body" [showIcon]="true" dateFormat="dd/mm/yy">
+                                </p-calendar>
+                            </div>
                         </div>
-                        <div class="ui-g-8 ui-md-4 ui-lg-3">
-                            <p-calendar [monthNavigator]="true" [yearNavigator]="true " [locale]="es"
-                                yearRange="1940:2200" appendTo="body" [disabledDays]="[0,6]" [showIcon]="true"
-                                dateFormat="dd/mm/yy">
-                            </p-calendar>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.disgus" binary="true" [disabled]="true"
+                                    label="Disminución en los sentidos de olfato y gusto"></p-checkbox>
+                            </div>
+
+
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.tos" binary="true" [disabled]="true" label="Tos">
+                                </p-checkbox>
+                            </div>
+
+
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.dolor" binary="true" [disabled]="true"
+                                    label="Dolor de garganta">
+                                </p-checkbox>
+                            </div>
+
+
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.difi" binary="true" [disabled]="true"
+                                    label="Dificultad para respirar">
+                                </p-checkbox>
+                            </div>
+
+
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.nasal" binary="true" [disabled]="true"
+                                    label="Congestión Nasal">
+                                </p-checkbox>
+                            </div>
+
+
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.fiebre" binary="true" [disabled]="true"
+                                    label="Fiebre">
+                                </p-checkbox>
+                            </div>
                         </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Disminución en los sentidos de olfato y gusto"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
+                    </p-fieldset>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                    <p-fieldset legend="SITUACIONES DE RIESGO" [style]="{'height':'470px'}">
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-3 ui-lg-12">
+                                <label>
+                                    <h4>¿En los últimos 14 días, has tenido contacto con un caso confirmado de COVID-19?
+                                    </h4>
+                                </label>
+                            </div>
+                            <div class="ui-g-6 ui-md-4 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion1" name="situacion1" [disabled]="true"
+                                    label="Si" value="SI">
+                                </p-radioButton>
+                            </div>
+
+                            <div class="ui-g-6 ui-md-3 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion1" name="situacion1" [disabled]="true"
+                                    label="No" value="NO">
+                                </p-radioButton>
+                            </div>
                         </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Tos"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-3 ui-lg-12">
+                                <label>
+                                    <h4>¿En los últimos 14 días, te has desplazado a un distrito diferente al de
+                                        docimicilio
+                                        actual?</h4>
+                                </label>
+                            </div>
+                            <div class="ui-g-6 ui-md-4 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion2" name="situacion2" [disabled]="true"
+                                    label="Si" value="SI">
+                                </p-radioButton>
+                            </div>
+
+                            <div class="ui-g-6 ui-md-3 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion2" name="situacion2" [disabled]="true"
+                                    label="No" value="NO">
+                                </p-radioButton>
+                            </div>
                         </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Dolor de garganta"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-3 ui-lg-12">
+                                <label>
+                                    <h4>¿Trabajas en un establecimiento de salud o has estado en uno?</h4>
+                                </label>
+                            </div>
+                            <div class="ui-g-6 ui-md-4 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion3" name="situacion3" [disabled]="true"
+                                    label="Si" value="SI">
+                                </p-radioButton>
+                            </div>
+
+                            <div class="ui-g-6 ui-md-3 ui-lg-12">
+                                <p-radioButton [(ngModel)]="dtoTriaje.situacion3" name="situacion3" [disabled]="true"
+                                    label="No" value="NO">
+                                </p-radioButton>
+                            </div>
                         </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Dificultad para respirar"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
+                    </p-fieldset>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-4">
+                    <p-fieldset legend="CONDICIONES MÉDICAS" [style]="{'height':'470px'}">
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-3 ui-lg-12">
+                                <label>
+                                    <h3>Enfermedades o condiciones médicas seleccionadas:</h3>
+                                </label>
+                            </div>
                         </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Congestión Nasal"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
+                        <div class="ui-g ui-md ui-lg">
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.obesidad" binary="true" [disabled]="true"
+                                    label="Obesidad">
+                                </p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.pulmonar" binary="true" [disabled]="true"
+                                    label="Enfermedad pulmonar crónica">
+                                </p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.asma" binary="true" [disabled]="true" label="Asma">
+                                </p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.diabetes" binary="true" [disabled]="true"
+                                    label="Diabetes">
+                                </p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.hipertension" binary="true" [disabled]="true"
+                                    label="Hipertensión Arterial"></p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.cardio" binary="true" [disabled]="true"
+                                    label="Enfermedad cardiovascular"></p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
+                                <p-checkbox [(ngModel)]="dtoTriaje.renal" binary="true" [disabled]="true"
+                                    label="Insuficiencia renal crónica"></p-checkbox>
+                            </div>
+                            <div class="ui-g-12 ui-md-4 ui-lg-12">
+                                <p-checkbox [(ngModel)]="dtoTriaje.cancer" binary="true" [disabled]="true"
+                                    label="Cáncer">
+                                </p-checkbox>
+                            </div>
                         </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Fiebre"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                    </div>
-                </p-fieldset>
+                    </p-fieldset>
+                </div>
             </div>
-            <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <p-fieldset legend="SITUACIONES DE RIESGO">
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-3 ui-lg-12">
-                            <label>
-                                <h3>¿En los últimos 14 días, has tenido contacto con un caso confirmado de COVID-19?
-                                </h3>
-                            </label>
-                        </div>
-                        <div class="ui-g-6 ui-md-4 ui-lg-3">
-                            <p-radioButton name="situacion1" label="Si" value="Si"></p-radioButton>
-                        </div>
-
-                        <div class="ui-g-6 ui-md-3 ui-lg-3">
-                            <p-radioButton name="situacion1" label="No" value="No"></p-radioButton>
-                        </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-3 ui-lg-12">
-                            <label>
-                                <h3>¿En los últimos 14 días, te has desplazado a un distrito diferente al de docimicilio
-                                    actual?</h3>
-                            </label>
-                        </div>
-                        <div class="ui-g-6 ui-md-4 ui-lg-3">
-                            <p-radioButton name="situacion2" label="Si" value="Si"></p-radioButton>
-                        </div>
-
-                        <div class="ui-g-6 ui-md-3 ui-lg-3">
-                            <p-radioButton name="situacion2" label="No" value="No"></p-radioButton>
-                        </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-3 ui-lg-12">
-                            <label>
-                                <h3>¿Trabajas en un establecimiento de salud o has estado en uno?</h3>
-                            </label>
-                        </div>
-                        <div class="ui-g-6 ui-md-4 ui-lg-3">
-                            <p-radioButton name="situacion3" label="Si" value="Si"></p-radioButton>
-                        </div>
-
-                        <div class="ui-g-6 ui-md-3 ui-lg-3">
-                            <p-radioButton name="situacion3" label="No" value="No"></p-radioButton>
-                        </div>
-                    </div>
-                </p-fieldset>
-            </div>
-            <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <p-fieldset legend="CONDICIONES MÉDICAS">
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-3 ui-lg-12">
-                            <label>
-                                <h3>Enfermedades o condiciones médicas seleccionadas:</h3>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Obesidad"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Enfermedad pulmonar crónica"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Asma"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Diabetes"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Hipertensión Arterial"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Enfermedad cardiovascular"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                    </div>
-                    <div class="ui-g ui-md ui-lg">
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Insuficiencia renal crónica"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                        <div class="ui-g-12 ui-md-4 ui-lg-4">
-                            <p-checkbox label="Cáncer"></p-checkbox>
-                            <!-- <p-checkbox [(ngModel)]="estadoBol"></p-checkbox> -->
-                        </div>
-                    </div>
-                </p-fieldset>
-            </div>
-        </div>
+        </p-panel>
     </div>
 
 

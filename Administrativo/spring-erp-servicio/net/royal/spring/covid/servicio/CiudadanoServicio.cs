@@ -15,5 +15,6 @@ namespace net.royal.spring.covid.servicio
         Ciudadano actualizar(UsuarioActual usuarioActual, Ciudadano bean);
         CiudadanoPk cambiarestado(CiudadanoPk pk);
         List<Ciudadano> listado(DtoTabla filtro);
+        List<Ciudadano> listado();
     }
 }

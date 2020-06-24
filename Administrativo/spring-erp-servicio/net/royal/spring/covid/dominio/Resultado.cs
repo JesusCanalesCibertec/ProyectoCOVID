@@ -20,7 +20,7 @@ namespace net.royal.spring.covid.dominio
         [Column("RECOMENDACION")]
         public String Recomendacion { get; set; }
 
-    }
-
-    
+        [Column("COLOR")]
+        public String Color { get; set; }
+    }   
 }

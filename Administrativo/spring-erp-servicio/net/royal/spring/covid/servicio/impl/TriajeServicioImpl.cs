@@ -157,5 +157,10 @@ namespace net.royal.spring.covid.servicio.impl
         {
             return triajeDao.listado(filtro);
         }
+
+        public List<DtoTabla> listado(int pIdCiudadano)
+        {
+            return triajeDao.listado(pIdCiudadano);
+        }
     }
 }

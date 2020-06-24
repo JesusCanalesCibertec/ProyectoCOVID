@@ -18,7 +18,7 @@ namespace net.royal.spring.covid.dao.impl
 
         private IServiceProvider servicioProveedor;
 
-        public CiudadanoDaoImpl(GenericoDbContext context, IServiceProvider _servicioProveedor):base(context, "ciudadano")
+        public CiudadanoDaoImpl(GenericoDbContext context, IServiceProvider _servicioProveedor):base(context, "covidciudadano")
         {
             servicioProveedor = _servicioProveedor;
         }
@@ -45,9 +45,9 @@ namespace net.royal.spring.covid.dao.impl
             parametros.Add(new ParametroPersistenciaGenerico("p_distrito", ConstanteUtil.TipoDato.String, filtro.distrito));
             parametros.Add(new ParametroPersistenciaGenerico("p_estado", ConstanteUtil.TipoDato.Integer, filtro.estado));
 
-            contador = this.contar("ciudadano.filtroContar", parametros);
+            contador = this.contar("covidciudadano.filtroContar", parametros);
 
-            _reader = this.listarConPaginacion(paginacion,parametros, "ciudadano.filtroPaginacion");
+            _reader = this.listarConPaginacion(paginacion,parametros, "covidciudadano.filtroPaginacion");
 
             while (_reader.Read())
             {
