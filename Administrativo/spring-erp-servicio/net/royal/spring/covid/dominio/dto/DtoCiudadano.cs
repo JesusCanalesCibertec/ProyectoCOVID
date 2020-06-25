@@ -20,5 +20,9 @@ namespace net.royal.spring.covid.dominio.filtro
         public String nomdistrito { get; set; }
         public Nullable<Int32> estado { get; set; }
         public String nomestado { get; set; }
+        public Nullable<Int32> edad { get; set; }
+        public String nombre { get; set; }
+        public String apellido { get; set; }
+        public Nullable<Int32> cantidad { get; set; }
     }
 }

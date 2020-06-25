@@ -95,6 +95,18 @@ namespace net.royal.spring.covid.dao.impl
                 if (!_reader.IsDBNull(13))
                     bean.nomestado = _reader.GetString(13);
 
+                if (!_reader.IsDBNull(14))
+                    bean.edad = _reader.GetInt32(14);
+
+                if (!_reader.IsDBNull(15))
+                    bean.nombre = _reader.GetString(15);
+
+                if (!_reader.IsDBNull(16))
+                    bean.apellido = _reader.GetString(16);
+
+                if (!_reader.IsDBNull(17))
+                    bean.cantidad = _reader.GetInt32(17);
+
                 lstResultado.Add(bean);
             }
 
@@ -148,6 +160,20 @@ namespace net.royal.spring.covid.dao.impl
             //if (lst.Count > 0)
             //    return lst;
             return null;
+        }
+
+        public Ciudadano ObtenerPersonaxDNI(string nroDocumento)
+        {
+      
+                IQueryable<Ciudadano> query = this.getCriteria();
+                query = query.Where(res => res.NroDocumento == nroDocumento);
+
+                List<Ciudadano> lst = query.ToList();
+
+                if (lst.Count > 0)
+                    return lst.FirstOrDefault();
+                return null;
+            
         }
     }
     

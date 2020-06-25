@@ -50,6 +50,10 @@ body .ui-panel .ui-panel-titlebar {
     width: calc(100% - 3em) !important;
 }
 
+.ui-state-disabled, .ui-widget:disabled {
+    opacity: 0.8 !important;
+    cursor: default !important;
+}
 /* .ui-datatable .fa-lg:hover{
    
    font-size: 22px !important;

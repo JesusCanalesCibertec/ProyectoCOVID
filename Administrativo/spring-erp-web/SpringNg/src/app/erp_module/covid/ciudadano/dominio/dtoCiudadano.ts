@@ -11,7 +11,11 @@ export class dtoCiudadano {
     nomprovincia: string;
     distrito: string;
     nomdistrito: string;
-    estado: string;
-    nomestado: string
+    estado: number;
+    nomestado: string;
+    edad: number;
+    nombre:string;
+    apellido:string;
+    cantidad:number;
 }
 

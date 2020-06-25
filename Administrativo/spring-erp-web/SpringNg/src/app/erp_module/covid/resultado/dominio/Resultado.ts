@@ -1,5 +1,5 @@
 export class ResultadoPk {
-    idResultado: string;
+    idResultado: number;
 }
 export class Resultado extends ResultadoPk {
     nombre: string;

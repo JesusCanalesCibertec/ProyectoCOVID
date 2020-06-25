@@ -13,6 +13,7 @@ import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/
 import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
 import { dtoCiudadano } from '../dominio/dtoCiudadano';
 import { Router } from '@angular/router';
+import { Resultado } from '../../resultado/dominio/resultado';
 
 
 
@@ -57,17 +58,36 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   distritos: SelectItem[] = [];
   Ciudadano: Ciudadano = new Ciudadano();
   Ciudadanopk: CiudadanoPk = new CiudadanoPk();
+  resultados: Resultado[] = [];
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
   }
 
+  cars: SelectItem[];
+  selectedCar2: string = 'BMW';
+
   ngOnInit() {
     super.ngOnInit();
     this.bloquearPagina();
-    this.cargarColumnas();
     this.cargarPaises();
     this.cargarDepartamentos();
+    this.cargarResultados();
+    this.cargarEstados();
+    this.cargarColumnas();
+
+    this.cars = [
+      { label: 'Audi', value: 'Audi' },
+      { label: 'BMW', value: 'BMW' },
+      { label: 'Fiat', value: 'Fiat' },
+      { label: 'Ford', value: 'Ford' },
+      { label: 'Honda', value: 'Honda' },
+      { label: 'Jaguar', value: 'Jaguar' },
+      { label: 'Mercedes', value: 'Mercedes' },
+      { label: 'Renault', value: 'Renault' },
+      { label: 'VW', value: 'VW' },
+      { label: 'Volvo', value: 'Volvo' }
+    ];
   }
 
   cargarColumnas() {
@@ -80,10 +100,27 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
       { field: 'nomdepartamento', header: 'Departamento', width: 150 },
       { field: 'nomprovincia', header: 'Provincia', width: 150 },
       { field: 'nomdistrito', header: 'Distrito', width: 200 },
-      { field: 'nomestado', header: 'Estado', width: 100 },
-      { header: 'Triajes', width: 100 },
+      { field: 'nomestado', header: 'Estado', width: 150 },
+      { header: 'Triajes', width: 70 },
       //{ header: 'Acción', width: 100 }
     ];
+  }
+
+  cargarResultados() {
+    this.resultados.push({ idResultado: 1, nombre: 'Sano', descripcion: '', recomendacion: '', color: 'green' });
+    this.resultados.push({ idResultado: 2, nombre: 'Sospechoso', descripcion: '', recomendacion: '', color: '#8f9a9f' });
+    this.resultados.push({ idResultado: 3, nombre: 'Positivo leve', descripcion: '', recomendacion: '', color: 'yellow' });
+    this.resultados.push({ idResultado: 4, nombre: 'Positivo moderado', descripcion: '', recomendacion: '', color: 'orange' });
+    this.resultados.push({ idResultado: 5, nombre: 'Positivo crítico', descripcion: '', recomendacion: '', color: 'red' });
+    this.resultados.push({ idResultado: 6, nombre: 'Sin evaluación', descripcion: '', recomendacion: '', color: '#f5f5dc' });
+  }
+
+  cargarEstados() {
+    this.estados = [];
+    this.estados.push({ value: null, label: '--Todos--' });
+    this.resultados.forEach(res => {
+      this.estados.push({ value: res.idResultado, label: res.nombre });
+    });
   }
 
 
@@ -165,7 +202,11 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   }
 
   obtener(dto: dtoCiudadano) {
-    this.router.navigate(['spring/triaje-listado', dto.codigo], { skipLocationChange: true });
+    if(dto.estado==6){
+      this.mostrarMensajeInfo('El ciudadano no cuenta con triajes realizados');
+      return;
+    }
+    this.router.navigate(['spring/triaje-listado', JSON.stringify(dto)], { skipLocationChange: true });
   }
 
 
@@ -204,7 +245,29 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
         }
       });
     }
-
   }
 
+  obtenerEstilos(estado: number, tipo: number) {
+    if(!this.estaVacioNumber(estado)){
+      if(tipo == 1){
+        return {
+          'background-color': this.resultados[estado - 1].color,
+          'border-radius': '50%',
+          'width': '20px',
+          'height': '20px',
+          'border': '1px solid black',
+          'margin':'auto'
+        }
+      }else{
+        return {
+          'background-color': this.resultados[estado - 1].color,
+          'border-radius': '50%',
+          'width': '16px',
+          'height': '16px',
+          'border': '1px solid black'
+        }
+      }
+     
+    } 
+  }
 }

@@ -175,13 +175,19 @@ namespace net.royal.spring.covid.dao.impl
                     bean.num3 = _reader.GetInt32(3);
                 if (!_reader.IsDBNull(4))
                     bean.CodigoNumerico = _reader.GetInt32(4);
+                if (!_reader.IsDBNull(5))
+                    bean.fechainicio1 = _reader.GetDateTime(5);
+                if (!_reader.IsDBNull(6))
+                    bean.valor1 = _reader.GetString(6);
 
                 lst.Add(bean);
             }
             this.dispose();
 
+            if(lst.Count > 0)
+                return lst;
 
-            return lst;
+            return null;
         }
     }
     

@@ -57,7 +57,7 @@ export const routes: Routes = [
             //minedu inicio
             { path: 'ciudadano-listado', component: CiudadanoListadoComponent },
             { path: 'triaje-listado', component: TriajeListadoComponent },
-            { path: 'triaje-listado/:codigo', component: TriajeListadoComponent },
+            { path: 'triaje-listado/:dto', component: TriajeListadoComponent },
 
             //minedu final
             
