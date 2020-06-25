@@ -266,12 +266,24 @@ public class TestActivity extends AppCompatActivity {
     private void validar(){
         String textfec = txtFecIni.getText().toString();
 
-        if(textfec.equals("")){
+
+        if(textfec.equals("")&&count>0){
             Toast.makeText(getApplicationContext(), "Ingrese los datos faltantes", Toast.LENGTH_SHORT).show();
-        }else if(thatDay.after(today)||thatDay.equals(today)){
-            Toast.makeText(getApplicationContext(), "Ingrese una fecha anterior a hoy", Toast.LENGTH_SHORT).show();
+        }else if(!textfec.equals("")){
+            long resta = today.getTime() - thatDay.getTime();
+            long treinta = 3000000000l;
+            int comp = Long.compare(resta,treinta);
+            if(thatDay.after(today)||thatDay.equals(today)){
+                Toast.makeText(getApplicationContext(), "Ingrese una fecha anterior a hoy", Toast.LENGTH_SHORT).show();
+            }
+            else if(comp>0){
+                Toast.makeText(getApplicationContext(), "Ingrese una fecha no mayor a 30 días", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
+                resultadoExitoso();
+            }
         }else{
-            Toast.makeText(getApplicationContext(), "exitoso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
             resultadoExitoso();
         }
     }

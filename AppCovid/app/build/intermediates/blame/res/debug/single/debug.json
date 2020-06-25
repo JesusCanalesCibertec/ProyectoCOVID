@@ -20,12 +20,12 @@
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\layout\\fragment_triaje.xml"
     },
     {
-        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
-    },
-    {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_mapa.png.flat",
         "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable-xxhdpi\\ic_mapa.png"
+    },
+    {
+        "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
         "merged": "C:\\Users\\USUARIO\\Desktop\\Proyecto\\AppCovid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_resultado.xml.flat",

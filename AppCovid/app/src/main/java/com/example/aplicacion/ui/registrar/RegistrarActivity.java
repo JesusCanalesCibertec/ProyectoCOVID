@@ -129,6 +129,7 @@ public class RegistrarActivity extends AppCompatActivity{
                         spnProv.setAdapter(adapter);
 
                     }catch (Exception e){
+                        error();
                         e.printStackTrace();
                     }
             }
@@ -166,6 +167,7 @@ public class RegistrarActivity extends AppCompatActivity{
                         ArrayAdapter<Distrito> adapter=new ArrayAdapter<Distrito>(RegistrarActivity.this,android.R.layout.simple_spinner_item,dataDis);
                         spnDis.setAdapter(adapter);
                     }catch (Exception e){
+                        error();
                         e.printStackTrace();
                     }
             }
@@ -193,6 +195,8 @@ public class RegistrarActivity extends AppCompatActivity{
 
             }
         });
+
+
 
         //Mostrar Fecha
         txtFecha.setOnClickListener(new View.OnClickListener() {
@@ -248,6 +252,15 @@ public class RegistrarActivity extends AppCompatActivity{
                 calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    public void error(){
+        if(spnDep.getSelectedItem().equals("-")){
+            Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+        }
+    }
+
     public void cargarPais(){
         try{
             ServicioTaskListPais servicio=new ServicioTaskListPais(this,"http://arbchum1-001-site1.etempurl.com/api/spring/covid/Pais/listarTodos");
@@ -258,6 +271,7 @@ public class RegistrarActivity extends AppCompatActivity{
             spnNac.setAdapter(adapter);
         }
         catch (Exception e){
+            error();
             e.printStackTrace();
         }
 
@@ -329,7 +343,7 @@ public class RegistrarActivity extends AppCompatActivity{
                 if (doc.length() < 8 || doc.length() > 8) {
                     Toast.makeText(getApplicationContext(), "DNI debe ser de 8 digitos", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(), "exito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
                     resultadoExitoso();
                 }
             }
@@ -337,7 +351,7 @@ public class RegistrarActivity extends AppCompatActivity{
                 if (doc.length() < 12) {
                     Toast.makeText(getApplicationContext(), "Carnet de extranjeria debe ser de 12 digitos", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(), "exitoso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
                     resultadoExitoso();
                 }
             }
