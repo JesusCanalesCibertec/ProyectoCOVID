@@ -32,6 +32,11 @@ namespace net.royal.spring.covid.servicio.impl
 
         public Ciudadano registrar(UsuarioActual usuarioActual, Ciudadano bean)
         {
+            Ciudadano existePersona = ciudadanoDao.ObtenerPersonaxDNI(bean.NroDocumento);
+            if (existePersona != null)
+            {
+                return null;
+            }
             bean.Nombre = UString.Mayusculas(bean.Nombre);
             bean.Apellido = UString.Mayusculas(bean.Apellido);
             bean.Direccion = UString.Mayusculas(bean.Direccion);

@@ -15,6 +15,8 @@ import { CiudadanoService } from '../../ciudadano/servicio/Ciudadano.service';
 import { DtoTabla } from 'src/app/erp_module/shared/dominio/dto/DtoTabla';
 import { dtoTriaje } from '../dominio/dtoTriaje';
 import { Resultado } from '../../resultado/dominio/resultado';
+import { Ciudadano, CiudadanoPk } from '../../ciudadano/dominio/ciudadano';
+import { dtoCiudadano } from '../../ciudadano/dominio/dtoCiudadano';
 
 
 
@@ -35,10 +37,7 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     //servicios
     private cdref: ChangeDetectorRef,
     private triajeServicio: TriajeService,
-    private ciudadanoServicio: CiudadanoService,
-    private paisServicio: PaisServicio,
-    private departamentoServicio: DepartamentoServicio,
-
+    private router: Router,
     private route: ActivatedRoute,
   ) {
     super(noAuthorizationInterceptor, messageService);
@@ -48,8 +47,7 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
 
   areabloquear: Boolean = false;
   cols: any[] = [];
-  idCiudadano: number;
-  nombre;
+  ciudadano: dtoCiudadano = new dtoCiudadano();
 
   //Declaraciones
   //filtro: FiltroTriaje = new FiltroTriaje();
@@ -60,6 +58,7 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
   Triajepk: TriajePk = new TriajePk();
   dtoTriaje: dtoTriaje = new dtoTriaje();
   resultados: Resultado[] = [];
+  ciudadanos: SelectItem[] = [];
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
@@ -68,15 +67,10 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
   ngOnInit() {
     super.ngOnInit();
     this.bloquearPagina();
-    this.idCiudadano = this.route.snapshot.params['codigo'] as number;
-    this.ciudadanoServicio.obtenerPorId(this.idCiudadano).then(res => {
-      this.nombre = res.nombre + ' ' + res.apellido;
-      this.cargarColumnas();
-      this.cargarResultados();
-      this.listarTriajes();
-
-    })
-
+    this.ciudadano = JSON.parse(this.route.snapshot.params['dto']);
+    this.cargarColumnas();
+    this.cargarResultados();
+    this.listarTriajes();
   }
 
   cargarColumnas() {
@@ -86,14 +80,14 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
       { field: 'num2', header: 'Nro. de situaciones', width: 130 },
       { field: 'num3', header: 'Nro. de condiciones', width: 130 },
       { header: 'Resultado', width: 100 },
-      { field: 'fecharegistro', header: 'Fecha de evaluación', width: 150 },
+      { field: 'fechainicio1', header: 'Fecha de evaluación', width: 150 },
       { header: 'Acción', width: 50 }
     ];
   }
 
   listarTriajes() {
     this.listadoTriajes = [];
-    this.triajeServicio.listarporciudadano(this.idCiudadano).then(res => {
+    this.triajeServicio.listarporciudadano(this.ciudadano.codigo).then(res => {
       if (res != null) {
         this.listadoTriajes = res;
         var dto = new DtoTabla();
@@ -105,13 +99,19 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     });
   }
 
-  cargarResultados(){
-    this.resultados.push({idResultado:null, nombre:'Sin evaluación',descripcion:'', recomendacion:'',color:'#f5f5dc'});
-    this.resultados.push({idResultado:null, nombre:'Sano',descripcion:'',recomendacion:'',color:'green'});
-    this.resultados.push({idResultado:null, nombre:'Sospechoso',descripcion:'',recomendacion:'',color:'#8f9a9f'});
-    this.resultados.push({idResultado:null, nombre:'Positivo leve',descripcion:'',recomendacion:'',color:'yellow'});
-    this.resultados.push({idResultado:null, nombre:'Positivo moderado',descripcion:'',recomendacion:'',color:'orange'});
-    this.resultados.push({idResultado:null, nombre:'Positivo crítico',descripcion:'',recomendacion:'',color:'red'});
+  cargarResultados() {
+    this.resultados.push({ idResultado: null, nombre: 'Sano', descripcion: '', recomendacion: '', color: 'green' });
+    this.resultados.push({ idResultado: null, nombre: 'Sospechoso', descripcion: '', recomendacion: '', color: '#8f9a9f' });
+    this.resultados.push({ idResultado: null, nombre: 'Positivo leve', descripcion: '', recomendacion: '', color: 'yellow' });
+    this.resultados.push({ idResultado: null, nombre: 'Positivo moderado', descripcion: '', recomendacion: '', color: 'orange' });
+    this.resultados.push({ idResultado: null, nombre: 'Positivo crítico', descripcion: '', recomendacion: '', color: 'red' });
+    this.resultados.push({ idResultado: 6, nombre: 'Sin evaluación', descripcion: '', recomendacion: '', color: '#f5f5dc' });
+  }
+
+
+
+  volver() {
+    this.router.navigate(['spring/ciudadano-listado']);
   }
 
 
@@ -179,7 +179,7 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     this.dtoTriaje.renal = this.dato_a_boleano(bean.renal);
     this.dtoTriaje.cancer = this.dato_a_boleano(bean.cancer);
 
-   this.dtoTriaje.fechainicio = bean.fechainicio;
+    this.dtoTriaje.fechainicio = bean.fechainicio;
   }
 
   dato_a_boleano(dato: string): Boolean {
@@ -189,14 +189,14 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
   }
 
   obtenerEstilos(color: string) {
-      return { 'background-color': color, 
-               'border-radius': '50%', 
-               'width': '20px', 
-               'height': '20px', 
-               'margin': 'auto', 
-               'border': '1px solid black',
-               'display': 'inline',
-               'margin-right': '20%'};
+    return {
+      'background-color': color,
+      'border-radius': '50%',
+      'width': '20px',
+      'height': '20px',
+      'display': 'inline',
+      'margin-left': '40%',
+      'border': '1px solid black'
+    };
   }
-  //  </label>
 }

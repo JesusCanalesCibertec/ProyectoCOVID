@@ -15,6 +15,6 @@ namespace net.royal.spring.covid.dao
         Ciudadano registrar(UsuarioActual usuarioActual, Ciudadano bean);
         Ciudadano actualizar(UsuarioActual usuarioActual, Ciudadano bean);
         List<Ciudadano> listado(DtoTabla filtro);
-
+        Ciudadano ObtenerPersonaxDNI(string nroDocumento);
     }
 }

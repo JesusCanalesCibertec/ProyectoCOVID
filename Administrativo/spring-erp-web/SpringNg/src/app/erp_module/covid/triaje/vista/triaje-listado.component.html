@@ -12,26 +12,104 @@
 
 <div class="ui-fluid" #frm>
     <div class="ui-g ui-md ui-lg">
-        <div class="ui-g-12 ui-md-12 ui-lg-2">
+        <div class="ui-g-12 ui-md-12 ui-lg-4">
+            <div class="ui-g-12 ui-md-12 ui-lg-4"></div>
+            <div class="ui-g-12 ui-md-12 ui-lg-4">
+                <button pButton label="Volver" type="button" icon="fa fa-mail-reply" (click)="volver()"style="width:100%"></button>
+            </div>
             <div class="card">
-                <div class="ui-g ui-md ui-lg card-w-title">
+                <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: center;text-decoration: underline;">
                     <label>
-                        <h3>Estados según color:</h3>
+                        <h3>Datos del ciudadano</h3>
                     </label>
                 </div>
-                <div class="ui-g-12 ui-md-12 ui-lg-12" style="height: 40px;" *ngFor="let item of resultados">
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Código:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-4">
                     <label>
-                        <h3 style="display: inline;">{{item.nombre}}</h3>
-                        <div class="ui-g-12 ui-md-12 ui-lg-6" [ngStyle]="obtenerEstilos(item.color)">
-                        </div>
+                        {{ciudadano.codigo}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-2">
+                    <label style="font-weight: bold;">
+                        DNI:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label>
+                        {{ciudadano.documento}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Nombre:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.nombre}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Apellido:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.apellido}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Edad:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.edad}} años
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        País:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.nompais}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Dirección actual:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.direccion}}
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                    <label style="font-weight: bold;">
+                        Ubigeo:
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-8">
+                    <label>
+                        {{ciudadano.nomdepartamento}}/{{ciudadano.nomprovincia}}/{{ciudadano.nomdistrito}}
                     </label>
                 </div>
             </div>
         </div>
+
         <div class="ui-g-12 ui-md-12 ui-lg-6">
-            <p-panel header="{{nombre}} : Triajes">
+            <p-panel header="Triajes">
                 <p-table #dt [value]="listadoTriajes" [columns]="cols" [scrollable]="true" [responsive]="true"
-                    scrollHeight="315px">
+                    scrollHeight="215px">
                     <ng-template pTemplate="colgroup" let-columns>
                         <colgroup>
                             <col *ngFor="let col of columns" [style.width.px]="col.width">
@@ -50,15 +128,17 @@
                             <td class="textoCentrado">{{row.num1}}</td>
                             <td class="textoCentrado">{{row.num2}}</td>
                             <td class="textoCentrado">{{row.num3}}</td>
-                            <td class="textoCentrado">
-                                <div class="ui-g">
-                                    <!-- <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(tx.desviacion)">
-                                    </div> -->
+                            <td style="text-align: center;">
+
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(row.valor1)">
                                 </div>
+
                             </td>
-                            <td class="textoCentrado">{{row.fecharegistro}}</td>
                             <td class="textoCentrado">
-                                <div class="ui-g">
+                                {{row.fechainicio1 | date: 'dd/MM/yyyy hh:mm:ss'}}
+                            </td>
+                            <td>
+                                <div class="ui-g" class="textoCentrado">
                                     <div class="ui-g-4 ui-md-4 ui-lg-12" title="Ver triaje">
                                         <i class="fa fa-eye fa-lg seleccionable" (click)="obtener(row)"></i>
                                     </div>
@@ -78,6 +158,26 @@
                     </ng-template>
                 </p-table>
             </p-panel>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-2">
+            <div class="card">
+                <div class="ui-g ui-md ui-lg">
+                    <label>
+                        <h3>Estados según color:</h3>
+                    </label>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-12" style="height: 40px;" *ngFor="let item of resultados">
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <label style="font-weight: bold;">
+                            {{item.nombre}}:
+                        </label>
+                    </div>
+                    <div class="ui-g-12 ui-md-12 ui-lg-4">
+                        <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(item.color)">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <p-panel header="Triaje número: {{dtoTriaje.secuencia}}">
             <div class="ui-g ui-md ui-lg">
@@ -107,35 +207,25 @@
                                 <p-checkbox [(ngModel)]="dtoTriaje.disgus" binary="true" [disabled]="true"
                                     label="Disminución en los sentidos de olfato y gusto"></p-checkbox>
                             </div>
-
-
                             <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
                                 <p-checkbox [(ngModel)]="dtoTriaje.tos" binary="true" [disabled]="true" label="Tos">
                                 </p-checkbox>
                             </div>
-
-
                             <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
                                 <p-checkbox [(ngModel)]="dtoTriaje.dolor" binary="true" [disabled]="true"
                                     label="Dolor de garganta">
                                 </p-checkbox>
                             </div>
-
-
                             <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
                                 <p-checkbox [(ngModel)]="dtoTriaje.difi" binary="true" [disabled]="true"
                                     label="Dificultad para respirar">
                                 </p-checkbox>
                             </div>
-
-
                             <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
                                 <p-checkbox [(ngModel)]="dtoTriaje.nasal" binary="true" [disabled]="true"
                                     label="Congestión Nasal">
                                 </p-checkbox>
                             </div>
-
-
                             <div class="ui-g-12 ui-md-4 ui-lg-12" style="height: 40px;">
                                 <p-checkbox [(ngModel)]="dtoTriaje.fiebre" binary="true" [disabled]="true"
                                     label="Fiebre">

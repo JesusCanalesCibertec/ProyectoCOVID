@@ -69,7 +69,7 @@ namespace net.royal.spring.covid.servicio.impl
             {
                 return 3;
             }
-            else if (num_sintomas < 2 || num_sintomas == null || num_situaciones > 0)
+            else if ((num_sintomas < 2 && num_situaciones > 0) || (num_sintomas == null && num_situaciones == 0))
             {
                 return 2;
             }
