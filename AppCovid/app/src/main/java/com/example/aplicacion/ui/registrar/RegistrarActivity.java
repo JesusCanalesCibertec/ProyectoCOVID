@@ -63,6 +63,8 @@ public class RegistrarActivity extends AppCompatActivity{
     int posDis;
     String fecval;
     String edad;
+    int idCiu;
+    String nom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,12 +255,11 @@ public class RegistrarActivity extends AppCompatActivity{
     }
 
     public void error(){
-        if(spnDep.getSelectedItem().equals("-")){
-            Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-        }
+        Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+
     }
 
     public void cargarPais(){
@@ -311,9 +312,10 @@ public class RegistrarActivity extends AppCompatActivity{
             servicio.execute();
             String s = servicio.get();
             Ciudadano ciudadano = CiudadanoDAO.responseCiudadano(s);
-            int idCiu;
             idCiu=ciudadano.getIdCiudadano();
-
+            if(idCiu==0){
+                idCiu=-1;
+            }
             SessionManagement sessionManagement = new SessionManagement(RegistrarActivity.this);
             sessionManagement.saveSession(idCiu);
 
@@ -323,7 +325,7 @@ public class RegistrarActivity extends AppCompatActivity{
     }
 
     public void validar(){
-        String nom = txtNombre.getText().toString();//
+        nom = txtNombre.getText().toString();//
         String ape = txtApellido.getText().toString();//
         String doc = txtDoc.getText().toString();//
         String tipDoc = spnTipoDoc.getSelectedItem().toString();//
@@ -343,7 +345,6 @@ public class RegistrarActivity extends AppCompatActivity{
                 if (doc.length() < 8 || doc.length() > 8) {
                     Toast.makeText(getApplicationContext(), "DNI debe ser de 8 digitos", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
                     resultadoExitoso();
                 }
             }
@@ -351,7 +352,6 @@ public class RegistrarActivity extends AppCompatActivity{
                 if (doc.length() < 12) {
                     Toast.makeText(getApplicationContext(), "Carnet de extranjeria debe ser de 12 digitos", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
                     resultadoExitoso();
                 }
             }
@@ -362,7 +362,13 @@ public class RegistrarActivity extends AppCompatActivity{
 
     private void resultadoExitoso() {
         registrar();
-        movetoMain();
+        if(idCiu==-1){
+            Toast.makeText(getApplicationContext(), "El numero de documento debe ser único", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Bienvenido "+nom+", su registro fue exitoso", Toast.LENGTH_SHORT).show();
+            movetoMain();
+        }
+
     }
 
     private String getAge(Calendar date){
