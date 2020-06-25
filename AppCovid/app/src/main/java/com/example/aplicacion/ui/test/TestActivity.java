@@ -279,11 +279,11 @@ public class TestActivity extends AppCompatActivity {
             else if(comp>0){
                 Toast.makeText(getApplicationContext(), "Ingrese una fecha no mayor a 30 días", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "El triaje ha sido registrado con éxito", Toast.LENGTH_SHORT).show();
                 resultadoExitoso();
             }
         }else{
-            Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "El triaje ha sido registrado con éxito", Toast.LENGTH_SHORT).show();
             resultadoExitoso();
         }
     }
