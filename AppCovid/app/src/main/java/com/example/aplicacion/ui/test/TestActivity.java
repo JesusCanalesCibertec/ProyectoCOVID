@@ -10,19 +10,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.aplicacion.Entitiy.Triaje;
 import com.example.aplicacion.R;
-import com.example.aplicacion.Session;
+import com.example.aplicacion.SessionManagement;
 import com.example.aplicacion.controlador.TriajeDAO;
 import com.example.aplicacion.taskTriaje.ServicioTaskSaveTriaje;
-import com.example.aplicacion.ui.registrar.RegistrarActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,9 +48,7 @@ public class TestActivity extends AppCompatActivity {
     Button btnNext;
     String fecval;
     int estado;
-    int idCiu;
     int count=0;
-    private Session session;
     Date today;
     Date thatDay;
 
@@ -83,8 +78,6 @@ public class TestActivity extends AppCompatActivity {
         ckHipertención = (CheckBox) findViewById(R.id.ckHipertención);
         ckPulmonar = (CheckBox) findViewById(R.id.ckFiebre);
         btnNext = (Button) findViewById(R.id.btnTestEnviar);
-        session = new Session(TestActivity.this);
-        idCiu = session.getIdCiudadano();
 
 
         ckDismi.setOnClickListener(new View.OnClickListener() {
@@ -177,13 +170,6 @@ public class TestActivity extends AppCompatActivity {
                 calendario.get(Calendar.YEAR),calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void hideKeyboard(){
-        View oView = this.getCurrentFocus();
-        if(oView != null){
-            InputMethodManager oInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            oInputMethodManager.hideSoftInputFromWindow(oView.getWindowToken(),0);
-        }
-    }
 
     private String SioNoCk(CheckBox ck){
         if(ck.isChecked())
@@ -195,6 +181,7 @@ public class TestActivity extends AppCompatActivity {
     private void registrar(){
         try{
             Triaje t = new Triaje();
+            int idCiu = getIdCiu();
 
             //Setear Ciudadano
             t.setIdCiudadano(idCiu);
@@ -256,6 +243,11 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+    private int getIdCiu() {
+        SessionManagement sessionManagement = new SessionManagement(TestActivity.this);
+        return sessionManagement.getSession();
+    }
+
     private void check(CheckBox chk){
         if(chk.isChecked())
             count++;
@@ -274,21 +266,34 @@ public class TestActivity extends AppCompatActivity {
     private void validar(){
         String textfec = txtFecIni.getText().toString();
 
-        if(textfec.equals("")){
+
+        if(textfec.equals("")&&count>0){
             Toast.makeText(getApplicationContext(), "Ingrese los datos faltantes", Toast.LENGTH_SHORT).show();
-        }else if(thatDay.after(today)||thatDay.equals(today)){
-            Toast.makeText(getApplicationContext(), "Ingrese una fecha anterior a hoy", Toast.LENGTH_SHORT).show();
+        }else if(!textfec.equals("")){
+            long resta = today.getTime() - thatDay.getTime();
+            long treinta = 3000000000l;
+            int comp = Long.compare(resta,treinta);
+            if(thatDay.after(today)||thatDay.equals(today)){
+                Toast.makeText(getApplicationContext(), "Ingrese una fecha anterior a hoy", Toast.LENGTH_SHORT).show();
+            }
+            else if(comp>0){
+                Toast.makeText(getApplicationContext(), "Ingrese una fecha no mayor a 30 días", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
+                resultadoExitoso();
+            }
         }else{
-            Toast.makeText(getApplicationContext(), "exitoso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Éxito", Toast.LENGTH_SHORT).show();
             resultadoExitoso();
         }
     }
 
     private void resultadoExitoso() {
-        //registrar();
+        registrar();
         Intent intent = new Intent(TestActivity.this, ResultadoActivity.class);
         intent.putExtra("estado",estado);
         startActivity(intent);
+        finish();
     }
 
 }
