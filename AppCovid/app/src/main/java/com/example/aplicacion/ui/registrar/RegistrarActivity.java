@@ -328,6 +328,7 @@ public class RegistrarActivity extends AppCompatActivity{
         nom = txtNombre.getText().toString();//
         String ape = txtApellido.getText().toString();//
         String doc = txtDoc.getText().toString();//
+        String pais = spnNac.getSelectedItem().toString();
         String tipDoc = spnTipoDoc.getSelectedItem().toString();//
         String fecNac = txtFecha.getText().toString();
         String viv = txtViv.getText().toString();//
@@ -349,7 +350,10 @@ public class RegistrarActivity extends AppCompatActivity{
                 }
             }
             else if (tipDoc.equals("Carne EXT.")) {
-                if (doc.length() < 12) {
+                if(pais.equals("PERÚ                ")){
+                    Toast.makeText(getApplicationContext(), "Seleccione un tipo de documento adecuado", Toast.LENGTH_SHORT).show();
+                }
+                else if (doc.length() < 12) {
                     Toast.makeText(getApplicationContext(), "Carnet de extranjeria debe ser de 12 digitos", Toast.LENGTH_SHORT).show();
                 }else {
                     resultadoExitoso();
