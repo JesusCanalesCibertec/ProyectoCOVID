@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { PrincipalBaseComponent } from 'src/app/base_module/components/PrincipalBaseComponent';
 import { NoAuthorizationInterceptor } from 'src/app/base_module/interceptor/NoAuthorizationInterceptor';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { CiudadanoService } from '../servicio/Ciudadano.service';
-import { DataTable, SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Ciudadano, CiudadanoPk } from '../dominio/Ciudadano';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { FiltroCiudadano } from '../dominio/filtroCiudadano';
 import { PaisServicio } from '../../pais/servicio/PaisServicio';
 import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
@@ -43,8 +41,6 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   ) {
     super(noAuthorizationInterceptor, messageService);
   }
-
-  @ViewChild(DataTable) dt: DataTable;
 
   areabloquear: Boolean = false;
   cols: any[] = [];

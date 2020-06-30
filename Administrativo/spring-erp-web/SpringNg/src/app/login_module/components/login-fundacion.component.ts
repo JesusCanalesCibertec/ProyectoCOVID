@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioServicio } from '../servicio/UsuarioServicio';
 import { LoginUser } from '../dominio/LoginUser';
-import { BaseComponent } from '../../base_module/components/basecomponent';
 import { NoAuthorizationInterceptor } from '../../base_module/interceptor/NoAuthorizationInterceptor';
 import { PrincipalBaseComponent } from '../../base_module/components/PrincipalBaseComponent';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { SelectItem } from 'primeng/primeng';
-import { ViewEncapsulation } from '@angular/compiler/src/core';
+import { MessageService, SelectItem } from 'primeng/api';
 
 @Component({
     selector: "login-base",
@@ -28,7 +25,7 @@ export class LoginFundacionComponent extends PrincipalBaseComponent implements O
     ngOnInit() {
         super.ngOnInit();
         this.usuario.usuario = null;//'ALTORRES';
-        this.router.navigate(['spring']);
+        this.router.navigate(['/spring/dashboard'], { skipLocationChange: true });
     }
 
     loginPress(event?: any) {
@@ -45,9 +42,10 @@ export class LoginFundacionComponent extends PrincipalBaseComponent implements O
                 if (obj != null) {
                     // sessionStorage.setItem('modo', 'F');
                     // sessionStorage.removeItem('filtroBeneficiario');
+ 
                     sessionStorage.setItem('access_token', obj);
-                    this.router.navigate(['spring']);
                 } else {
+                    
                     this.desbloquearPagina();
                 }
             }

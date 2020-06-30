@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { PrincipalBaseComponent } from 'src/app/base_module/components/PrincipalBaseComponent';
 import { NoAuthorizationInterceptor } from 'src/app/base_module/interceptor/NoAuthorizationInterceptor';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService, SelectItem } from 'primeng/api';
 import { TriajeService } from '../servicio/triaje.service';
-import { DataTable, SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Triaje, TriajePk } from '../dominio/Triaje';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { PaisServicio } from '../../pais/servicio/PaisServicio';
 import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
 import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/ProvinciaServicio';
@@ -43,8 +41,6 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     super(noAuthorizationInterceptor, messageService);
   }
 
-  @ViewChild(DataTable) dt: DataTable;
-
   areabloquear: Boolean = false;
   cols: any[] = [];
   ciudadano: dtoCiudadano = new dtoCiudadano();
@@ -76,12 +72,12 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
   cargarColumnas() {
     this.cols = [
       { field: 'secuencia', header: 'Nro.', width: 50 },
-      { field: 'num1', header: 'Nro. de síntomas', width: 130 },
-      { field: 'num2', header: 'Nro. de situaciones', width: 130 },
-      { field: 'num3', header: 'Nro. de condiciones', width: 130 },
-      { header: 'Resultado', width: 100 },
+      { header: 'Acción', width: 60 },
+      { header: 'Resultado', width: 80 },
+      { field: 'num1', header: 'Nro. de síntomas', width: 100 },
+      { field: 'num2', header: 'Nro. de situaciones', width: 100 },
+      { field: 'num3', header: 'Nro. de condiciones', width: 100 },
       { field: 'fechainicio1', header: 'Fecha de evaluación', width: 150 },
-      { header: 'Acción', width: 50 }
     ];
   }
 
@@ -108,13 +104,9 @@ export class TriajeListadoComponent extends PrincipalBaseComponent implements On
     this.resultados.push({ idResultado: 6, nombre: 'Sin evaluación', descripcion: '', recomendacion: '', color: '#f5f5dc' });
   }
 
-
-
   volver() {
     this.router.navigate(['spring/ciudadano-listado']);
   }
-
-
 
   buscar(dt: any) {
     // if (!this.estaVacio(this.filtro.documento)) {

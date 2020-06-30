@@ -69,4 +69,44 @@ export class CiudadanoService {
   }
 
 
+  public ListarPie(): Promise<DtoTabla[]> {
+    return this.http.get(this.rutaServicio + 'listarpie')
+      .toPromise()
+      .then(response => {
+        return response as DtoTabla[];
+      })
+      .catch(error => []);
+  }
+
+  public ListarPiexDepartamento(pDepa: string): Promise<DtoTabla[]> {
+    const params = new HttpParams().set('pDepa', pDepa);
+    return this.http.get(this.rutaServicio + 'listarPiexDepartamento', { params })
+      .toPromise()
+      .then(response => {
+        return response as DtoTabla[];
+      })
+      .catch(error => []);
+  }
+
+  public ListarPiexProvincia(pDepa: string, pProv: string): Promise<DtoTabla[]> {
+    const params = new HttpParams().set('pDepa', pDepa).set('pProv', pProv)
+    return this.http.get(this.rutaServicio + 'listarPiexProvincia', { params })
+      .toPromise()
+      .then(response => {
+        return response as DtoTabla[];
+      })
+      .catch(error => []);
+  }
+
+  public ListarPiexDistrito(pDepa: string, pProv: string, pDist: string): Promise<DtoTabla[]> {
+    const params = new HttpParams().set('pDepa', pDepa).set('pProv', pProv).set('pDist', pDist);
+    return this.http.get(this.rutaServicio + 'listarPiexDistrito', { params })
+      .toPromise()
+      .then(response => {
+        return response as DtoTabla[];
+      })
+      .catch(error => []);
+  }
+
+
 }

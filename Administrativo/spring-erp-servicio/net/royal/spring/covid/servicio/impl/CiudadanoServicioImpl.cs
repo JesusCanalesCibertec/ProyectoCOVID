@@ -70,5 +70,25 @@ namespace net.royal.spring.covid.servicio.impl
         {
             return ciudadanoDao.listarTodos();
         }
+
+        public List<DtoTabla> ListarPie()
+        {
+            return ciudadanoDao.ListarPie();
+        }
+
+        public List<DtoTabla> listarPiexDepartamento(string pDepa)
+        {
+            return ciudadanoDao.listarPiexDepartamento(pDepa);
+        }
+
+        public List<DtoTabla> listarPiexProvincia(string pDepa, string pProv)
+        {
+            return ciudadanoDao.listarPiexProvincia(pDepa,pProv);
+        }
+
+        public List<DtoTabla> listarPiexDistrito(string pDepa, string pProv, string pDist)
+        {
+            return ciudadanoDao.listarPiexDistrito(pDepa,pProv,pDist);
+        }
     }
 }

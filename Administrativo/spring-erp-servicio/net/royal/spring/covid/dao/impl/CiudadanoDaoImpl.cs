@@ -175,6 +175,129 @@ namespace net.royal.spring.covid.dao.impl
                 return null;
             
         }
+
+        public List<DtoTabla> ListarPie()
+        {
+            List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
+            List<DtoTabla> lst = new List<DtoTabla>();
+
+            _reader = base.listarPorQuery("covidciudadano.listarpie", parametros);
+
+            while (_reader.Read())
+            {
+                DtoTabla bean = new DtoTabla();
+                if (!_reader.IsDBNull(0))
+                    bean.Nombre = _reader.GetString(0);
+
+                if (!_reader.IsDBNull(1))
+                    bean.valorNumerico = _reader.GetInt32(1);
+
+                if (!_reader.IsDBNull(2))
+                    bean.Porcentaje = _reader.GetDecimal(2);
+
+                lst.Add(bean);
+            }
+
+            this.dispose();
+            if (lst.Count > 0)
+                return lst;
+            return null;
+        }
+
+        public List<DtoTabla> listarPiexDepartamento(string pDepa)
+        {
+            List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
+
+            List<DtoTabla> lst = new List<DtoTabla>();
+
+            parametros.Add(new ParametroPersistenciaGenerico("pDepartamento", ConstanteUtil.TipoDato.String, pDepa));
+
+            _reader = base.listarPorQuery("covidciudadano.listarpiexDepartamento", parametros);
+
+            while (_reader.Read())
+            {
+                DtoTabla bean = new DtoTabla();
+                if (!_reader.IsDBNull(0))
+                    bean.Nombre = _reader.GetString(0);
+
+                if (!_reader.IsDBNull(1))
+                    bean.valorNumerico = _reader.GetInt32(1);
+
+                if (!_reader.IsDBNull(2))
+                    bean.Porcentaje = _reader.GetDecimal(2);
+
+                lst.Add(bean);
+            }
+
+            this.dispose();
+            if (lst.Count > 0)
+                return lst;
+            return null;
+        }
+
+        public List<DtoTabla> listarPiexProvincia(string pDepa, string pProv)
+        {
+            List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
+            List<DtoTabla> lst = new List<DtoTabla>();
+
+            parametros.Add(new ParametroPersistenciaGenerico("pDepartamento", ConstanteUtil.TipoDato.String, pDepa));
+            parametros.Add(new ParametroPersistenciaGenerico("pProvincia", ConstanteUtil.TipoDato.String, pProv));
+
+            _reader = base.listarPorQuery("covidciudadano.listarpiexProvincia", parametros);
+
+            while (_reader.Read())
+            {
+                DtoTabla bean = new DtoTabla();
+                if (!_reader.IsDBNull(0))
+                    bean.Nombre = _reader.GetString(0);
+
+                if (!_reader.IsDBNull(1))
+                    bean.valorNumerico = _reader.GetInt32(1);
+
+                if (!_reader.IsDBNull(2))
+                    bean.Porcentaje = _reader.GetDecimal(2);
+
+                lst.Add(bean);
+            }
+
+            this.dispose();
+            if (lst.Count > 0)
+                return lst;
+            return null;
+        }
+
+        public List<DtoTabla> listarPiexDistrito(string pDepa, string pProv, string pDist)
+        {
+            List<ParametroPersistenciaGenerico> parametros = new List<ParametroPersistenciaGenerico>();
+            List<DtoTabla> lst = new List<DtoTabla>();
+
+
+            parametros.Add(new ParametroPersistenciaGenerico("pDepartamento", ConstanteUtil.TipoDato.String, pDepa));
+            parametros.Add(new ParametroPersistenciaGenerico("pProvincia", ConstanteUtil.TipoDato.String, pProv));
+            parametros.Add(new ParametroPersistenciaGenerico("pDistrito", ConstanteUtil.TipoDato.String, pDist));
+
+            _reader = base.listarPorQuery("covidciudadano.listarpiexDistrito", parametros);
+
+            while (_reader.Read())
+            {
+                DtoTabla bean = new DtoTabla();
+                if (!_reader.IsDBNull(0))
+                    bean.Nombre = _reader.GetString(0);
+
+                if (!_reader.IsDBNull(1))
+                    bean.valorNumerico = _reader.GetInt32(1);
+
+                if (!_reader.IsDBNull(2))
+                    bean.Porcentaje = _reader.GetDecimal(2);
+
+                lst.Add(bean);
+            }
+
+            this.dispose();
+            if (lst.Count > 0)
+                return lst;
+            return null;
+        }
     }
     
 }
