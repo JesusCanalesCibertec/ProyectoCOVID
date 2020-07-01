@@ -9,6 +9,7 @@ export class detaPie {
     label: string;
     data: any[] = [];
     backgroundColor: any[] = [];
+    borderColor: any[] = [];
 }
 
 export class dtoBarra {

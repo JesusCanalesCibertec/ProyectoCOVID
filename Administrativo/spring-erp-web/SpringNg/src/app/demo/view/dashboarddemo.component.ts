@@ -13,41 +13,16 @@ import { SelectItem, MessageService } from 'primeng/api';
 
 @Component({
     templateUrl: './dashboard.component.html',
-    // styles: [`
-    //     .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-details > .p-grid {
-    //         border: 1px solid #b3c2ca;
-    //         border-radius: 3px;
-    //         margin: 0.3em;
-    //         text-align: center;
-    //         padding: 2em 0 2.25em 0;
-    //     }
-    //     .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data .car-title {
-    //         font-weight: 700;
-    //         font-size: 20px;
-    //         margin-top: 24px;
-    //     }
-    //     .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data .car-subtitle {
-    //         margin: 0.25em 0 2em 0;
-    //     }
-    //     .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data button {
-    //         margin-left: 0.5em;
-    //     }
-    //     .carousel-demo .ui-carousel .ui-carousel-content .ui-carousel-item .car-data button:first-child {
-    //         margin-left: 0;
-    //     }
-    //     .carousel-demo .ui-carousel.custom-carousel .ui-carousel-dot-icon {
-    //         width: 16px !important;
-    //         height: 16px !important;
-    //         border-radius: 50%;
-    //     }
-    //     .carousel-demo .ui-carousel.ui-carousel-horizontal .ui-carousel-content .ui-carousel-item.ui-carousel-item-start .car-details > .p-grid {
-    //         margin-left: 0.6em;
-    //     }
-    //     .carousel-demo .ui-carousel.ui-carousel-horizontal .ui-carousel-content .ui-carousel-item.ui-carousel-item-end .car-details > .p-grid {
-    //         margin-right: 0.6em;
-    //     }
-    // `],
-    // encapsulation: ViewEncapsulation.None
+    styles:[`
+        .contenido{
+            background-color: white;
+            border-style: inset;
+            justify-content: center; 
+            display: flex; 
+            align-items: center;
+            border-radius:5%;
+        }
+        `]
 })
 export class DashboardDemoComponent extends PrincipalBaseComponent implements OnInit {
 
@@ -74,7 +49,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
     distritos: SelectItem[] = [];
 
     colorScheme = ["green", "#8f9a9f", "yellow", "orange", "red", "#f5f5dc", "#aeea00", "#ffab00", "#2B4ED1", "#E94F4F"]
-
+   
     cars: any[];
 
     responsiveOptions;
@@ -110,24 +85,6 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                 }
             ]
         }
-
-        this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 3,
-                numScroll: 3
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 2,
-                numScroll: 2
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1,
-                numScroll: 1
-            }
-        ];
     }
 
     ngOnInit() {
@@ -226,8 +183,10 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                 res.forEach(d => {
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
                 })
                 secundario.backgroundColor = this.colorScheme;
+                
                 bean.datasets.push(secundario);
 
                 this.pieDatadepa = bean; 
@@ -265,6 +224,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                 res.forEach(d => {
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
                 })
                 secundario.backgroundColor = this.colorScheme;
                 bean.datasets.push(secundario);
@@ -304,6 +264,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                 res.forEach(d => {
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
                 })
                 secundario.backgroundColor = this.colorScheme;
                 bean.datasets.push(secundario);
@@ -335,6 +296,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
             res.forEach(d => {
                 bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                 secundario.data.push(d.valorNumerico);
+                secundario.borderColor.push('#b8bfc2');
             })
             secundario.backgroundColor = this.colorScheme;
             bean.datasets.push(secundario);

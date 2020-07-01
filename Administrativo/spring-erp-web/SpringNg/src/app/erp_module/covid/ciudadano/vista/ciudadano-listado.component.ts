@@ -141,6 +141,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     this.distritos = [];
     this.filtro.provincia = null;
     this.filtro.distrito = null;
+    if(this.estaVacio(this.filtro.departamento)){return;}
     this.provincias.push({ value: null, label: '--Todos--' });
     this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
       res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
@@ -150,6 +151,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   cargarDistritos() {
     this.distritos = [];
     this.filtro.distrito = null;
+    if(this.estaVacio(this.filtro.provincia)){return;}
     this.distritos.push({ value: null, label: '--Todos--' });
     this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
       res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));
