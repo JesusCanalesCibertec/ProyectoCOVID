@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { PrincipalBaseComponent } from 'src/app/base_module/components/PrincipalBaseComponent';
 import { NoAuthorizationInterceptor } from 'src/app/base_module/interceptor/NoAuthorizationInterceptor';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { CiudadanoService } from '../servicio/Ciudadano.service';
-import { DataTable, SelectItem, ConfirmationService } from 'primeng/primeng';
 import { Ciudadano, CiudadanoPk } from '../dominio/Ciudadano';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { FiltroCiudadano } from '../dominio/filtroCiudadano';
 import { PaisServicio } from '../../pais/servicio/PaisServicio';
 import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
@@ -43,8 +41,6 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   ) {
     super(noAuthorizationInterceptor, messageService);
   }
-
-  @ViewChild(DataTable) dt: DataTable;
 
   areabloquear: Boolean = false;
   cols: any[] = [];
@@ -145,6 +141,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     this.distritos = [];
     this.filtro.provincia = null;
     this.filtro.distrito = null;
+    if(this.estaVacio(this.filtro.departamento)){return;}
     this.provincias.push({ value: null, label: '--Todos--' });
     this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
       res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
@@ -154,6 +151,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   cargarDistritos() {
     this.distritos = [];
     this.filtro.distrito = null;
+    if(this.estaVacio(this.filtro.provincia)){return;}
     this.distritos.push({ value: null, label: '--Todos--' });
     this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
       res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));

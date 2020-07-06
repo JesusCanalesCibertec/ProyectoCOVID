@@ -1,4 +1,3 @@
-
 <p-blockUI #pnl [blocked]="blocked">
     <div class="ui-g"
         style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;width:100px;height: 100px;">
@@ -12,6 +11,135 @@
 </p-blockUI>
 
 <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+
+        <!-- <p-carousel [value]="cars">
+            <ng-template let-car pTemplate="item">
+                Content to display
+            </ng-template>
+        </p-carousel> -->
+
+        <!-- <p-carousel [value]="cars" [responsiveOptions]="responsiveOptions">
+            <ng-template let-car pTemplate="item">
+                Content to display
+            </ng-template>
+        </p-carousel> -->
+
+        <!-- <p-carousel [value]="cars" orientation="vertical" [style]="{'max-width':'400px', 'margin-top':'2em'}" verticalViewPortHeight="330px" [numVisible]="3" [numScroll]="1">
+            <p-header>
+                <h3>Vertical</h3>
+            </p-header>
+            <ng-template let-car pTemplate="item">
+                <div class="car-details">
+                    <div class="p-grid p-nogutter">
+                        <div class="p-col-12">
+                            <img src="assets/demo/images/car/{{car.brand}}.png" />
+                        </div>
+                        <div class="p-col-12 car-data">
+                            <div class="car-title">{{car.brand}}</div>
+                            <div class="car-subtitle">{{car.year}} | {{car.color}}</div>
+        
+                            <div class="car-buttons">
+                                <button pButton type="button" class="ui-button-secondary" icon="pi pi-search"></button>
+                                <button pButton type="button" class="ui-button-secondary" icon="pi pi-star"></button>
+                                <button pButton type="button" class="ui-button-secondary" icon="pi pi-cog"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel> -->
+
+    </div>
+    <div class="ui-g-12 ui-md-12 ui-lg-6">
+        <div class="contenido">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p-chart type="pie" [data]="pieData" [options]="options"></p-chart>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-12 ui-lg-4">
+        <div class="ui-g-12 ui-md-6 ui-lg-6" style="font-weight: bold; text-decoration: underline;">
+            <label>
+                Departamentos:
+            </label>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <p-dropdown [options]="departamentos" [(ngModel)]="filtro.departamento" (onChange)='cargarProvincias()'
+                [autoWidth]="false" appendTo="body">
+            </p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <div class="contenido">
+                <div *ngIf="depa" class="ui-g-12 ui-md-12 ui-lg-12">
+                    <p-chart type="pie" [data]="pieDatadepa" [options]="optionsDepa">
+                    </p-chart>
+                </div>
+                <div *ngIf="!depa" class="ui-g-12 ui-md-12 ui-lg-12"
+                    style="font-weight: bold;margin: 0 auto; font-size: 40px;text-align: center;">
+                    <label>
+                        Sin registros
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-12 ui-lg-4">
+        <div class="ui-g-12 ui-md-6 ui-lg-6" style="font-weight: bold; text-decoration: underline;">
+            <label>
+                Provincias:
+            </label>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <p-dropdown [options]="provincias" [(ngModel)]="filtro.provincia" (onChange)='cargarDistritos()'
+                [disabled]="!depa" placeholder="Seleccione" [autoWidth]="false" appendTo="body">
+            </p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <div class="contenido">
+                <div *ngIf="prov" class="ui-g-12 ui-md-12 ui-lg-12">
+                    <p-chart type="pie" [data]="pieDataprov" [options]="optionsProv">
+                    </p-chart>
+                </div>
+                <div *ngIf="!prov" class="ui-g-12 ui-md-12 ui-lg-12"
+                    style="font-weight: bold;margin: 0 auto; font-size: 40px;text-align: center;">
+                    <label>
+                        Sin registros
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-12 ui-lg-4">
+        <div class="ui-g-12 ui-md-6 ui-lg-6" style="font-weight: bold; text-decoration: underline;">
+            <label>
+                Distritos:
+            </label>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-6">
+            <p-dropdown [options]="distritos" [(ngModel)]="filtro.distrito" (onChange)='listarPiedist()'
+                [autoWidth]="false" [disabled]="!prov || !depa" placeholder="Seleccione" appendTo="body">
+            </p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+            <div class="contenido">
+                <div *ngIf="dist" class="ui-g-12 ui-md-12 ui-lg-12">
+                    <p-chart type="pie" [data]="pieDatadist" [options]="optionsDist">
+                    </p-chart>
+                </div>
+                <div *ngIf="!dist" class="ui-g-12 ui-md-12 ui-lg-12"
+                    style="font-weight: bold;margin: 0 auto; font-size: 40px;text-align: center;">
+                    <label>
+                        Sin registros
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- <div class="ui-g-12 ui-lg-6">
         <div class="card">
             <p-chart type="horizontalBar" [data]="barData"  [options]="optionsBar"></p-chart>
@@ -19,10 +147,10 @@
     </div>
     <div class="ui-g-12 ui-lg-6">
         <div class="card">
-            <p-chart type="pie" [data]="pieData" [options]="options" (onDataSelect)="selectData($event)"></p-chart>
+            <p-chart type="pie" [data]="pieData" [options]="options" ></p-chart>
         </div>
     </div>
-    <div class="ui-g-12 ui-lg-12">
+    <div class="ui-g-12 ui-md-12 ui-lg-12">
         <div class="card">
             <p-chart type="bar" [data]="barData2"  [options]="optionsBar2"></p-chart>
         </div>

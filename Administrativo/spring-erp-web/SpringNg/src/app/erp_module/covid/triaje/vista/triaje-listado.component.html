@@ -15,7 +15,8 @@
         <div class="ui-g-12 ui-md-12 ui-lg-4">
             <div class="ui-g-12 ui-md-12 ui-lg-4"></div>
             <div class="ui-g-12 ui-md-12 ui-lg-4">
-                <button pButton label="Volver" type="button" icon="fa fa-mail-reply" (click)="volver()"style="width:100%"></button>
+                <button pButton label="Volver" type="button" icon="fa fa-mail-reply" (click)="volver()"
+                    style="width:100%"></button>
             </div>
             <div class="card">
                 <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align: center;text-decoration: underline;">
@@ -85,7 +86,7 @@
                 </div>
                 <div class="ui-g-12 ui-md-12 ui-lg-3">
                     <label style="font-weight: bold;">
-                        Dirección actual:
+                        Dirección:
                     </label>
                 </div>
                 <div class="ui-g-12 ui-md-12 ui-lg-8">
@@ -106,7 +107,7 @@
             </div>
         </div>
 
-        <div class="ui-g-12 ui-md-12 ui-lg-6">
+        <div class="ui-g-12 ui-md-12 ui-lg-5">
             <p-panel header="Triajes">
                 <p-table #dt [value]="listadoTriajes" [columns]="cols" [scrollable]="true" [responsive]="true"
                     scrollHeight="215px">
@@ -125,24 +126,22 @@
                     <ng-template pTemplate="body" let-row let-columns="columns">
                         <tr [pSelectableRow]="row">
                             <td class="textoCentrado">{{row.secuencia}}</td>
-                            <td class="textoCentrado">{{row.num1}}</td>
-                            <td class="textoCentrado">{{row.num2}}</td>
-                            <td class="textoCentrado">{{row.num3}}</td>
-                            <td style="text-align: center;">
-
-                                <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(row.valor1)">
-                                </div>
-
-                            </td>
-                            <td class="textoCentrado">
-                                {{row.fechainicio1 | date: 'dd/MM/yyyy hh:mm:ss'}}
-                            </td>
                             <td>
                                 <div class="ui-g" class="textoCentrado">
                                     <div class="ui-g-4 ui-md-4 ui-lg-12" title="Ver triaje">
                                         <i class="fa fa-eye fa-lg seleccionable" (click)="obtener(row)"></i>
                                     </div>
                                 </div>
+                            </td>
+                            <td style="text-align: center;">
+                                <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(row.valor1)">
+                                </div>
+                            </td>
+                            <td class="textoCentrado">{{row.num1}}</td>
+                            <td class="textoCentrado">{{row.num2}}</td>
+                            <td class="textoCentrado">{{row.num3}}</td>
+                            <td class="textoCentrado">
+                                {{row.fechainicio1 | date: 'dd/MM/yyyy hh:mm:ss'}}
                             </td>
                         </tr>
                     </ng-template>
@@ -159,7 +158,7 @@
                 </p-table>
             </p-panel>
         </div>
-        <div class="ui-g-12 ui-md-12 ui-lg-2">
+        <div class="ui-g-12 ui-md-12 ui-lg-3">
             <div class="card">
                 <div class="ui-g ui-md ui-lg">
                     <label>
@@ -183,7 +182,7 @@
             <div class="ui-g ui-md ui-lg">
 
                 <div class="ui-g-12 ui-md-12 ui-lg-4">
-                    <p-fieldset legend="SÍNTOMATOLOGÍA" [style]="{'height':'470px'}">
+                    <p-fieldset legend="SÍNTOMATOLOGÍA" [style]="{'height':'500px'}">
                         <div class="ui-g ui-md ui-lg">
                             <div class="ui-g-12 ui-md-12 ui-lg-12">
                                 <label>
@@ -192,10 +191,10 @@
                             </div>
                         </div>
                         <div class="ui-g ui-md ui-lg">
-                            <div class="ui-g-4 ui-md-3 ui-lg-4">
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
                                 <label>Fecha de inicio</label>
                             </div>
-                            <div class="ui-g-8 ui-md-4 ui-lg-4">
+                            <div class="ui-g-12 ui-md-6 ui-lg-6">
                                 <p-calendar [(ngModel)]="dtoTriaje.fechainicio" [monthNavigator]="true"
                                     [disabled]="true" [yearNavigator]="true " [locale]="es" yearRange="1940:2200"
                                     appendTo="body" [showIcon]="true" dateFormat="dd/mm/yy">
@@ -235,7 +234,7 @@
                     </p-fieldset>
                 </div>
                 <div class="ui-g-12 ui-md-12 ui-lg-4">
-                    <p-fieldset legend="SITUACIONES DE RIESGO" [style]="{'height':'470px'}">
+                    <p-fieldset legend="SITUACIONES DE RIESGO" [style]="{'height':'500px'}">
                         <div class="ui-g ui-md ui-lg">
                             <div class="ui-g-12 ui-md-3 ui-lg-12">
                                 <label>
@@ -296,7 +295,7 @@
                     </p-fieldset>
                 </div>
                 <div class="ui-g-12 ui-md-12 ui-lg-4">
-                    <p-fieldset legend="CONDICIONES MÉDICAS" [style]="{'height':'470px'}">
+                    <p-fieldset legend="CONDICIONES MÉDICAS" [style]="{'height':'500px'}">
                         <div class="ui-g ui-md ui-lg">
                             <div class="ui-g-12 ui-md-3 ui-lg-12">
                                 <label>

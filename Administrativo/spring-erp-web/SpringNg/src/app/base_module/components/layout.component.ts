@@ -3,9 +3,8 @@ import { Router, Routes, Route, ActivatedRoute } from '@angular/router';
 import { ContraseniaMantenientoComponent } from './contrasenia-mantenimiento/contrasenia-mantenimiento.component';
 import { PrincipalBaseComponent } from './PrincipalBaseComponent';
 import { NoAuthorizationInterceptor } from '../interceptor/NoAuthorizationInterceptor';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { ScrollPanel } from 'primeng/primeng';
-import { EmpleadomastServicio } from '../../erp_module/shared/selectores/empleado/servicio/EmpleadomastServicio';
+import { ScrollPanel, MessageService } from 'primeng/primeng';
+
 
 @Component({
     selector: "layout",
@@ -65,7 +64,7 @@ export class LayoutComponent extends PrincipalBaseComponent implements OnInit {
         public renderer: Renderer2,
         private route: ActivatedRoute, private router: Router,
         noAuthorizationInterceptor: NoAuthorizationInterceptor,
-        private EmpleadomastServicio: EmpleadomastServicio, messageService: MessageService
+        messageService: MessageService,
     ) { super(noAuthorizationInterceptor, messageService); }
 
     ngOnInit() {
@@ -79,14 +78,14 @@ export class LayoutComponent extends PrincipalBaseComponent implements OnInit {
 
     }
 
-    showDialog() {
-        this.EmpleadomastServicio.obtenerInformacionPorIdPersonaUsuarioActual().then(
-            resp => {
-                this.contraseniaMantenientoComponent.iniciarComponente(resp.codigoUsuario);
-            }
-        );
+    // showDialog() {
+    //     this.EmpleadomastServicio.obtenerInformacionPorIdPersonaUsuarioActual().then(
+    //         resp => {
+    //             this.contraseniaMantenientoComponent.iniciarComponente(resp.codigoUsuario);
+    //         }
+    //     );
 
-    }
+    // }
 
     onLayoutClick() {
         if (!this.topbarItemClick) {

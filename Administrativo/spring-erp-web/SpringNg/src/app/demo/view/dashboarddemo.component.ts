@@ -1,23 +1,28 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CarService } from '../service/carservice';
-import { EventService } from '../service/eventservice';
-import { Car } from '../domain/car';
-import { SelectItem } from 'primeng/primeng';
-import { MenuItem } from 'primeng/primeng';
-import { routes } from '../../app.routes';
 import { Router } from '@angular/router';
-import { EmpleadomastServicio } from 'src/app/erp_module/shared/selectores/empleado/servicio/EmpleadomastServicio';
 import { PrincipalBaseComponent } from 'src/app/base_module/components/PrincipalBaseComponent';
 import { NoAuthorizationInterceptor } from 'src/app/base_module/interceptor/NoAuthorizationInterceptor';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { ContratacionService } from 'src/app/erp_module/minedu/contratacion/servicio/contratacion.service';
-import { ProyectoService } from 'src/app/erp_module/minedu/proyecto/servicio/Proyecto.service';
-import { SeriesHorizontal } from '@swimlane/ngx-charts';
 import { dtoPie, detaPie, dtoBarra, detaBarra } from 'src/app/erp_module/shared/dominio/dto/dtoSerie';
+import { CiudadanoService } from 'src/app/erp_module/covid/ciudadano/servicio/Ciudadano.service';
+import { FiltroCiudadano } from 'src/app/erp_module/covid/ciudadano/dominio/filtroCiudadano';
+import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/servicio/DepartamentoServicio';
+import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/ProvinciaServicio';
+import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
+import { SelectItem, MessageService } from 'primeng/api';
 
 @Component({
     templateUrl: './dashboard.component.html',
+    styles:[`
+        .contenido{
+            background-color: white;
+            border-style: inset;
+            justify-content: center; 
+            display: flex; 
+            align-items: center;
+            border-radius:5%;
+        }
+        `]
 })
 export class DashboardDemoComponent extends PrincipalBaseComponent implements OnInit {
 
@@ -25,26 +30,41 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
     barData: any;
     barData2: any;
     pieData: any;
+    pieDatadepa: any;
+    pieDataprov: any;
+    pieDatadist: any;
     polarData: any;
     radarData: any;
     data: any;
     options: any;
+    optionsDepa: any;
+    optionsProv: any;
+    optionsDist: any;
     optionsBar: any;
     optionsBar2: any;
+    filtro: FiltroCiudadano = new FiltroCiudadano();
 
-    colorScheme = ["#AAAAAA", "#1794A1", "#19DE16", "#B213EA", "#19DDF1", "#00bfa5", "#aeea00", "#ffab00", "#2B4ED1", "#E94F4F"]
+    departamentos: SelectItem[] = [];
+    provincias: SelectItem[] = [];
+    distritos: SelectItem[] = [];
+
+    colorScheme = ["green", "#8f9a9f", "yellow", "orange", "red", "#f5f5dc", "#aeea00", "#ffab00", "#2B4ED1", "#E94F4F"]
+   
+    cars: any[];
+
+    responsiveOptions;
 
 
 
     constructor(
-        private contratacionService: ContratacionService,
-        private proyectoService: ProyectoService,
-        private domSanitizer: DomSanitizer,
+        private ciudadanoServicio: CiudadanoService,
+        private departamentoServicio: DepartamentoServicio,
+        private provinciaServicio: ProvinciaServicio,
+        private distritoServicio: ZonapostalServicio,
+        private carServicio: CarService,
         noAuthorizationInterceptor: NoAuthorizationInterceptor,
         messageService: MessageService,
         private router: Router,
-
-
     ) {
         super(noAuthorizationInterceptor, messageService);
 
@@ -69,11 +89,16 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
 
     ngOnInit() {
         super.ngOnInit();
+        this.bloquearPagina();
+        this.depa = true;
+        this.prov = true;
+        this.dist = true;
         this.listarPie1();
+        this.cargarDepartamentos();
 
-        this.listarBarraestados();
-
-        this.listarBarratipos();
+        this.carServicio.getCarsSmall().then(cars => {
+            this.cars = cars
+        });
 
         this.lineData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -147,33 +172,206 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
         };
     }
 
+    depa: Boolean;
+    listarPiedepa() {
+        this.pieDatadepa = [];
+        this.depa = true;
+        let bean = new dtoPie();
+        this.ciudadanoServicio.ListarPiexDepartamento(this.filtro.departamento).then(res => {
+            if (res != null) {
+                let secundario = new detaPie();
+                res.forEach(d => {
+                    bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
+                    secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
+                })
+                secundario.backgroundColor = this.colorScheme;
+                
+                bean.datasets.push(secundario);
+
+                this.pieDatadepa = bean; 
+            }
+            else{
+                this.depa = false;
+                this.provincias = [];
+                this.distritos = [];
+            }    
+            this.optionsDepa = {
+                title: {
+                    display: false,
+                    text: 'POR DEPARTAMENTO',
+                    fontSize: 10,
+                    position: 'bottom'
+                },
+                legend: {
+                    position: 'right',
+                    onClick: function (evt, item) {
+                    }
+                }
+            };
+            this.desbloquearPagina();
+        });
+    }
+
+    prov: Boolean;
+    listarPieprov() {
+        this.pieDataprov = [];
+        this.prov = true;
+        let bean = new dtoPie();
+        this.ciudadanoServicio.ListarPiexProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
+            if (res != null) {
+                let secundario = new detaPie();
+                res.forEach(d => {
+                    bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
+                    secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
+                })
+                secundario.backgroundColor = this.colorScheme;
+                bean.datasets.push(secundario);
+
+                this.pieDataprov = bean;
+            }
+            else{
+                this.prov = false;
+                this.distritos = []
+            }
+            this.optionsProv = {
+                title: {
+                    display: false,
+                    text: 'POR PROVINCIA',
+                    fontSize: 10,
+                    position: 'bottom'
+                },
+                legend: {
+                    position: 'right',
+                    onClick: function (evt, item) {
+                    }
+                }
+            };
+            this.desbloquearPagina();
+        });
+    }
+
+    dist:Boolean;
+    listarPiedist() {
+        this.bloquearPagina();
+        this.pieDatadist = [];
+        this.dist = true;
+        let bean = new dtoPie();
+        this.ciudadanoServicio.ListarPiexDistrito(this.filtro.departamento, this.filtro.provincia, this.filtro.distrito).then(res => {
+            if (res != null) {
+                let secundario = new detaPie();
+                res.forEach(d => {
+                    bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
+                    secundario.data.push(d.valorNumerico);
+                    secundario.borderColor.push('#b8bfc2');
+                })
+                secundario.backgroundColor = this.colorScheme;
+                bean.datasets.push(secundario);
+
+                this.pieDatadist = bean;
+            }else{this.dist = false;}
+            this.optionsDist = {
+                title: {
+                    display: false,
+                    text: 'POR DISTRITO',
+                    fontSize: 10,
+                    position: 'bottom'
+                },
+                legend: {
+                    position: 'right',
+                    onClick: function (evt, item) {
+                    }
+                }
+            };
+            this.desbloquearPagina();
+        });
+    }
+
     listarPie1() {
-        // let bean = new dtoPie();
-        // this.contratacionService.ListarPie().then(res => {
-        //     let secundario = new detaPie();
-        //     res.forEach(d => {
-        //         bean.labels.push(d.nombre + ' (' + d.valorNumerico + ')');
-        //         secundario.data.push(d.porcentaje);
-        //     })
-        //     secundario.backgroundColor = this.colorScheme;
-        //     bean.datasets.push(secundario);
+        this.pieData = [];
+        let bean = new dtoPie();
+        this.ciudadanoServicio.ListarPie().then(res => {
+            let secundario = new detaPie();
+            res.forEach(d => {
+                bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
+                secundario.data.push(d.valorNumerico);
+                secundario.borderColor.push('#b8bfc2');
+            })
+            secundario.backgroundColor = this.colorScheme;
+            bean.datasets.push(secundario);
+            this.pieData = bean;
+            this.options = {
+                title: {
+                    display: true,
+                    text: 'CONTEO NACIONAL TOTAL',
+                    fontSize: 14,
+                    position: 'top'
+                },
+                legend: {
+                    position: 'right',
+                    onClick: function (evt, item) {
+                    }
+                },
+                showAllTooltips: true,
+            };
+            this.desbloquearPagina();
+        });
+    }
 
-        //     this.pieData = bean;
+    cargarDepartamentos() {
+        this.departamentos = [];
+        //this.departamentos.push({ value: null, label: '--Todos--' });
+        this.departamentoServicio.listarTodos().then(res => {
+            res.forEach(obj => this.departamentos.push({ value: obj.departamento, label: obj.descripcion }))
+            this.filtro.departamento = '15';
+            return this.cargarProvincias().then(
+                r => {
+                    this.filtro.provincia = '01';
+                  return this.cargarDistritos().then(
+                    r => {
+                        this.filtro.distrito = '01';
+                        this.listarPiedist();
+                    }
+                  );
+                }
+              );
+        })
+    }
 
-        //     this.options = {
-        //         title: {
-        //             display: true,
-        //             text: 'CONTRATACIONES',
-        //             fontSize: 24
-        //         },
-        //         legend: {
-        //             position: 'bottom',
-        //             onClick: function (evt, item) {
-        //             }
-        //         }
-        //     };
+    cargarProvincias(): Promise<number>  {
+        this.bloquearPagina();
+        this.provincias = [];
+        this.distritos = [];
+        this.pieDataprov = [];
+        this.optionsProv = [];
+        this.pieDatadist = [];
+        this.optionsDist = [];
+        this.filtro.provincia = null;
+        this.filtro.distrito = null;
+        this.prov = true;
+        this.dist = true;
+        //this.provincias.push({ value: null, label: '--Todos--' });
+        return this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
+            res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
+            this.listarPiedepa();
+            return 1;
+        })
+    }
 
-        // });
+    cargarDistritos(): Promise<number> {
+        this.bloquearPagina();
+        this.distritos = [];
+        this.pieDatadist = [];
+        this.optionsDist = [];
+        this.filtro.distrito = null;
+        this.dist = true;
+        //this.distritos.push({ value: null, label: '--Todos--' });
+        return this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
+            res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));
+            this.listarPieprov();
+            return 1;
+        })
     }
 
     listarBarraestados() {

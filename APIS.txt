@@ -60,7 +60,8 @@ Json de campos con datos de ejemplo:
     "cardio": "NO",
     "renal": "NO",
     "cancer": "NO",
-    "estado": null
+    "estado": null,
+	"fecharegistro":null
 }
 /*TRIAJE FIN*/
 

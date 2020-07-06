@@ -16,5 +16,9 @@ namespace net.royal.spring.covid.servicio
         CiudadanoPk cambiarestado(CiudadanoPk pk);
         List<Ciudadano> listado(DtoTabla filtro);
         List<Ciudadano> listado();
+        List<DtoTabla> ListarPie();
+        List<DtoTabla> listarPiexDepartamento(string pDepa);
+        List<DtoTabla> listarPiexProvincia(string pDepa, string pProv);
+        List<DtoTabla> listarPiexDistrito(string pDepa, string pProv, string pDist);
     }
 }
