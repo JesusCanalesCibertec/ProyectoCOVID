@@ -24,6 +24,15 @@ public class Triaje {
     private String renal;
     private String cancer;
     private int estado;
+    private String fecharegistro;
+
+    public String getFecharegistro() {
+        return fecharegistro;
+    }
+
+    public void setFecharegistro(String fecharegistro) {
+        this.fecharegistro = fecharegistro;
+    }
 
     public int getEstado() {
         return estado;

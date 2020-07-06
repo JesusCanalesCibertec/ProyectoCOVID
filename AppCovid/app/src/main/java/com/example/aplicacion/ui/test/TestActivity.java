@@ -21,9 +21,12 @@ import com.example.aplicacion.SessionManagement;
 import com.example.aplicacion.controlador.TriajeDAO;
 import com.example.aplicacion.taskTriaje.ServicioTaskSaveTriaje;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -46,7 +49,7 @@ public class TestActivity extends AppCompatActivity {
     CheckBox ckHipertención;
     CheckBox ckPulmonar;
     Button btnNext;
-    String fecval;
+    String fecvalini;
     int estado;
     int count=0;
     Date today;
@@ -147,6 +150,10 @@ public class TestActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                SimpleDateFormat oSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat oSdf = new SimpleDateFormat("yyyy/MM/dd");
+
+
                 calendario.set(Calendar.HOUR_OF_DAY, 0);
                 calendario.set(Calendar.MINUTE, 0);
                 calendario.set(Calendar.SECOND, 0);
@@ -157,11 +164,10 @@ public class TestActivity extends AppCompatActivity {
                 calendario.set(Calendar.YEAR,year);
                 calendario.set(Calendar.MONTH,month);
                 calendario.set(Calendar.DAY_OF_MONTH,day);
-                SimpleDateFormat oSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat oSdf = new SimpleDateFormat("yyyy/MM/dd");
+
 
                 fecha.setText(oSimpleDateFormat.format(calendario.getTime()));
-                fecval = oSdf.format(calendario.getTime());
+                fecvalini = oSdf.format(calendario.getTime());
 
                 thatDay = calendario.getTime();
             }
@@ -192,7 +198,7 @@ public class TestActivity extends AppCompatActivity {
             t.setDifi(SioNoCk(ckDifi));
             t.setNasal(SioNoCk(ckNasal));
             t.setFiebre(SioNoCk(ckFiebre));
-            t.setFechainicio(fecval);
+            t.setFechainicio(fecvalini);
             //Situaciones
             switch (rgContacto.getCheckedRadioButtonId()){
                 case R.id.rdbtnContactoSi:
@@ -229,6 +235,12 @@ public class TestActivity extends AppCompatActivity {
             t.setCardio(SioNoCk(ckCardio));
             t.setHipertension(SioNoCk(ckHipertención));
             t.setPulmonar(SioNoCk(ckPulmonar));
+
+
+            Date fecreg = new Date();
+            SimpleDateFormat oSdfreg = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            String fechaReg = oSdfreg.format(fecreg);
+            t.setFecharegistro(fechaReg);
 
             ServicioTaskSaveTriaje saveTriaje = new ServicioTaskSaveTriaje(this,"http://arbchum1-001-site1.etempurl.com/api/spring/covid/Triaje/registrar",t);
             saveTriaje.execute();
