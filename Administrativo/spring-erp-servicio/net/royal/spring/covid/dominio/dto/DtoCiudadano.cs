@@ -24,5 +24,6 @@ namespace net.royal.spring.covid.dominio.filtro
         public String nombre { get; set; }
         public String apellido { get; set; }
         public Nullable<Int32> cantidad { get; set; }
+        public Nullable<Int32> tipodocumento { get; set; }
     }
 }

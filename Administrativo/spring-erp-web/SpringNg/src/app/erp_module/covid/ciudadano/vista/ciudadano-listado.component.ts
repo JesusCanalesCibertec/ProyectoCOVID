@@ -52,6 +52,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   departamentos: SelectItem[] = [];
   provincias: SelectItem[] = [];
   distritos: SelectItem[] = [];
+  tipos: SelectItem[] = [];
   Ciudadano: Ciudadano = new Ciudadano();
   Ciudadanopk: CiudadanoPk = new CiudadanoPk();
   resultados: Resultado[] = [];
@@ -71,6 +72,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     this.cargarResultados();
     this.cargarEstados();
     this.cargarColumnas();
+    this.cargarTipos();
 
     this.cars = [
       { label: 'Audi', value: 'Audi' },
@@ -89,7 +91,8 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   cargarColumnas() {
     this.cols = [
       { field: 'codigo', header: 'ID', width: 50 },
-      { field: 'documento', header: 'Nro. Documento', width: 100 },
+      { field: 'tipodocumento', header: 'Tipo documento', width: 100 },
+      { field: 'documento', header: 'Nro. Documento', width: 120 },
       { field: 'nombrecompleto', header: 'Nombres y Apellidos', width: 250 },
       { field: 'nompais', header: 'País', width: 120 },
       { field: 'direccion', header: 'Dirección actual', width: 250 },
@@ -101,6 +104,14 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
       //{ header: 'Acción', width: 100 }
     ];
   }
+
+  cargarTipos() {
+    this.tipos = [];
+    this.tipos.push({ value: null, label: '--Todos--' });
+    this.tipos.push({ value: 1, label: 'D.N.I' });
+    this.tipos.push({ value: 2, label: 'Carnet Ext.' });
+  }
+
 
   cargarResultados() {
     this.resultados.push({ idResultado: 1, nombre: 'Sano', descripcion: '', recomendacion: '', color: 'green' });
@@ -141,7 +152,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
     this.distritos = [];
     this.filtro.provincia = null;
     this.filtro.distrito = null;
-    if(this.estaVacio(this.filtro.departamento)){return;}
+    if (this.estaVacio(this.filtro.departamento)) { return; }
     this.provincias.push({ value: null, label: '--Todos--' });
     this.provinciaServicio.listarActivosPorDepartamento(this.filtro.departamento).then(res => {
       res.forEach(obj => this.provincias.push({ value: obj.provincia, label: obj.descripcion }));
@@ -151,7 +162,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   cargarDistritos() {
     this.distritos = [];
     this.filtro.distrito = null;
-    if(this.estaVacio(this.filtro.provincia)){return;}
+    if (this.estaVacio(this.filtro.provincia)) { return; }
     this.distritos.push({ value: null, label: '--Todos--' });
     this.distritoServicio.listarActivosPorProvincia(this.filtro.departamento, this.filtro.provincia).then(res => {
       res.forEach(obj => this.distritos.push({ value: obj.codigopostal, label: obj.descripcion }));
@@ -170,9 +181,17 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
       })
   }
 
+  deshabilitar: boolean = true;
+  maximo: number;
   buscar(dt: any) {
+    this.deshabilitar = !this.estaVacioNumber(this.filtro.tipodocumento) ? false : true;
+    this.maximo = 5;
     if (!this.estaVacio(this.filtro.documento)) {
-      if (this.filtro.documento.length < 8) {
+      if (this.filtro.documento.length < 8 && this.filtro.tipodocumento == 1) {
+        return;
+      }
+
+      if (this.filtro.documento.length < 12 && this.filtro.tipodocumento == 2) {
         return;
       }
     }
@@ -200,7 +219,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   }
 
   obtener(dto: dtoCiudadano) {
-    if(dto.estado==6){
+    if (dto.estado == 6) {
       this.mostrarMensajeInfo('El ciudadano no cuenta con triajes realizados');
       return;
     }
@@ -246,17 +265,17 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
   }
 
   obtenerEstilos(estado: number, tipo: number) {
-    if(!this.estaVacioNumber(estado)){
-      if(tipo == 1){
+    if (!this.estaVacioNumber(estado)) {
+      if (tipo == 1) {
         return {
           'background-color': this.resultados[estado - 1].color,
           'border-radius': '50%',
           'width': '20px',
           'height': '20px',
           'border': '1px solid black',
-          'margin':'auto'
+          'margin': 'auto'
         }
-      }else{
+      } else {
         return {
           'background-color': this.resultados[estado - 1].color,
           'border-radius': '50%',
@@ -265,7 +284,7 @@ export class CiudadanoListadoComponent extends PrincipalBaseComponent implements
           'border': '1px solid black'
         }
       }
-     
-    } 
+
+    }
   }
 }

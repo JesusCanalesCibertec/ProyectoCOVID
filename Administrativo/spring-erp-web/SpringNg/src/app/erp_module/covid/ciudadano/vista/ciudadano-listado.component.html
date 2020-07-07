@@ -44,9 +44,14 @@
                     </tr>
                     <tr>
                         <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                            <p-dropdown *ngSwitchCase="'tipodocumento'" [options]="tipos"
+                                [(ngModel)]="filtro.tipodocumento" (onChange)='buscar(dt)' [autoWidth]="false"
+                                appendTo="body">
+                            </p-dropdown>
                             <input *ngSwitchCase="'documento'" pInputText type="text" placeholder=""
-                                [(ngModel)]="filtro.documento" (input)="buscar(dt)">
-                            <input *ngSwitchCase="'nombrecompleto'" pInputText type="text"
+                                [disabled]="deshabilitar" maxlength="maximo" [(ngModel)]="filtro.documento"
+                                (input)="buscar(dt)" pKeyFilter="int">
+                            <input *ngSwitchCase="'nombrecompleto'" pInputText type="text" pKeyFilter="alpha"
                                 placeholder="Buscar por nombre" [(ngModel)]="filtro.nombre" (input)="buscar(dt)">
                             <p-dropdown *ngSwitchCase="'nompais'" [options]="paises" [(ngModel)]="filtro.pais"
                                 (onChange)='buscar(dt)' [autoWidth]="false" appendTo="body">
@@ -63,16 +68,21 @@
                                 [(ngModel)]="filtro.distrito" (onChange)='buscar(dt)' [autoWidth]="false"
                                 appendTo="body">
                             </p-dropdown>
-                            <p-dropdown *ngSwitchCase="'nomestado'" [options]="estados" [(ngModel)]="filtro.estado" (onChange)='buscar(dt)'
-                                [style]="{'width':'100%'}" appendTo="body">
+                            <p-dropdown *ngSwitchCase="'nomestado'" [options]="estados" [(ngModel)]="filtro.estado"
+                                (onChange)='buscar(dt)' [style]="{'width':'100%'}" appendTo="body">
                                 <ng-template let-item pTemplate="selectedItem">
-                                    <div class="ui-g-12 ui-md-12 ui-lg-2"  style="vertical-align:middle; height: 16px;width: 16px;"  [ngStyle]="obtenerEstilos(item.value,2)"></div>
+                                    <div class="ui-g-12 ui-md-12 ui-lg-2"
+                                        style="vertical-align:middle; height: 16px;width: 16px;"
+                                        [ngStyle]="obtenerEstilos(item.value,2)"></div>
                                     <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
                                 </ng-template>
-                                <ng-template let-row pTemplate="item"> 
-                                    <div class="ui-helper-clearfix" style="position: relative;height: 30px;width: 140px;">
-                                        <div class="ui-g-12 ui-md-12 ui-lg-2" style="float:left;margin-top: 5px;"  [ngStyle]="obtenerEstilos(row.value,1)">
-                                        <div style="position: absolute; right: 0;font-size:14px;margin-top:-5px"   >{{row.label}}</div>
+                                <ng-template let-row pTemplate="item">
+                                    <div class="ui-helper-clearfix"
+                                        style="position: relative;height: 30px;width: 140px;">
+                                        <div class="ui-g-12 ui-md-12 ui-lg-2" style="float:left;margin-top: 5px;"
+                                            [ngStyle]="obtenerEstilos(row.value,1)">
+                                            <div style="position: absolute; right: 0;font-size:14px;margin-top:-5px">
+                                                {{row.label}}</div>
                                         </div>
                                     </div>
                                 </ng-template>
@@ -83,6 +93,7 @@
                 <ng-template pTemplate="body" let-row let-columns="columns">
                     <tr [pSelectableRow]="row">
                         <td class="textoCentrado">{{row.codigo}}</td>
+                        <td class="textoCentrado">{{row.tipodocumento==1?'D.N.I':'Carnet Ext.'}}</td>
                         <td class="textoCentrado">{{row.documento}}</td>
                         <td>{{row.nombrecompleto}}</td>
                         <td>{{row.nompais}}</td>
@@ -90,7 +101,8 @@
                         <td>{{row.nomdepartamento}}</td>
                         <td>{{row.nomprovincia}}</td>
                         <td>{{row.nomdistrito}}</td>
-                        <td class="textoCentrado" style="display: flex;justify-content: center; height: 37px; ; border-bottom: 0;">
+                        <td class="textoCentrado"
+                            style="display: flex;justify-content: center; height: 37px; ; border-bottom: 0;">
                             <div class="ui-g-12 ui-md-12 ui-lg-12" [ngStyle]="obtenerEstilos(row.estado,1)">
                             </div>
                         </td>
@@ -99,7 +111,7 @@
                                 <div class="ui-g-12 ui-md-12 ui-lg-12" title="Obtener triajes ({{row.cantidad}})">
                                     <i class="fas fa-notes-medical fa-lg seleccionable" (click)="obtener(row)"></i>
                                 </div>
-                                
+
                                 <!-- <div class="ui-g-4 ui-md-4 ui-lg-4" title="Editar">
                                     <i class="far fa-edit fa-lg seleccionable" (click)="editar(row)"></i>
                                 </div>

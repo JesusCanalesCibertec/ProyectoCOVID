@@ -23,8 +23,6 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DialogModule } from 'primeng/dialog';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ScheduleModule } from 'primeng/schedule';
-import { ChartModule } from 'primeng/chart';
-
 import { MegaMenuModule } from 'primeng/megamenu';
 import { FormsModule } from '@angular/forms';
 import { MenuModule } from 'primeng/menu';
@@ -51,7 +49,7 @@ import { EmptyDemoComponent } from '../demo/view/emptydemo.component';
 import { ChartsDemoComponent } from '../demo/view/chartsdemo.component';
 import { FileDemoComponent } from '../demo/view/filedemo.component';
 import { DocumentationComponent } from '../demo/view/documentation.component';
-import { FileUploadModule, OverlayPanelModule, LightboxModule, ToolbarModule, InputMaskModule, DataTableModule } from 'primeng/primeng';
+import { FileUploadModule, OverlayPanelModule, LightboxModule, ToolbarModule, InputMaskModule, DataTableModule, ChartModule } from 'primeng/primeng';
 import { MessageModule } from 'primeng/message';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { StepsModule } from 'primeng/steps';
@@ -108,7 +106,6 @@ import { AppProfileComponent } from './components/app.profile.component';
         CalendarModule,
         CardModule,
         CarouselModule,
-        ChartModule,
         CheckboxModule,
         ChipsModule,
         CodeHighlighterModule,
@@ -174,12 +171,12 @@ import { AppProfileComponent } from './components/app.profile.component';
         InputTextModule, ButtonModule, DropdownModule,
         SpinnerModule, CalendarModule, CheckboxModule,
         ConfirmDialogModule, TabViewModule, FieldsetModule,
-        DialogModule, RadioButtonModule, ScheduleModule, ChartModule,
+        DialogModule, RadioButtonModule, ScheduleModule, 
         DataTableModule,
         NgxEditorModule,
 
         MegaMenuModule, MenuModule, MenubarModule, ContextMenuModule,
-        PanelMenuModule, SlideMenuModule, TabMenuModule, TieredMenuModule,
+        PanelMenuModule, SlideMenuModule, TabMenuModule, TieredMenuModule, ChartModule
     ],
 
     declarations: [

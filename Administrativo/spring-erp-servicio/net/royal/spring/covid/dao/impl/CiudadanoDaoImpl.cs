@@ -44,6 +44,7 @@ namespace net.royal.spring.covid.dao.impl
             parametros.Add(new ParametroPersistenciaGenerico("p_provincia", ConstanteUtil.TipoDato.String, filtro.provincia));
             parametros.Add(new ParametroPersistenciaGenerico("p_distrito", ConstanteUtil.TipoDato.String, filtro.distrito));
             parametros.Add(new ParametroPersistenciaGenerico("p_estado", ConstanteUtil.TipoDato.Integer, filtro.estado));
+            parametros.Add(new ParametroPersistenciaGenerico("p_tipo", ConstanteUtil.TipoDato.Integer, filtro.tipodocumento));
 
             contador = this.contar("covidciudadano.filtroContar", parametros);
 
@@ -106,6 +107,9 @@ namespace net.royal.spring.covid.dao.impl
 
                 if (!_reader.IsDBNull(17))
                     bean.cantidad = _reader.GetInt32(17);
+
+                if (!_reader.IsDBNull(18))
+                    bean.tipodocumento = _reader.GetInt32(18);
 
                 lstResultado.Add(bean);
             }

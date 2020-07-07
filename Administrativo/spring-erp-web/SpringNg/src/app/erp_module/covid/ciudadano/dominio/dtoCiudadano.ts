@@ -14,8 +14,9 @@ export class dtoCiudadano {
     estado: number;
     nomestado: string;
     edad: number;
-    nombre:string;
-    apellido:string;
-    cantidad:number;
+    nombre: string;
+    apellido: string;
+    cantidad: number;
+    tipodocumento: number;
 }
 

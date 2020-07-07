@@ -9,6 +9,7 @@ export class FiltroCiudadano {
     distrito: string;
     direccion: string;
     estado: number;
+    tipodocumento: number;
 
     constructor() {
         this.paginacion = new ParametroPaginacionGenerico();

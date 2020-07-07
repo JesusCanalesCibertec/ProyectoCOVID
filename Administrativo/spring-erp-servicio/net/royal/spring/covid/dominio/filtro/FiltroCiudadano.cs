@@ -13,7 +13,9 @@ namespace net.royal.spring.covid.dominio.filtro
         public String provincia { get; set; }
         public String distrito { get; set; }
         public Nullable<Int32> estado { get; set; }
+        public Nullable<Int32> tipodocumento { get; set; }
         public ParametroPaginacionGenerico paginacion { get; set; }
+
         public FiltroCiudadano()
         {
             paginacion = new ParametroPaginacionGenerico();

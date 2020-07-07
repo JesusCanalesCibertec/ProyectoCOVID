@@ -10,10 +10,12 @@ import { DepartamentoServicio } from 'src/app/erp_module/shared/departamento/ser
 import { ProvinciaServicio } from 'src/app/erp_module/shared/provincia/servicio/ProvinciaServicio';
 import { ZonapostalServicio } from 'src/app/erp_module/shared/zonapostal/servicio/ZonapostalServicio';
 import { SelectItem, MessageService } from 'primeng/api';
+import { ChartComponent } from '@swimlane/ngx-charts';
+
 
 @Component({
     templateUrl: './dashboard.component.html',
-    styles:[`
+    styles: [`
         .contenido{
             background-color: white;
             border-style: inset;
@@ -25,6 +27,8 @@ import { SelectItem, MessageService } from 'primeng/api';
         `]
 })
 export class DashboardDemoComponent extends PrincipalBaseComponent implements OnInit {
+
+    @ViewChild(ChartComponent) chartComponent: ChartComponent
 
     lineData: any;
     barData: any;
@@ -49,7 +53,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
     distritos: SelectItem[] = [];
 
     colorScheme = ["green", "#8f9a9f", "yellow", "orange", "red", "#f5f5dc", "#aeea00", "#ffab00", "#2B4ED1", "#E94F4F"]
-   
+
     cars: any[];
 
     responsiveOptions;
@@ -177,6 +181,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
         this.pieDatadepa = [];
         this.depa = true;
         let bean = new dtoPie();
+        let total = 0;
         this.ciudadanoServicio.ListarPiexDepartamento(this.filtro.departamento).then(res => {
             if (res != null) {
                 let secundario = new detaPie();
@@ -184,23 +189,24 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
                     secundario.borderColor.push('#b8bfc2');
+                    total += d.valorNumerico;
                 })
                 secundario.backgroundColor = this.colorScheme;
-                
+
                 bean.datasets.push(secundario);
 
-                this.pieDatadepa = bean; 
+                this.pieDatadepa = bean;
             }
-            else{
+            else {
                 this.depa = false;
                 this.provincias = [];
                 this.distritos = [];
-            }    
+            }
             this.optionsDepa = {
                 title: {
-                    display: false,
-                    text: 'POR DEPARTAMENTO',
-                    fontSize: 10,
+                    display: true,
+                    text: 'TOTAL '+ total,
+                    fontSize: 12,
                     position: 'bottom'
                 },
                 legend: {
@@ -215,6 +221,7 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
 
     prov: Boolean;
     listarPieprov() {
+        let total = 0;
         this.pieDataprov = [];
         this.prov = true;
         let bean = new dtoPie();
@@ -225,21 +232,22 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
                     secundario.borderColor.push('#b8bfc2');
+                    total += d.valorNumerico;
                 })
                 secundario.backgroundColor = this.colorScheme;
                 bean.datasets.push(secundario);
 
                 this.pieDataprov = bean;
             }
-            else{
+            else {
                 this.prov = false;
                 this.distritos = []
             }
             this.optionsProv = {
                 title: {
-                    display: false,
-                    text: 'POR PROVINCIA',
-                    fontSize: 10,
+                    display: true,
+                    text: 'TOTAL '+total,
+                    fontSize: 12,
                     position: 'bottom'
                 },
                 legend: {
@@ -252,9 +260,10 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
         });
     }
 
-    dist:Boolean;
+    dist: Boolean;
     listarPiedist() {
         this.bloquearPagina();
+        let total = 0;
         this.pieDatadist = [];
         this.dist = true;
         let bean = new dtoPie();
@@ -265,17 +274,18 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
                     bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                     secundario.data.push(d.valorNumerico);
                     secundario.borderColor.push('#b8bfc2');
+                    total += d.valorNumerico;
                 })
                 secundario.backgroundColor = this.colorScheme;
                 bean.datasets.push(secundario);
 
                 this.pieDatadist = bean;
-            }else{this.dist = false;}
+            } else { this.dist = false; }
             this.optionsDist = {
                 title: {
-                    display: false,
-                    text: 'POR DISTRITO',
-                    fontSize: 10,
+                    display: true,
+                    text: 'TOTAL '+total,
+                    fontSize: 12,
                     position: 'bottom'
                 },
                 legend: {
@@ -291,12 +301,14 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
     listarPie1() {
         this.pieData = [];
         let bean = new dtoPie();
+        let total = 0;
         this.ciudadanoServicio.ListarPie().then(res => {
             let secundario = new detaPie();
             res.forEach(d => {
                 bean.labels.push(d.nombre + ' (' + d.porcentaje + ' %)');
                 secundario.data.push(d.valorNumerico);
                 secundario.borderColor.push('#b8bfc2');
+                total += d.valorNumerico;
             })
             secundario.backgroundColor = this.colorScheme;
             bean.datasets.push(secundario);
@@ -304,16 +316,20 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
             this.options = {
                 title: {
                     display: true,
-                    text: 'CONTEO NACIONAL TOTAL',
+                    text: 'CONTEO NACIONAL TOTAL '+ total,
                     fontSize: 14,
                     position: 'top'
                 },
                 legend: {
                     position: 'right',
-                    onClick: function (evt, item) {
+                },
+                plugins: {
+                    labels: {
+                        render: 'percentage',
+                        fontColor: ['green', 'white', 'red', 'green', 'white', 'red'],
+                        precision: 2
                     }
                 },
-                showAllTooltips: true,
             };
             this.desbloquearPagina();
         });
@@ -328,18 +344,18 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
             return this.cargarProvincias().then(
                 r => {
                     this.filtro.provincia = '01';
-                  return this.cargarDistritos().then(
-                    r => {
-                        this.filtro.distrito = '01';
-                        this.listarPiedist();
-                    }
-                  );
+                    return this.cargarDistritos().then(
+                        r => {
+                            this.filtro.distrito = '01';
+                            this.listarPiedist();
+                        }
+                    );
                 }
-              );
+            );
         })
     }
 
-    cargarProvincias(): Promise<number>  {
+    cargarProvincias(): Promise<number> {
         this.bloquearPagina();
         this.provincias = [];
         this.distritos = [];
@@ -436,5 +452,64 @@ export class DashboardDemoComponent extends PrincipalBaseComponent implements On
         //     };
         // });
     }
+
+
+
+
+    // ngAfterViewInit() {
+
+    //     this.options = {
+    //         plugins: {
+    //             labels: {
+    //                 // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
+    //                 render: "percentage",
+    //                 // precision for percentage, default is 0
+    //                 precision: 0,
+    //                 // identifies whether or not labels of value 0 are displayed, default is false
+    //                 showZero: true,
+    //                 // font size, default is defaultFontSize
+    //                 fontSize: 12,
+    //                 // font color, can be color array for each data or function for dynamic color, default is defaultFontColor
+    //                 fontColor: "#000000",
+    //                 // font style, default is defaultFontStyle
+    //                 fontStyle: "normal",
+    //                 // font family, default is defaultFontFamily
+    //                 fontFamily:
+    //                     "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+    //                 // draw text shadows under labels, default is false
+    //                 // textShadow: true,
+    //                 // text shadow intensity, default is 6
+    //                 shadowBlur: 10,
+    //                 // text shadow X offset, default is 3
+    //                 shadowOffsetX: -5,
+    //                 // text shadow Y offset, default is 3
+    //                 shadowOffsetY: 5,
+    //                 // text shadow color, default is 'rgba(0,0,0,0.3)'
+    //                 // shadowColor: "rgba(255,0,0,0.75)",
+    //                 // draw label in arc, default is false
+    //                 // bar chart ignores this
+    //                 arc: true,
+    //                 // position to draw label, available value is 'default', 'border' and 'outside'
+    //                 // bar chart ignores this
+    //                 // default is 'default'
+    //                 position: "outside",
+    //                 // draw label even it's overlap, default is true
+    //                 // bar chart ignores this
+    //                 overlap: true,
+    //                 // show the real calculated percentages from the values and don't apply the additional logic to fit the percentages to 100 in total, default is false
+    //                 showActualPercentages: true,
+    //                 // add padding when position is `outside`
+    //                 // default is 2
+    //                 outsidePadding: 4,
+    //                 // add margin of text when position is `outside` or `border`
+    //                 // default is 2
+    //                 textMargin: 4
+    //             }
+    //         }
+    //     }
+    //     //.........
+        
+
+    // }
 
 }

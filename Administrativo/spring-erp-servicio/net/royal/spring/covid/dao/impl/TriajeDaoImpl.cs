@@ -109,7 +109,7 @@ namespace net.royal.spring.covid.dao.impl
         public Triaje registrar(UsuarioActual usuarioActual, Triaje bean)
         {
             bean.IdTriaje = this.generarCodigo();
-            bean.Fecharegistro = DateTime.Now;
+            bean.Fecharegistro = DateTime.UtcNow;
             this.registrar(bean);
             return bean;
         }
