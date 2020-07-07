@@ -57,6 +57,7 @@ public class ServicioTaskSaveTriaje extends AsyncTask<Void,Void,String> {
             paramPost.put("cardio",triaje.getCardio());
             paramPost.put("renal",triaje.getRenal());
             paramPost.put("cancer",triaje.getCancer());
+            paramPost.put("fecharegistro",triaje.getFecharegistro());
 
 
 
