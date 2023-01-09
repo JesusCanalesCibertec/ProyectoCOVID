@@ -35,7 +35,7 @@
     "core-js": "2.5.7",
     "d3": "^5.12.0",
     "font-awesome": "^4.7.0",
-    "fullcalendar": "^4.0.0-alpha.4",
+    "fullcalendar": "^6.0.2",
     "install": "^0.13.0",
     "intl": "1.2.5",
     "moment": "^2.18.1",
